@@ -5,9 +5,9 @@ import { FaSun } from "react-icons/fa";
 import { Outlet,Link } from "react-router-dom";
 import Sidebar from '../components/shared/Sidebar';
 interface Props {
-    children: React.ReactNode
+    children?: React.ReactNode
 }
-const DashboardLayout: React.FunctionComponent<Props> = (props:Props) => {
+const DashboardLayout: React.FC<Props> = (props:Props) => {
     
     
     const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
@@ -111,9 +111,6 @@ const DashboardLayout: React.FunctionComponent<Props> = (props:Props) => {
         </div>
       </div>
       <Outlet />
-    </div>
-    <div>
-        {props.children}
     </div>
     </>
   )

@@ -35,9 +35,17 @@ body {
     border-left: 5px solid var(--blue);
     transition: 0.5s;
     overflow: hidden;
+    overflow-y: scroll;
     /* transition: width 0.5s, background 0.5s; */
 }
-
+.navigation::-webkit-scrollbar {
+    width: 0px;
+    height: 100%;
+    z-index: 1000;
+}
+.navigation::-webkit-scrollbar-thumb {
+    background-color: 'red'
+}
 /* .navigation.nav-collapsed {
     width: 80px;
     background: var(--blue);
@@ -518,4 +526,11 @@ body {
         right: 0;
         left: initial;
     }
+}
+
+
+
+
+div.is-splitted span.rotate-0 svg path{
+    display: none;
 }

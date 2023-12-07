@@ -3,9 +3,7 @@ import DashboardLayout from '../layouts/Layout'
 
 const Admin = () => {
   return (
-    <DashboardLayout>
-        <p>Admin</p>
-    </DashboardLayout>
+    <p>Admin</p>
   )
 }
 

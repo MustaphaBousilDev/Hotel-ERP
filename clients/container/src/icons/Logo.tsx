@@ -1,14 +1,21 @@
 import React from 'react'
-
-const Logo = () => {
+interface Props {
+  w?:string,
+  h?:string,
+  color?:string,
+  className?:string
+}
+const Logo:React.FC<Props> = ({w='30px',h='30px',color='#333',className=''}) => {
   return (
     <>
-    <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
-    width="60px" height="60px" viewBox="0 0 2000.000000 2000.000000"
+    <svg 
+    className={`${className}`}
+    version="1.0" xmlns="http://www.w3.org/2000/svg"
+    width={w} height={h} viewBox="0 0 2000.000000 2000.000000"
     preserveAspectRatio="xMidYMid meet">
 
         <g transform="translate(0.000000,2000.000000) scale(0.100000,-0.100000)"
-        fill="#000000" stroke="none">
+        fill={color} stroke="none">
         <path d="M10930 18418 c-25 -25 -189 -192 -364 -370 -176 -177 -475 -480 -665
         -673 -190 -192 -496 -503 -681 -690 -654 -662 -1717 -1742 -1823 -1850 l-107
         -110 0 -3137 c0 -1895 4 -3138 9 -3138 5 0 11 4 13 9 2 5 123 131 271 280
