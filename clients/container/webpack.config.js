@@ -19,6 +19,16 @@ module.exports = (_, argv) => ({
   module: {
     rules: [
       {
+        test: /\.(png|jpg|gif|jpeg)$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192
+            }
+          }]
+      },
+      {
         test: /\.m?js/,
         type: "javascript/auto",
         resolve: {

@@ -6,7 +6,7 @@ interface props{
 }
 const Theme:React.FC<props> = ({dark,onClick}) => {
   return (
-    <span className="w-8 h-8 cursor-pointer" onClick={onClick}>
+    <span className="w-8 h-8 hidden md:flex cursor-pointer" onClick={onClick}>
         {
             dark 
             ? <BsMoonStars className="  w-5 h-5 text-greyNormal mt-1" />

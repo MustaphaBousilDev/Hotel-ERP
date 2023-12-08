@@ -5,7 +5,7 @@ interface props{
 }
 const Notifications:React.FC<props> = ({count}) => {
   return (
-    <div className=" relative w-9 h-9 cursor-pointer">
+    <div className=" relative w-9 h-9 cursor-pointer hidden md:flex">
         <span
             className="
             absolute right-3 z-20  top-0 w-3 h-3 bg-danger rounded-full text-xs

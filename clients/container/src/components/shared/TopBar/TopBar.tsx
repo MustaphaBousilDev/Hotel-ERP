@@ -24,7 +24,7 @@ const TopBar:React.FC<NavbarProps> = ({menuActive,setMenuActive}) => {
     <div className="topbar shadow-sm">
         <Bars menuActive={menuActive} onClick={toggleMenu}/>
         <Searchs/>
-        <div className=" flex  gap-2 items-center pr-4">
+        <div className=" flex  gap-2 items-center md:pr-10">
           <Notifications count={notification} />
           <Theme onClick={()=>setDark(!dark)} dark={dark} />
           <Picture dropDown={dropdownOpen} onClick={toggleDropdown} />

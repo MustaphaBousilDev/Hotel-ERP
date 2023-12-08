@@ -8,7 +8,8 @@ module.exports = {
       white:'#fff',
       textColor:'#333',
       greyNormal:'#94a3b8',
-      danger:'#dc2626'
+      danger:'#dc2626',
+      greyHover:'#e2e8f0'
     },
     extend: {},
   },
