@@ -1,8 +1,8 @@
 import React from 'react'
 import { BsMoonStars, BsSun } from 'react-icons/bs'
 interface props{
-    onClick:()=>void
-    dark:boolean
+  onClick:()=>void
+  dark:boolean
 }
 const Theme:React.FC<props> = ({dark,onClick}) => {
   return (

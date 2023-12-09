@@ -10,6 +10,7 @@ const Bars:React.FC<props> = ({menuActive,onClick}) => {
           className="toggle"
           onClick={onClick}
           onKeyDown={onClick}
+          data-tested="bars-toggle"
         >
           {
             menuActive 

@@ -1,8 +1,6 @@
 import React from 'react'
 import Shadow from '../Shadow'
-interface props{
-    open:boolean
-}
+interface props{open:boolean}
 const Modal:React.FC<props>= ({open}) => {
   return (
     <>

@@ -1,9 +1,10 @@
 import React from 'react'
-import DashboardLayout from '../layouts/Layout'
 
 const Admin = () => {
   return (
+    <div className=' relative'>
     <p>Admin</p>
+    </div>
   )
 }
 

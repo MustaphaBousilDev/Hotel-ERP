@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import profilePict from '../../../../public/me.jpeg'
+//import profilePict from '../../../../public/me.jpeg'
 import { CiUser,CiSettings } from "react-icons/ci";
 import { IoIosHelpCircleOutline } from "react-icons/io";
 import { CiLogout } from "react-icons/ci";
@@ -18,7 +18,7 @@ const Picture:React.FC<props> = ({onClick,dropDown}) => {
       <DropdownTrigger className=' '>
         <img 
           className='w-11 h-11 rounded-full cursor-pointer' 
-          src={profilePict} alt='' 
+          src={'https://media.licdn.com/dms/image/D4E35AQGb2pdS-kHm7g/profile-framedphoto-shrink_200_200/0/1698369427585?e=1702731600&v=beta&t=UA8aJBZIi5KXGq2tf7mD_nnqBhV4pzMwh4kuLceI2j4'} alt='' 
         />
       </DropdownTrigger>
       <DropdownMenu 
