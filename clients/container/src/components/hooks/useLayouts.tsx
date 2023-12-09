@@ -19,6 +19,7 @@ export const LayoutProvider:React.FC<ILayoutProviderProps>=({children})=>{
     const [openSide,setOpenSide]=useState(false)
     const handleToggleOpenSide=()=>{
         setOpenSide(!openSide)
+        console.log('fuck')
     }
 
     return (
