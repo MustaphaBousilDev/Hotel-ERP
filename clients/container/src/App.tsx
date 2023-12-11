@@ -5,6 +5,8 @@ import "./index.scss";
 import Admin from "./pages/Admin";
 import DashboardLayout from "./layouts/Layout";
 import { LayoutProvider } from "./components/hooks/useLayouts";
+import './i18n';
+
 
 const App:React.FC = () => (
   <LayoutProvider>
