@@ -14,8 +14,8 @@ const Bars:React.FC<props> = ({menuActive,onClick}) => {
         >
           {
             menuActive 
-                ? <HiBars3BottomLeft className='text-textColor text-4xl' />
-                : <HiOutlineBars3 className='text-textColor text-4xl' />
+                ? <HiBars3BottomLeft className='text-textColor text-4xl dark:text-gray-400' />
+                : <HiOutlineBars3 className='text-textColor text-4xl dark:text-gray-400' />
           }
     </div>
   )

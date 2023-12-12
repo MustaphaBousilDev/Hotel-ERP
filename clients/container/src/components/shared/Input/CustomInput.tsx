@@ -23,7 +23,7 @@ const Input:React.FC<Props> = ({
             )
         }
         <input 
-           className='outline-none transition duration-200 
+           className='outline-none dark:text-gray-300 dark:bg-gray-600 transition duration-200 
            px-9 border rounded-md  w-full h-full border-greyLight
            focus:border-greyNormal'
            type={type}

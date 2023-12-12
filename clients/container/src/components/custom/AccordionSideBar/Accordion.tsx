@@ -17,7 +17,8 @@ const Accordion:React.FC<AccorProps> = ({onClick,activeMenu,dataLink}) => {
                 dataLink?.child.map((c:any,key:number)=>(
                     <p className={`${activeMenu ? ' ' : 'mx-3'}
                     flex gap-2 transition-all cursor-pointer items-center 
-                    hover:bg-textColor hover:text-white py-1 rounded-md`}>
+                    hover:bg-textColor dark:bg-gray-600 dark:text-white hover:text-white py-1 
+                    rounded-md`}>
                         <FaSun className=' scale-150 ml-4' />
                         <span className={`${activeMenu ? 'hidden' : ''}`}>
                             {c.name}
