@@ -3,6 +3,7 @@ import { IoIosNotificationsOutline } from 'react-icons/io'
 import {Dropdown,DropdownTrigger,DropdownMenu,DropdownItem} from '@nextui-org/dropdown'
 import {Tabs,Tab,} from '@nextui-org/tabs';
 import {WarningNotif,DangergNotif,InfoNotif} from './MessageNotif'
+import CustomTabs from './CustomTabs';
 
 interface props{
     count:number
@@ -13,19 +14,19 @@ const Notifications:React.FC<props> = ({count}) => {
         {
           id: "photos",
           label:WarningNotif,
-          content: "Lorem .",
+          content: CustomTabs,
           color:'yellow-500'
         },
         {
           id: "music",
           label: DangergNotif,
-          content: "pariatur.",
+          content: CustomTabs,
           color:'red-500'
         },
         {
           id: "videos",
           label: InfoNotif,
-          content: "laborum.jjjj",
+          content: CustomTabs,
           color:'blue-500'
         }
     ];
@@ -46,33 +47,32 @@ const Notifications:React.FC<props> = ({count}) => {
             </div>
         </DropdownTrigger>
         <DropdownMenu 
-            className=' shadow-lg w-52'
+            className=' w-52'
             aria-label="Dynamic Actions" 
             closeOnSelect={false}
         >
             <DropdownItem 
             style={{alignItems:''}}
             className=' flex p-0 flex-col  '>
-            <div className='  w-[70%]  bg-white p-2 border rounded-md'>
+            <div className='  w-[70%] flex flex-col  bg-white p-2 border rounded-md'>
                 <Tabs 
                     className='h-9 flex items-center justify-center  p-0 scrollbar-hide m-0 w-full'
                     aria-label="Dynamic tabs" 
                     selectedIndex={activeTab}
-                    
                     items={tabs}>
                     {(item:any, index:number) => (
-                        <Tab 
-                        
-                        className={`
-                            text-sm  px-3  flex items-center justify-center  w-[30%]
-                            
+                        <Tab className={`
+                            text-sm flex items-center  justify-center w-[30%] py-0
                         `}
                         key={item.index} 
                         title={<item.label/>}>
-                            {item.content}
+                            {<item.content/>}
                         </Tab>
                     )}
                 </Tabs>
+                <p className='text-blue-500 hover:underline flex items-center p-1 justify-center text-sm'>
+                    see more notifications
+                </p>
             </div>
             </DropdownItem>
         </DropdownMenu>
