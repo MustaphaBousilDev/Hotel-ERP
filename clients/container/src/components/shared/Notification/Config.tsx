@@ -13,7 +13,7 @@ const Config = () => {
                 />
               </span>
               <p className=' flex flex-col h-auto'>
-                <span className=' text-xs font-semibold'> Mustapha Bousil</span>
+                <span className=' text-xs font-semibold'> CONFIG</span>
                 <span className=' text-xs  '>
                   order user must be come
                 </span>
