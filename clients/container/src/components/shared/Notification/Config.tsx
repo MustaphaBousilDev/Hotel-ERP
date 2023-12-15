@@ -3,7 +3,7 @@ import React from 'react'
 const Config = () => {
   return (
     <div className=' py-2 flex flex-col'>
-      <div className=' flex items-center border-b  justify-between bg-yellow-50 py-1 px-2'>
+      <div className=' flex items-center border-b  justify-between bg-gray-50 py-1 px-2'>
             <div className=' flex gap-2 items-center'>
               <span className='  flex  w-9 h-9 border-2 rounded-full overflow-hidden items-center justify-center'>
                 <img 
@@ -45,7 +45,7 @@ const Config = () => {
           
         </p>
       </div>
-      <div className=' flex items-center border-b shadow-md justify-between bg-yellow-50 py-1 px-2'>
+      <div className=' flex items-center border-b shadow-md justify-between bg-gray-50 py-1 px-2'>
         <div className=' flex gap-2 items-center'>
           <span className='  flex  w-9 h-9 border-2 rounded-full overflow-hidden items-center justify-center'>
             <img 
@@ -87,7 +87,7 @@ const Config = () => {
           
         </p>
       </div>
-      <div className=' flex items-center border-b  justify-between bg-yellow-50 py-1 px-2'>
+      <div className=' flex items-center border-b  justify-between bg-gray-50 py-1 px-2'>
         <div className=' flex gap-2 items-center'>
           <span className='  flex  w-9 h-9 border-2 rounded-full overflow-hidden items-center justify-center'>
             <img 

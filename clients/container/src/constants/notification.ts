@@ -48,7 +48,7 @@ const ListNotification = [
       name: "DANGER",
       color: "text-red-400",
       colorFocus:'text-red-600',
-      bg:'bg-red-100',
+      bg:'bg-red-50',
       border:'red-600',
       icon: CgDanger,
       child:[
