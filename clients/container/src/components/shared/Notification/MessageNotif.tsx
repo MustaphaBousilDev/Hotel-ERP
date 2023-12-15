@@ -1,24 +1,23 @@
 import React from "react";
-import { IoWarningOutline } from "react-icons/io5";
-import { CgDanger } from "react-icons/cg";
-import { IoIosInformationCircleOutline } from "react-icons/io";
 import CustomTabs from "./CustomTabs";
+import ListNotification from "../../../constants/notification";
 interface props{
-  onClick?:()=>void
+  onClick?:()=>void,
+  child?:any
 }
 export const WarningNotif:React.FC<props>=({onClick})=>{
   return (
-    <CustomTabs/>
+    <CustomTabs child={ListNotification[0].child} />
   )
 
 }
 export const DangergNotif:React.FC<props>=({onClick})=>{
   return (
-    <CustomTabs/>
+    <CustomTabs child={ListNotification[1].child}/>
   )
 }
 export const InfoNotif:React.FC<props>=({onClick})=>{
   return (
-    <CustomTabs/>
+    <CustomTabs child={ListNotification[2].child}/>
   )
 }

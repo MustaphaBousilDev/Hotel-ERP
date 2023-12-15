@@ -1,7 +1,8 @@
 import React from 'react'
 import {WarningNotif,DangergNotif,InfoNotif} from './MessageNotif'
 interface props {
-  type?:string | null
+  type?:string | null,
+  child?:any
 }
 const SwitchStatus:React.FC<props> = ({type}) => {
   switch (type) {

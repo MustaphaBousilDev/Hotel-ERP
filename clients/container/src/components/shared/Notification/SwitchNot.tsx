@@ -3,7 +3,7 @@ import Guasts from './Guasts'
 import Rooms from './Rooms'
 import Food from './Food'
 import Config from './Config'
-interface props{
+interface props {
   type?:string | null
 }
 const SwitchNot: React.FC<props> = ({ type }) => {

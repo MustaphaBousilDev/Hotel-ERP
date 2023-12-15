@@ -2,15 +2,13 @@ import React, { useState } from 'react'
 import { IoIosNotificationsOutline } from 'react-icons/io'
 import {Dropdown,DropdownTrigger,DropdownMenu,DropdownItem} from '@nextui-org/dropdown'
 import SwitchStatus from './SwitchStatus';
-import { IoWarningOutline } from "react-icons/io5";
-import { CgDanger } from "react-icons/cg";
-import { IoIosInformationCircleOutline } from "react-icons/io";
-
+import ListNotification from '../../../constants/notification';
 interface props{
     count:number
 }
 const Notifications:React.FC<props> = ({count}) => {
     const [type,setType]=useState<string>('WARNING')
+    let d:any=[]
     const handleClick=(type:string) =>{
         console.log(type)
         setType(type)
@@ -18,11 +16,11 @@ const Notifications:React.FC<props> = ({count}) => {
   return (
     <Dropdown>
         <DropdownTrigger>
-            <div className=" relative w-9 h-9 bg-light dark:bg-gray-700 
+            <div className=" relative  w-10 h-10 bg-light dark:bg-gray-700 
             dark:text-white  items-center justify-center rounded-full cursor-pointer hidden md:flex">
                 <span
                     className="
-                    absolute right-3 z-20  top-0 w-3 h-3 bg-danger rounded-full text-xs
+                    absolute right-2 z-20  top-1 w-3 h-3 bg-danger rounded-full  text-xs
                     text-white flex justify-center items-center"
                 >
                     {count}
@@ -33,7 +31,7 @@ const Notifications:React.FC<props> = ({count}) => {
             </div>
         </DropdownTrigger>
         <DropdownMenu 
-            className=' w-52'
+            className='  overflow-hidden'
             aria-label="Dynamic Actions" 
             closeOnSelect={false}
         >
@@ -44,53 +42,31 @@ const Notifications:React.FC<props> = ({count}) => {
                 <div className='w-full h-full'>
                 <header>
                     <ul className=' flex gap-1 text-sm relative z-50'>
-                        <li
-                            onClick={()=>handleClick('WARNING')}
-                            className={`
-                            flex-1   cursor-pointer p-1 gap-1 flex items-center
-                            transition  duration-200 origin-top-right opacity-75 text-yellow-300 p-2
-                             
-                            
-
-                            ${type === 'WARNING' && 'border-b-2 bg-yellow-50 border-yellow-400 opacity-100 text-yellow-400'}
-                            `}>
-                            <span className=' '>
-                                <IoWarningOutline onClick={()=>handleClick('WARNING')}/>
-                            </span>
-                            <span className=' text-xs '> WARNING</span>
-                        </li>
-                        <li
-                            onClick={()=>handleClick('INFO')}
-                            className={`
-                            flex-1   cursor-pointer   p-1 gap-1 flex items-center
-                               flex items-center justify-center
-                            transition  duration-200 origin-top-right opacity-75 text-blue-500
-                            ${type === 'INFO' && 'border-b-2 border-blue-600 opacity-100 bg-blue-50 text-blue-600'}
-                            `}>
-                            <span>
-                                <IoIosInformationCircleOutline 
-                                className=' '
-                                onClick={()=>handleClick('INFO')}/>
-                            </span>
-                            <span className=' text-xs '> INFO</span>
-                        </li>
-                        <li
-                            onClick={()=>handleClick('DANGER')}
-                            className={`
-                            flex-1   cursor-pointer   p-1 gap-1 flex items-center
-                            transition  duration-200 origin-top-right opacity-75  text-red-400
-                            ${type === 'DANGER' && 'border-b-2 border-red-600 bg-red-100 opacity-100 text-red-600'}
-                            `}>
-                            <span>
-                                <CgDanger  
-                                className='  '
-                                onClick={()=>handleClick('DANGER')}/>
-                            </span>
-                            <span className=' text-xs '> DANGER</span>
-                        </li>
+                        {
+                            ListNotification?.map((notif)=>{
+                                console.log(notif)
+                                d=notif.child
+                                console.log('from Notifications',d)
+                                return (
+                                    <li
+                                        onClick={()=>handleClick(notif.name)}
+                                        className={`
+                                        flex-1   cursor-pointer p-1 gap-1 flex items-center
+                                        transition  duration-200 origin-top-right opacity-75 ${notif.color} p-2
+                                        ${type === notif.name &&  `border-b-2 ${notif.bg}  border-${notif.border} 
+                                        opacity-100 ${notif.colorFocus}  `}
+                                        `}>
+                                        <span className=' '>
+                                            <notif.icon onClick={()=>handleClick(notif.name)}/>
+                                        </span>
+                                        <span className=' text-xs '> {notif.name}</span>
+                                    </li>
+                                    )
+                            })
+                        }
                     </ul>
                 </header>
-                <SwitchStatus type={type} />
+                <SwitchStatus type={type}/>
                 </div>
                 <p className='text-blue-500 hover:underline flex items-center p-1 justify-center text-sm'>
                     see more notifications
