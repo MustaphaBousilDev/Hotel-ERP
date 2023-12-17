@@ -29,7 +29,7 @@ const Navbar: React.FC<NavbarProps>= ({menuActive}) => {
   };
 
   return (
-    <div className={`navigation shadow-md  bg-primary dark:bg-darkTopBar   
+    <div className={`navigation navigations shadow-md  bg-primary dark:bg-darkTopBar   
     
     ${menuActive ? "active" : ""} `}>
         <ul className={`  ${menuActive ? 'p-0' : 'p-2'} flex flex-col `}>

@@ -34,6 +34,10 @@ module.exports = {
         darkButton:"#4CAF50",
         darkButtonHover:"#45a049"
       },
+      width:{
+        '250px':'250px',
+      },
+      
     },
   },
   variants: {
