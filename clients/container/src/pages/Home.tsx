@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import { mount } from 'remoteApp/CounterComp';
+import { mount } from 'tasks/Tasks';
 const Home = () => {
   useState(()=>{
     mount()
@@ -7,7 +7,7 @@ const Home = () => {
   return (
     <div className='  bg-red-400'>
       <h1>This is react HostApp</h1>
-      <counter-app></counter-app>
+      <tasks-hotel></tasks-hotel>
     </div>
   )
 }

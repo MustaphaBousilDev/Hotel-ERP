@@ -25,8 +25,17 @@
       "compilerOptions": {
         "tsConfigPath": "apps/reservations/tsconfig.app.json"
       }
+    },
+    "clean-architect": {
+      "type": "application",
+      "root": "apps/clean-architect",
+      "entryFile": "main",
+      "sourceRoot": "apps/clean-architect/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/clean-architect/tsconfig.app.json"
+      }
     }
   },
   "monorepo": true,
-  "root":"apps/reservations"
+  "root": "apps/reservations"
 }

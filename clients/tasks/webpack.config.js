@@ -10,8 +10,9 @@ sharedMappings.register(
 
 module.exports = {
   output: {
-    uniqueName: "tasks2",
-    publicPath: "auto"
+    uniqueName: "tasks",
+    publicPath: "auto",
+    scriptType: "text/javascript"
   },
   optimization: {
     runtimeChunk: false
@@ -26,14 +27,15 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-        library: { type: "module" },
+        //library: { type: "module" },
 
         // For remotes (please adjust)
-        // name: "tasks2",
-        // filename: "remoteEntry.js",
-        // exposes: {
-        //     './Component': './/src/app/app.component.ts',
-        // },        
+        name: "tasks",
+        filename: "remoteEntry.js",
+        exposes: {
+            './CounterModule': './/src/app/counter/counter.module.ts',
+            './Tasks'  : './/src/counter.comp.ts'
+        },        
         
         // For hosts (please adjust)
         // remotes: {
