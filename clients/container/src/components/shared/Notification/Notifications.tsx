@@ -10,7 +10,6 @@ const Notifications:React.FC<props> = ({count}) => {
     const [type,setType]=useState<string>('WARNING')
     let d:any=[]
     const handleClick=(type:string) =>{
-        console.log(type)
         setType(type)
     }
   return (
@@ -44,9 +43,7 @@ const Notifications:React.FC<props> = ({count}) => {
                     <ul className=' flex gap-1 text-sm relative z-50'>
                         {
                             ListNotification?.map((notif)=>{
-                                console.log(notif)
                                 d=notif.child
-                                console.log('from Notifications',d)
                                 return (
                                     <li
                                         onClick={()=>handleClick(notif.name)}

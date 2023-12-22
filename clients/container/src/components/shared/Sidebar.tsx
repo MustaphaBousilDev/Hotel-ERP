@@ -29,25 +29,28 @@ const Navbar: React.FC<NavbarProps>= ({menuActive}) => {
   };
 
   return (
-    <div className={`navigation navigations shadow-md  bg-primary dark:bg-darkTopBar   
+    <div className={`navigation navigations   bg-gray-50   shadow-md ${menuActive ? ' py-2 ' : 'p-2 px-3 shadow-lg'}     dark:bg-darkTopBar   
     
     ${menuActive ? "active" : ""} `}>
-        <ul className={`  ${menuActive ? 'p-0' : 'p-2'} flex flex-col `}>
-          <span className=' flex gap-2 items-center mb-5'>
-            <Logo w='65px' h='65px' color={`${ theme==='dark' ? '#fff' : '#333'}`}
-            className={``}
-            />
-            <p className={`
-              ${menuActive ? "hidden" : "flex"}
-              text-2xl font-semibold text-textColor
-              `}>HotelERP</p>
-          </span>
-          {listLinks.map((link, index) => (
-            <Accordion 
-              dataLink={link}
-              activeMenu={menuActive} />
-          ))}
-        </ul>
+        <div style={{height:'99.5%'}}  className={` p-2 relative    bg-white  p-4 rounded-md overflow-hidden `}>
+          <ul className={`  ${menuActive ? '' : 'p-2'} flex flex-col `}>
+            <span className=' flex gap-2 items-center mb-5'>
+              <Logo w='65px' h='65px' color={`${ theme==='dark' ? '#fff' : '#333'}`}
+              className={` ${menuActive ? '' : ' ml-3 mt-3'}`}
+              />
+              <p className={`
+                ${menuActive ? "hidden" : "flex"}
+                text-2xl font-semibold text-textColor
+                `}>HotelERP</p>
+            </span>
+            {listLinks.map((link, index) => (
+              <Accordion 
+                className='  bg-white'
+                dataLink={link}
+                activeMenu={menuActive} />
+            ))}
+          </ul>
+        </div>
     </div>
   )
 }

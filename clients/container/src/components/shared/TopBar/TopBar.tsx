@@ -26,7 +26,7 @@ const TopBar:React.FC<NavbarProps> = ({menuActive,setMenuActive}) => {
       console.log('mode',colorTheme)
     }
   return (
-    <div className="topbar shadow-sm dark:bg-darkTopBar transition duration-300">
+    <div className={`topbar my-2 ${menuActive ? 'mx-2': ' mx-1'}  shadow-sm rounded-md dark:bg-darkTopBar bg-white transition duration-300`}>
         <Bars menuActive={menuActive} onClick={toggleMenu}/>
         <Searchs/>
         <div className=" flex  gap-2 items-center md:pr-10">

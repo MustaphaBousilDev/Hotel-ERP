@@ -10,8 +10,14 @@ import { LuUsers2 } from "react-icons/lu";
 import { FaSprayCanSparkles } from "react-icons/fa6";
 import { FaHandSparkles } from "react-icons/fa6";
 import { FaUsersGear } from "react-icons/fa6";
+import { MdAddTask } from "react-icons/md";
+import { FaTasks } from "react-icons/fa";
 import { PiVanThin } from "react-icons/pi";
 import { IoBagCheckOutline } from "react-icons/io5";
+import { FcParallelTasks } from "react-icons/fc";
+import { GrDocumentConfig } from "react-icons/gr";
+import { IoMdStats } from "react-icons/io";
+
 const listLinks = [
     {
       name: "overwies",
@@ -21,43 +27,70 @@ const listLinks = [
         {
           name: "all",
           path: "/dashboard",
-          icon: "Logo",
+          icon: TfiDashboard,
         },
         {
           name: "housekeeping",
           path: "/dashboard",
-          icon: "Logo",
+          icon: TfiDashboard,
         },
         {
           name: "restaurants",
           path: "/dashboard",
-          icon: "Logo",
+          icon: TfiDashboard,
         },
         {
           name: "spaServices",
           path: "/dashboard",
-          icon: "Logo",
+          icon: TfiDashboard,
         },
         {
           name: "mantanance",
           path: "/dashboard",
-          icon: "Logo",
+          icon: TfiDashboard,
         },
         {
           name: "guasts",
           path: "/dashboard",
-          icon: "Logo",
+          icon: TfiDashboard,
         },
         {
           name: "rooms",
           path: "/dashboard",
-          icon: "Logo",
+          icon: TfiDashboard,
         },
         {
           name: "stockes",
           path: "/dashboard",
-          icon: "Logo",
+          icon: TfiDashboard,
         }
+      ]
+    },
+    {
+      name: "tasks",
+      path: "/dashboard/tasks",
+      icon: FaTasks,
+      child:[
+        {
+          name: "all",
+          path: "/dashboard/tasks",
+          icon: FcParallelTasks,
+        },
+        {
+          name: "add",
+          path: "/dashboard/tasks/add",
+          icon: MdAddTask,
+        },
+        {
+          name: "config",
+          path: "/dashboard/tasks/config",
+          icon: GrDocumentConfig,
+        },
+        {
+          name: "report",
+          path: "/dashboard/tasks/report",
+          icon: IoMdStats,
+        },
       ]
     },
     {
@@ -68,22 +101,22 @@ const listLinks = [
         {
           name: "all",
           path: "/dashboard",
-          icon: "Logo",
+          icon: TfiDashboard,
         },
         {
           name: "reserveé",
           path: "/dashboard",
-          icon: "Logo",
+          icon: TfiDashboard,
         },
         {
           name: "add",
           path: "/dashboard",
-          icon: "Logo",
+          icon: TfiDashboard,
         },
         {
           name: "lists",
           path: "/dashboard",
-          icon: "Logo",
+          icon: TfiDashboard,
         }
       ]
     },
@@ -95,22 +128,22 @@ const listLinks = [
         {
           name: "overview",
           path: "/dashboard",
-          icon: "Logo",
+          icon: TfiDashboard,
         },
         {
           name: "lists",
           path: "/dashboard",
-          icon: "Logo",
+          icon: TfiDashboard,
         },
         {
           name: "add",
           path: "/dashboard",
-          icon: "Logo",
+          icon: TfiDashboard,
         },
         {
           name: "satistic",
           path: "/dashboard",
-          icon: "Logo",
+          icon: TfiDashboard,
         },
       ]
     },
@@ -122,22 +155,22 @@ const listLinks = [
         {
           name: "stock",
           path: "/dashboard",
-          icon: "Logo",
+          icon: TfiDashboard,
         },
         {
           name: "statistics",
           path: "/dashboard",
-          icon: "Logo",
+          icon: TfiDashboard,
         },
         {
           name: "orders",
           path: "/dashboard",
-          icon: "Logo",
+          icon: TfiDashboard,
         },
         {
           name: "employéé",
           path: "/dashboard",
-          icon: "Logo",
+          icon: TfiDashboard,
         },
       ]
     },
@@ -149,12 +182,12 @@ const listLinks = [
         {
           name: "overview",
           path: "/dashboard",
-          icon: "Logo",
+          icon: TfiDashboard,
         },
         {
           name: "lists",
           path: "/dashboard",
-          icon: "Logo",
+          icon: TfiDashboard,
         },
       ]
     },
@@ -166,22 +199,22 @@ const listLinks = [
         {
           name: "overview",
           path: "/dashboard",
-          icon: "Logo",
+          icon: TfiDashboard,
         },
         {
           name: "lists",
           path: "/dashboard",
-          icon: "Logo",
+          icon: TfiDashboard,
         },
         {
           name: "add",
           path: "/dashboard",
-          icon: "Logo",
+          icon: TfiDashboard,
         },
         {
           name: "statistics",
           path: "/dashboard",
-          icon: "Logo",
+          icon: TfiDashboard,
         },
       ]
     },
@@ -193,22 +226,22 @@ const listLinks = [
         {
           name: "overview",
           path: "/dashboard",
-          icon: "Logo",
+          icon: TfiDashboard,
         },
         {
           name: "tasks",
           path: "/dashboard",
-          icon: "Logo",
+          icon: TfiDashboard,
         },
         {
           name: "addTask",
           path: "/dashboard",
-          icon: "Logo",
+          icon: TfiDashboard,
         },
         {
           name: "overview",
           path: "/dashboard",
-          icon: "Logo",
+          icon: TfiDashboard,
         },
       ]
     },
@@ -220,17 +253,17 @@ const listLinks = [
         {
           name: "overview",
           path: "/dashboard",
-          icon: "Logo",
+          icon: TfiDashboard,
         },
         {
           name: "add",
           path: "/dashboard",
-          icon: "Logo",
+          icon: TfiDashboard,
         },
         {
           name: "lists",
           path: "/dashboard",
-          icon: "Logo",
+          icon: TfiDashboard,
         },
       ]
     },
@@ -242,22 +275,22 @@ const listLinks = [
         {
           name: "overview",
           path: "/dashboard",
-          icon: "Logo",
+          icon: TfiDashboard,
         },
         {
           name: "rooms",
           path: "/dashboard",
-          icon: "Logo",
+          icon: TfiDashboard,
         },
         {
           name: "restaurant",
           path: "/dashboard",
-          icon: "Logo",
+          icon: TfiDashboard,
         },
         {
           name: "spaService",
           path: "/dashboard",
-          icon: "Logo",
+          icon: TfiDashboard,
         },
       ]
     },
@@ -269,22 +302,22 @@ const listLinks = [
         {
           name: "overview",
           path: "/dashboard",
-          icon: "Logo",
+          icon: TfiDashboard,
         },
         {
           name: "orders",
           path: "/dashboard",
-          icon: "Logo",
+          icon: TfiDashboard,
         },
         {
           name: "stock",
           path: "/dashboard",
-          icon: "Logo",
+          icon: TfiDashboard,
         },
         {
           name: "stock",
           path: "/dashboard",
-          icon: "Logo",
+          icon: TfiDashboard,
         },
       ]
     },
@@ -296,12 +329,12 @@ const listLinks = [
         {
           name: "overview",
           path: "/dashboard",
-          icon: "Logo",
+          icon: TfiDashboard,
         },
         {
           name: "add",
           path: "/dashboard",
-          icon: "Logo",
+          icon: TfiDashboard,
         }
       ]
     },

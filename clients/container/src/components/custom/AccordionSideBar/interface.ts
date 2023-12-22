@@ -3,7 +3,8 @@ interface AccorProps{
     children?: React.ReactNode,
     title?:string,
     activeMenu?:boolean,
-    dataLink:any
+    dataLink:any,
+    className?:string
 }
 
 export {

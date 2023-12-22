@@ -9,10 +9,8 @@ interface props{
   child?:any
 }
 const CustomTabs:React.FC<props> = ({child}) => {
-  console.log('from Custom tabs',child)
   const [type,setType]=useState<string>('GUAST')
   const handleClick=(type:string) =>{
-    console.log(type)
     setType(type)
   }
   return (

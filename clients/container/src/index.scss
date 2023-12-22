@@ -13,7 +13,7 @@ body {
 
 @layer components{
   .navigations{
-    @apply fixed w-250px h-full  border-blue-500 border-l-2 duration-500 overflow-hidden overflow-y-scroll
+    @apply fixed w-250px h-full   duration-500 overflow-hidden overflow-y-scroll
   }
   .list-Links-navigation{
     @apply flex flex-col absolute top-0 left-0 w-full

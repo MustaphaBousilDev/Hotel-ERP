@@ -7,7 +7,7 @@ const Admin = () => {
     i18n.changeLanguage(language);//change the language
   }
   return (
-    <div className=' relative'>
+    <div className=' relative bg-gray-50'>
     <p>Admin</p>
     <select onChange={onClickLanguageChange}>
         <option value='en'>English</option>

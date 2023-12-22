@@ -3,16 +3,18 @@ import { CommonModule } from '@angular/common';
 import { createCustomElement } from '@angular/elements';
 import { CounterRoutingModule } from './counter-routing.module';
 import { CounterComponent } from './counter.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import "zone.js"
 import { BrowserModule } from '@angular/platform-browser';
 @NgModule({
   declarations: [
-    CounterComponent
+    
   ],
   imports: [
     CommonModule,
     CounterRoutingModule,
-    BrowserModule
+    BrowserModule,
+    MatSlideToggleModule,
   ],
 
 })

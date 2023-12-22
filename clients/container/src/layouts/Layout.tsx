@@ -16,7 +16,7 @@ const DashboardLayout: React.FC<Props> = (props:Props) => {
   return (
     <>
     <Sidebar menuActive={menuActive} />
-    <div className={`main ${menuActive ? "active" : ""}`}>
+    <div className={`main bg-gray-50 ${menuActive ? "active" : ""}`}>
       <TopBar menuActive={menuActive} setMenuActive={setMenuActive} />
       <Side/>
       <Settings  />
