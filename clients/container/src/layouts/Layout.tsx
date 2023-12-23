@@ -7,6 +7,7 @@ import Side from '../components/Settings/Side';
 import Settings from '../components/Settings/Settings';
 import Shadow from '../components/shared/Shadow';
 import { LayoutContext } from '../components/hooks/useLayouts';
+import BreadCrumbs from '../components/shared/BreadCrumbs/BreadCrumbs';
 interface Props {
     children?: React.ReactNode
 }
@@ -21,6 +22,7 @@ const DashboardLayout: React.FC<Props> = (props:Props) => {
       <Side/>
       <Settings  />
       <Shadow className={`z-30 bg-textColor ${openSide ? '' : 'hidden'}`} />
+      <BreadCrumbs/>
       <Outlet />
     </div>
     </>

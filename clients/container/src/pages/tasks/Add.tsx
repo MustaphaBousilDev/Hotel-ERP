@@ -5,7 +5,7 @@ const Add = () => {
     mount()
   },[])
   return (
-    <div className='   relative'>
+    <div className='   relative  px-2'>
       <tasks-hotel></tasks-hotel>
     </div>
   )

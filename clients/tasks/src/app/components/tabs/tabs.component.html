@@ -1,0 +1,22 @@
+
+  <ul class="tabs-container">
+    <li (click)="onTabClick('Personal Details')" [class.active]="activeTab == 'Personal Details'" class="tab-link">Personal Details</li>
+    <li (click)="onTabClick('Account Details')" [class.active]="activeTab == 'Account Details'" class="tab-link">Account Details</li>
+    <li (click)="onTabClick('Other Details')" [class.active]="activeTab == 'Other Details'" class="tab-link">Other Details</li>
+  </ul>
+
+    @if(activeTab == 'Personal Details'){
+      <div  class="content w-full ">
+        Personal Details
+      </div>
+    }
+    @if(activeTab == 'Account Details'){
+      <div class="w-full content">
+        Account Details
+      </div>
+    }
+    @if(activeTab == 'Other Details'){
+      <div class="w-full content">
+        Other Details
+      </div>
+    }

@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
+import {TabsComponent} from "../components/tabs/tabs.component"
 import {
   CdkDragDrop,
   CdkDrag,
@@ -9,15 +10,16 @@ import {
   transferArrayItem,
   
 } from '@angular/cdk/drag-drop';
+import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-counter',
-  templateUrl: './counter.component.html',
-  styleUrl: './counter.component.scss',
+  templateUrl: './tasks.component.html',
+  styleUrl: '../../styles.css',
   standalone: true,
-  imports:[CdkDropListGroup, CdkDropList, CdkDrag],
+  imports:[CdkDropListGroup, CdkDropList, CdkDrag,TabsComponent,MatIconModule],
   encapsulation: ViewEncapsulation.ShadowDom
 })
-export class CounterComponent {
+export class TasksComponent {
   
   todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
   todoArr=[

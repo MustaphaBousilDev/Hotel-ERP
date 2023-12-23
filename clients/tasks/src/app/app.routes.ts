@@ -8,6 +8,6 @@ export const routes: Routes = [
   },
   {
     path:"",
-    loadChildren: () => import("./counter/counter.module").then(m => m.CounterModule)
+    loadChildren: () => import("./tasks/tasks.module").then(m => m.TasksModule)
   }
 ];

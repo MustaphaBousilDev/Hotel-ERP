@@ -33,8 +33,8 @@ module.exports = {
         name: "tasks",
         filename: "remoteEntry.js",
         exposes: {
-            './CounterModule': './/src/app/counter/counter.module.ts',
-            './Tasks'  : './/src/counter.comp.ts'
+            './CounterModule': './/src/app/tasks/tasks.module.ts',
+            './Tasks'  : './/src/tasks.comp.ts'
         },        
         
         // For hosts (please adjust)
