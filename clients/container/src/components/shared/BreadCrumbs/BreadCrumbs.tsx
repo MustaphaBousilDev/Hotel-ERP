@@ -11,7 +11,11 @@ const BreadCrumbs = () => {
       <li><IoIosArrowForward className=' text-sm'/></li>
       <Link to='' className=' text-md hover:underline'>Tasks</Link>
       <li><IoIosArrowForward className=' text-sm'/></li>
-      <Link to='' className=' text-md hover:underline'>Add</Link>
+      <Link 
+        to='' 
+        className=' text-md hover:underline text-blue-600 bg-blue-100 p-1 px-4 rounded-md text-sm'>
+          Add
+      </Link>
     </ul>
   )
 }

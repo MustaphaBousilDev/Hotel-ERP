@@ -1,22 +1,71 @@
 
   <ul class="tabs-container">
-    <li (click)="onTabClick('Personal Details')" [class.active]="activeTab == 'Personal Details'" class="tab-link">Personal Details</li>
-    <li (click)="onTabClick('Account Details')" [class.active]="activeTab == 'Account Details'" class="tab-link">Account Details</li>
-    <li (click)="onTabClick('Other Details')" [class.active]="activeTab == 'Other Details'" class="tab-link">Other Details</li>
+    <li 
+      (click)="onTabClick('all-task')" 
+      [class.active]="activeTab == 'all-task'" 
+      class="tab-link "
+    >
+      <span>All Tasks</span>
+      <span class=" flex justify-center items-center p-2 rounded-md text-white bg-black">
+        58
+      </span>
+    </li>
+    <li 
+      (click)="onTabClick('todo')" 
+      [class.active]="activeTab == 'todo'" 
+      class="tab-link ">
+      <span></span>
+      <span>To do</span>
+      <span>20</span>
+    </li>
+    <li 
+      (click)="onTabClick('in-progress')" 
+      [class.active]="activeTab == 'in-progress'" 
+      class="tab-link ">
+      <span></span>
+      <span>In Progress</span>
+      <span>15</span>
+    </li>
+    <li 
+      (click)="onTabClick('in-review')" 
+      [class.active]="activeTab == 'in-review'" 
+      class="tab-link ">
+      <span></span>
+      <span>In Review</span>
+      <span>5</span>
+    </li>
+    <li 
+      (click)="onTabClick('done')" 
+      [class.active]="activeTab == 'done'" 
+      class="tab-link ">
+      <span></span>
+      <span>Done</span>
+      <span>21</span>
+    </li>
   </ul>
 
-    @if(activeTab == 'Personal Details'){
+    @if(activeTab == 'all-task'){
       <div  class="content w-full ">
-        Personal Details
+        All Tasks Content
       </div>
     }
-    @if(activeTab == 'Account Details'){
+    @if(activeTab == 'todo'){
       <div class="w-full content">
-        Account Details
+        Todo Content
       </div>
     }
-    @if(activeTab == 'Other Details'){
+    @if(activeTab == 'in-progress'){
       <div class="w-full content">
-        Other Details
+        In Progress Content 
+      </div>
+    }
+    @if(activeTab == 'in-review'){
+      <div class="w-full content">
+        In Review Content 
+      </div>
+    }
+    @if(activeTab == 'done'){
+      <div class="w-full content">
+        In Done Content 
       </div>
     }

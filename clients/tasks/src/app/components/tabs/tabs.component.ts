@@ -9,7 +9,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 })
 export class TabsComponent {
   title = 'Bytes';
-  activeTab: string = 'Personal Details';
+  activeTab: string = 'all-task';
 
   onTabClick(tab:any) {
     this.activeTab = tab;
