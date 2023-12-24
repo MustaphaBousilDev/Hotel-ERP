@@ -27,7 +27,7 @@ const Picture:React.FC<props> = ({onClick,dropDown}) => {
         >
         <DropdownItem 
         style={{alignItems:'flex-start'}}
-        className=' flex flex-col  py-2  gap-4'>
+        className=' flex flex-col  py-2  gap-4 relative z-50 bg-white'>
           <div className='  w-full px-5'>
             <h3 className='text-center my-0 text-textColor font-semibold '>
               Mustapha Bousil
@@ -37,7 +37,7 @@ const Picture:React.FC<props> = ({onClick,dropDown}) => {
             </span>
           </div>
           <div className='mt-3 px-1'>
-            <ul className=' flex flex-col'>
+            <ul className=' flex flex-col relative z-50 '>
               <li className='
                   flex items-center transition gap-2 
                   py-2 px-2 hover:bg-greyHover rounded-md'>
