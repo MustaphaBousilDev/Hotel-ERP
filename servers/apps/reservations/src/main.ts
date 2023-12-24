@@ -12,6 +12,7 @@ async function bootstrap() {
   // Use the Logger provided by the Nest application
   app.useLogger(app.get(Logger));
   // Start the application and make it listen on port 5000
+  console.log('fucking test2');
   await app.listen(5000);
 }
 bootstrap();
