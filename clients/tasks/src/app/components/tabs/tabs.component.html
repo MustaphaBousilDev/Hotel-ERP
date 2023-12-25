@@ -1,48 +1,98 @@
 
-  <ul class="tabs-container">
-    <li 
-      (click)="onTabClick('all-task')" 
-      [class.active]="activeTab == 'all-task'" 
-      class="tab-link "
-    >
-      <span>All Tasks</span>
-      <span class=" flex justify-center items-center p-2 rounded-md text-white bg-black">
-        58
-      </span>
-    </li>
-    <li 
-      (click)="onTabClick('todo')" 
-      [class.active]="activeTab == 'todo'" 
-      class="tab-link ">
-      <span></span>
-      <span>To do</span>
-      <span>20</span>
-    </li>
-    <li 
-      (click)="onTabClick('in-progress')" 
-      [class.active]="activeTab == 'in-progress'" 
-      class="tab-link ">
-      <span></span>
-      <span>In Progress</span>
-      <span>15</span>
-    </li>
-    <li 
-      (click)="onTabClick('in-review')" 
-      [class.active]="activeTab == 'in-review'" 
-      class="tab-link ">
-      <span></span>
-      <span>In Review</span>
-      <span>5</span>
-    </li>
-    <li 
-      (click)="onTabClick('done')" 
-      [class.active]="activeTab == 'done'" 
-      class="tab-link ">
-      <span></span>
-      <span>Done</span>
-      <span>21</span>
-    </li>
-  </ul>
+  <div class="tabs__parent">
+    <ul class="tabs-container">
+      <li 
+        (click)="onTabClick('all-task')" 
+        [class.active]="activeTab == 'all-task'" 
+        class="tab-link "
+      >
+        <span>All Tasks</span>
+        <span class=" flex justify-center items-center p-2 rounded-md text-white bg-black">
+          58
+        </span>
+      </li>
+      <li 
+        (click)="onTabClick('todo')" 
+        [class.active]="activeTab == 'todo'" 
+        class="tab-link ">
+        <span></span>
+        <span>To do</span>
+        <span>20</span>
+      </li>
+      <li 
+        (click)="onTabClick('in-progress')" 
+        [class.active]="activeTab == 'in-progress'" 
+        class="tab-link ">
+        <span></span>
+        <span>In Progress</span>
+        <span>15</span>
+      </li>
+      <li 
+        (click)="onTabClick('in-review')" 
+        [class.active]="activeTab == 'in-review'" 
+        class="tab-link ">
+        <span></span>
+        <span>In Review</span>
+        <span>5</span>
+      </li>
+      <li 
+        (click)="onTabClick('done')" 
+        [class.active]="activeTab == 'done'" 
+        class="tab-link ">
+        <span></span>
+        <span>Done</span>
+        <span>21</span>
+      </li>
+      <li 
+        (click)="onTabClick('cancel')" 
+        [class.active]="activeTab == 'cancel'" 
+        class="tab-link ">
+        <span></span>
+        <span>Cancel</span>
+        <span>10</span>
+      </li>
+    </ul>
+    <div class="empolyee__avatar_parent">
+      <div class="empolyee__avatar">
+        <div class="avatar">
+          <img 
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRa9UI1y4Shr253ibETjPCOWNBWWpKgQsVKaw&usqp=CAU" 
+            alt="" 
+          />
+        </div>
+        <div class="avatar">
+          <img 
+            src="https://www.w3schools.com/w3images/avatar6.png" 
+            alt="" 
+          />
+        </div>
+        <div class="avatar">
+          <img 
+            src="https://www.w3schools.com/w3css/img_avatar3.png" 
+            alt="" 
+          />
+        </div>
+        <div class="avatar">
+          <img 
+            src="https://st2.depositphotos.com/2703645/7304/v/450/depositphotos_73040253-stock-illustration-male-avatar-icon.jpg" 
+            alt="" 
+          />
+        </div>
+        <div class="avatar">
+          <img 
+            src="https://images.assetsdelivery.com/compings_v2/tanyadanuta/tanyadanuta2006/tanyadanuta200600030.jpg" 
+            alt="" 
+          />
+        </div>
+        <div class="avatar">
+          <img 
+            src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" 
+            alt="" 
+          />
+        </div>
+      </div>
+    </div>
+  </div>
 
     @if(activeTab == 'all-task'){
       <div  class="content w-full ">
@@ -67,5 +117,10 @@
     @if(activeTab == 'done'){
       <div class="w-full content">
         In Done Content 
+      </div>
+    }
+    @if(activeTab == 'cancel'){
+      <div class="w-full content">
+        In Cancel Content
       </div>
     }
