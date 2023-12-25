@@ -25,6 +25,7 @@ import * as Joi from 'joi';
       isGlobal: true,
       validationSchema: Joi.object({
         MONGODB_URI: Joi.string().required(),
+        PORT_RESERVATION: Joi.number().required(),
       }),
     }),
   ],
