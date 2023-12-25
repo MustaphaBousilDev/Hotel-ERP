@@ -29,10 +29,14 @@ const Navbar: React.FC<NavbarProps>= ({menuActive}) => {
   };
 
   return (
-    <div className={`navigation navigations   bg-gray-50   shadow-md ${menuActive ? ' py-2 ' : 'p-2 px-3 shadow-lg'}     dark:bg-darkTopBar   
+    <div className={`navigation navigations  bg-white   shadow-md ${menuActive ? ' py-2 ' : 'p-2 px-3 shadow-lg'}     dark:bg-darkTopBar   
     
     ${menuActive ? "active" : ""} `}>
-        <div style={{height:'99.5%'}}  className={` p-2 relative    bg-white  p-4 rounded-md overflow-hidden `}>
+        <div 
+          style={{height:'99.5%'}}  
+          className={` 
+          relative bg-white p-4 rounded-md 
+          overflow-hidden overflow-y-scroll child_side `}>
           <ul className={`  ${menuActive ? '' : 'p-2'} flex flex-col `}>
             <span className=' flex gap-2 items-center mb-5'>
               <Logo w='65px' h='65px' color={`${ theme==='dark' ? '#fff' : '#333'}`}

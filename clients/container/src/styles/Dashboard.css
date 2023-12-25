@@ -42,6 +42,11 @@ body {
     height: 100%;
     z-index: 1000;
 }
+.child_side::-webkit-scrollbar{
+    width: 0px;
+    height: 100%;
+    z-index: 1000;
+}
 .navigation::-webkit-scrollbar-thumb {
     background-color: 'red'
 }
