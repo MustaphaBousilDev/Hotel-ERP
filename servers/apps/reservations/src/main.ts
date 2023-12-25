@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { ReservationsModule } from './reservations.module';
 import { ValidationPipe } from '@nestjs/common';
 import { Logger } from 'nestjs-pino';
+import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
   // Create an instance of the Nest application using the ReservationsModule
@@ -12,6 +13,7 @@ async function bootstrap() {
   // Use the Logger provided by the Nest application
   app.useLogger(app.get(Logger));
   // Start the application and make it listen on port 5000
-  await app.listen(5000);
+  const configService = app.get(ConfigService);
+  await app.listen(configService.get('PORT_RESERVATION'));
 }
 bootstrap();
