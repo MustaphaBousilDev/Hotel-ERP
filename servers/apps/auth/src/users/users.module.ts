@@ -20,5 +20,6 @@ import { LoggerModule } from 'nestjs-pino';
   ],
   controllers: [UsersController],
   providers: [UsersService, UsersRepository],
+  exports: [UsersService],
 })
 export class UsersModule {}
