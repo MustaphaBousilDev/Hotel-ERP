@@ -1,3 +1,7 @@
+svg{
+  width: 35px;
+  height:35px
+}
 .tabs__parent{
   display: flex;
   align-items: center;
@@ -227,7 +231,42 @@
   }
   .filtering{
     width: 50%;
-    background-color: blue;
+    // background-color: blue;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 15px;
+    div{
+      display: flex;
+      align-items: center;
+      gap:5px;
+      color:rgb(73, 72, 72);
+      padding: 5px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: .2s;
+      transform: scale(1);
+      &:active{
+        transform: scale(.98);
+      }
+      &:hover{
+        color:#fff;
+        background-color: #333;
+      }
+      &.active{
+        color:#fff;
+        background-color: #333;
+      }
+      svg{
+        width: 17px;
+        height: 17px;
+      }
+      span{
+        font-size: 14px;
+        letter-spacing: -1px;
+        font-weight: 500;
+      }
+    }
   }
 }
 

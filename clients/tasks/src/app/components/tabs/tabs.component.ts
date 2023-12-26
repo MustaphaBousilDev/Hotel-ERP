@@ -11,16 +11,16 @@ export class TabsComponent {
   title = 'Bytes';
   activeTab: string = 'all-task';
   type:string | null = '';
+  filterLocal: boolean | any = false;
+  sortLocal: boolean | any  = false;
+  sort:boolean = false;
+  filter:boolean = false ;
 
   ngOnInit() {
     // Call your custom function when the component is initialized
-    this.type=localStorage.getItem('type')
-    if(this.type){
-      this.activeTab = this.type
-      // console.log('init',this.activeTab)
-    }else{
-      localStorage.setItem('type',this.activeTab)
-    }
+    this.localStorageTasks()
+    this.localStorageFilter()
+    this.localStorageSort()
   }
 
   onTabClick(tab:any) {
@@ -29,8 +29,35 @@ export class TabsComponent {
     // console.log(this.activeTab)
   }
 
-  storeLocalStorage(data:string){
-    
+  sortClick(){
+    this.sort=true 
+    this.filter=false 
+    localStorage.setItem('sort',JSON.stringify(this.sort))
+    localStorage.setItem('filter',JSON.stringify(false))
+  }
+  filterClick(){
+    this.sort=false 
+    this.filter=true  
+    localStorage.setItem('filter',JSON.stringify(this.filter))
+    localStorage.setItem('sort',JSON.stringify(false))
+  }
+
+  localStorageTasks(){
+    this.type=localStorage.getItem('type')
+    if(this.type){
+      this.activeTab = this.type
+      // console.log('init',this.activeTab)
+    }else{
+      localStorage.setItem('type',this.activeTab)
+    }
+  }
+  localStorageFilter(){
+    this.filterLocal=localStorage.getItem('filter')
+    this.filter=JSON.parse(this.filterLocal)
+  }
+  localStorageSort(){
+    this.sortLocal=localStorage.getItem('sort')
+    this.sort=JSON.parse(this.sortLocal)
     
   }
 }

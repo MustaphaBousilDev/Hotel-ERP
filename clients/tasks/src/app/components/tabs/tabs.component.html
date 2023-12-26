@@ -102,7 +102,24 @@
         <input placeholder="Search by keyword or DocID" type="text" name="" />
       </div>
     </div>
-    <div class="filtering">Filter</div>
+    <div class="filtering">
+      <div 
+      (click)="sortClick()"
+      [class.active]="sort">
+        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 20">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6v13m0 0 3-3m-3 3-3-3m11-2V1m0 0L9 4m3-3 3 3"/>
+        </svg>
+        <span>Sorted By</span>
+      </div>
+      <div 
+      (click)="filterClick()"
+      [class.active]="filter">
+        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
+          <path d="M18.85 1.1A1.99 1.99 0 0 0 17.063 0H2.937a2 2 0 0 0-1.566 3.242L6.99 9.868 7 14a1 1 0 0 0 .4.8l4 3A1 1 0 0 0 13 17l.01-7.134 5.66-6.676a1.99 1.99 0 0 0 .18-2.09Z"/>
+        </svg>
+        <span>Advanced Filter</span>
+      </div>
+    </div>
   </div>
     @if(activeTab == 'all-task'){
       <div  class="content w-full ">
