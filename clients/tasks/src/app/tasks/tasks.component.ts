@@ -14,13 +14,13 @@ import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-counter',
   templateUrl: './tasks.component.html',
-  styleUrl: '../../styles.css',
+  styleUrl: './tasks.component.scss',
   standalone: true,
   imports:[CdkDropListGroup, CdkDropList, CdkDrag,TabsComponent,MatIconModule],
   encapsulation: ViewEncapsulation.ShadowDom
 })
 export class TasksComponent {
-  
+  dataFromChild: string='';
   todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
   todoArr=[
     {
@@ -64,7 +64,7 @@ export class TasksComponent {
       status:'progress'
     }
   ]
-
+  
   done = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk dog'];
 
   progress = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk dog'];
@@ -98,5 +98,11 @@ export class TasksComponent {
       console.log('todProgress',this.progressArr)
       console.log('todDone',this.doneArr)
     }
+  }
+
+  receviedDataFromChild(data:string){
+    this.dataFromChild = data
+    console.log('from parent')
+    console.log(this.dataFromChild)
   }
 }

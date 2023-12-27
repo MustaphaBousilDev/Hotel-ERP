@@ -1,57 +1,60 @@
-<!-- <div cdkDropListGroup>
-  <div class="example-container">
-    <h2>To do</h2>
 
-    <div
-      cdkDropList
-      [cdkDropListData]="todoArr"
-      class="example-list"
-      id="todoList"
-      (cdkDropListDropped)="drop($event)">
-      @for (item of todoArr; track item) {
-        <div class="example-box" cdkDrag>
-          <p>name: {{item.name}}</p>
-          <p>status: <span>Todo</span></p>
-        </div>
-      }
-    </div>
-  </div>
-  <div class="example-container">
-    <h2>Done</h2>
-
-    <div
-      cdkDropList
-      [cdkDropListData]="doneArr"
-      class="example-list"
-      id="doneList"
-      (cdkDropListDropped)="drop($event)">
-      @for (item of doneArr; track item) {
-        <div class="example-box" cdkDrag>
-          <p>name: {{item.name}}</p>
-          <p>status: <span>Done</span></p>
-        </div>
-      }
-    </div>
-  </div>
-  <div class="example-container">
-    <h2>Done</h2>
-
-    <div
-      cdkDropList
-      [cdkDropListData]="progressArr"
-      class="example-list"
-      id="progressList"
-      (cdkDropListDropped)="drop($event)">
-      @for (item of progressArr; track item) {
-        <div class="example-box" cdkDrag>
-          <p>name: {{item.name}}</p>
-          <p>status: <span>Progress</span></p>
-        </div>
-      }
-    </div>
-  </div>
-</div> -->
 <div class=" my-4">
   <h3 class="text-3xl font-bold">Welcome Back, Mugiwara</h3>
-  <app-tabs></app-tabs>
+  <app-tabs (activeTabShared)="receviedDataFromChild($event)" ></app-tabs>
+  @if(dataFromChild=='all-task'){
+    <div cdkDropListGroup>
+      <div class="example-container">
+        <h2>To do</h2>
+    
+        <div
+          cdkDropList
+          [cdkDropListData]="todoArr"
+          class="example-list"
+          id="todoList"
+          (cdkDropListDropped)="drop($event)">
+          @for (item of todoArr; track item) {
+            <div class="example-box" cdkDrag>
+              <p>name: {{item.name}}</p>
+              <p>status: <span>Todo</span></p>
+            </div>
+          }
+        </div>
+      </div>
+      <div class="example-container">
+        <h2>Done</h2>
+    
+        <div
+          cdkDropList
+          [cdkDropListData]="doneArr"
+          class="example-list"
+          id="doneList"
+          (cdkDropListDropped)="drop($event)">
+          @for (item of doneArr; track item) {
+            <div class="example-box" cdkDrag>
+              <p>name: {{item.name}}</p>
+              <p>status: <span>Done</span></p>
+            </div>
+          }
+        </div>
+      </div>
+      <div class="example-container">
+        <h2>Done</h2>
+    
+        <div
+          cdkDropList
+          [cdkDropListData]="progressArr"
+          class="example-list"
+          id="progressList"
+          (cdkDropListDropped)="drop($event)">
+          @for (item of progressArr; track item) {
+            <div class="example-box" cdkDrag>
+              <p>name: {{item.name}}</p>
+              <p>status: <span>Progress</span></p>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  }
 </div>

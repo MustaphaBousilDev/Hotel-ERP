@@ -5,7 +5,6 @@ import { TabsComponent } from './tabs.component';
 
 @NgModule({
   declarations: [
-    TabsComponent
   ],
   imports: [
     CommonModule

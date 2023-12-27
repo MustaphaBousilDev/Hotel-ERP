@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import {MatTabsModule} from '@angular/material/tabs';
 @Component({
   selector: 'app-tabs',
@@ -7,7 +7,11 @@ import {MatTabsModule} from '@angular/material/tabs';
   templateUrl: './tabs.component.html',
   styleUrl: './tabs.component.scss'
 })
-export class TabsComponent {
+export class TabsComponent{
+  //event emitter
+  @Output() activeTabShared = new EventEmitter<string>()
+
+
   title = 'Bytes';
   activeTab: string = 'all-task';
   type:string | null = '';
@@ -16,17 +20,26 @@ export class TabsComponent {
   sort:boolean = false;
   filter:boolean = false ;
 
+  
+  sendDataToParent() {
+    const sharedData = this.activeTab;
+    this.activeTabShared.emit(sharedData)
+  }
+
   ngOnInit() {
     // Call your custom function when the component is initialized
     this.localStorageTasks()
     this.localStorageFilter()
     this.localStorageSort()
+    this.sendDataToParent()
   }
+
 
   onTabClick(tab:any) {
     this.activeTab = tab;
     localStorage.setItem('type',this.activeTab)
     // console.log(this.activeTab)
+    this.sendDataToParent()
   }
 
   sortClick(){
