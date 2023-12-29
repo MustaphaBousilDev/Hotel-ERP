@@ -89,14 +89,15 @@
         background-color: #e9e9e9;
       }
       &::-webkit-scrollbar-thumb {
-        background-color: rgb(143, 173, 255);
+        background-color: rgb(199, 200, 202);
         border-radius: 15px;
+        
       }
       padding:5px 10px;
       border-radius: 10px;
       @media screen and (max-width:1200px){min-width: calc(33.33% - 10px);}
       @media screen and (max-width:800px){min-width: calc(48% - 10px);}
-      @media screen and (max-width:600px){min-width: calc(65% - 10px);}
+      @media screen and (max-width:600px){min-width: calc(75% - 10px);}
       .child-heading{
         padding:8px 12px;
         border-radius: 7px;
