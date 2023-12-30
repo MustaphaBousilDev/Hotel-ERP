@@ -3,6 +3,7 @@ import { ReservationsModule } from './reservations.module';
 import { ValidationPipe } from '@nestjs/common';
 import { Logger } from 'nestjs-pino';
 import { ConfigService } from '@nestjs/config';
+import * as cookieParser from 'cookie-parser';
 
 async function bootstrap() {
   // Create an instance of the Nest application using the ReservationsModule
@@ -12,8 +13,9 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
   // Use the Logger provided by the Nest application
   app.useLogger(app.get(Logger));
+  app.use(cookieParser());
   // Start the application and make it listen on port 5000
   const configService = app.get(ConfigService);
-  await app.listen(configService.get('PORT_RESERVATION'));
+  await app.listen(configService.get('HTTP_PORT_RESERVATION'));
 }
 bootstrap();
