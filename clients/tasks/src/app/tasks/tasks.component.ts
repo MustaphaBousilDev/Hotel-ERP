@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 import {TabsComponent} from "../components/tabs/tabs.component"
 import {
@@ -10,6 +10,7 @@ import {
   transferArrayItem,
   
 } from '@angular/cdk/drag-drop';
+import { ModalService } from '../components/modal/modal.service';
 import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-counter',
@@ -68,7 +69,10 @@ export class TasksComponent {
   done = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk dog'];
 
   progress = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk dog'];
-  constructor(private router: Router){}
+  constructor(
+    private router: Router,
+    private modalService: ModalService
+  ){}
   drop(event: CdkDragDrop<{name: string; status: string;}[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -104,5 +108,14 @@ export class TasksComponent {
     this.dataFromChild = data
     console.log('from parent')
     console.log(this.dataFromChild)
+  }
+
+  //for modal
+  openModal(modalTemplate: TemplateRef<any>) {
+    this.modalService
+      .open(modalTemplate, { size: 'lg', title: 'Foo' })
+      .subscribe((action) => {
+        console.log('modalAction', action);
+      });
   }
 }

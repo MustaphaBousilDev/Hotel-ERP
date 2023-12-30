@@ -6,6 +6,8 @@ import { TasksComponent } from './tasks.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import "zone.js"
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { ModalModule } from '../components/modal/modal.module';
 @NgModule({
   declarations: [
   ],
@@ -13,6 +15,8 @@ import { BrowserModule } from '@angular/platform-browser';
     CommonModule,
     TasksRoutingModule,
     BrowserModule,
+    HttpClientModule,
+    ModalModule,
     MatSlideToggleModule,
   ],
 
