@@ -1,0 +1,31 @@
+<form class="container_form" [formGroup]="form">
+
+  <h1>Order your drinks</h1>
+
+  <div class="form-control">
+    <label>Your name: </label>
+    <input type="text" placeholder="Your name" formControlName="name" />
+  </div>
+  <div class="form-control">
+    <label>Amount of white wine: </label>
+    <input type="number" formControlName="white_wine" />
+  </div>
+  <div class="form-control">
+    <label>Amount of red wine: </label>
+    <input type="number" formControlName="red_wine" />
+  </div>
+  <div class="form-control">
+    <label>Amount of beer: </label>
+    <input type="number" formControlName="beer" />
+  </div>
+  <div class="form-control">
+    <button>Place order</button>
+  </div>
+  @if(form){
+    <pre class="form-values">
+      {{ form.value | json }}
+    </pre>
+  }
+  
+
+</form>
