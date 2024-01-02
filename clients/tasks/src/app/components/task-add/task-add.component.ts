@@ -1,29 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl,ReactiveFormsModule } from '@angular/forms';
+import {
+  ReactiveFormsModule,
+  FormsModule,
+} from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
+import { InputComponent } from '../input/input.component';
 @Component({
   selector: 'app-task-add',
   standalone: true,
   imports: [
     CommonModule,
-    ReactiveFormsModule 
+    ReactiveFormsModule,
+    FormsModule,
+    InputComponent
   ],
   templateUrl: './task-add.component.html',
-  styleUrl: './task-add.component.scss'
+  styleUrls: ['./task-add.component.scss','../input/input.component.scss']
 })
-export class TaskAddComponent implements OnInit {
-  form: FormGroup | any=''
-  ngOnInit(): void {
-    this.form = this.createForm();
-  }
-  createForm() {
-    return new FormGroup({
-      name: new FormControl(''),
-      white_wine: new FormControl(0),
-      red_wine: new FormControl(0),
-      beer: new FormControl(0)
-    });
-  }
+export class TaskAddComponent {
 
 }
