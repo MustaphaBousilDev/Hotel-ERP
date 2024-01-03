@@ -2,15 +2,21 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 import { PassportStrategy } from '@nestjs/passport';
 import { Inject, Injectable } from '@nestjs/common';
 import { Request } from 'express';
+import { EnvironmentConfigService } from '../../config/environment-config/environment-config.service';
 import { UsecasesProxyModule } from '../../usecases-proxy/usecases-proxy.module';
 import { UseCaseProxy } from '../../usecases-proxy/usecases-proxy';
 import { LoginUseCases } from '../../../useCases/auth/login.usecases';
-import { ExceptionsService } from '../../exceptions/exceptions.service';
+import { TokenPayload } from '../../../domain/model/auth';
 import { LoggerService } from '../../logger/logger.service';
+import { ExceptionsService } from '../../exceptions/exceptions.service';
 
 @Injectable()
-export class JwtStrategy extends PassportStrategy(Strategy) {
+export class JwtRefreshTokenStrategy extends PassportStrategy(
+  Strategy,
+  'jwt-refresh-token',
+) {
   constructor(
+    private readonly configService: EnvironmentConfigService,
     @Inject(UsecasesProxyModule.LOGIN_USECASES_PROXY)
     private readonly loginUsecaseProxy: UseCaseProxy<LoginUseCases>,
     private readonly logger: LoggerService,
@@ -19,21 +25,23 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     super({
       jwtFromRequest: ExtractJwt.fromExtractors([
         (request: Request) => {
-          return request?.cookies?.Authentication;
+          return request?.cookies?.Refresh;
         },
       ]),
-      secretOrKey: process.env.JWT_SECRET,
+      secretOrKey: configService.getJwtRefreshSecret(),
+      passReqToCallback: true,
     });
   }
 
-  async validate(payload: any) {
+  async validate(request: Request, payload: TokenPayload) {
+    const refreshToken = request.cookies?.Refresh;
     const user = this.loginUsecaseProxy
       .getInstance()
-      .validateUserForJWTStragtegy(payload.username);
+      .getUserIfRefreshTokenMatches(refreshToken, payload.username);
     if (!user) {
-      this.logger.warn('JwtStrategy', `User not found`);
+      this.logger.warn('JwtStrategy', `User not found or hash not correct`);
       this.exceptionService.UnauthorizedException({
-        message: 'User not found',
+        message: 'User not found or hash not correct',
       });
     }
     return user;

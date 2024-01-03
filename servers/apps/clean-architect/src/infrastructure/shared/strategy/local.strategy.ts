@@ -1,39 +1,39 @@
-import { ExtractJwt, Strategy } from 'passport-jwt';
+import { Strategy } from 'passport-local';
 import { PassportStrategy } from '@nestjs/passport';
 import { Inject, Injectable } from '@nestjs/common';
-import { Request } from 'express';
 import { UsecasesProxyModule } from '../../usecases-proxy/usecases-proxy.module';
 import { UseCaseProxy } from '../../usecases-proxy/usecases-proxy';
 import { LoginUseCases } from '../../../useCases/auth/login.usecases';
-import { ExceptionsService } from '../../exceptions/exceptions.service';
 import { LoggerService } from '../../logger/logger.service';
+import { ExceptionsService } from '../../exceptions/exceptions.service';
+// import { TokenPayload } from '../../../domain/model/auth';
 
 @Injectable()
-export class JwtStrategy extends PassportStrategy(Strategy) {
+export class LocalStrategy extends PassportStrategy(Strategy) {
   constructor(
     @Inject(UsecasesProxyModule.LOGIN_USECASES_PROXY)
     private readonly loginUsecaseProxy: UseCaseProxy<LoginUseCases>,
     private readonly logger: LoggerService,
     private readonly exceptionService: ExceptionsService,
   ) {
-    super({
-      jwtFromRequest: ExtractJwt.fromExtractors([
-        (request: Request) => {
-          return request?.cookies?.Authentication;
-        },
-      ]),
-      secretOrKey: process.env.JWT_SECRET,
-    });
+    super();
   }
 
-  async validate(payload: any) {
-    const user = this.loginUsecaseProxy
+  async validate(username: string, password: string) {
+    if (!username || !password) {
+      this.logger.warn(
+        'LocalStrategy',
+        `Username or password is missing, BadRequestException`,
+      );
+      this.exceptionService.UnauthorizedException();
+    }
+    const user = await this.loginUsecaseProxy
       .getInstance()
-      .validateUserForJWTStragtegy(payload.username);
+      .validateUserForLocalStragtegy(username, password);
     if (!user) {
-      this.logger.warn('JwtStrategy', `User not found`);
+      this.logger.warn('LocalStrategy', `Invalid username or password`);
       this.exceptionService.UnauthorizedException({
-        message: 'User not found',
+        message: 'Invalid username or password.',
       });
     }
     return user;

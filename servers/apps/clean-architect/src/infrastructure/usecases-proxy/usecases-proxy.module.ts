@@ -4,9 +4,9 @@ import { DynamicModule, Module } from '@nestjs/common';
 // import { GetTodoUseCases } from '../../usecases/todo/getTodo.usecases';
 // import { getTodosUseCases } from '../../usecases/todo/getTodos.usecases';
 // import { updateTodoUseCases } from '../../usecases/todo/updateTodo.usecases';
-import { IsAuthenticatedUseCases } from '../../usecases/auth/isAuthenticated.usecases';
-import { LoginUseCases } from '../../usecases/auth/login.usecases';
-import { LogoutUseCases } from '../../usecases/auth/logout.usecases';
+import { IsAuthenticatedUseCases } from '../../useCases/auth/isAuthenticated.usecases';
+import { LoginUseCases } from '../../useCases/auth/login.usecases';
+import { LogoutUseCases } from '../../useCases/auth/logout.usecases';
 
 import { ExceptionsModule } from '../exceptions/exceptions.module';
 import { LoggerModule } from '../logger/logger.module';
@@ -126,11 +126,11 @@ export class UsecasesProxyModule {
         // },
       ],
       exports: [
-        UsecasesProxyModule.GET_TODO_USECASES_PROXY,
-        UsecasesProxyModule.GET_TODOS_USECASES_PROXY,
-        UsecasesProxyModule.POST_TODO_USECASES_PROXY,
-        UsecasesProxyModule.PUT_TODO_USECASES_PROXY,
-        UsecasesProxyModule.DELETE_TODO_USECASES_PROXY,
+        // UsecasesProxyModule.GET_TODO_USECASES_PROXY,
+        // UsecasesProxyModule.GET_TODOS_USECASES_PROXY,
+        // UsecasesProxyModule.POST_TODO_USECASES_PROXY,
+        // UsecasesProxyModule.PUT_TODO_USECASES_PROXY,
+        // UsecasesProxyModule.DELETE_TODO_USECASES_PROXY,
         UsecasesProxyModule.LOGIN_USECASES_PROXY,
         UsecasesProxyModule.IS_AUTHENTICATED_USECASES_PROXY,
         UsecasesProxyModule.LOGOUT_USECASES_PROXY,
