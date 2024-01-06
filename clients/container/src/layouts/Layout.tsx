@@ -22,7 +22,7 @@ const DashboardLayout: React.FC<Props> = (props:Props) => {
       <Side/>
       <Settings  />
       <Shadow className={`z-30 bg-textColor ${openSide ? '' : 'hidden'}`} />
-      <BreadCrumbs/>
+      {/* <BreadCrumbs/> */}
       <Outlet />
     </div>
     </>

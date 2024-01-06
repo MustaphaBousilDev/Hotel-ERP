@@ -4,7 +4,7 @@ const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPl
 const deps = require("./package.json").dependencies;
 module.exports = (_, argv) => ({
   output: {
-    publicPath: "http://localhost:3000/",
+    publicPath: "http://localhost:3004/",
   },
 
   resolve: {
@@ -12,22 +12,12 @@ module.exports = (_, argv) => ({
   },
 
   devServer: {
-    port: 3000,
+    port: 3004,
     historyApiFallback: true,
   },
 
   module: {
     rules: [
-      {
-        test: /\.(png|jpg|gif|jpeg)$/i,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 8192
-            }
-          }]
-      },
       {
         test: /\.m?js/,
         type: "javascript/auto",
@@ -46,23 +36,19 @@ module.exports = (_, argv) => ({
           loader: "babel-loader",
         },
       },
-      {
-        test: /\.json$/,
-        use: 'json-loader',
-        type: 'javascript/auto',
-      },
     ],
   },
 
   plugins: [
     new ModuleFederationPlugin({
-      name: "container",
+      name: "static_all",
       filename: "remoteEntry.js",
       remotes: {
-        "tasks":"tasks@http://localhost:4201/remoteEntry.js",
         static_all:"static_all@http://localhost:3004/remoteEntry.js"
       },
-      exposes: {},
+      exposes: {
+        "./Static":"./src/Static/Static.tsx"
+      },
       shared: {
         ...deps,
         react: {
