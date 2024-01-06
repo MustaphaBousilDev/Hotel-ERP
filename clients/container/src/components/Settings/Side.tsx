@@ -1,5 +1,5 @@
 import React,{useContext} from 'react'
-import { LayoutContext } from '../hooks/useLayouts';
+import { LayoutContext } from '../../hooks/useLayouts';
 import { IoColorPaletteOutline } from "react-icons/io5";
 import LightMode from '../../assets/lightMod.png'
 import DarkMode from '../../assets/darkMod.png';

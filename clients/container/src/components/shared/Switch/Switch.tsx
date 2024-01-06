@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { CheckBoxWrapper, CheckBox, CheckBoxLabel } from './Styles';
-import { LayoutContext } from '../../hooks/useLayouts';
+import { LayoutContext } from '../../../hooks/useLayouts';
 interface props{
   className?:string 
   onChange?:()=>void,

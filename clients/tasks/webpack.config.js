@@ -38,8 +38,8 @@ module.exports = {
         },        
         
         // For hosts (please adjust)
-        // remotes: {
-        //     "mfe1": "http://localhost:3000/remoteEntry.js",
+        //remotes: {
+            //"components": "components@http://localhost:4300/remoteEntry.js",
 
         // },
 

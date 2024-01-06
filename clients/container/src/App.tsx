@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./index.scss";
 import Admin from "./pages/Admin";
 import DashboardLayout from "./layouts/Layout";
-import { LayoutProvider } from "./components/hooks/useLayouts";
+import { LayoutProvider } from "./hooks/useLayouts";
 import './i18n';
 import Home from "./pages/Home";
 //tasks 

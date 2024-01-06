@@ -1,5 +1,5 @@
 import React,{useContext} from 'react'
-import { LayoutContext } from '../hooks/useLayouts'
+import { LayoutContext } from '../../hooks/useLayouts'
 interface props{className?:string}
 const Shadow:React.FC<props> = ({className}) => {
   const {handleToggleOpenSide}=useContext(LayoutContext)

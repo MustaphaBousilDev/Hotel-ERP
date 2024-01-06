@@ -1,7 +1,7 @@
 import React ,{useContext} from 'react'
 import './setting.css'
 import { IoSettingsSharp } from "react-icons/io5";
-import { LayoutContext } from '../hooks/useLayouts';
+import { LayoutContext } from '../../hooks/useLayouts';
 const Settings = () => {
   const { openSide, handleToggleOpenSide} = useContext(LayoutContext)
   console.log(openSide)

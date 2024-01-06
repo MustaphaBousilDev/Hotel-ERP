@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Logo from '../../icons/Logo';
 import Accordion from '../custom/AccordionSideBar';
 import {dataConstant} from '../../constants'
-import useThemeSwitcher from '../hooks/useThemeSwitcher';
+import useThemeSwitcher from '../../hooks/useThemeSwitcher';
 interface NavbarProps {
   menuActive: boolean;
 }

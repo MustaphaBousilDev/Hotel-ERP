@@ -5,6 +5,7 @@ import {
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { InputComponent } from '../input/input.component';
+import { InputDateComponent } from '../input/input-date/input-date.component';
 @Component({
   selector: 'app-task-add',
   standalone: true,
@@ -12,7 +13,8 @@ import { InputComponent } from '../input/input.component';
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    InputComponent
+    InputComponent,
+    InputDateComponent
   ],
   templateUrl: './task-add.component.html',
   styleUrls: ['./task-add.component.scss','../input/input.component.scss']

@@ -6,7 +6,7 @@ import TopBar from '../components/shared/TopBar/TopBar';
 import Side from '../components/Settings/Side';
 import Settings from '../components/Settings/Settings';
 import Shadow from '../components/shared/Shadow';
-import { LayoutContext } from '../components/hooks/useLayouts';
+import { LayoutContext } from '../hooks/useLayouts';
 import BreadCrumbs from '../components/shared/BreadCrumbs/BreadCrumbs';
 interface Props {
     children?: React.ReactNode

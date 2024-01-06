@@ -4,7 +4,7 @@ import Searchs from '../Search/Searchs';
 import Bars from '../Bar/Bars';
 import Theme from '../Dark/Theme';
 import Picture from '../Avatar/Picture';
-import useThemeSwitcher from '../../hooks/useThemeSwitcher';
+import useThemeSwitcher from '../../../hooks/useThemeSwitcher';
 interface NavbarProps {
     menuActive: boolean;
     setMenuActive:any
