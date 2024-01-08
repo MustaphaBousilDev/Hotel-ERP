@@ -267,7 +267,11 @@ const Static = () => {
       highcharts={Highcharts}
       options={options}
     /> */}
-    <Card styles={{...styleCard}} className=' flex  '>
+    <Card 
+      title='Employée Stats'
+      styles={{...styleCard}} 
+      className=' flex'
+    >
       <div className=' content p-2'>
         <HighchartsReact
           highcharts={Highcharts}
@@ -308,28 +312,50 @@ const Static = () => {
         </ul>
       </div>
     </Card>
-    <Card styles={{...styleCard}} className=' w-[25%]'>
+    <Card 
+      title='Passive & Income'
+      styles={{...styleCard}} 
+      className=' w-[25%]'
+    >
       <HighchartsReact 
         highcharts={Highcharts} 
         options={options2} 
         containerProps={{style: {height:'360px'}}}
       />
     </Card>
-    <Card styles={{...styleCard}} className=' w-[25%]'>
+    <Card 
+      styles={{...styleCard}} 
+      className=' w-[25%]'
+      title='Tasks List'
+    >
       <p>Hello Fucking Card</p>
     </Card>
-    <Card styles={{width:'20%'}} className='  bg-red-500 relative w-[25%] hidden xl:flex'>
+    <Card 
+      styles={{width:'20%'}} 
+      className='  bg-red-500 relative w-[25%] hidden xl:flex'>
       <div className=' absolute top-0 left-0 w-full   bg-green-500' style={{height:'90vh'}}>
         <p>kjdfkkjdjf</p>
       </div>
     </Card>
-    <Card styles={{...styleCard}} className=' w-[25%]'>
+    <Card 
+      styles={{...styleCard}} 
+      className=' w-[25%]'
+      title='Guasts'
+    >
       <p>Hello Fucking Card</p>
     </Card>
-    <Card styles={{...styleCard}} className=' w-[25%]'>
+    <Card 
+      styles={{...styleCard}} 
+      className=' w-[25%]'
+      title='Rooms'
+    >
       <p>Hello Fucking Card</p>
     </Card>
-    <Card styles={{...styleCard}} className=' w-[25%]'>
+    <Card 
+      styles={{...styleCard}} 
+      className=' w-[25%]'
+      title='Booking'
+    >
       <p>Hello Fucking Card</p>
     </Card>
     </div>
