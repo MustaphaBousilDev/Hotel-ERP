@@ -4,7 +4,8 @@ import { EventPattern, Payload } from '@nestjs/microservices';
 import { NotifyEmailDto } from './dto/notify-email.dto';
 import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import * as AWS from 'aws-sdk';
+// import * as AWS from 'aws-sdk';
+import { SESClient, SendEmailCommand } from '@aws-sdk/client-ses';
 
 @Controller()
 export class NotificationsController {
@@ -13,11 +14,14 @@ export class NotificationsController {
     private readonly configService: ConfigService, // Inject ConfigService
   ) {}
   SES_CONFIG = {
-    accessKeyId: this.configService.get<string>('ACCESS_KEY_ID'),
-    secretAccessKey: this.configService.get<string>('SECRET_ACCESS_KEY'),
+    credentials: {
+      accessKeyId: this.configService.get<string>('ACCESS_KEY_ID'),
+      secretAccessKey: this.configService.get<string>('SECRET_ACCESS_KEY'),
+    },
     region: this.configService.get<string>('REGION_AWS'),
   };
-  AWS_SES = new AWS.SES(this.SES_CONFIG);
+  // AWS_SES = new AWS.SES(this.SES_CONFIG);
+  sesClient = new SESClient(this.SES_CONFIG);
   @UsePipes(new ValidationPipe())
   @EventPattern('notify_email')
   async notifyEmail(@Payload() data: NotifyEmailDto) {
@@ -52,7 +56,10 @@ export class NotificationsController {
       },
     };
     try {
-      const res = await this.AWS_SES.sendEmail(params).promise();
+      // const res = await this.AWS_SES.sendEmail(params).promise();
+      // console.log('################ fucking success send email', res);
+      const sendEmailCommand = new SendEmailCommand(params);
+      const res = await this.sesClient.send(sendEmailCommand);
       console.log('################ fucking success send email', res);
     } catch (error) {
       console.log(
