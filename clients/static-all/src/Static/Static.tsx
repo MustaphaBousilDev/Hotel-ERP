@@ -4,6 +4,7 @@ import Highcharts from 'highcharts'
 import variablePie from 'highcharts/modules/variable-pie';
 import HighchartsReact from 'highcharts-react-official'
 import Card from '../components/Card/Card';
+import Timeline from '../components/Timeline/Timeline';
  //options 
 variablePie(Highcharts);
 const Static = () => {
@@ -221,6 +222,40 @@ const Static = () => {
       ],
     },
   }
+  
+  const options3 = {
+    chart: {
+      type: 'pie',
+    },
+    title: {
+      text: 'Rooms Available/Reserved',
+      align: 'center',
+    },
+    tooltip: {
+      pointFormat: '<b>{point.percentage:.1f}%</b>',
+    },
+    plotOptions: {
+      pie: {
+        allowPointSelect: true,
+        cursor: 'pointer',
+        dataLabels: {
+          enabled: true,
+          format: '<b>{point.name}</b>: {point.percentage:.1f}%',
+        },
+        colors: ['#1d4ed8', '#0ea5e9'], // Custom colors for each slice
+      },
+    },
+    series: [
+      {
+        name: 'Categories',
+        colorByPoint: true,
+        data: [
+          { name: 'Reserved', y: 20 },
+          { name: 'Available', y: 80 },
+        ],
+      },
+    ],
+  };
   const [styleCard, setStyleCard] = useState({ width: '23%',margin:'0px' });
   useEffect(() => {
     const mediaQuerySmallXS = window.matchMedia('(max-width: 600px)');
@@ -328,7 +363,23 @@ const Static = () => {
       className=' w-[25%]'
       title='Tasks List'
     >
-      <p>Hello Fucking Card</p>
+      <HighchartsReact
+          highcharts={Highcharts}
+          options={options3}
+          containerProps={{ style: { width: '100%', height: '300px' } }}
+        />
+      <div className=' p-2'>
+        <ul className=' flex    items-center flex-wrap justify-between'>
+          <li style={{width:'49%'}} className=' my-1  flex gap-2 items-center '>
+            <span style={{background:'#1d4ed8'}} className='w-8 h-4'></span>
+            <span className=' text-xs'>Reserved</span>
+          </li>
+          <li style={{width:'49%'}} className=' flex my-1 gap-2 items-center '>
+            <span style={{background:'#0ea5e9'}} className='w-8 h-4 '></span>
+            <span className=' text-xs'>Available</span>
+          </li>
+        </ul>
+      </div>
     </Card>
     <Card 
       styles={{width:'20%'}} 
@@ -342,7 +393,7 @@ const Static = () => {
       className=' w-[25%]'
       title='Guasts'
     >
-      <p>Hello Fucking Card</p>
+      <Timeline/>
     </Card>
     <Card 
       styles={{...styleCard}} 

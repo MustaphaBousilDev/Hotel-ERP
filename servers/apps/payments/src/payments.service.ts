@@ -1,4 +1,3 @@
-import { CreateChargeDto } from '@app/shared';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import Stripe from 'stripe';
