@@ -10,8 +10,8 @@ services:
       - ./apps/reservations/.env
     ports:
       - '5000:5000'
-    volumes:
-      - .:/usr/src/app
+    # volumes:
+    #   - .:/usr/src/app
   auth:
     build:
       context: .
@@ -23,8 +23,8 @@ services:
       - ./apps/auth/.env
     ports:
       - '5001:5001'
-    volumes: 
-      - .:/usr/src/app
+    # volumes: 
+    #   - .:/usr/src/app
   payments:
     build:
       context: .
@@ -36,8 +36,8 @@ services:
       - ./apps/payments/.env
     # ports:
     #   - '5003:5003'
-    volumes: 
-      - .:/usr/src/app
+    # volumes: 
+    #   - .:/usr/src/app
   notifications:
     build:
       context: .
@@ -49,8 +49,8 @@ services:
       - ./apps/notifications/.env
     # ports:
     #   - '5004:5004'
-    volumes: 
-      - .:/usr/src/app
+    # volumes: 
+    #   - .:/usr/src/app
   mongo:
     image: mongo
   # product-db:

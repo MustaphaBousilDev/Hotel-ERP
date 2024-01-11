@@ -1,10 +1,16 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import Stripe from 'stripe';
 import { PaymentsCreateChargeDto } from './dto/payments-create-charge.dto';
+import { NOTIFICATION_SERVICE } from '@app/shared';
+import { ClientProxy } from '@nestjs/microservices';
 @Injectable()
 export class PaymentsService {
-  constructor(private readonly configService: ConfigService) {}
+  constructor(
+    private readonly configService: ConfigService,
+    @Inject(NOTIFICATION_SERVICE)
+    private readonly notificationsService: ClientProxy,
+  ) {}
 
   private readonly stripe = new Stripe(
     this.configService.get('STRIPE_SECRET_KEY'),
@@ -29,6 +35,11 @@ export class PaymentsService {
       confirm: true,
       payment_method_types: ['card'],
       currency: 'usd',
+    });
+
+    this.notificationsService.emit('notify_email', {
+      email,
+      text: `Your fucking Payment of $${amount} has fuccking succesfly`,
     });
 
     return paymentIntent;
