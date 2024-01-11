@@ -34,8 +34,21 @@ services:
     #if each microservice has own envirement vairiable
     env_file:
       - ./apps/payments/.env
-    ports:
-      - '5003:5003'
+    # ports:
+    #   - '5003:5003'
+    volumes: 
+      - .:/usr/src/app
+  notifications:
+    build:
+      context: .
+      dockerfile: ./apps/notifications/Dockerfile
+      target: development
+    command: npm run start:dev notifications
+    #if each microservice has own envirement vairiable
+    env_file:
+      - ./apps/notifications/.env
+    # ports:
+    #   - '5004:5004'
     volumes: 
       - .:/usr/src/app
   mongo:
