@@ -23,6 +23,18 @@
       ],
       "@app/shared/*": [
         "libs/shared/src/*"
+      ],
+      "@app/Auth_DOMAIN":[
+        "apps/auth/src/domain"
+      ],
+      "@app/Auth_DOMAIN/*":[
+        "apps/auth/src/domain/*"
+      ],
+      "@app/Auth_USECASES":[
+        "apps/auth/src/useCases/*"
+      ],
+      "@app/Auth_INFRASTRUCTURE":[
+        "apps/auth/src/infrastructure/*"
       ]
     }
   }
