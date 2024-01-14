@@ -16,6 +16,7 @@
     "@nestjs/passport": "^10.0.3",
     "@types/bcryptjs": "^2.4.6",
     "passport": "^0.7.0",
+    "@types/passport-jwt": "^3.0.13",
     "passport-jwt": "^4.0.1",
     "bcryptjs": "^2.4.3",
     "passport-local": "^1.0.0"

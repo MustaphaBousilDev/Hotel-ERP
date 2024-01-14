@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@aws-sdk/client-ses": "^3.489.0",
-    "nest-aws-sdk": "^3.0.1"
+    "nest-aws-sdk": "^3.0.1",
+    "aws-sdk": "^2.1533.0"
   }
 }

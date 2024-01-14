@@ -17,7 +17,7 @@ FROM node:alpine as production
 # Set environment variable
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
-# Set the working directory
+# Set environment variable
 WORKDIR /usr/src/app
 # Copy package files
 COPY package*.json ./
