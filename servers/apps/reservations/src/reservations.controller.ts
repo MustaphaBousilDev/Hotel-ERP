@@ -37,14 +37,14 @@ export class ReservationsController {
 
   @UseGuards(JwtAuthGuard)
   @Get(':id')
-  async findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: string | number) {
     return this.reservationsService.findOne(id);
   }
 
   @UseGuards(JwtAuthGuard)
   @Patch(':id')
   async update(
-    @Param('id') id: string,
+    @Param('id') id: string | number,
     @Body() updateReservationDto: UpdateReservationDto,
   ) {
     return this.reservationsService.update(id, updateReservationDto);
@@ -52,7 +52,7 @@ export class ReservationsController {
 
   @UseGuards(JwtAuthGuard)
   @Delete(':id')
-  async remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string | number) {
     return this.reservationsService.remove(id);
   }
 }

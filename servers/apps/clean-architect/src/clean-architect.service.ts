@@ -4,5 +4,5 @@ import { Injectable } from '@nestjs/common';
 export class CleanArchitectService {
   getHello(): string {
     return 'Hello World!';
-  }
+  } 
 }

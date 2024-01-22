@@ -33,13 +33,13 @@ import { LogoutUseCases } from '../../../useCases/auth/logout.usecases';
 import { ApiResponseType } from '../../shared/swagger/response.decorator';
 
 @Controller('auth')
-@ApiTags('auth')
-@ApiResponse({
-  status: 401,
-  description: 'No authorization token was found',
-})
-@ApiResponse({ status: 500, description: 'Internal error' })
-@ApiExtraModels(IsAuthPresenter)
+// @ApiTags('auth')
+// @ApiResponse({
+//   status: 401,
+//   description: 'No authorization token was found',
+// })
+// @ApiResponse({ status: 500, description: 'Internal error' })
+// @ApiExtraModels(IsAuthPresenter)
 export class AuthController {
   constructor(
     @Inject(UsecasesProxyModule.LOGIN_USECASES_PROXY)
@@ -52,16 +52,17 @@ export class AuthController {
 
   @Post('login')
   @UseGuards(LoginGuard)
-  @ApiBearerAuth()
-  @ApiBody({ type: AuthLoginDto })
-  @ApiOperation({ description: 'login' })
+  // @ApiBearerAuth()
+  // @ApiBody({ type: AuthLoginDto })
+  // @ApiOperation({ description: 'login' })
   async login(@Body() auth: AuthLoginDto, @Request() request: any) {
+    console.log('fycj yout');
     const accessTokenCookie = await this.loginUsecaseProxy
       .getInstance()
-      .getCookieWithJwtToken(auth.username);
+      .getCookieWithJwtToken(auth.email);
     const refreshTokenCookie = await this.loginUsecaseProxy
       .getInstance()
-      .getCookieWithJwtRefreshToken(auth.username);
+      .getCookieWithJwtRefreshToken(auth.email);
     request.res.setHeader('Set-Cookie', [
       accessTokenCookie,
       refreshTokenCookie,

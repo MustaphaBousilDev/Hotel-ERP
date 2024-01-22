@@ -19,10 +19,13 @@ export class User {
   @Column('text')
   password: string;
 
-  @CreateDateColumn({ name: 'createdate' })
+  @Column('text')
+  email: string;
+
+  @CreateDateColumn({ name: 'createdate', nullable: true })
   createdate: Date;
 
-  @UpdateDateColumn({ name: 'updateddate' })
+  @UpdateDateColumn({ name: 'updateddate', nullable: true })
   updateddate: Date;
 
   @Column({ nullable: true })

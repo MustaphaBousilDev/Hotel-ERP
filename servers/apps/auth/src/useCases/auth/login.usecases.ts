@@ -42,8 +42,8 @@ export class LoginUseCases {
     return cookie;
   }
 
-  async validateUserForLocalStragtegy(username: string, pass: string) {
-    const user = await this.userRepository.getUserByUsername(username);
+  async validateUserForLocalStragtegy(email: string, pass: string) {
+    const user = await this.userRepository.getUserByEmail(email);
     if (!user) {
       return null;
     }
@@ -56,8 +56,8 @@ export class LoginUseCases {
     return null;
   }
 
-  async validateUserForJWTStragtegy(username: string) {
-    const user = await this.userRepository.getUserByUsername(username);
+  async validateUserForJWTStragtegy(email: string) {
+    const user = await this.userRepository.getUserByEmail(email);
     if (!user) {
       return null;
     }
@@ -77,8 +77,8 @@ export class LoginUseCases {
     );
   }
 
-  async getUserIfRefreshTokenMatches(refreshToken: string, username: string) {
-    const user = await this.userRepository.getUserByUsername(username);
+  async getUserIfRefreshTokenMatches(refreshToken: string, email: string) {
+    const user = await this.userRepository.getUserByEmail(email);
     if (!user) {
       return null;
     }

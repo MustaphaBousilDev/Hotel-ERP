@@ -1,15 +1,19 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { CreateReservationDto } from './dto/create-reservation.dto';
 import { UpdateReservationDto } from './dto/update-reservation.dto';
-import { ReservationsRepository } from './reservations.repository';
+import {
+  ReservationsRepository,
+  ReservationsRepositorymySQL,
+} from './reservations.repository';
 import { PAYMENT_SERVICE, UserDto } from '@app/shared';
 import { ClientProxy } from '@nestjs/microservices';
 import { map } from 'rxjs';
+import { Reservation } from './models/reservation.mysql.entity';
 
 @Injectable()
 export class ReservationsService {
   constructor(
-    private readonly reservationRepository: ReservationsRepository,
+    private readonly reservationRepository: ReservationsRepositorymySQL,
     @Inject(PAYMENT_SERVICE) private readonly paymentsService: ClientProxy,
   ) {}
   async create(
@@ -25,14 +29,14 @@ export class ReservationsService {
         //tap is used to perform side effects on the data coming in from the microservice in other words it is used to perform operations on the data coming in from the microservice(for example logging the data coming in from the microservice)
         //map is used to handle asynchronous operations
         map((res) => {
-          //console.log(response);
-          return this.reservationRepository.create({
+          const reservation = new Reservation({
             ...createReservationDto,
             //id of payment in stripe
             invoiceId: res.id,
             timestamp: new Date(),
             userId,
           });
+          return this.reservationRepository.create(reservation);
         }),
       );
   }
@@ -41,18 +45,19 @@ export class ReservationsService {
     return this.reservationRepository.find({});
   }
 
-  async findOne(_id: string) {
+  async findOne(_id: any) {
     return this.reservationRepository.findOne({ _id });
   }
 
-  async update(_id: string, updateReservationDto: UpdateReservationDto) {
+  async update(_id: any, updateReservationDto: UpdateReservationDto) {
     return this.reservationRepository.findOneAndUpdate(
       { _id },
-      { $set: updateReservationDto },
+      updateReservationDto, // for typeORM
+      // { $set: updateReservationDto }, # for mongo
     );
   }
 
-  async remove(_id: string) {
+  async remove(_id: any) {
     return this.reservationRepository.findOneAndDelete({ _id });
   }
 }

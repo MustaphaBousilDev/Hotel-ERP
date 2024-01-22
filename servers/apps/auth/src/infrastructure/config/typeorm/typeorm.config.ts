@@ -1,35 +1,34 @@
 import { ConnectionOptions } from 'typeorm';
 import * as dotenv from 'dotenv';
+import { User } from '../../entities/user.entity';
 
 if (process.env.NODE_ENV === 'local') {
   dotenv.config({ path: './env/local.env' });
 }
 
 const config: ConnectionOptions = {
-  type: 'postgres',
+  type: 'mysql',
   //host: process.env.DATABASE_HOST,
   host: 'localhost',
   // port: parseInt(process.env.DATABASE_PORT),
-  port: 5432,
+  port: 3306,
   // username: process.env.DATABASE_USER,
-  username: 'postgres',
+  username: 'root',
   // password: process.env.DATABASE_PASSWORD,
-  password: 'mugiwara1032',
+  password: '',
   // database: process.env.DATABASE_NAME,
-  database: 'clean-architect',
+  database: 'erp_hotel_mugiwara',
   // entities: [__dirname + './../../**/*.entity{.ts,.js}'],
-  entities: [__dirname + '../../**/*.entity{.ts,.js}'],
-  synchronize: false,
+  entities: [User],
+  synchronize: true,
+  ssl: true,
   // schema: process.env.DATABASE_SCHEMA,
-  migrationsRun: true,
-  migrationsTableName: 'migration_todo',
-  migrations: ['database/migrations/**/*{.ts,.js}'],
   // cli: {
   //   migrationsDir: 'database/migrations',
   // },
-  ssl: {
-    rejectUnauthorized: false,
-  },
+  // ssl: {
+  //   rejectUnauthorized: false,
+  // },
 };
 
 console.log(config);

@@ -1,4 +1,4 @@
-import { UserM } from '../model/user';
+import { UserM } from '../users/models/user.class';
 // import { UserWithoutPassword } from '../model/user';
 export interface UserRepository {
   getUserByEmail(email: string): Promise<UserM>;

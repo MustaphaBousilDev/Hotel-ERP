@@ -1,12 +1,13 @@
 import { Logger, NotFoundException } from '@nestjs/common';
 import { FilterQuery, Model, Types, UpdateQuery } from 'mongoose';
-import { AbstractDocument } from './abstract.schema';
+import { AbstractDocument } from './abstract.schema.mongo';
 
 export abstract class AbstractRepository<TDocument extends AbstractDocument> {
   protected abstract readonly logger: Logger;
 
   constructor(protected readonly model: Model<TDocument>) {}
 
+  public ORM = 'mongoose';
   //Omit is an utility typescript for create a new type and in this situation the new type is all propertyType to TDOcument except '_id' <-this is new Type is for document parzmetre
   async create(document: Omit<TDocument, '_id'>): Promise<TDocument> {
     const createDocument = new this.model({

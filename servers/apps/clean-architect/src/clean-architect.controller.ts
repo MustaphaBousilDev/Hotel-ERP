@@ -5,7 +5,7 @@ import { CleanArchitectService } from './clean-architect.service';
 export class CleanArchitectController {
   constructor(private readonly cleanArchitectService: CleanArchitectService) {}
 
-  @Get()
+  @Get() 
   getHello(): string {
     return this.cleanArchitectService.getHello();
   }

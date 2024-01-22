@@ -6,26 +6,34 @@ import {
   LoggerModule,
   AUTH_SERVICE,
   PAYMENT_SERVICE,
+  DatabaseModulemySQL,
 } from '@app/shared';
-import { ReservationsRepository } from './reservations.repository';
+import {
+  ReservationsRepository,
+  ReservationsRepositorymySQL,
+} from './reservations.repository';
 import {
   ReservationDocument,
   ReservationSchema,
-} from './models/reservation.schema';
+} from './models/reservation.mongo.schema';
+//for mysql typeorm
+import { Reservation } from './models/reservation.mysql.entity';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as Joi from 'joi';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 
 @Module({
   imports: [
-    DatabaseModule,
-    //DatabaseModule.forFeature in databaseModel inside shared folder
-    DatabaseModule.forFeature([
-      {
-        name: ReservationDocument.name,
-        schema: ReservationSchema,
-      },
-    ]),
+    // DatabaseModule,
+    // //DatabaseModule.forFeature in databaseModel inside shared folder
+    // DatabaseModule.forFeature([
+    //   {
+    //     name: ReservationDocument.name,
+    //     schema: ReservationSchema,
+    //   },
+    // ]),
+    DatabaseModulemySQL,
+    DatabaseModulemySQL.forFeature([Reservation]),
     LoggerModule,
     ConfigModule.forRoot({
       isGlobal: true,
@@ -64,6 +72,10 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
     ]),
   ],
   controllers: [ReservationsController],
-  providers: [ReservationsService, ReservationsRepository],
+  providers: [
+    ReservationsService,
+    // ReservationsRepository,
+    ReservationsRepositorymySQL,
+  ],
 })
 export class ReservationsModule {}
