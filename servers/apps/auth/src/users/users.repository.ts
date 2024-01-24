@@ -1,7 +1,14 @@
-import { AbstractRepository, UserDocument } from '@app/shared';
+import {
+  AbstractRepository,
+  AbstractRepositorymySQL,
+  User,
+  UserDocument,
+} from '@app/shared';
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
+import { InjectRepository } from '@nestjs/typeorm';
 import { Model } from 'mongoose';
+import { EntityManager, Repository } from 'typeorm';
 
 @Injectable()
 export class UsersRepository extends AbstractRepository<UserDocument> {
@@ -9,5 +16,17 @@ export class UsersRepository extends AbstractRepository<UserDocument> {
 
   constructor(@InjectModel(UserDocument.name) userModel: Model<UserDocument>) {
     super(userModel);
+  }
+}
+
+export class UserRepositorySQL extends AbstractRepositorymySQL<User> {
+  protected readonly logger = new Logger(UserRepositorySQL.name);
+
+  constructor(
+    @InjectRepository(User)
+    usersRepository: Repository<User>,
+    entityManager: EntityManager,
+  ) {
+    super(usersRepository, entityManager);
   }
 }

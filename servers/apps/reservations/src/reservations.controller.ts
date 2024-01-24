@@ -11,7 +11,7 @@ import {
 import { ReservationsService } from './reservations.service';
 import { CreateReservationDto } from './dto/create-reservation.dto';
 import { UpdateReservationDto } from './dto/update-reservation.dto';
-import { JwtAuthGuard, Roles, UserDto } from '@app/shared';
+import { JwtAuthGuard, Roles, User, UserDto } from '@app/shared';
 import { CurrentUser } from '@app/shared';
 
 @Controller('reservations')
@@ -23,7 +23,7 @@ export class ReservationsController {
   @Roles('Admin')
   async create(
     @Body() createReservationDto: CreateReservationDto,
-    @CurrentUser() user: UserDto,
+    @CurrentUser() user: User,
   ) {
     console.log('###################hhhh############################');
     return this.reservationsService.create(createReservationDto, user);

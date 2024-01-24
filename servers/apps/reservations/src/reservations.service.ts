@@ -5,7 +5,7 @@ import {
   ReservationsRepository,
   ReservationsRepositorymySQL,
 } from './reservations.repository';
-import { PAYMENT_SERVICE, UserDto } from '@app/shared';
+import { PAYMENT_SERVICE, User, UserDto } from '@app/shared';
 import { ClientProxy } from '@nestjs/microservices';
 import { map } from 'rxjs';
 import { Reservation } from './models/reservation.mysql.entity';
@@ -18,7 +18,7 @@ export class ReservationsService {
   ) {}
   async create(
     createReservationDto: CreateReservationDto,
-    { email, _id: userId }: UserDto,
+    { email, _id: userId }: User,
   ) {
     return this.paymentsService
       .send('create_charge', {

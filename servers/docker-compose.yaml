@@ -47,12 +47,22 @@ services:
     #if each microservice has own envirement vairiable
     env_file:
       - ./apps/notifications/.env
+  # db:
+  #   image: mysql 
+  #   restart: always
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: example
+  # adminer:
+  #   image: adminer
+  #   restart: always
+  #   ports:
+  #     - 8080:8080
     # ports:
     #   - '5004:5004'
     # volumes: 
     #   - .:/usr/src/app
-  # mongo:
-  #   image: mongo
+  mongo:
+    image: mongo
   # postgres:
   #   image: postgres
   #   ports:
