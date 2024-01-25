@@ -2,20 +2,12 @@ import { Module } from '@nestjs/common';
 import { ReservationsService } from './reservations.service';
 import { ReservationsController } from './reservations.controller';
 import {
-  DatabaseModule,
   LoggerModule,
   AUTH_SERVICE,
   PAYMENT_SERVICE,
   DatabaseModulemySQL,
 } from '@app/shared';
-import {
-  ReservationsRepository,
-  ReservationsRepositorymySQL,
-} from './reservations.repository';
-import {
-  ReservationDocument,
-  ReservationSchema,
-} from './models/reservation.mongo.schema';
+import { ReservationsRepositorymySQL } from './reservations.repository';
 //for mysql typeorm
 import { Reservation } from './models/reservation.mysql.entity';
 import { ConfigModule, ConfigService } from '@nestjs/config';

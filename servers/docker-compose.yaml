@@ -61,8 +61,8 @@ services:
     #   - '5004:5004'
     # volumes: 
     #   - .:/usr/src/app
-  mongo:
-    image: mongo
+  # mongo:
+  #   image: mongo
   # postgres:
   #   image: postgres
   #   ports:
