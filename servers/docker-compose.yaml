@@ -2,8 +2,12 @@ services:
   reservations:
     build:
       context: .
-      dockerfile: ./apps/reservations/Dockerfile
+      # dockerfile: ./apps/reservations/Dockerfile
+      args:
+        - APP=reservations
       target: development
+    restart: always
+      
     command: npm run start:dev reservations
     #if each microservice has own envirement vairiable
     env_file:
@@ -15,8 +19,11 @@ services:
   auth:
     build:
       context: .
-      dockerfile: ./apps/auth/Dockerfile
+      # dockerfile: ./apps/auth/Dockerfile
+      args:
+        - APP=auth
       target: development
+    restart: always
     command: npm run start:dev auth
     #if each microservice has own envirement vairiable
     env_file:
@@ -28,8 +35,11 @@ services:
   payments:
     build:
       context: .
-      dockerfile: ./apps/payments/Dockerfile
+      # dockerfile: ./apps/payments/Dockerfile
+      args:
+        - APP=payments
       target: development
+    restart: always
     command: npm run start:dev payments
     #if each microservice has own envirement vairiable
     env_file:
@@ -41,8 +51,11 @@ services:
   notifications:
     build:
       context: .
-      dockerfile: ./apps/notifications/Dockerfile
+      # dockerfile: ./apps/notifications/Dockerfile
+      args:
+        - APP=notifications
       target: development
+    restart: always
     command: npm run start:dev notifications
     #if each microservice has own envirement vairiable
     env_file:
