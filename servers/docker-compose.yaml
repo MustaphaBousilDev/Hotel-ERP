@@ -14,6 +14,8 @@ services:
       - ./apps/reservations/.env
     ports:
       - '5000:5000'
+    depends_on:
+      - redis
     # volumes:
     #   - .:/usr/src/app
   auth:
@@ -30,6 +32,8 @@ services:
       - ./apps/auth/.env
     ports:
       - '5001:5001'
+    depends_on:
+      - redis
     # volumes: 
     #   - .:/usr/src/app
   payments:
@@ -44,6 +48,8 @@ services:
     #if each microservice has own envirement vairiable
     env_file:
       - ./apps/payments/.env
+    depends_on:
+      - redis
     # ports:
     #   - '5003:5003'
     # volumes: 
@@ -60,6 +66,14 @@ services:
     #if each microservice has own envirement vairiable
     env_file:
       - ./apps/notifications/.env
+    depends_on:
+      - redis
+  redis:
+    image: "redis:7-alpine"
+    ports:
+      - 6379
+    volumes:
+      - ./tmp/redis_data:/var/lib/redis/data
   # db:
   #   image: mysql 
   #   restart: always
