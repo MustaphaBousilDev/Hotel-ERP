@@ -72,8 +72,13 @@ services:
     image: "redis:7-alpine"
     ports:
       - 6379
-    volumes:
-      - ./tmp/redis_data:/var/lib/redis/data
+    depends_on:
+      - rabbitmq
+  rabbitmq:
+    image: rabbitmq 
+    ports:
+      - 5672:5672
+
   # db:
   #   image: mysql 
   #   restart: always

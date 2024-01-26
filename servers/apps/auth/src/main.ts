@@ -11,11 +11,14 @@ async function bootstrap() {
   const configService = app.get(ConfigService);
   //transport protocol for communication microservices
   app.connectMicroservice({
-    transport: Transport.TCP,
+    transport: Transport.RMQ,
     //specify host and port that we want to be listening on for our TPC microservice
     options: {
-      host: '0.0.0.0',
-      port: configService.get('TCP_PORT_AUTH'),
+      // host: '0.0.0.0',
+      // port: configService.get('TCP_PORT_AUTH'),
+      urls: [configService.getOrThrow('RABBITMQ_URI')],
+      //actual name of the queu that were going to be using in this service
+      queue: 'auth',
     },
   });
   app.use(cookieParser());
