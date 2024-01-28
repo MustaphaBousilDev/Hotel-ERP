@@ -1,11 +1,8 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { CreateReservationDto } from './dto/create-reservation.dto';
 import { UpdateReservationDto } from './dto/update-reservation.dto';
-import {
-  ReservationsRepository,
-  ReservationsRepositorymySQL,
-} from './reservations.repository';
-import { PAYMENT_SERVICE, User, UserDto } from '@app/shared';
+import { ReservationsRepositorymySQL } from './reservations.repository';
+import { PAYMENT_SERVICE, User } from '@app/shared';
 import { ClientProxy } from '@nestjs/microservices';
 import { map } from 'rxjs';
 import { Reservation } from './models/reservation.mysql.entity';

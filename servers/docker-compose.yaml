@@ -78,6 +78,22 @@ services:
     image: rabbitmq 
     ports:
       - 5672:5672
+  gateway:
+    build:
+      context: .
+      # dockerfile: ./apps/notifications/Dockerfile
+      args:
+        - APP=gateway
+      target: development
+    command: npm run start:dev gateway
+    #if each microservice has own envirement vairiable
+    env_file:
+      - ./apps/gateway/.env
+    depends_on:
+      - redis
+    ports:
+      - '6000:6000'
+    
 
   # db:
   #   image: mysql 
