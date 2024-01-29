@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
-import { UsersRepository, UserRepositorySQL } from './users.repository';
-import { DatabaseModule, DatabaseModulemySQL, Role, User } from '@app/shared';
+import { UserRepositorySQL } from './users.repository';
+import { DatabaseModulemySQL, Role, User } from '@app/shared';
 import { LoggerModule } from 'nestjs-pino';
 
 @Module({

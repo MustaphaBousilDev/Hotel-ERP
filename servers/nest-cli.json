@@ -70,6 +70,15 @@
       "compilerOptions": {
         "tsConfigPath": "apps/gateway/tsconfig.app.json"
       }
+    },
+    "organization": {
+      "type": "application",
+      "root": "apps/organization",
+      "entryFile": "main",
+      "sourceRoot": "apps/organization/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/organization/tsconfig.app.json"
+      }
     }
   },
   "monorepo": true,

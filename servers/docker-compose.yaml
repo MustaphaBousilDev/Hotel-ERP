@@ -93,6 +93,18 @@ services:
       - redis
     ports:
       - '6000:6000'
+  organization:
+    build:
+      context: .
+      args:
+        - APP=organization
+      target: development
+    command: npm run start:dev organization
+    env_file:
+      - ./apps/organization/.env
+    ports:
+      - '5006:5006'
+      
     
 
   # db:
