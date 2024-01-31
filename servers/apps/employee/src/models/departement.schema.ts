@@ -13,10 +13,6 @@ export class Departement extends AbstractEntity<Departement> {
 
   @Column()
   @Field() // for graph
-  description: string;
-
-  @Column()
-  @Field() // for graph
   image: string;
 
   @ManyToMany(() => Hotel, (hotel) => hotel.departments)

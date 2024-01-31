@@ -9,6 +9,7 @@ import { Organization } from './models/organization.schema';
 import { Wifi } from './models/wifi.schema';
 import { Room } from './models/rooms.schema';
 import { Departement } from './models/departement.schema';
+import { Employee } from './models/employee.schema';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { Departement } from './models/departement.schema';
       Wifi,
       Room,
       Departement,
+      Employee,
     ]),
     LoggerModule,
     ConfigModule.forRoot({ isGlobal: true }),
