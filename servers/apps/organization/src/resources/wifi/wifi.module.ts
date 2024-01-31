@@ -5,14 +5,18 @@ import { DatabaseModulemySQL } from '@app/shared';
 import { LoggerModule } from 'nestjs-pino';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
+import { WifiRepositorySQL } from './wifi.repository';
 import {
   ApolloFederationDriver,
   ApolloFederationDriverConfig,
 } from '@nestjs/apollo';
+import { Wifi } from '../../models/wifi.schema';
+import { Hotel } from '../../models/hotel.schema';
 
 @Module({
   imports: [
     DatabaseModulemySQL,
+    DatabaseModulemySQL.forFeature([Wifi, Hotel]),
     GraphQLModule.forRoot<ApolloFederationDriverConfig>({
       driver: ApolloFederationDriver,
       autoSchemaFile: {
@@ -22,6 +26,6 @@ import {
     LoggerModule,
     ConfigModule.forRoot({ isGlobal: true }),
   ],
-  providers: [WifiResolver, WifiService],
+  providers: [WifiResolver, WifiService, WifiRepositorySQL],
 })
 export class WifiModule {}

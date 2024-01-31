@@ -92,7 +92,7 @@ services:
     depends_on:
       - redis
     ports:
-      - '6000:6000'
+      - 4000:4000
   organization:
     build:
       context: .

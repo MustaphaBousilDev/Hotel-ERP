@@ -10,14 +10,12 @@ import { Room } from './models/rooms.schema';
 import { Departement } from './models/departement.schema';
 import { Employee } from './models/employee.schema';
 import { WifiModule } from './resources/wifi/wifi.module';
-import { Wifi } from './models/wifi.schema';
 
 @Module({
   imports: [
-    WifiModule,
     DatabaseModulemySQL,
     DatabaseModulemySQL.forFeature([
-      Wifi,
+      // Wifi,
       City,
       Hotel,
       Organization,
@@ -26,6 +24,7 @@ import { Wifi } from './models/wifi.schema';
       Employee,
     ]),
     LoggerModule,
+    WifiModule,
     ConfigModule.forRoot({ isGlobal: true }),
   ],
   controllers: [OrganizationController],
