@@ -15,8 +15,9 @@ services:
     ports:
       - '5000:5000'
     depends_on:
-      - redis
+      #- redis
       - rabbitmq
+      - gateway
     # volumes:
     #   - .:/usr/src/app
   auth:
@@ -34,7 +35,7 @@ services:
     ports:
       - '5001:5001'
     depends_on:
-      - redis
+      #- redis
       - rabbitmq
     # volumes: 
     #   - .:/usr/src/app
@@ -51,7 +52,7 @@ services:
     env_file:
       - ./apps/payments/.env
     depends_on:
-      - redis
+      #- redis
       - rabbitmq
     # ports:
     #   - '5003:5003'
@@ -70,7 +71,7 @@ services:
     env_file:
       - ./apps/notifications/.env
     depends_on:
-      - redis
+      #- redis
       - rabbitmq
   redis:
     image: "redis:7-alpine"
@@ -94,10 +95,10 @@ services:
     env_file:
       - ./apps/gateway/.env
     depends_on:
-      - redis
+      #- redis
       - rabbitmq
     ports:
-      - 4000:4000
+      - 5007:5007
   organization:
     build:
       context: .
@@ -110,7 +111,7 @@ services:
     ports:
       - '5006:5006'
     depends_on:
-      - redis 
+      #- redis 
       - rabbitmq
       
     
