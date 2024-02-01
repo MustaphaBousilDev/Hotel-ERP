@@ -9,7 +9,7 @@ export class Room extends AbstractEntity<Room> {
   @Column()
   //i am not using type in field because nestjs and graphql pick up on the type of these properties and will use it
   @Field() // for graph
-  roomMumber: number;
+  roomNumber: number;
 
   @Column()
   @Field() // for graph
@@ -17,7 +17,7 @@ export class Room extends AbstractEntity<Room> {
 
   @Column()
   @Field()
-  price: string;
+  price: number;
 
   @Column()
   @Field()
