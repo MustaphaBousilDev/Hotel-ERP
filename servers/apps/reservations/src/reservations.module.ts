@@ -55,11 +55,13 @@ import { ReservationsResolver } from './reservations.resolver';
       {
         name: AUTH_SERVICE,
         useFactory: (configService: ConfigService) => ({
-          transport: Transport.RMQ,
+          transport: Transport.TCP,
           options: {
-            urls: [configService.getOrThrow<string>('RABBITMQ_URI')],
-            //actual name of the queu that were going to be using in this service
-            queue: 'auth',
+            // urls: [configService.getOrThrow<string>('RABBITMQ_URI')],
+            // //actual name of the queu that were going to be using in this service
+            // queue: 'auth',
+            host: configService.get('AUTH_HOST'),
+            port: configService.get('AUTH_PORT'),
           },
         }),
         inject: [ConfigService],
@@ -67,11 +69,13 @@ import { ReservationsResolver } from './reservations.resolver';
       {
         name: PAYMENT_SERVICE,
         useFactory: (configService: ConfigService) => ({
-          transport: Transport.RMQ,
+          transport: Transport.TCP,
           options: {
-            urls: [configService.getOrThrow<string>('RABBITMQ_URI')],
-            //actual name of the queu that were going to be using in this service
-            queue: 'payments',
+            // urls: [configService.getOrThrow<string>('RABBITMQ_URI')],
+            // //actual name of the queu that were going to be using in this service
+            // queue: 'payments',
+            host: configService.get('PAYMENTS_HOST'),
+            port: configService.get('PAYMENTS_PORT'),
           },
         }),
         inject: [ConfigService],

@@ -44,10 +44,12 @@ import { authContext } from './auth.context';
       {
         name: AUTH_SERVICE,
         useFactory: (configService: ConfigService) => ({
-          transport: Transport.RMQ,
+          transport: Transport.TCP,
           options: {
-            urls: [configService.getOrThrow<string>('RABBITMQ_URI')],
-            queue: 'auth',
+            // urls: [configService.getOrThrow<string>('RABBITMQ_URI')],
+            // queue: 'auth',
+            host: configService.getOrThrow('AUTH_HOST'),
+            port: configService.getOrThrow('AUTH_PORT'),
           },
         }),
         inject: [ConfigService],
