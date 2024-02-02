@@ -9,6 +9,7 @@ import './i18n';
 import Home from "./pages/Home";
 //tasks 
 import {Add,Tasks,Config,Raport} from './pages/tasks'
+import Authentication from './pages/auth';
 
 
 const App:React.FC = () => (
@@ -16,6 +17,7 @@ const App:React.FC = () => (
   <Router>
     <Routes>
       <Route path='/' element={<Home/>} />
+      <Route path='/auth' element={<Authentication/>} />
       <Route path='/dashboard' element={<DashboardLayout/>}>
         <Route path='/dashboard' element={<Admin/>} />
         <Route path='/dashboard/tasks' element={<Tasks/>} />

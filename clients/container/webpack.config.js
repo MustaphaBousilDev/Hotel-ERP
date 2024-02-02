@@ -41,7 +41,7 @@ module.exports = (_, argv) => ({
       },
       {
         test: /\.(ts|tsx|js|jsx)$/,
-        exclude: /node_modules/,
+        exclude: /node_modules/, 
         use: {
           loader: "babel-loader",
         },
@@ -60,7 +60,8 @@ module.exports = (_, argv) => ({
       filename: "remoteEntry.js",
       remotes: {
         "tasks":"tasks@http://localhost:4201/remoteEntry.js",
-        static_all:"static_all@http://localhost:3004/remoteEntry.js"
+        static_all:"static_all@http://localhost:3004/remoteEntry.js",
+        auth: "auth@http://localhost:3005/remoteEntry.js"
       },
       exposes: {},
       shared: {
