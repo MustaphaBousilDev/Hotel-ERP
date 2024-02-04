@@ -4,6 +4,7 @@ import { UsersService } from './users.service';
 import { UserRepositorySQL } from './users.repository';
 import { DatabaseModulemySQL, Role, User } from '@app/shared';
 import { LoggerModule } from 'nestjs-pino';
+import { UsersResolver } from './users.resolver';
 
 @Module({
   imports: [
@@ -20,7 +21,7 @@ import { LoggerModule } from 'nestjs-pino';
     LoggerModule,
   ],
   controllers: [UsersController],
-  providers: [UsersService, UserRepositorySQL],
+  providers: [UsersService, UserRepositorySQL, UsersResolver],
   exports: [UsersService],
 })
 export class UsersModule {}

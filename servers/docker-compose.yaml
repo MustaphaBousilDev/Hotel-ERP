@@ -1,5 +1,6 @@
 services:
   reservations:
+    image: reservations
     build:
       context: .
       # dockerfile: ./apps/reservations/Dockerfile
@@ -17,10 +18,11 @@ services:
     depends_on:
       #- redis
       - rabbitmq
-      - gateway
+    container_name: reservations
     # volumes:
     #   - .:/usr/src/app
   auth:
+    image: auth
     build:
       context: .
       # dockerfile: ./apps/auth/Dockerfile
@@ -37,9 +39,11 @@ services:
     depends_on:
       #- redis
       - rabbitmq
+    container_name: auth
     # volumes: 
     #   - .:/usr/src/app
   payments:
+    image: payments
     build:
       context: .
       # dockerfile: ./apps/payments/Dockerfile
@@ -58,7 +62,9 @@ services:
     #   - '5003:5003'
     # volumes: 
     #   - .:/usr/src/app
+    container_name: payments
   notifications:
+    image: notifications
     build:
       context: .
       # dockerfile: ./apps/notifications/Dockerfile
@@ -73,17 +79,21 @@ services:
     depends_on:
       #- redis
       - rabbitmq
+    container_name: notifications
   redis:
     image: "redis:7-alpine"
     ports:
       - 6379
     depends_on:
       - rabbitmq
+    container_name: redis
   rabbitmq:
     image: rabbitmq 
     ports:
       - 5672:5672
+    container_name: rabbitmq
   gateway:
+    image: gateway
     build:
       context: .
       # dockerfile: ./apps/notifications/Dockerfile
@@ -97,9 +107,14 @@ services:
     depends_on:
       #- redis
       - rabbitmq
+      - reservations
+      - auth
+      - payments
+    container_name: gateway
     ports:
       - 5007:5007
   organization:
+    image: organization
     build:
       context: .
       args:
@@ -113,7 +128,7 @@ services:
     depends_on:
       #- redis 
       - rabbitmq
-      
+    container_name: organization
     
 
   # db:

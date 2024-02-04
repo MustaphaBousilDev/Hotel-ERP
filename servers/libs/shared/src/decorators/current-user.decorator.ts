@@ -1,7 +1,7 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
-import { UserDocument } from '@app/shared';
+import { User } from '../models/user.entity';
 
-const getCurrentUserByContext = (context: ExecutionContext): UserDocument => {
+const getCurrentUserByContext = (context: ExecutionContext): User => {
   if (context.getType() === 'http') {
     return context.switchToHttp().getRequest().user;
   }

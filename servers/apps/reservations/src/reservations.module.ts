@@ -14,25 +14,14 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as Joi from 'joi';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { GraphQLModule } from '@nestjs/graphql';
-import {
-  ApolloFederationDriver,
-  ApolloFederationDriverConfig,
-} from '@nestjs/apollo';
+import { ApolloDriverConfig, ApolloFederationDriver } from '@nestjs/apollo';
 import { ReservationsResolver } from './reservations.resolver';
 
 @Module({
   imports: [
-    // DatabaseModule,
-    // //DatabaseModule.forFeature in databaseModel inside shared folder
-    // DatabaseModule.forFeature([
-    //   {
-    //     name: ReservationDocument.name,
-    //     schema: ReservationSchema,
-    //   },
-    // ]),
     DatabaseModulemySQL,
     DatabaseModulemySQL.forFeature([Reservation]),
-    GraphQLModule.forRoot<ApolloFederationDriverConfig>({
+    GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloFederationDriver,
       //generate automaticely graphQL schema using federation version 2
       autoSchemaFile: {
