@@ -3,6 +3,18 @@ const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPl
 const { VueLoaderPlugin } = require("vue-loader");
 const Dotenv = require('dotenv-webpack');
 module.exports = (_, argv) => ({
+  chainWebpack: (config)=>{
+    config.module
+      .rule("images")
+      .use("url-loader")
+      .tap((options) => {
+
+        options.name = "images/[name].[ext]";
+        options.publicPath = isDev ? __webpack_public_path__ : 'https://my-cdn.net/';
+
+        return options;
+      });
+  },
   output: {
     publicPath: "http://localhost:3005/",
   },
