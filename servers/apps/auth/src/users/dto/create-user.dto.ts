@@ -3,6 +3,7 @@ import {
   IsStrongPassword,
   IsOptional,
   IsArray,
+  IsString,
 } from 'class-validator';
 import { RoleDto } from './role.dto';
 import { Field, InputType } from '@nestjs/graphql';
@@ -14,6 +15,16 @@ export class CreateUserDto {
   @Type(() => String)
   @Field()
   email: string;
+
+  @IsString()
+  @Type(() => String)
+  @Field()
+  firstName: string;
+
+  @IsString()
+  @Type(() => String)
+  @Field()
+  lastName: string;
 
   @IsStrongPassword()
   @Type(() => String)

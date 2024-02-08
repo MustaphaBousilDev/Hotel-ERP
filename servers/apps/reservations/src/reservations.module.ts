@@ -6,22 +6,31 @@ import {
   AUTH_SERVICE,
   PAYMENT_SERVICE,
   DatabaseModulemySQL,
-  User,
 } from '@app/shared';
 import { ReservationsRepositorymySQL } from './reservations.repository';
 //for mysql typeorm
 import { Reservation } from './models/reservation.mysql.entity';
+import { User } from './models/users.mysql.entity';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as Joi from 'joi';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriverConfig, ApolloFederationDriver } from '@nestjs/apollo';
 import { ReservationsResolver } from './reservations.resolver';
+import { Room } from './models/rooms.mysql.entity';
+import { Hotel } from './models/hotel.mysql.entity';
+import { Organization } from './models/organization.mysql.entity';
 
 @Module({
   imports: [
     DatabaseModulemySQL,
-    DatabaseModulemySQL.forFeature([Reservation, User]),
+    DatabaseModulemySQL.forFeature([
+      Reservation,
+      User,
+      Room,
+      Hotel,
+      Organization,
+    ]),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloFederationDriver,
       //generate automaticely graphQL schema using federation version 2
