@@ -110,6 +110,9 @@ services:
       - reservations
       - auth
       - payments
+      - notifications
+      - redis
+      - organization
     container_name: gateway
     ports:
       - 5007:5007

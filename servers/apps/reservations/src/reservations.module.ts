@@ -6,6 +6,7 @@ import {
   AUTH_SERVICE,
   PAYMENT_SERVICE,
   DatabaseModulemySQL,
+  User,
 } from '@app/shared';
 import { ReservationsRepositorymySQL } from './reservations.repository';
 //for mysql typeorm
@@ -20,7 +21,7 @@ import { ReservationsResolver } from './reservations.resolver';
 @Module({
   imports: [
     DatabaseModulemySQL,
-    DatabaseModulemySQL.forFeature([Reservation]),
+    DatabaseModulemySQL.forFeature([Reservation, User]),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloFederationDriver,
       //generate automaticely graphQL schema using federation version 2
