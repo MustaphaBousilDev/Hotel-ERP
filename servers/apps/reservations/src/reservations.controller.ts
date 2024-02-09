@@ -12,10 +12,21 @@ import { ReservationsService } from './reservations.service';
 import { CreateReservationDto } from './dto/create-reservation.dto';
 import { UpdateReservationDto } from './dto/update-reservation.dto';
 import { JwtAuthGuard, Roles, User, CurrentUser } from '@app/shared';
+import {
+  Ctx,
+  MessagePattern,
+  Payload,
+  RmqContext,
+} from '@nestjs/microservices';
+import { UserRepositorySQL } from './resources/users.repository';
+import { User as UserReservation } from './models/users.mysql.entity';
 
 @Controller('reservations')
 export class ReservationsController {
-  constructor(private readonly reservationsService: ReservationsService) {}
+  constructor(
+    private readonly reservationsService: ReservationsService,
+    private readonly usersRepository: UserRepositorySQL,
+  ) {}
 
   @UseGuards(JwtAuthGuard)
   @Post()
@@ -53,5 +64,20 @@ export class ReservationsController {
   @Delete(':id')
   async remove(@Param('id') id: string | number) {
     return this.reservationsService.remove(id);
+  }
+
+  @MessagePattern('createUserResr')
+  async createUser(@Payload() data: any, @Ctx() context: RmqContext) {
+    console.log(' ########################## success message ');
+    console.log(' ########################## success  ');
+    console.log(data);
+    const channel = context.getChannelRef();
+    const originalMsg = context.getMessage();
+    //telling RabbitMQ that it has been successfully received and processed. This is important in message queue systems to prevent messages from being reprocessed in case of failures.
+    channel.ack(originalMsg);
+    const user = new UserReservation({
+      ...data,
+    });
+    return this.usersRepository.create(user);
   }
 }

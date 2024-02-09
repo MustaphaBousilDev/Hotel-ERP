@@ -13,10 +13,6 @@ export class Organization extends AbstractEntity<Organization> {
 
   @Column()
   @Field() // for graph
-  description: string;
-
-  @Column()
-  @Field() // for graph
   logo: string;
 
   @OneToMany(() => Hotel, (hotel) => hotel.organization, {

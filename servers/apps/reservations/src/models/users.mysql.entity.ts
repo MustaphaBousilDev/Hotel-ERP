@@ -8,15 +8,19 @@ import { Reservation } from './reservation.mysql.entity';
 export class User extends AbstractEntity<User> {
   @Column()
   @Field()
-  email: string;
+  firstName: string;
 
   @Column()
-  // i dont want to add Field into password , because password is sensitive data
-  password: string;
+  @Field()
+  lastName: string;
+
+  @Column()
+  @Field()
+  email: string;
 
   @OneToMany(() => Reservation, (reservation) => reservation.user, {
     cascade: true,
     eager: true,
   })
-  reservation: Reservation[];
+  reservation: Reservation[] = null;
 }

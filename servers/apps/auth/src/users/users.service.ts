@@ -1,25 +1,45 @@
 import {
+  Inject,
   Injectable,
   UnauthorizedException,
   UnprocessableEntityException,
 } from '@nestjs/common';
+import { map } from 'rxjs';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UserRepositorySQL } from './users.repository';
 import * as bcrypt from 'bcryptjs';
 import { GetUserDto } from './dto/get-user.dto';
-import { Role, User } from '@app/shared';
+import { RESERVATION_SERVICE, Role, User } from '@app/shared';
+import { ClientProxy } from '@nestjs/microservices';
 @Injectable()
 export class UsersService {
-  constructor(private readonly usersRepository: UserRepositorySQL) {}
+  constructor(
+    private readonly usersRepository: UserRepositorySQL,
+    @Inject(RESERVATION_SERVICE)
+    private readonly createUserReservation: ClientProxy,
+  ) {}
   async create(createUserDto: CreateUserDto) {
+    console.log('services');
+    console.log(createUserDto);
     await this.validateCreateUserDto(createUserDto);
     const user = new User({
       ...createUserDto,
       password: await bcrypt.hash(createUserDto.password, 10),
       roles: createUserDto.roles?.map((roleDto) => new Role(roleDto)),
     });
-    await this.usersRepository.create(user);
-    return user;
+    console.log('user Service (((----', user);
+    return this.createUserReservation
+      .send('createUserResr', {
+        ...createUserDto,
+        password: undefined,
+      })
+      .pipe(
+        map((res) => {
+          console.log('fucking response from reser');
+          console.log(res);
+          return this.usersRepository.create(user);
+        }),
+      );
   }
   async verifyUser(email: string, password: string) {
     const user = await this.usersRepository.findOne({ email });

@@ -6,6 +6,10 @@ import { lastValueFrom } from 'rxjs';
 
 export const authContext = async ({ req }) => {
   try {
+    const subgraphName = req.headers?.['x-subgraph'];
+    if (subgraphName !== 'reservations') {
+      return {};
+    }
     const authClient = app.get<ClientProxy>(AUTH_SERVICE);
     const user = await lastValueFrom(
       authClient.send('authenticate', {

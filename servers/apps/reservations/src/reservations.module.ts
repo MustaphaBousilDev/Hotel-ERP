@@ -20,6 +20,7 @@ import { ReservationsResolver } from './reservations.resolver';
 import { Room } from './models/rooms.mysql.entity';
 import { Hotel } from './models/hotel.mysql.entity';
 import { Organization } from './models/organization.mysql.entity';
+import { UserRepositorySQL } from './resources/users.repository';
 
 @Module({
   imports: [
@@ -83,6 +84,7 @@ import { Organization } from './models/organization.mysql.entity';
     // ReservationsRepository,
     ReservationsRepositorymySQL,
     ReservationsResolver,
+    UserRepositorySQL,
   ],
 })
 export class ReservationsModule {}
