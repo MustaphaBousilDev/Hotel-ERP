@@ -5,7 +5,7 @@ import { CurrentUser } from '@app/shared';
 import { Response } from 'express';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
-import { LoginDto } from '@app/shared/dto/login.dto';
+import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -14,7 +14,7 @@ export class AuthController {
   @UseGuards(LocalAuthGuard)
   @Post('login')
   async login(
-    @CurrentUser() user: LoginDto,
+    @CurrentUser() user: UserInfoDto,
     @Res({ passthrough: true }) response: Response,
   ) {
     console.log('####------------------controller', user);

@@ -3,7 +3,7 @@ import { Response } from 'express';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { TokenPayload } from './interfaces/token-payload.interface';
-import { LoginDto } from '@app/shared/dto/login.dto';
+import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
 
 @Injectable()
 export class AuthService {
@@ -14,7 +14,7 @@ export class AuthService {
   getHello(): string {
     return 'Hello World!';
   }
-  async login(user: LoginDto, response: Response) {
+  async login(user: UserInfoDto, response: Response) {
     console.log('##----login', user);
     const tokenPayload: TokenPayload = {
       userId: user._id,

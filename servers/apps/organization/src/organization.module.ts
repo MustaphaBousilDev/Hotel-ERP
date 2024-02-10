@@ -10,6 +10,8 @@ import { Room } from './models/rooms.schema';
 import { Departement } from './models/departement.schema';
 import { Employee } from './models/employee.schema';
 import { WifiModule } from './resources/wifi/wifi.module';
+import { User } from './models/users.mysql.entity';
+import { UserRepositorySQL } from './resources/users/users.repository';
 
 @Module({
   imports: [
@@ -22,12 +24,13 @@ import { WifiModule } from './resources/wifi/wifi.module';
       Room,
       Departement,
       Employee,
+      User,
     ]),
     LoggerModule,
     WifiModule,
     ConfigModule.forRoot({ isGlobal: true }),
   ],
   controllers: [OrganizationController],
-  providers: [OrganizationService],
+  providers: [OrganizationService, UserRepositorySQL],
 })
 export class OrganizationModule {}

@@ -1,7 +1,7 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
-import { LoginDto } from '../dto/login.dto';
+import { UserInfoDto } from '../dto/userInfo.dto';
 
-const getCurrentUserByContext = (context: ExecutionContext): LoginDto => {
+const getCurrentUserByContext = (context: ExecutionContext): UserInfoDto => {
   if (context.getType() === 'http') {
     return context.switchToHttp().getRequest().user;
   }

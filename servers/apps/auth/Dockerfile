@@ -9,8 +9,6 @@ RUN npm install
 # Copy only necessary source files
 COPY apps/auth apps/auth
 COPY libs libs
-# Build the application
-RUN cd apps/auth && npm install
 RUN npm run build auth
 # Second stage: Setting up the production environment
 FROM node:alpine as production 

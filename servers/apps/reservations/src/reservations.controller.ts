@@ -78,6 +78,7 @@ export class ReservationsController {
     const user = new UserReservation({
       ...data,
     });
-    return this.usersRepository.create(user);
+    await this.usersRepository.create(user);
+    return this.reservationsService.sendUserIntoOrg(data);
   }
 }

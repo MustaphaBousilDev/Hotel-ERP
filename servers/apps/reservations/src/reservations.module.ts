@@ -6,6 +6,7 @@ import {
   AUTH_SERVICE,
   PAYMENT_SERVICE,
   DatabaseModulemySQL,
+  ORGANIZATION_SERVICE,
 } from '@app/shared';
 import { ReservationsRepositorymySQL } from './reservations.repository';
 //for mysql typeorm
@@ -72,6 +73,17 @@ import { UserRepositorySQL } from './resources/users.repository';
             urls: [configService.getOrThrow<string>('RABBITMQ_URI')],
             //actual name of the queu that were going to be using in this service
             queue: 'payments',
+          },
+        }),
+        inject: [ConfigService],
+      },
+      {
+        name: ORGANIZATION_SERVICE,
+        useFactory: (configService: ConfigService) => ({
+          transport: Transport.RMQ,
+          options: {
+            urls: [configService.getOrThrow<string>('RABBITMQ_URI')],
+            queue: 'organization',
           },
         }),
         inject: [ConfigService],
