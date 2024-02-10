@@ -4,12 +4,17 @@ import {
   UnauthorizedException,
   UnprocessableEntityException,
 } from '@nestjs/common';
-import { map } from 'rxjs';
+// import { map } from 'rxjs';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UserRepositorySQL } from './users.repository';
 import * as bcrypt from 'bcryptjs';
 import { GetUserDto } from './dto/get-user.dto';
-import { RESERVATION_SERVICE, Role, User } from '@app/shared';
+import {
+  ORGANIZATION_SERVICE,
+  RESERVATION_SERVICE,
+  Role,
+  User,
+} from '@app/shared';
 import { ClientProxy } from '@nestjs/microservices';
 @Injectable()
 export class UsersService {
@@ -17,6 +22,8 @@ export class UsersService {
     private readonly usersRepository: UserRepositorySQL,
     @Inject(RESERVATION_SERVICE)
     private readonly createUserReservation: ClientProxy,
+    @Inject(ORGANIZATION_SERVICE)
+    private readonly createUserOrganization: ClientProxy,
   ) {}
   async create(createUserDto: CreateUserDto) {
     console.log('services');
@@ -27,19 +34,27 @@ export class UsersService {
       password: await bcrypt.hash(createUserDto.password, 10),
       roles: createUserDto.roles?.map((roleDto) => new Role(roleDto)),
     });
+    const promises = [];
     console.log('user Service (((----', user);
-    return this.createUserReservation
-      .send('createUserResr', {
-        ...createUserDto,
-        password: undefined,
-      })
-      .pipe(
-        map((res) => {
-          console.log('fucking response from reser');
-          console.log(res);
-          return this.usersRepository.create(user);
-        }),
-      );
+    promises.push(
+      this.createUserReservation
+        .send('createUserResr', {
+          ...createUserDto,
+          password: undefined,
+        })
+        .toPromise(),
+    );
+
+    promises.push(
+      this.createUserOrganization
+        .send('createUserOrg', {
+          ...createUserDto,
+          password: undefined,
+        })
+        .toPromise(),
+    );
+    await Promise.all(promises);
+    return this.usersRepository.create(user);
   }
   async verifyUser(email: string, password: string) {
     const user = await this.usersRepository.findOne({ email });

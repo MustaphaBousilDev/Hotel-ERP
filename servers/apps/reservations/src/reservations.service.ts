@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { CreateReservationDto } from './dto/create-reservation.dto';
 import { UpdateReservationDto } from './dto/update-reservation.dto';
 import { ReservationsRepositorymySQL } from './reservations.repository';
-import { ORGANIZATION_SERVICE, PAYMENT_SERVICE, User } from '@app/shared';
+import { PAYMENT_SERVICE, User } from '@app/shared';
 import { ClientProxy } from '@nestjs/microservices';
 import { map } from 'rxjs';
 import { Reservation } from './models/reservation.mysql.entity';
@@ -12,8 +12,6 @@ export class ReservationsService {
   constructor(
     private readonly reservationRepository: ReservationsRepositorymySQL,
     @Inject(PAYMENT_SERVICE) private readonly paymentsService: ClientProxy,
-    @Inject(ORGANIZATION_SERVICE)
-    private readonly createUserOrganization: ClientProxy,
   ) {}
   async create(
     createReservationDto: CreateReservationDto,
@@ -58,20 +56,5 @@ export class ReservationsService {
 
   async remove(_id: any) {
     return this.reservationRepository.findOneAndDelete({ _id });
-  }
-
-  async sendUserIntoOrg(data: any) {
-    console.log('##################### they fucking entire');
-    return this.createUserOrganization
-      .send('createUserOrg', {
-        ...data,
-      })
-      .pipe(
-        map((res) => {
-          console.log('fucking response from orgs');
-          console.log(res);
-          return res;
-        }),
-      );
   }
 }

@@ -1,5 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { OrganizationService } from './organization.service';
+import { UserRepositorySQL } from './resources/users/users.repository';
 import {
   Ctx,
   MessagePattern,
@@ -7,7 +8,6 @@ import {
   RmqContext,
 } from '@nestjs/microservices';
 import { User as UserReservation } from './models/users.mysql.entity';
-import { UserRepositorySQL } from './resources/users/users.repository';
 
 @Controller()
 export class OrganizationController {
@@ -23,8 +23,8 @@ export class OrganizationController {
 
   @MessagePattern('createUserOrg')
   async createUser(@Payload() data: any, @Ctx() context: RmqContext) {
-    console.log(' ########################## success message org');
-    console.log(' ########################## success  org');
+    console.log(' ########################## success message org ');
+    console.log(' ########################## success  orgs');
     console.log(data);
     const channel = context.getChannelRef();
     const originalMsg = context.getMessage();

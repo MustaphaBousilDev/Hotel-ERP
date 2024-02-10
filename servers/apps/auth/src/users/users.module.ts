@@ -4,6 +4,7 @@ import { UsersService } from './users.service';
 import { UserRepositorySQL } from './users.repository';
 import {
   DatabaseModulemySQL,
+  ORGANIZATION_SERVICE,
   RESERVATION_SERVICE,
   Role,
   User,
@@ -27,6 +28,17 @@ import { ConfigService } from '@nestjs/config';
     DatabaseModulemySQL.forFeature([User, Role]),
     LoggerModule,
     ClientsModule.registerAsync([
+      {
+        name: ORGANIZATION_SERVICE,
+        useFactory: (configService: ConfigService) => ({
+          transport: Transport.RMQ,
+          options: {
+            urls: [configService.getOrThrow<string>('RABBITMQ_URI')],
+            queue: 'organization',
+          },
+        }),
+        inject: [ConfigService],
+      },
       {
         name: RESERVATION_SERVICE,
         useFactory: (configService: ConfigService) => ({
