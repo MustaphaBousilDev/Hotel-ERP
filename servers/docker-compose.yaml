@@ -132,7 +132,19 @@ services:
       #- redis 
       - rabbitmq
     container_name: organization
-    
+  s3:
+    image: s3-files
+    build: 
+      context: .
+      args:
+        - APP=s3
+      target: development
+    command: npm run start:dev s3 
+    env_file:
+      - ./apps/s3/.env 
+    ports:
+      - '5008:5008'
+    container_name: s3
 
   # db:
   #   image: mysql 

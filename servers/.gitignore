@@ -36,3 +36,5 @@ lerna-debug.log*
 
 
 DockerDesktopWSL
+
+./apps/s3/.env

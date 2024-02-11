@@ -88,6 +88,15 @@
       "compilerOptions": {
         "tsConfigPath": "apps/employee/tsconfig.app.json"
       }
+    },
+    "s3": {
+      "type": "application",
+      "root": "apps/s3",
+      "entryFile": "main",
+      "sourceRoot": "apps/s3/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/s3/tsconfig.app.json"
+      }
     }
   },
   "monorepo": true,
