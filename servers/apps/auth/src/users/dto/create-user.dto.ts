@@ -4,6 +4,7 @@ import {
   IsOptional,
   IsArray,
   IsString,
+  ValidateNested,
 } from 'class-validator';
 import { RoleDto } from './role.dto';
 import { Field, InputType } from '@nestjs/graphql';
@@ -33,7 +34,8 @@ export class CreateUserDto {
 
   @IsOptional()
   @IsArray()
-  @Type(() => Array)
-  @Field(() => [String], { nullable: true })
+  @ValidateNested({ each: true })
+  @Type(() => RoleDto)
+  @Field(() => [RoleDto], { nullable: true })
   roles?: RoleDto[];
 }
