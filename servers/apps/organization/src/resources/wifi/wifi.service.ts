@@ -4,11 +4,12 @@ import { WifiRepositorySQL } from './wifi.repository';
 import { User } from '@app/shared';
 import { Wifi } from '../../models/wifi.schema';
 import { UpdateWifiInput } from './dto/update-wifi.input';
+import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
 
 @Injectable()
 export class WifiService {
   constructor(private readonly wifiRepository: WifiRepositorySQL) {}
-  async create(createWifiDto: CreateWifiInput, { _id: user_id }: User) {
+  async create(createWifiDto: CreateWifiInput, { _id: user_id }: UserInfoDto) {
     const wifi = new Wifi({
       ...createWifiDto,
       user_id,
