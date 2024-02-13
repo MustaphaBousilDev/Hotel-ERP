@@ -79,6 +79,8 @@ services:
     depends_on:
       #- redis
       - rabbitmq
+    # volumes: 
+    #   - .:/usr/src/app
     container_name: notifications
   redis:
     image: "redis:7-alpine"
@@ -86,6 +88,8 @@ services:
       - 6379
     depends_on:
       - rabbitmq
+    volumes: 
+      - .:/usr/src/app
     container_name: redis
   rabbitmq:
     image: rabbitmq 
@@ -113,6 +117,8 @@ services:
       - notifications
       - redis
       - organization
+    # volumes: 
+    #   - .:/usr/src/app
     container_name: gateway
     ports:
       - 5007:5007
@@ -120,6 +126,7 @@ services:
     image: organization
     build:
       context: .
+      # dockerfile: ./apps/notifications/Dockerfile
       args:
         - APP=organization
       target: development
@@ -131,9 +138,12 @@ services:
     depends_on:
       #- redis 
       - rabbitmq
+    volumes: 
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
     container_name: organization
   s3:
-    image: s3-files
+    image: s3
     build: 
       context: .
       args:
@@ -144,6 +154,10 @@ services:
       - ./apps/s3/.env 
     ports:
       - '5008:5008'
+    depends_on:
+      - rabbitmq
+    volumes: 
+      - .:/usr/src/app
     container_name: s3
 
   # db:

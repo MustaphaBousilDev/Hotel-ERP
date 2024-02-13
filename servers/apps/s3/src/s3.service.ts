@@ -13,8 +13,9 @@ export class S3Service {
 
   constructor(private readonly configService: ConfigService) {}
 
-  async upload(fileName: string, file: Buffer) {
-    await this.s3Client.send(
+  async upload(fileName: string, file: any) {
+    console.log('#-----------------------------byffer', file);
+    return this.s3Client.send(
       new PutObjectCommand({
         Bucket: 'erp-orga',
         Key: fileName,

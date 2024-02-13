@@ -1,14 +1,9 @@
 import { Module } from '@nestjs/common';
 import { S3Controller } from './s3.controller';
 import { S3Service } from './s3.service';
-// import { ConfigService } from '@nestjs/config';
-// import { APP_GUARD } from '@nestjs/core';
-// import {
-//   ThrottlerGuard,
-//   ThrottlerModule,
-//   ThrottlerModuleOptions,
-// } from '@nestjs/throttler';
 import { ConfigModule } from '@nestjs/config';
+import { LoggerModule } from '@app/shared';
+// import { ClientsModule, Transport } from '@nestjs/microservices';
 
 @Module({
   imports: [
@@ -22,6 +17,7 @@ import { ConfigModule } from '@nestjs/config';
     //   }),
     //   inject: [ConfigService],
     // }),
+    LoggerModule,
   ],
   controllers: [S3Controller],
   providers: [
