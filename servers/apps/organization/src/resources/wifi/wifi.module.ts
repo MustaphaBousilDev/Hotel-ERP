@@ -12,11 +12,12 @@ import {
 } from '@nestjs/apollo';
 import { Wifi } from '../../models/wifi.schema';
 import { Hotel } from '../../models/hotel.schema';
+import { User } from '../../models/users.mysql.entity';
 
 @Module({
   imports: [
     DatabaseModulemySQL,
-    DatabaseModulemySQL.forFeature([Wifi, Hotel]),
+    DatabaseModulemySQL.forFeature([Wifi, Hotel, User]),
     GraphQLModule.forRoot<ApolloFederationDriverConfig>({
       driver: ApolloFederationDriver,
       autoSchemaFile: {

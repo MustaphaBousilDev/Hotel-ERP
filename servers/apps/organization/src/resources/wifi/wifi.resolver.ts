@@ -2,7 +2,7 @@ import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { WifiService } from './wifi.service';
 import { Wifi } from '../../models/wifi.schema';
 import { CreateWifiInput } from './dto/create-wifi.input';
-import { UpdateWifiInput } from './dto/update-wifi.input';
+// import { UpdateWifiInput } from './dto/update-wifi.input';
 import { CurrentUser, User } from '@app/shared';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
 
@@ -30,10 +30,11 @@ export class WifiResolver {
 
   @Mutation(() => Wifi)
   updateWifi(
-    @Args('updateWifiInput') updateWifiInput: UpdateWifiInput,
+    @Args('id') id: number,
+    @Args('updateWifiInput') updateWifiInput: CreateWifiInput,
     @CurrentUser() user: User,
   ) {
-    return this.wifiService.update(updateWifiInput.id, updateWifiInput, user);
+    return this.wifiService.update(id, updateWifiInput, user);
   }
 
   @Mutation(() => Wifi)

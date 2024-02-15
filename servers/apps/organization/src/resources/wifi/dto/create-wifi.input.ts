@@ -22,10 +22,10 @@ export class CreateWifiInput {
   @IsNumber()
   @Type(() => Number)
   @Field()
-  user_id: string;
-
-  @IsNumber()
-  @Type(() => Number)
-  @Field()
   hotel_id: number;
+
+  // @IsNumber()
+  // @Type(() => Number)
+  // @Field()
+  // user: number;
 }

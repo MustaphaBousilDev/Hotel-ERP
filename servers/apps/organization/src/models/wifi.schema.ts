@@ -1,7 +1,8 @@
 import { AbstractEntity } from '@app/shared';
 import { Field, ObjectType } from '@nestjs/graphql';
 import { Column, Entity, ManyToOne } from 'typeorm';
-import { Hotel } from './hotel.schema';
+// import { Hotel } from './hotel.schema';
+// import { User } from './users.mysql.entity';
 
 @Entity()
 @ObjectType() // for add it in schema qraphql
@@ -23,10 +24,21 @@ export class Wifi extends AbstractEntity<Wifi> {
   @Field() // for graph
   user_id: number;
 
-  @ManyToOne(() => Hotel, (hotel) => hotel.wifi, {
-    orphanedRowAction: 'delete',
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE',
-  })
-  hotel: Hotel;
+  @Column()
+  @Field() // for graph
+  hotel_id: number;
+
+  // @ManyToOne(() => Hotel, (hotel) => hotel.wifi, {
+  //   orphanedRowAction: 'delete',
+  //   onDelete: 'CASCADE',
+  //   onUpdate: 'CASCADE',
+  // })
+  // hotel: Hotel;
+
+  // @ManyToOne(() => User, (user) => .wifi, {
+  //   orphanedRowAction: 'delete',
+  //   onDelete: 'CASCADE',
+  //   onUpdate: 'CASCADE',
+  // })
+  // hotel: Hotel;
 }

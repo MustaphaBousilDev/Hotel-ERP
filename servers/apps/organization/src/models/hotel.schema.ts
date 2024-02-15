@@ -10,7 +10,7 @@ import {
 } from 'typeorm';
 import { City } from './city.schema';
 import { Organization } from './organization.schema';
-import { Wifi } from './wifi.schema';
+// import { Wifi } from './wifi.schema';
 import { Room } from './rooms.schema';
 import { Departement } from './departement.schema';
 
@@ -41,11 +41,12 @@ export class Hotel extends AbstractEntity<Hotel> {
   })
   organization: Organization;
 
-  @OneToMany(() => Wifi, (wifi) => wifi.hotel, {
-    cascade: true,
-    eager: true,
-  })
-  wifi: Wifi[];
+  // @Field(() => [Wifi], { nullable: true })
+  // @OneToMany(() => Wifi, (wifi) => wifi.hotel, {
+  //   cascade: true,
+  //   eager: true,
+  // })
+  // wifi: Wifi[];
 
   @Column()
   @Field() // for graph
