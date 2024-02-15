@@ -1,8 +1,5 @@
 import {
   Controller,
-  FileTypeValidator,
-  MaxFileSizeValidator,
-  ParseFilePipe,
   Post,
   UploadedFile,
   UseInterceptors,
@@ -46,7 +43,6 @@ export class S3Controller {
     const originalMsg = context.getMessage();
     //telling RabbitMQ that it has been successfully received and processed. This is important in message queue systems to prevent messages from being reprocessed in case of failures.
     channel.ack(originalMsg);
-    return
     return this.s3Service.upload(data.originalname, data.buffer);
   }
 }

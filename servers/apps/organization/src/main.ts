@@ -7,9 +7,7 @@ import * as cookieParser from 'cookie-parser';
 import * as bodyParser from 'body-parser';
 import { Transport } from '@nestjs/microservices';
 async function bootstrap() {
-  console.log('#################hhhhotrjktjrt##############')
   const app = await NestFactory.create(OrganizationModule);
-  
   // Parse application/json
   app.use(bodyParser.json());
   // Parse application/x-www-form-urlencoded

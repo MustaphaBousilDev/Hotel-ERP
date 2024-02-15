@@ -8,35 +8,35 @@ import { Hotel } from './hotel.schema';
 export class Organization extends AbstractEntity<Organization> {
   @Column()
   //i am not using type in field because nestjs and graphql pick up on the type of these properties and will use it
-  @Field() // for graph
+  @Field({ nullable: true }) // for graph
   name: string;
 
   @Column()
-  @Field() // for graph
+  @Field({ nullable: true })
   phone1: string;
 
   @Column()
-  @Field() // for graph
+  @Field({ nullable: true })
   phone2: string;
 
   @Column()
-  @Field() // for graph
+  @Field({ nullable: true }) // for graph
   email: string;
 
   @Column()
-  @Field() // for graph
+  @Field({ nullable: true })
   website: string;
 
   @Column()
-  @Field() // for graph
+  @Field({ nullable: true })
   description: string;
 
   @Column()
-  @Field() // for graph
+  @Field({ nullable: true })
   logo: string;
 
   @Column()
-  @Field() // for graph
+  @Field({ nullable: true })
   user_id: number;
 
   @OneToMany(() => Hotel, (hotel) => hotel.organization, {

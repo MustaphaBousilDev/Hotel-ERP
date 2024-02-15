@@ -4,7 +4,12 @@ import { OrganizationService } from './organization.service';
 import { City } from './models/city.schema';
 import { Hotel } from './models/hotel.schema';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { AUTH_SERVICE, DatabaseModulemySQL, LoggerModule, UPLOAD_S3 } from '@app/shared';
+import {
+  AUTH_SERVICE,
+  DatabaseModulemySQL,
+  LoggerModule,
+  UPLOAD_S3,
+} from '@app/shared';
 import { Organization } from './models/organization.schema';
 import { Room } from './models/rooms.schema';
 import { Departement } from './models/departement.schema';
@@ -14,6 +19,9 @@ import { User } from './models/users.mysql.entity';
 import { UserRepositorySQL } from './resources/users/users.repository';
 import { OrganizationRepositorymySQL } from './organization.repository';
 import { ClientsModule, Transport } from '@nestjs/microservices';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriverConfig, ApolloFederationDriver } from '@nestjs/apollo';
+import { OrganizationResolver } from './organization.resolver';
 
 @Module({
   imports: [
@@ -28,6 +36,12 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
       Employee,
       User,
     ]),
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloFederationDriver,
+      autoSchemaFile: {
+        federation: 2,
+      },
+    }),
     LoggerModule,
     WifiModule,
     ConfigModule.forRoot({ isGlobal: true }),
@@ -62,6 +76,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
     OrganizationService,
     UserRepositorySQL,
     OrganizationRepositorymySQL,
+    OrganizationResolver,
   ],
 })
 export class OrganizationModule {}

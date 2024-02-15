@@ -1,44 +1,36 @@
-import { IsEmail, IsString, Validate, IsNotEmpty } from 'class-validator';
-import { Field, InputType } from '@nestjs/graphql';
+import { Field, InputType, ObjectType } from '@nestjs/graphql';
 import { Type } from 'class-transformer';
-import { IsPhoneNumber } from '@app/shared';
 
-@InputType() // for graphql shema when i create or update
-export class OrganizationInputDto {
-  @IsString()
+@ObjectType()
+export class UpdateOrganizationGraph {
+  @Type(() => Number)
+  @Field({ nullable: true }) // Adding nullable: true makes the field optional
+  _id: number;
+
   @Type(() => String)
-  @Field({ nullable: true })
+  @Field({ nullable: true }) // Adding nullable: true makes the field optional
   name: string;
 
-  @IsString()
   @Type(() => String)
   @Field({ nullable: true })
-  @Validate(IsPhoneNumber)
   phone1: string;
 
-  @IsString()
   @Type(() => String)
   @Field({ nullable: true })
-  @Validate(IsPhoneNumber)
   phone2: string;
 
-  @IsEmail()
   @Type(() => String)
   @Field({ nullable: true })
   email: string;
 
-  @IsString()
   @Type(() => String)
   @Field({ nullable: true })
   website: string;
 
-  @IsString()
-  @IsNotEmpty()
   @Type(() => String)
   @Field({ nullable: true })
   description: string;
 
-  @IsString()
   @Type(() => String)
   @Field({ nullable: true })
   logo: string;

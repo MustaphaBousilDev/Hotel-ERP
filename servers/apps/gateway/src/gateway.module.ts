@@ -31,6 +31,10 @@ import { authContext } from './auth.context';
                 name: 'payments',
                 url: configService.getOrThrow('PAYMENTS_GRAPHQL_URL'),
               },
+              {
+                name: 'organization',
+                url: configService.getOrThrow('ORGANIZATION_GRAPHQL_URL'),
+              },
             ],
           }),
           buildService({ url }) {
