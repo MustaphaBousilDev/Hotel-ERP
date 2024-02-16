@@ -51,13 +51,13 @@ export class OrganizationResolver {
   }
 
   @Mutation(() => Organization)
-  removeOrganization(@Args('id', { type: () => Number }) id: number) {
-    return this.organizationService.remove(id);
+  async removeOrganization(@Args('id', { type: () => Number }) id: number) {
+    console.log(id);
+    await this.organizationService.remove(id);
+    return { message: 'Suceess' };
   }
   @MessagePattern('createUserResr')
   createUser(@Payload() data: any, @Ctx() context: RmqContext) {
-    console.log(' ########################## success message ');
-    console.log(' ########################## success  ');
     const channel = context.getChannelRef();
     const originalMsg = context.getMessage();
     //telling RabbitMQ that it has been successfully received and processed. This is important in message queue systems to prevent messages from being reprocessed in case of failures.

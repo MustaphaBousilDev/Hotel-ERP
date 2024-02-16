@@ -38,6 +38,9 @@ export class OrganizationService {
   }
 
   async remove(_id: any) {
-    return this.organizationRepository.findOneAndDelete({ _id });
+    console.log('############# coming to here');
+    console.log(_id);
+    await this.organizationRepository.findOneAndDelete({ _id });
+    return { message: 'Success Delete Organization' };
   }
 }
