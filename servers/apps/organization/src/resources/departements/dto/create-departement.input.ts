@@ -3,41 +3,26 @@ import { Type } from 'class-transformer';
 import { IsBoolean, IsNumber, IsString } from 'class-validator';
 
 @InputType()
-export class CreateRoomInput {
-  @IsNumber()
-  @Type(() => Number)
-  @Field()
-  roomNumber: number;
-
+export class CreateDepartementInput {
   @IsString()
   @Type(() => String)
   @Field()
-  type: string;
+  name: string;
 
   @IsString()
   @Type(() => String)
   @Field()
   description: string;
 
+  @IsBoolean()
+  @Type(() => Boolean)
+  @Field()
+  status: boolean;
+
   @IsString()
   @Type(() => String)
   @Field()
   image: string;
-
-  @IsBoolean()
-  @Type(() => Boolean)
-  @Field()
-  isAvailable: boolean;
-
-  @IsNumber()
-  @Type(() => Number)
-  @Field()
-  price: number;
-
-  @IsNumber()
-  @Type(() => Number)
-  @Field()
-  user_id: number;
 
   @IsNumber()
   @Type(() => Number)

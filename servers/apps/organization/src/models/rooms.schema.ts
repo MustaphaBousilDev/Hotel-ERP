@@ -1,7 +1,7 @@
 import { AbstractEntity } from '@app/shared';
 import { Field, ObjectType } from '@nestjs/graphql';
-import { Column, Entity, ManyToOne } from 'typeorm';
-import { Hotel } from './hotel.schema';
+import { Column, Entity } from 'typeorm';
+// import { Hotel } from './hotel.schema';
 
 @Entity()
 @ObjectType() // for add it in schema qraphql
@@ -23,16 +23,13 @@ export class Room extends AbstractEntity<Room> {
   @Field()
   description: string;
 
-  @Column()
+  @Column({ default: false })
   @Field()
   isAvailable: boolean;
 
-  @ManyToOne(() => Hotel, (hotel) => hotel.room, {
-    orphanedRowAction: 'delete',
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE',
-  })
-  hotel: Hotel;
+  @Column()
+  @Field() // for graph
+  hotel_id: number;
 
   @Column()
   @Field() // for graph

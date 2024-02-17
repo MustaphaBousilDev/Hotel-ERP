@@ -9,7 +9,6 @@ import {
   Payload,
   RmqContext,
 } from '@nestjs/microservices';
-import { NotFoundException } from '@nestjs/common';
 
 @Resolver(() => Organization)
 export class OrganizationResolver {

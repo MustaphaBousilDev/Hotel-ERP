@@ -1,24 +1,22 @@
 import { Module } from '@nestjs/common';
-import { WifiService } from './wifi.service';
-import { WifiResolver } from './wifi.resolver';
 import { DatabaseModulemySQL } from '@app/shared';
 import { LoggerModule } from 'nestjs-pino';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
-import { WifiRepositorySQL } from './wifi.repository';
 import {
   ApolloFederationDriver,
   ApolloFederationDriverConfig,
 } from '@nestjs/apollo';
-import { Wifi } from '../../models/wifi.schema';
-import { Hotel } from '../../models/hotel.schema';
-import { User } from '../../models/users.mysql.entity';
-import { Room } from '../../models/rooms.schema';
+import { Employee } from '../../models/employee.schema';
+import { Departement } from '../../models/departement.schema';
+import { DepartementResolver } from './departement.resolver';
+import { DepartementService } from './departement.service';
+import { DepartementRepositorySQL } from './departement.repository';
 
 @Module({
   imports: [
     DatabaseModulemySQL,
-    DatabaseModulemySQL.forFeature([Wifi, Hotel, User, Room]),
+    DatabaseModulemySQL.forFeature([Departement, Employee]),
     GraphQLModule.forRoot<ApolloFederationDriverConfig>({
       driver: ApolloFederationDriver,
       autoSchemaFile: {
@@ -28,6 +26,10 @@ import { Room } from '../../models/rooms.schema';
     LoggerModule,
     ConfigModule.forRoot({ isGlobal: true }),
   ],
-  providers: [WifiResolver, WifiService, WifiRepositorySQL],
+  providers: [
+    DepartementResolver,
+    DepartementService,
+    DepartementRepositorySQL,
+  ],
 })
-export class WifiModule {}
+export class DepartementModule {}

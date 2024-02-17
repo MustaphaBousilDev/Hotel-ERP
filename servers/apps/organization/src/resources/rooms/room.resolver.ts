@@ -1,42 +1,45 @@
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { RoomService } from './room.service';
 import { CreateRoomInput } from './dto/create-room.input';
-import { UpdateRoomInput } from './dto/update-room.input';
 import { CurrentUser, User } from '@app/shared';
 import { Room } from '../../models/rooms.schema';
+import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
 
 @Resolver(() => Room)
 export class RoomResolver {
-  constructor(private readonly wifiService: RoomService) {}
+  constructor(private readonly roomService: RoomService) {}
 
   @Mutation(() => Room)
-  createWifi(
-    @Args('createRoomInput') createWifiInput: CreateRoomInput,
-    @CurrentUser() user: User,
+  createRoom(
+    @Args('createRoomInput') createRoomInput: CreateRoomInput,
+    @CurrentUser() user: UserInfoDto,
   ) {
-    return this.wifiService.create(createWifiInput, user);
+    console.log('################# room');
+    console.log(createRoomInput);
+    return this.roomService.create(createRoomInput, user);
   }
 
   @Query(() => [Room], { name: 'room' })
   findAll() {
-    return this.wifiService.findAll();
+    return this.roomService.findAll();
   }
 
   @Query(() => Room, { name: 'room' })
   findOne(@Args('id', { type: () => Number }) id: number) {
-    return this.wifiService.findOne(id);
+    return this.roomService.findOne(id);
   }
 
   @Mutation(() => Room)
-  updateWifi(
-    @Args('updateRoomInput') updateWifiInput: UpdateRoomInput,
+  updateRoom(
+    @Args('id') id: number,
+    @Args('updateRoomInput') updateWifiInput: CreateRoomInput,
     @CurrentUser() user: User,
   ) {
-    return this.wifiService.update(updateWifiInput.id, updateWifiInput, user);
+    return this.roomService.update(id, updateWifiInput, user);
   }
 
   @Mutation(() => Room)
-  removeWifi(@Args('id', { type: () => Number }) id: number) {
-    return this.wifiService.remove(id);
+  removeRoom(@Args('id', { type: () => Number }) id: number) {
+    return this.roomService.remove(id);
   }
 }

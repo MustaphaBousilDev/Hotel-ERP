@@ -11,7 +11,6 @@ import {
   UPLOAD_S3,
 } from '@app/shared';
 import { Organization } from './models/organization.schema';
-import { Room } from './models/rooms.schema';
 import { Departement } from './models/departement.schema';
 import { Employee } from './models/employee.schema';
 import { WifiModule } from './resources/wifi/wifi.module';
@@ -22,6 +21,8 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriverConfig, ApolloFederationDriver } from '@nestjs/apollo';
 import { OrganizationResolver } from './organization.resolver';
+import { RoomModule } from './resources/rooms/room.module';
+import { DepartementModule } from './resources/departements/departement.module';
 
 @Module({
   imports: [
@@ -31,7 +32,6 @@ import { OrganizationResolver } from './organization.resolver';
       City,
       Hotel,
       Organization,
-      Room,
       Departement,
       Employee,
       User,
@@ -44,6 +44,8 @@ import { OrganizationResolver } from './organization.resolver';
     }),
     LoggerModule,
     WifiModule,
+    RoomModule,
+    DepartementModule,
     ConfigModule.forRoot({ isGlobal: true }),
     ClientsModule.registerAsync([
       {

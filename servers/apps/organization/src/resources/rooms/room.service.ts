@@ -2,13 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { CreateRoomInput } from './dto/create-room.input';
 import { RoomRepositorySQL } from './room.repository';
 import { User } from '@app/shared';
-import { UpdateRoomInput } from './dto/update-room.input';
 import { Room } from '../../models/rooms.schema';
+import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
 
 @Injectable()
 export class RoomService {
   constructor(private readonly roomRepository: RoomRepositorySQL) {}
-  async create(createRoomDto: CreateRoomInput, { _id: user_id }: User) {
+  async create(createRoomDto: CreateRoomInput, { _id: user_id }: UserInfoDto) {
     const room = new Room({
       ...createRoomDto,
       user_id,
@@ -26,7 +26,7 @@ export class RoomService {
 
   async update(
     _id: any,
-    updateWifiDto: UpdateRoomInput,
+    updateWifiDto: CreateRoomInput,
     { _id: user_id }: User,
   ) {
     const update = {

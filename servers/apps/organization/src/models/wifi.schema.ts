@@ -1,6 +1,6 @@
 import { AbstractEntity } from '@app/shared';
 import { Field, ObjectType } from '@nestjs/graphql';
-import { Column, Entity, ManyToOne } from 'typeorm';
+import { Column, Entity } from 'typeorm';
 // import { Hotel } from './hotel.schema';
 // import { User } from './users.mysql.entity';
 

@@ -6,13 +6,13 @@ import {
   ManyToMany,
   JoinTable,
   ManyToOne,
-  OneToMany,
+  // OneToMany,
 } from 'typeorm';
 import { City } from './city.schema';
 import { Organization } from './organization.schema';
 // import { Wifi } from './wifi.schema';
-import { Room } from './rooms.schema';
-import { Departement } from './departement.schema';
+// import { Room } from './rooms.schema';
+// import { Departement } from './departement.schema';
 
 @Entity()
 @ObjectType() // for add it in schema qraphql
@@ -30,9 +30,9 @@ export class Hotel extends AbstractEntity<Hotel> {
   @JoinTable()
   cities: City[];
 
-  @ManyToMany(() => Departement, (departments) => departments.hotels)
-  @JoinTable()
-  departments: Departement[];
+  // @ManyToMany(() => Departement, { cascade: true })
+  // @JoinTable()
+  // departments: Departement[];
 
   @ManyToOne(() => Organization, (organization) => organization.hotel, {
     orphanedRowAction: 'delete',
@@ -76,9 +76,9 @@ export class Hotel extends AbstractEntity<Hotel> {
   @Field() // for graph
   user_id: number;
 
-  @OneToMany(() => Room, (room) => room.hotel, {
-    cascade: true,
-    eager: true,
-  })
-  room: Room[];
+  // @OneToMany(() => Room, (room) => room.hotel, {
+  //   cascade: true,
+  //   eager: true,
+  // })
+  // room: Room[];
 }
