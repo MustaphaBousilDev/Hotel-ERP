@@ -1,3 +1,4 @@
+version: '3'
 services:
   reservations:
     image: reservations
@@ -88,8 +89,8 @@ services:
       - 6379
     depends_on:
       - rabbitmq
-    volumes: 
-      - .:/usr/src/app
+    # volumes: 
+    #   - .:/usr/src/app
     container_name: redis
   rabbitmq:
     image: rabbitmq 
@@ -138,9 +139,9 @@ services:
     depends_on:
       #- redis 
       - rabbitmq
-    volumes: 
-      - .:/usr/src/app
-      - /usr/src/app/node_modules
+    # volumes: 
+    #   - .:/usr/src/app
+    #   - /usr/src/app/node_modules
     container_name: organization
   s3:
     image: s3
@@ -156,9 +157,24 @@ services:
       - '5008:5008'
     depends_on:
       - rabbitmq
-    volumes: 
-      - .:/usr/src/app
+    # volumes: 
+    #   - .:/usr/src/app
     container_name: s3
+  tasks:
+    image: tasks 
+    build:
+      context: .
+      args:
+        - APP=tasks 
+      target: development
+    command: npm run start:dev tasks 
+    env_file:
+      - ./apps/tasks/.env
+    ports:
+      - '5009:5009'
+    depends_on:
+      - rabbitmq
+    container_name: tasks
 
   # db:
   #   image: mysql 

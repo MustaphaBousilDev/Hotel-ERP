@@ -3,13 +3,13 @@ import { Field, ObjectType } from '@nestjs/graphql';
 import {
   Column,
   Entity,
-  ManyToMany,
-  JoinTable,
-  ManyToOne,
+  // ManyToMany,
+  // JoinTable,
+  // ManyToOne,
   // OneToMany,
 } from 'typeorm';
-import { City } from './city.schema';
-import { Organization } from './organization.schema';
+// import { City } from './city.schema';
+// import { Organization } from './organization.schema';
 // import { Wifi } from './wifi.schema';
 // import { Room } from './rooms.schema';
 // import { Departement } from './departement.schema';
@@ -26,20 +26,28 @@ export class Hotel extends AbstractEntity<Hotel> {
   @Field() // for graph
   address: string;
 
-  @ManyToMany(() => City, { cascade: true })
-  @JoinTable()
-  cities: City[];
+  @Column()
+  @Field() // for graph
+  city_id: number;
+
+  // @ManyToMany(() => City, { cascade: true })
+  // @JoinTable()
+  // cities: City[];
 
   // @ManyToMany(() => Departement, { cascade: true })
   // @JoinTable()
   // departments: Departement[];
 
-  @ManyToOne(() => Organization, (organization) => organization.hotel, {
-    orphanedRowAction: 'delete',
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE',
-  })
-  organization: Organization;
+  // @ManyToOne(() => Organization, (organization) => organization.hotel, {
+  //   orphanedRowAction: 'delete',
+  //   onDelete: 'CASCADE',
+  //   onUpdate: 'CASCADE',
+  // })
+  // organization: Organization;
+
+  @Column()
+  @Field() // for graph
+  organization_id: number;
 
   // @Field(() => [Wifi], { nullable: true })
   // @OneToMany(() => Wifi, (wifi) => wifi.hotel, {
@@ -67,6 +75,10 @@ export class Hotel extends AbstractEntity<Hotel> {
   @Column()
   @Field() // for graph
   latitude: string;
+
+  @Column({ default: false })
+  @Field() // for graph
+  status: boolean;
 
   @Column()
   @Field() // for graph
