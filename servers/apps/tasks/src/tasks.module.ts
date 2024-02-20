@@ -13,11 +13,26 @@ import {
   TasksRepositorymySQL,
   TasksTypeRepositorymySQL,
 } from './tasks.repository';
+import { Employee } from './models/employee.entity';
+import { Organization } from './models/organization.entity';
+import { Hotel } from './models/hotel.entity';
+import { Task_History } from './models/task-history.entity';
+import { TasksAttach } from './models/tasks-attachement.entity';
+import { Departement } from './models/departement.entity';
 
 @Module({
   imports: [
     DatabaseModulemySQL,
-    DatabaseModulemySQL.forFeature([Tasks, TasksType]),
+    DatabaseModulemySQL.forFeature([
+      Tasks,
+      TasksType,
+      Employee,
+      Organization,
+      Hotel,
+      Task_History,
+      TasksAttach,
+      Departement,
+    ]),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloFederationDriver,
       autoSchemaFile: {

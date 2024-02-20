@@ -13,31 +13,7 @@ export class Organization extends AbstractEntity<Organization> {
 
   @Column()
   @Field() // for graph
-  phone1: string;
-
-  @Column()
-  @Field() // for graph
-  phone2: string;
-
-  @Column()
-  @Field() // for graph
-  email: string;
-
-  @Column()
-  @Field() // for graph
-  website: string;
-
-  @Column()
-  @Field() // for graph
-  description: string;
-
-  @Column()
-  @Field() // for graph
   logo: string;
-
-  @Column()
-  @Field() // for graph
-  user_id: number;
 
   @OneToMany(() => Hotel, (hotel) => hotel.organization, {
     cascade: true,

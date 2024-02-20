@@ -147,6 +147,7 @@ services:
     image: s3
     build: 
       context: .
+      # dockerfile: ./apps/s3/Dockerfile
       args:
         - APP=s3
       target: development

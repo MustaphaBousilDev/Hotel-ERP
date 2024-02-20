@@ -6,7 +6,6 @@ import {
 } from './tasks.repository';
 import { TasksDtoInput } from './dto/tasks.dto';
 import { Tasks } from './models/tasks.entity';
-import { TasksType } from './models/tasks-type.entity';
 
 @Injectable()
 export class TasksService {

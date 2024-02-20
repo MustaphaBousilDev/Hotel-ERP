@@ -3,6 +3,7 @@ import { Field, ObjectType } from '@nestjs/graphql';
 import { Column, Entity, ManyToOne } from 'typeorm';
 import { Departement } from './departement.schema';
 import { Position } from './position.schema';
+import { TimeWork } from './shift.schema';
 
 @Entity()
 @ObjectType() // for add it in schema qraphql
@@ -67,5 +68,12 @@ export class Employee extends AbstractEntity<Employee> {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  position: Departement;
+  position: Position;
+
+  @ManyToOne(() => TimeWork, (organization) => organization.employee, {
+    orphanedRowAction: 'delete',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  timeWork: TimeWork;
 }
