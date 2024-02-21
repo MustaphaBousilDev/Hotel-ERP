@@ -3,12 +3,10 @@ import { Field, ObjectType, registerEnumType } from '@nestjs/graphql';
 import {
   Column,
   Entity,
-  JoinColumn,
   JoinTable,
   ManyToMany,
   ManyToOne,
   OneToMany,
-  OneToOne,
 } from 'typeorm';
 import { TasksType } from './tasks-type.entity';
 import { Employee } from './employee.entity';
@@ -85,8 +83,7 @@ export class Tasks extends AbstractEntity<Tasks> {
   employees: Employee[];
 
   @Field(() => TasksAttach, { nullable: true })
-  @OneToOne(() => TasksAttach)
-  @JoinColumn()
+  @ManyToOne(() => TasksAttach, (taskAttach) => taskAttach.tasks)
   taskAttachement: TasksAttach;
 
   @Field(() => [Task_History], { nullable: true })
