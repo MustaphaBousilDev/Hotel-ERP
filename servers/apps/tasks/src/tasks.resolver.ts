@@ -22,7 +22,10 @@ export class TasksResolver {
     @CurrentUser() user: UserInfoDto,
   ) {
     console.log('##############################');
-    console.log(createTaskInput.taskType.id);
+    console.log('##############################');
+    console.log(createTaskInput);
+    console.log('##############################');
+    console.log('##############################');
     return this.tasksService.create(createTaskInput, user);
   }
 

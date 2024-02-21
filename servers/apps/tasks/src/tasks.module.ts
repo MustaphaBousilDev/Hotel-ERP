@@ -10,6 +10,8 @@ import { Tasks } from './models/tasks.entity';
 import { TasksType } from './models/tasks-type.entity';
 import { TasksResolver } from './tasks.resolver';
 import {
+  EmployeeRepositorymySQL,
+  TaskAttachementRepositorymySQL,
   TasksRepositorymySQL,
   TasksTypeRepositorymySQL,
 } from './tasks.repository';
@@ -61,6 +63,8 @@ import { Departement } from './models/departement.entity';
     TasksResolver,
     TasksRepositorymySQL,
     TasksTypeRepositorymySQL,
+    TaskAttachementRepositorymySQL,
+    EmployeeRepositorymySQL,
   ],
 })
 export class TasksModule {}

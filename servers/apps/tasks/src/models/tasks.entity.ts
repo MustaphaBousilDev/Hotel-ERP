@@ -1,5 +1,5 @@
 import { AbstractEntity } from '@app/shared';
-import { Field, ObjectType } from '@nestjs/graphql';
+import { Field, ObjectType, registerEnumType } from '@nestjs/graphql';
 import {
   Column,
   Entity,
@@ -15,18 +15,26 @@ import { Employee } from './employee.entity';
 import { TasksAttach } from './tasks-attachement.entity';
 import { Task_History } from './task-history.entity';
 
-enum TaskStatus {
+export enum TaskStatus {
   PENDING = 'pending',
   DOING = 'doing',
   DONE = 'done',
   CANCEL = 'cancel',
 }
 
-enum TaskPriority {
+export enum TaskPriority {
   LOW = 'low',
   MEDIUM = 'medium',
   HIGH = 'high',
 }
+
+registerEnumType(TaskStatus, {
+  name: 'TaskStatus', // GraphQL type name
+});
+
+registerEnumType(TaskPriority, {
+  name: 'TaskPriority', // GraphQL type name
+});
 
 @ObjectType()
 @Entity()
@@ -53,7 +61,7 @@ export class Tasks extends AbstractEntity<Tasks> {
     enum: TaskPriority,
     default: TaskPriority.LOW,
   })
-  priority: TaskStatus;
+  priority: TaskPriority;
 
   @Field(() => TasksType, { nullable: true })
   @ManyToOne(() => TasksType, (tasktype) => tasktype.tasks)
@@ -76,6 +84,7 @@ export class Tasks extends AbstractEntity<Tasks> {
   @JoinTable()
   employees: Employee[];
 
+  @Field(() => TasksAttach, { nullable: true })
   @OneToOne(() => TasksAttach)
   @JoinColumn()
   taskAttachement: TasksAttach;

@@ -2,6 +2,7 @@ import { Logger, NotFoundException } from '@nestjs/common';
 import { AbstractEntity } from './abstract.entity.mysql';
 import {
   EntityManager,
+  FindManyOptions,
   FindOptionsRelations,
   FindOptionsWhere,
   Repository,
@@ -57,5 +58,9 @@ export abstract class AbstractRepositorymySQL<T extends AbstractEntity<T>> {
 
   async findOneAndDelete(where: FindOptionsWhere<T>) {
     return this.entityRepository.delete(where);
+  }
+
+  async findMany(options?: FindManyOptions<T>): Promise<T[]> {
+    return this.entityRepository.find(options);
   }
 }
