@@ -105,24 +105,26 @@ services:
       args:
         - APP=gateway
       target: development
-    command: npm run start:dev gateway
+    command: sh -c "sleep 500 && npm run start:dev gateway"  # Delayed start
+    # command: npm run start:dev gateway
     #if each microservice has own envirement vairiable
     env_file:
       - ./apps/gateway/.env
-    # depends_on:
-    #   #- redis
-    #   - rabbitmq
-    #   - reservations
-    #   - auth
-    #   - payments
-    #   - notifications
-    #   - redis
-    #   - organization
+    depends_on:
+      #- redis
+      - rabbitmq
+      - reservations
+      - auth
+      - payments
+      - notifications
+      - redis
+      - organization
     # volumes: 
     #   - .:/usr/src/app
     container_name: gateway
     ports:
       - 5007:5007
+    restart: "on-failure"
   organization:
     image: organization
     build:
