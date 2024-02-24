@@ -46,8 +46,8 @@ export class TasksResolver {
     return this.tasksService.update(id, updateTasksInput, user);
   }
 
-  @Query(() => [Tasks], { name: 'tasks' })
-  findAll() {
+  @Query(() => [Tasks], { name: 'tasksAll' })
+  findAllTasks() {
     return this.tasksService.findAll();
   }
 

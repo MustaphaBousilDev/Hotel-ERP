@@ -56,7 +56,7 @@ export class TasksService {
   }
 
   async findAll() {
-    return this.tasksRepository.findOne({});
+    return this.tasksRepository.find({});
   }
 
   async findOne(_id: any) {
