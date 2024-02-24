@@ -8,8 +8,8 @@ import {
 } from './tasks.repository';
 import { TasksDtoInput } from './dto/tasks.dto';
 import { Tasks } from './models/tasks.entity';
-import { Employee } from './models/employee.entity';
 import { In } from 'typeorm';
+import { TasksDtoUpdate } from './dto/tasks-update.dto';
 
 @Injectable()
 export class TasksService {
@@ -63,11 +63,50 @@ export class TasksService {
     return this.tasksRepository.findOne({ _id });
   }
 
-  async update(_id: any, updateOrganization: TasksDtoInput) {
-    // return this.tasksRepository.findOneAndUpdate(
-    //   { _id },
-    //   updateOrganization,
-    // );
+  async update(
+    _id: any,
+    updateTasksDto: TasksDtoUpdate,
+    { _id: userId }: UserInfoDto,
+  ) {
+    const { taskAttachement, taskType, employees, ...updateObject } =
+      updateTasksDto;
+    console.log(taskAttachement);
+    console.log(taskType);
+    console.log(employees);
+    const newObjUpdate = updateObject;
+    // Conditionally fetch and insert taskType if it's not null
+    if (updateTasksDto.taskType && updateTasksDto.taskType.id) {
+      const taskType = await this.tasksTypeRepository.findOne({
+        _id: updateTasksDto.taskType.id,
+      });
+      if (taskType) {
+        newObjUpdate['taskType'] = taskType;
+      }
+    }
+    // Conditionally fetch and insert taskAttachement if it's not null
+    if (updateTasksDto.taskAttachement && updateTasksDto.taskAttachement.id) {
+      const taskAttachement = await this.tasksAttachementRepository.findOne({
+        _id: updateTasksDto.taskAttachement.id,
+      });
+      if (taskAttachement) {
+        updateObject['taskAttachement'] = taskAttachement;
+      }
+    }
+    // Conditionally fetch and insert employees if they're not null
+    if (updateTasksDto.employees && updateTasksDto.employees.length > 0) {
+      const employeeIds = updateTasksDto.employees.map(
+        (employee) => employee.id,
+      );
+      const employees = await this.employeeRepository.findMany({
+        where: {
+          _id: In(employeeIds),
+        },
+      });
+      // updateObject['employees'] = employees;
+      console.log('############################# update');
+      console.log(updateObject);
+    }
+    return this.tasksRepository.findOneAndUpdate({ _id }, updateObject);
   }
 
   async remove(_id: any) {

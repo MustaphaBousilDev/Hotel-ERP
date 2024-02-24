@@ -37,53 +37,57 @@ registerEnumType(TaskPriority, {
 @ObjectType()
 @Entity()
 export class Tasks extends AbstractEntity<Tasks> {
-  @Field(() => String)
-  @Column()
+  @Field(() => String, { nullable: true })
+  @Column({ nullable: true })
   name: string;
 
-  @Field(() => String)
-  @Column()
+  @Field(() => String, { nullable: true })
+  @Column({ nullable: true })
   description: string;
 
-  @Field(() => TaskStatus)
+  @Field(() => TaskStatus, { nullable: true })
   @Column({
     type: 'enum',
     enum: TaskStatus,
     default: TaskStatus.PENDING,
+    nullable: true,
   })
   status: TaskStatus;
 
-  @Field(() => TaskPriority)
+  @Field(() => TaskPriority, { nullable: true })
   @Column({
     type: 'enum',
     enum: TaskPriority,
     default: TaskPriority.LOW,
+    nullable: true,
   })
   priority: TaskPriority;
 
   @Field(() => TasksType, { nullable: true })
-  @ManyToOne(() => TasksType, (tasktype) => tasktype.tasks)
+  @ManyToOne(() => TasksType, (tasktype) => tasktype.tasks, { nullable: true })
   taskType: TasksType;
 
-  @Field(() => Date)
-  @Column({ type: 'date' })
+  @Field(() => Date, { nullable: true })
+  @Column({ type: 'date', nullable: true })
   date: Date;
 
-  @Field(() => String)
-  @Column({ type: 'time' })
+  @Field(() => String, { nullable: true })
+  @Column({ type: 'time', nullable: true })
   time: string;
 
-  @Field(() => Date)
-  @Column({ type: 'date' })
+  @Field(() => Date, { nullable: true })
+  @Column({ type: 'date', nullable: true })
   dueDate: Date;
 
   @Field(() => [Employee], { nullable: true })
-  @ManyToMany(() => Employee)
+  @ManyToMany(() => Employee, { nullable: true })
   @JoinTable()
   employees: Employee[];
 
   @Field(() => TasksAttach, { nullable: true })
-  @ManyToOne(() => TasksAttach, (taskAttach) => taskAttach.tasks)
+  @ManyToOne(() => TasksAttach, (taskAttach) => taskAttach.tasks, {
+    nullable: true,
+  })
   taskAttachement: TasksAttach;
 
   @Field(() => [Task_History], { nullable: true })

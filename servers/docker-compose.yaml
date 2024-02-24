@@ -105,7 +105,7 @@ services:
       args:
         - APP=gateway
       target: development
-    command: sh -c "sleep 500 && npm run start:dev gateway"  # Delayed start
+    command: npm run start:dev gateway
     # command: npm run start:dev gateway
     #if each microservice has own envirement vairiable
     env_file:

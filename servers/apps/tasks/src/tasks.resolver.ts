@@ -10,6 +10,7 @@ import { TasksService } from './tasks.service';
 import { Tasks } from './models/tasks.entity';
 import { TasksDtoInput } from './dto/tasks.dto';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
+import { TasksDtoUpdate } from './dto/tasks-update.dto';
 
 @Resolver()
 export class TasksResolver {
@@ -33,7 +34,7 @@ export class TasksResolver {
   updateTasks(
     @Args('id') id: number,
     @Args('updateTasksInputs')
-    updateTasksInput: TasksDtoInput,
+    updateTasksInput: TasksDtoUpdate,
     @CurrentUser() user: User,
   ) {
     //check if organization exists
@@ -42,7 +43,7 @@ export class TasksResolver {
     // if (!existingOrganization) {
     //   throw new NotFoundException('Organization not found');
     // }
-    return this.tasksService.update(id, updateTasksInput);
+    return this.tasksService.update(id, updateTasksInput, user);
   }
 
   @Query(() => [Tasks], { name: 'tasks' })
