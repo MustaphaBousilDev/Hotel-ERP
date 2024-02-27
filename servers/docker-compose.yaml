@@ -110,15 +110,15 @@ services:
     #if each microservice has own envirement vairiable
     env_file:
       - ./apps/gateway/.env
-    depends_on:
-      #- redis
-      - rabbitmq
-      - reservations
-      - auth
-      - payments
-      - notifications
-      - redis
-      - organization
+    # depends_on:
+    #   #- redis
+    #   - rabbitmq
+    #   - reservations
+    #   - auth
+    #   - payments
+    #   - notifications
+    #   - redis
+    #   - organization
     # volumes: 
     #   - .:/usr/src/app
     container_name: gateway

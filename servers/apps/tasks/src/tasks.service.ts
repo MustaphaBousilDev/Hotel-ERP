@@ -24,9 +24,13 @@ export class TasksService {
     const taskType = await this.tasksTypeRepository.findOne({
       _id: createTasksDto.taskType.id,
     });
+    console.log('############ taskType ############');
+    console.log(taskType);
     const taskAttachement = await this.tasksAttachementRepository.findOne({
       _id: createTasksDto.taskAttachement.id,
     });
+    console.log('############ taskAttachement ############');
+    console.log(taskAttachement);
     const ids = [];
     ids[0] = createTasksDto.employees[0].id;
     ids[1] = createTasksDto.employees[1].id;
