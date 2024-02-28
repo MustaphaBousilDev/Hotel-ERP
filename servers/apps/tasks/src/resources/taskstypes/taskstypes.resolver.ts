@@ -20,10 +20,10 @@ export class TaskstypesResolver {
     return this.taskstypesService.findAll();
   }
 
-  // @Query(() => TasksType, { name: 'taskstype' })
-  // findOne(@Args('id', { type: () => Int }) id: number) {
-  //   return this.taskstypesService.findOne(id);
-  // }
+  @Query(() => TasksType, { name: 'taskstype' })
+  findTaskType(@Args('id', { type: () => Int }) id: number) {
+    return this.taskstypesService.findOne(id);
+  }
 
   // @Mutation(() => TasksType)
   // updateTaskstype(
