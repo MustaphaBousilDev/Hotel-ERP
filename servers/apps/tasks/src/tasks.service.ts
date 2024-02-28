@@ -117,6 +117,5 @@ export class TasksService {
     console.log('############# coming to here');
     console.log(_id);
     await this.tasksRepository.findOneAndDelete({ _id });
-    return { message: 'Success Delete Organization' };
   }
 }

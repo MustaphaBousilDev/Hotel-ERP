@@ -64,7 +64,11 @@ export class Tasks extends AbstractEntity<Tasks> {
   priority: TaskPriority;
 
   @Field(() => TasksType, { nullable: true })
-  @ManyToOne(() => TasksType, (tasktype) => tasktype.tasks, { nullable: true })
+  @ManyToOne(() => TasksType, (tasktype) => tasktype.tasks, {
+    nullable: true,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   taskType: TasksType;
 
   @Field(() => Date, { nullable: true })
