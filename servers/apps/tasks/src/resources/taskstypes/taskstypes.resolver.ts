@@ -2,6 +2,7 @@ import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { TaskstypesService } from './taskstypes.service';
 import { TasksTypeDtoInput } from '../../dto/tasks-type.dto';
 import { TasksType } from '../../models/tasks-type.entity';
+import { TaskTypeDtoUpdate } from '../../dto/task-type-update.dto';
 
 @Resolver(() => TasksType)
 export class TaskstypesResolver {
@@ -25,19 +26,17 @@ export class TaskstypesResolver {
     return this.taskstypesService.findOne(id);
   }
 
-  // @Mutation(() => TasksType)
-  // updateTaskstype(
-  //   @Args('updateTaskstypeInput')
-  //   updateTaskstypeInput: any,
-  // ) {
-  //   return this.taskstypesService.update(
-  //     updateTaskstypeInput.id,
-  //     updateTaskstypeInput,
-  //   );
-  // }
+  @Mutation(() => TasksType)
+  updateTaskstype(
+    @Args('id', { type: () => Int }) id: number,
+    @Args('updateTaskstypeInput')
+    updateTaskstypeInput: TaskTypeDtoUpdate,
+  ) {
+    return this.taskstypesService.update(id, updateTaskstypeInput);
+  }
 
-  // @Mutation(() => TasksType, { name: 'removeTaskstype' })
-  // removeTaskstype(@Args('id', { type: () => Int }) id: number) {
-  //   return this.taskstypesService.remove(id);
-  // }
+  @Mutation(() => TasksType, { name: 'removeTaskstype' })
+  removeTaskstype(@Args('id', { type: () => Int }) id: number) {
+    return this.taskstypesService.remove(id);
+  }
 }
