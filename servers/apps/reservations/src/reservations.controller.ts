@@ -66,7 +66,7 @@ export class ReservationsController {
     return this.reservationsService.remove(id);
   }
 
-  @MessagePattern('createUserResr')
+  @MessagePattern('createUserComminicate')
   async createUser(@Payload() data: any, @Ctx() context: RmqContext) {
     console.log(' ########################## success message ');
     console.log(' ########################## success  ');

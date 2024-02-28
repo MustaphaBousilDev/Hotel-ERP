@@ -115,7 +115,7 @@ export class OrganizationController {
     // return this.uploadLogoOrganization.send('upload_file_s3', { base64String });
   }
 
-  @MessagePattern('createUserOrg')
+  @MessagePattern('createUserComminicate')
   async createUser(@Payload() data: any, @Ctx() context: RmqContext) {
     console.log(' ########################## success message org ');
     console.log(' ########################## success  orgs');

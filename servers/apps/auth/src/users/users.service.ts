@@ -34,26 +34,35 @@ export class UsersService {
       password: await bcrypt.hash(createUserDto.password, 10),
       roles: createUserDto.roles?.map((roleDto) => new Role(roleDto)),
     });
-    const promises = [];
+    // const promises = [];
     console.log('user Service (((----', user);
-    promises.push(
-      this.createUserReservation
-        .send('createUserResr', {
-          ...createUserDto,
-          password: undefined,
-        })
-        .toPromise(),
-    );
+    // promises.push(
+    //   this.createUserReservation
+    //     .send('createUserResr', {
+    //       ...createUserDto,
+    //       password: undefined,
+    //     })
+    //     .toPromise(),
+    // );
 
-    promises.push(
-      this.createUserOrganization
-        .send('createUserOrg', {
-          ...createUserDto,
-          password: undefined,
-        })
-        .toPromise(),
-    );
-    await Promise.all(promises);
+    // promises.push(
+    //   this.createUserOrganization
+    //     .send('createUserOrg', {
+    //       ...createUserDto,
+    //       password: undefined,
+    //     })
+    //     .toPromise(),
+    // );
+    // await Promise.all(promises);
+    this.createUserOrganization.emit('createUserComminicate', {
+      ...createUserDto,
+      password: undefined,
+    });
+
+    this.createUserReservation.emit('createUserComminicate', {
+      ...createUserDto,
+      password: undefined,
+    });
     return this.usersRepository.create(user);
   }
   async verifyUser(email: string, password: string) {
