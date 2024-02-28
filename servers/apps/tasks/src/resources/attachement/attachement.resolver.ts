@@ -3,6 +3,7 @@ import { AttachementService } from './attachement.service';
 import { TasksAttach } from '../../models/tasks-attachement.entity';
 import { TaskAttachementInput } from '../../dto/task-attachement.dto';
 import { Query } from '@nestjs/graphql';
+import { TaskAttachementUpdateDTO } from '../../dto/task-attachement-update.dto';
 @Resolver(() => TasksAttach)
 export class AttachementResolver {
   constructor(private readonly attachementService: AttachementService) {}
@@ -25,13 +26,17 @@ export class AttachementResolver {
     return this.attachementService.findOne(id);
   }
 
-  // @Mutation(() => TasksAttach)
-  // updateAttachement(@Args('updateAttachementInput') updateAttachementInput: UpdateAttachementInput) {
-  //   return this.attachementService.update(updateAttachementInput.id, updateAttachementInput);
-  // }
+  @Mutation(() => TasksAttach)
+  updateAttachement(
+    @Args('id', { type: () => Int }) id: number,
+    @Args('updateAttachementInput')
+    updateAttachementInput: TaskAttachementUpdateDTO,
+  ) {
+    return this.attachementService.update(id, updateAttachementInput);
+  }
 
-  // @Mutation(() => TasksAttach)
-  // removeAttachement(@Args('id', { type: () => Int }) id: number) {
-  //   return this.attachementService.remove(id);
-  // }
+  @Mutation(() => TasksAttach)
+  removeAttachement(@Args('id', { type: () => Int }) id: number) {
+    return this.attachementService.remove(id);
+  }
 }

@@ -1,24 +1,30 @@
 import { Field, InputType } from '@nestjs/graphql';
 import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 import { EmployeeIDDtoInput } from './employee.dto';
+import { Type } from 'class-transformer';
 
 @InputType()
-export class TaskAttachementInput {
-  @Field(() => String, { nullable: true })
+export class TaskAttachementUpdateDTO {
   @IsString()
-  name: string;
-
-  @Field(() => String, { nullable: true })
-  @IsString()
-  file_name: string;
-
-  @Field(() => String, { nullable: true })
-  @IsString()
-  file_url: string;
-
-  @Field(() => EmployeeIDDtoInput, { nullable: true })
   @IsOptional()
-  employee: EmployeeIDDtoInput;
+  @Type(() => String)
+  @Field(() => String, { nullable: true })
+  name?: string;
+
+  @IsString()
+  @IsOptional()
+  @Field(() => String, { nullable: true })
+  file_name?: string;
+
+  @IsString()
+  @IsOptional()
+  @Field(() => String, { nullable: true })
+  file_url?: string;
+
+  @IsString()
+  @IsOptional()
+  @Field(() => EmployeeIDDtoInput, { nullable: true })
+  employee?: EmployeeIDDtoInput;
 }
 
 @InputType()

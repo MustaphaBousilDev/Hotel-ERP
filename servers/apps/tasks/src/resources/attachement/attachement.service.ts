@@ -5,6 +5,7 @@ import {
 } from './attachement.repository';
 import { TaskAttachementInput } from '../../dto/task-attachement.dto';
 import { TasksAttach } from '../../models/tasks-attachement.entity';
+import { TaskAttachementUpdateDTO } from '../../dto/task-attachement-update.dto';
 
 @Injectable()
 export class AttachementService {
@@ -32,31 +33,31 @@ export class AttachementService {
   async findOne(_id: any) {
     return this.taskAttachementRepository.findOne({ _id });
   }
-  // async update(
-  //   _id: any,
-  //   updateTasksDto: TaskTypeDtoUpdate,
-  //   // { _id: userId }: UserInfoDto,
-  // ) {
-  //   const newObjUpdate = {};
-  //   if (updateTasksDto.name) {
-  //     newObjUpdate['name'] = updateTasksDto.name;
-  //   }
-  //   // Conditionally fetch and insert taskType if it's not null
-  //   if (updateTasksDto.departement && updateTasksDto.departement.id) {
-  //     const departement = await this.departementRepository.findOne({
-  //       _id: updateTasksDto.departement.id,
-  //     });
-  //     if (departement) {
-  //       newObjUpdate['departement'] = departement;
-  //     }
-  //   }
-  //   return this.taskstypesRepository.findOneAndUpdate({ _id }, newObjUpdate);
-  // }
+  async update(
+    _id: any,
+    updateAttachementDto: TaskAttachementUpdateDTO,
+    // { _id: userId }: UserInfoDto,
+  ) {
+    //create object that except values from updateAttachementDto except employee using spread operator
+    const { employee, ...data } = updateAttachementDto;
+    // newObjUpdate = entity;
+    let employees = null;
+    // Conditionally fetch and insert taskType if it's not null
+    if (updateAttachementDto.employee && updateAttachementDto.employee.id) {
+      employees = await this.employeeRepository.findOne({
+        _id: updateAttachementDto.employee.id,
+      });
+      if (employee) {
+        data['employee'] = employees;
+      }
+    }
+    return this.taskAttachementRepository.findOneAndUpdate({ _id }, data);
+  }
 
-  // async remove(_id: any) {
-  //   console.log('############# coming to here');
-  //   console.log(_id);
-  //   await this.taskstypesRepository.findOneAndDelete({ _id });
-  //   return { message: 'Success Delete TasksType' };
-  // }
+  async remove(_id: any) {
+    console.log('############# coming to here');
+    console.log(_id);
+    await this.taskAttachementRepository.findOneAndDelete({ _id });
+    return { message: 'Success Delete TasksType' };
+  }
 }
