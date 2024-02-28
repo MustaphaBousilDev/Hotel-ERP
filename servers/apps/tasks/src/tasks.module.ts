@@ -22,6 +22,7 @@ import { Task_History } from './models/task-history.entity';
 import { TasksAttach } from './models/tasks-attachement.entity';
 import { Departement } from './models/departement.entity';
 import { TaskstypesModule } from './resources/taskstypes/taskstypes.module';
+import { AttachementModule } from './resources/attachement/attachement.module';
 
 @Module({
   imports: [
@@ -44,6 +45,7 @@ import { TaskstypesModule } from './resources/taskstypes/taskstypes.module';
     }),
     LoggerModule,
     TaskstypesModule,
+    AttachementModule,
     ConfigModule.forRoot({ isGlobal: true }),
     ClientsModule.registerAsync([
       {
