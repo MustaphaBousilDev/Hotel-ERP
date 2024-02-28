@@ -20,13 +20,18 @@ export class TasksResolver {
   createTasks(
     @Args('createTaskInput')
     createTaskInput: TasksDtoInput,
-    @CurrentUser() user: UserInfoDto,
+    // @CurrentUser() user: UserInfoDto,
   ) {
     console.log('##############################');
     console.log('##############################');
     console.log(createTaskInput);
     console.log('##############################');
     console.log('##############################');
+    const user = {
+      _id: 1,
+      email: 'mugiwara@gmail.com',
+      password: 'mugiwara',
+    };
     return this.tasksService.create(createTaskInput, user);
   }
 

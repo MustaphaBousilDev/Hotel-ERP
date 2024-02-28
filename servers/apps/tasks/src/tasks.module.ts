@@ -21,6 +21,7 @@ import { Hotel } from './models/hotel.entity';
 import { Task_History } from './models/task-history.entity';
 import { TasksAttach } from './models/tasks-attachement.entity';
 import { Departement } from './models/departement.entity';
+import { TaskstypesModule } from './resources/taskstypes/taskstypes.module';
 
 @Module({
   imports: [
@@ -42,6 +43,7 @@ import { Departement } from './models/departement.entity';
       },
     }),
     LoggerModule,
+    TaskstypesModule,
     ConfigModule.forRoot({ isGlobal: true }),
     ClientsModule.registerAsync([
       {

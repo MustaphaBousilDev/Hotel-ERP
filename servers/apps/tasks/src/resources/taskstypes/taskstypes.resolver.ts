@@ -1,35 +1,43 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { TaskstypesService } from './taskstypes.service';
-import { Taskstype } from './entities/taskstype.entity';
-import { CreateTaskstypeInput } from './dto/create-taskstype.input';
-import { UpdateTaskstypeInput } from './dto/update-taskstype.input';
+import { TasksTypeDtoInput } from '../../dto/tasks-type.dto';
+import { TasksType } from '../../models/tasks-type.entity';
 
-@Resolver(() => Taskstype)
+@Resolver(() => TasksType)
 export class TaskstypesResolver {
   constructor(private readonly taskstypesService: TaskstypesService) {}
 
-  @Mutation(() => Taskstype)
-  createTaskstype(@Args('createTaskstypeInput') createTaskstypeInput: CreateTaskstypeInput) {
+  @Mutation(() => TasksType)
+  createTaskstype(
+    @Args('createTaskstypeInput')
+    createTaskstypeInput: TasksTypeDtoInput,
+  ) {
     return this.taskstypesService.create(createTaskstypeInput);
   }
 
-  @Query(() => [Taskstype], { name: 'taskstypes' })
-  findAll() {
+  @Query(() => [TasksType], { name: 'taskstypes' })
+  findAllTasks() {
     return this.taskstypesService.findAll();
   }
 
-  @Query(() => Taskstype, { name: 'taskstype' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.taskstypesService.findOne(id);
-  }
+  // @Query(() => TasksType, { name: 'taskstype' })
+  // findOne(@Args('id', { type: () => Int }) id: number) {
+  //   return this.taskstypesService.findOne(id);
+  // }
 
-  @Mutation(() => Taskstype)
-  updateTaskstype(@Args('updateTaskstypeInput') updateTaskstypeInput: UpdateTaskstypeInput) {
-    return this.taskstypesService.update(updateTaskstypeInput.id, updateTaskstypeInput);
-  }
+  // @Mutation(() => TasksType)
+  // updateTaskstype(
+  //   @Args('updateTaskstypeInput')
+  //   updateTaskstypeInput: any,
+  // ) {
+  //   return this.taskstypesService.update(
+  //     updateTaskstypeInput.id,
+  //     updateTaskstypeInput,
+  //   );
+  // }
 
-  @Mutation(() => Taskstype)
-  removeTaskstype(@Args('id', { type: () => Int }) id: number) {
-    return this.taskstypesService.remove(id);
-  }
+  // @Mutation(() => TasksType, { name: 'removeTaskstype' })
+  // removeTaskstype(@Args('id', { type: () => Int }) id: number) {
+  //   return this.taskstypesService.remove(id);
+  // }
 }

@@ -1,26 +1,30 @@
 import { Injectable } from '@nestjs/common';
-import { CreateTaskstypeInput } from './dto/create-taskstype.input';
-import { UpdateTaskstypeInput } from './dto/update-taskstype.input';
+import {
+  DepartementRepositorymySQL,
+  TasksTypeRepositorymySQL,
+} from './tasksTypes.repository';
+import { TasksTypeDtoInput } from '../../dto/tasks-type.dto';
+import { TasksType } from '../../models/tasks-type.entity';
 
 @Injectable()
 export class TaskstypesService {
-  create(createTaskstypeInput: CreateTaskstypeInput) {
-    return 'This action adds a new taskstype';
+  constructor(
+    private readonly taskstypesRepository: TasksTypeRepositorymySQL,
+    private readonly departementRepository: DepartementRepositorymySQL,
+  ) {}
+
+  async create(createTaskstypeInput: TasksTypeDtoInput) {
+    const departement = await this.departementRepository.findOne({
+      _id: createTaskstypeInput.departement.id,
+    });
+    const tasksType = new TasksType({
+      name: createTaskstypeInput.name,
+      departement: departement,
+    });
+    return this.taskstypesRepository.create(tasksType);
   }
 
-  findAll() {
-    return `This action returns all taskstypes`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} taskstype`;
-  }
-
-  update(id: number, updateTaskstypeInput: UpdateTaskstypeInput) {
-    return `This action updates a #${id} taskstype`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} taskstype`;
+  async findAll() {
+    return this.taskstypesRepository.find({});
   }
 }
