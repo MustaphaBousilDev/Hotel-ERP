@@ -25,13 +25,13 @@ export class AttachementService {
     return this.taskAttachementRepository.create(taskAttachement);
   }
 
-  // async findAll() {
-  //   return this.taskstypesRepository.find({});
-  // }
+  async findAll() {
+    return this.taskAttachementRepository.find({});
+  }
 
-  // async findOne(_id: any) {
-  //   return this.taskstypesRepository.findOne({ _id });
-  // }
+  async findOne(_id: any) {
+    return this.taskAttachementRepository.findOne({ _id });
+  }
   // async update(
   //   _id: any,
   //   updateTasksDto: TaskTypeDtoUpdate,
