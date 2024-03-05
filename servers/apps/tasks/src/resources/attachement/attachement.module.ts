@@ -5,6 +5,7 @@ import { DatabaseModulemySQL } from '@app/shared';
 import { TasksAttach } from '../../models/tasks-attachement.entity';
 import { GraphQLModule } from '@nestjs/graphql';
 import {
+  ApolloDriverConfig,
   ApolloFederationDriver,
   ApolloFederationDriverConfig,
 } from '@nestjs/apollo';
@@ -21,12 +22,12 @@ import { Tasks } from '../../models/tasks.entity';
   imports: [
     DatabaseModulemySQL,
     DatabaseModulemySQL.forFeature([TasksAttach, Employee, Tasks]),
-    GraphQLModule.forRoot<ApolloFederationDriverConfig>({
-      driver: ApolloFederationDriver,
-      autoSchemaFile: {
-        federation: 2,
-      },
-    }),
+    // GraphQLModule.forRoot<ApolloDriverConfig>({
+    //   driver: ApolloFederationDriver,
+    //   autoSchemaFile: {
+    //     federation: 2,
+    //   },
+    // }),
     LoggerModule,
     ConfigModule.forRoot({ isGlobal: true }),
   ],

@@ -25,7 +25,7 @@ export class TasksDtoInput {
   description: string;
 
   @IsEnum(TaskStatus)
-  // @Type(() => String)
+  @Type(() => String)
   @Field(() => TaskStatus, { nullable: true })
   status: TaskStatus;
 
@@ -57,4 +57,11 @@ export class TasksDtoInput {
   @Field(() => TaskAttachementIDDtoInput)
   @IsNotEmpty()
   taskAttachement: TaskAttachementIDDtoInput;
+}
+
+@InputType()
+export class TaskIDDtoInput {
+  @Field(() => Number)
+  @IsNotEmpty()
+  id: number;
 }

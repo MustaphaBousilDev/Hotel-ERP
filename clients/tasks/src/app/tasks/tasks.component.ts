@@ -8,7 +8,7 @@ import {
   CdkDropListGroup,
   moveItemInArray,
   transferArrayItem,
-  
+
 } from '@angular/cdk/drag-drop';
 import { ModalService } from '../components/modal/modal.service';
 import { MatIconModule } from '@angular/material/icon';
@@ -32,12 +32,12 @@ export class TasksComponent {
   constructor(
     private router: Router,
     private modalService: ModalService,
-    
+
   ){}
   dataFromChild: string='';
 
-  
- 
+
+
   todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
   todoArr=[
     {
@@ -81,15 +81,24 @@ export class TasksComponent {
       status:'progress'
     }
   ]
-  
+
   done = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk dog'];
 
   progress = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk dog'];
-  
+
   drop(event: CdkDragDrop<{name: string; status: string;}[]>) {
+    console.log('fuck cfuck fuck')
+
+
     if (event.previousContainer === event.container) {
+
+      console.log('A')
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      console.log(event.container.id)
+      console.log('event previous container',event.previousContainer)
+      console.log('event container',event.container)
     } else {
+      console.log('B')
       const movedItem = event.previousContainer.data[event.previousIndex];
       transferArrayItem(
         event.previousContainer.data,

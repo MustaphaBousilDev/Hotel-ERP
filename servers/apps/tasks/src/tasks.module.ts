@@ -23,6 +23,7 @@ import { TasksAttach } from './models/tasks-attachement.entity';
 import { Departement } from './models/departement.entity';
 import { TaskstypesModule } from './resources/taskstypes/taskstypes.module';
 import { AttachementModule } from './resources/attachement/attachement.module';
+import { HisytoryModule } from './resources/hisytory/hisytory.module';
 
 @Module({
   imports: [
@@ -46,6 +47,7 @@ import { AttachementModule } from './resources/attachement/attachement.module';
     LoggerModule,
     TaskstypesModule,
     AttachementModule,
+    HisytoryModule,
     ConfigModule.forRoot({ isGlobal: true }),
     ClientsModule.registerAsync([
       {

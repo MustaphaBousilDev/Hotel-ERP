@@ -1,34 +1,40 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { HisytoryService } from './hisytory.service';
-import { Hisytory } from './entities/hisytory.entity';
-import { CreateHisytoryInput } from './dto/create-hisytory.input';
-import { UpdateHisytoryInput } from './dto/update-hisytory.input';
+import { Task_History } from '../../models/task-history.entity';
+import { TasksHistoryDtoInput } from '../../dto/task-history.dto';
+import { TasksHistoryUpdateDTO } from '../../dto/task-history-update.dto';
 
-@Resolver(() => Hisytory)
+@Resolver(() => Task_History)
 export class HisytoryResolver {
   constructor(private readonly hisytoryService: HisytoryService) {}
 
-  @Mutation(() => Hisytory)
-  createHisytory(@Args('createHisytoryInput') createHisytoryInput: CreateHisytoryInput) {
+  @Mutation(() => Task_History)
+  createHisytory(
+    @Args('createHisytoryInput') createHisytoryInput: TasksHistoryDtoInput,
+  ) {
     return this.hisytoryService.create(createHisytoryInput);
   }
 
-  @Query(() => [Hisytory], { name: 'hisytory' })
-  findAll() {
+  @Query(() => [Task_History], { name: 'hisytories' })
+  findAllHistory() {
     return this.hisytoryService.findAll();
   }
 
-  @Query(() => Hisytory, { name: 'hisytory' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
+  @Query(() => Task_History, { name: 'hisytory' })
+  findOneHistory(@Args('id', { type: () => Int }) id: number) {
     return this.hisytoryService.findOne(id);
   }
 
-  @Mutation(() => Hisytory)
-  updateHisytory(@Args('updateHisytoryInput') updateHisytoryInput: UpdateHisytoryInput) {
-    return this.hisytoryService.update(updateHisytoryInput.id, updateHisytoryInput);
+  @Mutation(() => Task_History)
+  updateHisytory(
+    @Args('id', { type: () => Int }) id: number,
+    @Args('updateHisytoryInput')
+    updateHisytoryInput: TasksHistoryUpdateDTO,
+  ) {
+    return this.hisytoryService.update(id, updateHisytoryInput);
   }
 
-  @Mutation(() => Hisytory)
+  @Mutation(() => Task_History)
   removeHisytory(@Args('id', { type: () => Int }) id: number) {
     return this.hisytoryService.remove(id);
   }
