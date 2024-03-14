@@ -13,6 +13,8 @@ export class TaskstypesResolver {
     @Args('createTaskstypeInput')
     createTaskstypeInput: TasksTypeDtoInput,
   ) {
+    console.log('~~é~#########################');
+    console.log(createTaskstypeInput);
     return this.taskstypesService.create(createTaskstypeInput);
   }
 

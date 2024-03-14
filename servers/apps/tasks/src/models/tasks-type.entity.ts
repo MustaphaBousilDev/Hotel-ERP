@@ -17,7 +17,7 @@ export class TasksType extends AbstractEntity<TasksType> {
   })
   tasks: Tasks[];
 
-  @OneToOne(() => Departement)
+  @OneToOne(() => Departement, { nullable: true })
   @JoinColumn()
   departement: Departement;
 }

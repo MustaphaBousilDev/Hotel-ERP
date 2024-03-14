@@ -50,6 +50,7 @@ export class Task_History extends AbstractEntity<Task_History> {
   priority: TaskPriorityHistory;
 
   // Define relationships
+  @Field(() => Tasks, { nullable: true })
   @ManyToOne(() => Tasks, (task) => task.tasks_history, {
     nullable: true,
     onDelete: 'CASCADE',
@@ -57,6 +58,7 @@ export class Task_History extends AbstractEntity<Task_History> {
   })
   task: Tasks;
 
+  @Field(() => Employee, { nullable: true })
   @ManyToOne(() => Employee, (employee) => employee.tasks_history, {
     nullable: true,
     onDelete: 'CASCADE',

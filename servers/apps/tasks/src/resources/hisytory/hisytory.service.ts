@@ -31,18 +31,40 @@ export class HisytoryService {
   }
 
   findAll() {
-    return `This action returns all hisytory`;
+    return this.hisytoryRepository.find({});
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} hisytory`;
+    return this.hisytoryRepository.findOne({ _id: id });
   }
 
-  update(_id: any, updateTaskHistoryDto: TasksHistoryUpdateDTO) {
-    return `This action updates a #${_id} hisytory`;
+  async update(_id: any, updateTaskHistoryDto: TasksHistoryUpdateDTO) {
+    const { employees, task, ...data } = updateTaskHistoryDto;
+    console.log(employees);
+    console.log(task);
+    let emplHistory = null;
+    let empTask = null;
+    if (updateTaskHistoryDto.employees && updateTaskHistoryDto.employees.id) {
+      emplHistory = await this.employeeRepository.findOne({
+        _id: updateTaskHistoryDto.employees.id,
+      });
+      if (emplHistory) {
+        data['employee'] = emplHistory;
+      }
+    }
+    if (updateTaskHistoryDto.task && updateTaskHistoryDto.task.id) {
+      empTask = await this.taskRepository.findOne({
+        _id: updateTaskHistoryDto.task.id,
+      });
+      if (empTask) {
+        data['task'] = empTask;
+      }
+    }
+    return this.hisytoryRepository.findOneAndUpdate({ _id }, data);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} hisytory`;
+  async remove(id: number) {
+    await this.hisytoryRepository.findOneAndDelete({ _id: id });
+    return { message: 'Success Delete History ' };
   }
 }

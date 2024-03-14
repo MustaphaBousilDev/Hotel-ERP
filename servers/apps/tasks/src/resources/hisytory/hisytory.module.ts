@@ -5,12 +5,6 @@ import { DatabaseModulemySQL } from '@app/shared';
 import { Task_History } from '../../models/task-history.entity';
 import { Tasks } from '../../models/tasks.entity';
 import { Employee } from '../../models/employee.entity';
-import { GraphQLModule } from '@nestjs/graphql';
-import {
-  ApolloDriverConfig,
-  ApolloFederationDriver,
-  ApolloFederationDriverConfig,
-} from '@nestjs/apollo';
 import { LoggerModule } from 'nestjs-pino';
 import { ConfigModule } from '@nestjs/config';
 import {

@@ -8,15 +8,14 @@ import { EntityClassOrSchema } from '@nestjs/typeorm/dist/interfaces/entity-clas
     TypeOrmModule.forRootAsync({
       //imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
-        type: 'mysql',
-        host: configService.getOrThrow('MYSQL_HOST'),
-        port: +configService.getOrThrow('MYSQL_PORT'),
-        database: configService.getOrThrow('MYSQL_DATABASE'),
-        username: configService.getOrThrow('MYSQL_USERNAME'),
-        password: configService.getOrThrow('MYSQL_PASSWORD'),
-        synchronize: configService.getOrThrow('MYSQL_SYNCHRONIZE'), //synchronize not for production
+        type: 'postgres',
+        username: configService.getOrThrow('POSTGRES_USER'),
+        password: configService.getOrThrow('POSTGRES_PASSWORD'),
+        port: configService.getOrThrow('POSTGRES_PORT'),
+        host: configService.getOrThrow('POSTGRES_HOST_DOCKER'),
+        database: configService.getOrThrow('POSTGRES_DB'),
         autoLoadEntities: true,
-        // ssl: true,
+        synchronize: true,
       }),
       inject: [ConfigService], // Specify the dependencies that should be injected into the useFactory function
     }),

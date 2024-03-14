@@ -178,6 +178,7 @@ services:
     depends_on:
       - rabbitmq
     container_name: tasks
+  
 
   # db:
   #   image: mysql 
@@ -195,20 +196,22 @@ services:
     #   - .:/usr/src/app
   # mongo:
   #   image: mongo
-  # postgres:
-  #   image: postgres
-  #   ports:
-  #     - '5432:5432'
-  #   environment:
-  #     POSTGRES_USER: postgres
-  #     POSTGRES_PASSWORD: postgres
-  #     POSTGRES_DB: productServiceDB
-  #   volumes:
-  #     - ./db-data/product-db:/var/lib/postgresql/data
-  # pgadmin: 
-    # image: dpage/pgadmin4
-    # environment:
-    #   PGADMIN_DEFAULT_EMAIL: admin@example.com
-    #   PGADMIN_DEFAULT_PASSWORD: admin
-    # ports:
-    #   - "5050:80"
+  db:
+    image: postgres
+    ports:
+      - '5433:5432' 
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: erp_authentifications
+      POSTGRES_INITDB_ARGS: '--data-checksums --encoding=UTF8'
+    volumes:
+      - ./db-data/product-db:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+  pgadmin: 
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+     - "5050:80"
