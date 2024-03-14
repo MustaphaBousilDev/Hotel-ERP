@@ -11,19 +11,19 @@ export class HotelService {
     createHotelDto: CreateHotelInput,
     { _id: user_id }: UserInfoDto,
   ) {
-    const hotel = new Hotel({
+    /*const hotel = new Hotel({
       ...createHotelDto,
       user_id: user_id,
     });
-    return this.hotelRepository.create(hotel);
+    return this.hotelRepository.create(hotel);*/
   }
 
   async findAll() {
-    return this.hotelRepository.find({});
+    //return this.hotelRepository.find({});
   }
 
   async findOne(_id: any) {
-    return this.hotelRepository.findOne({ _id });
+    //return this.hotelRepository.findOne({ _id });
   }
 
   async update(
@@ -31,14 +31,14 @@ export class HotelService {
     updateHotelDto: CreateHotelInput,
     { _id: user_id }: UserInfoDto,
   ) {
-    const update = {
+    /*const update = {
       ...updateHotelDto,
       user_id,
     };
-    return this.hotelRepository.findOneAndUpdate({ _id }, update);
+    return this.hotelRepository.findOneAndUpdate({ _id }, update);*/
   }
 
   remove(_id: any) {
-    this.hotelRepository.findOneAndDelete({ _id });
+    //this.hotelRepository.findOneAndDelete({ _id });
   }
 }

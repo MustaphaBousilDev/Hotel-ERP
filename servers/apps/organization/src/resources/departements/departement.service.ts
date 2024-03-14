@@ -13,19 +13,19 @@ export class DepartementService {
     createDepartementDto: CreateDepartementInput,
     { _id: user_id }: UserInfoDto,
   ) {
-    const departement = new Departement({
+    /*const departement = new Departement({
       ...createDepartementDto,
       user_id: user_id,
     });
-    return this.departementRepository.create(departement);
+    return this.departementRepository.create(departement);*/
   }
 
   async findAll() {
-    return this.departementRepository.find({});
+    //return this.departementRepository.find({});
   }
 
   async findOne(_id: any) {
-    return this.departementRepository.findOne({ _id });
+    //return this.departementRepository.findOne({ _id });
   }
 
   async update(
@@ -33,14 +33,14 @@ export class DepartementService {
     updateWifiDto: CreateDepartementInput,
     { _id: user_id }: UserInfoDto,
   ) {
-    const update = {
+    /*const update = {
       ...updateWifiDto,
       user_id,
     };
-    return this.departementRepository.findOneAndUpdate({ _id }, update);
+    return this.departementRepository.findOneAndUpdate({ _id }, update);*/
   }
 
   remove(_id: any) {
-    this.departementRepository.findOneAndDelete({ _id });
+    //this.departementRepository.findOneAndDelete({ _id });
   }
 }

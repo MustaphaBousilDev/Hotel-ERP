@@ -9,19 +9,19 @@ import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
 export class RoomService {
   constructor(private readonly roomRepository: RoomRepositorySQL) {}
   async create(createRoomDto: CreateRoomInput, { _id: user_id }: UserInfoDto) {
-    const room = new Room({
+    /*const room = new Room({
       ...createRoomDto,
       user_id,
     });
-    return this.roomRepository.create(room);
+    return this.roomRepository.create(room);*/
   }
 
   async findAll() {
-    return this.roomRepository.find({});
+    //return this.roomRepository.find({});
   }
 
   async findOne(_id: any) {
-    return this.roomRepository.findOne({ _id });
+    //return this.roomRepository.findOne({ _id });
   }
 
   async update(
@@ -29,14 +29,14 @@ export class RoomService {
     updateWifiDto: CreateRoomInput,
     { _id: user_id }: User,
   ) {
-    const update = {
+    /*const update = {
       ...updateWifiDto,
       user_id,
     };
-    return this.roomRepository.findOneAndUpdate({ _id }, update);
+    return this.roomRepository.findOneAndUpdate({ _id }, update);*/
   }
 
   remove(_id: any) {
-    this.roomRepository.findOneAndDelete({ _id });
+    //this.roomRepository.findOneAndDelete({ _id });
   }
 }

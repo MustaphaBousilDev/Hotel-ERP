@@ -1,6 +1,7 @@
 import { AbstractEntity } from '@app/shared';
 import { Field, ObjectType } from '@nestjs/graphql';
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, ManyToOne } from 'typeorm';
+import { Departement } from './departement.schema';
 // import { Departement } from './departement.schema';
 
 @Entity()
@@ -17,4 +18,11 @@ export class Employee extends AbstractEntity<Employee> {
   @Column()
   @Field() // for graph
   departement_id: string;
+
+  @ManyToOne(() => Departement, (departement) => departement.employee, {
+    orphanedRowAction: 'delete',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  departement: Departement;
 }

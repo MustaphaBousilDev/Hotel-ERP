@@ -15,32 +15,32 @@ export class OrganizationService {
     createOrganizationDto: OrganizationInputDto,
     { _id: userId }: UserInfoDto,
   ) {
-    const organization = new Organization({
+    /*const organization = new Organization({
       ...createOrganizationDto,
       user_id: userId,
     });
-    return this.organizationRepository.create(organization);
+    return this.organizationRepository.create(organization);*/
   }
 
   async findAll() {
-    return this.organizationRepository.findOne({});
+    //return this.organizationRepository.findOne({});
   }
 
   async findOne(_id: any) {
-    return this.organizationRepository.findOne({ _id });
+    //return this.organizationRepository.findOne({ _id });
   }
 
   async update(_id: any, updateOrganization: UpdateOrganizationDto) {
-    return this.organizationRepository.findOneAndUpdate(
+    /*return this.organizationRepository.findOneAndUpdate(
       { _id },
       updateOrganization,
-    );
+    );*/
   }
 
   async remove(_id: any) {
-    console.log('############# coming to here');
+    /*console.log('############# coming to here');
     console.log(_id);
     await this.organizationRepository.findOneAndDelete({ _id });
-    return { message: 'Success Delete Organization' };
+    return { message: 'Success Delete Organization' };*/
   }
 }

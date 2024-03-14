@@ -3,16 +3,17 @@ import { Field, ObjectType } from '@nestjs/graphql';
 import {
   Column,
   Entity,
-  // ManyToMany,
-  // JoinTable,
-  // ManyToOne,
-  // OneToMany,
+  OneToMany,
+  ManyToMany,
+  JoinTable,
+  ManyToOne,
 } from 'typeorm';
-// import { City } from './city.schema';
-// import { Organization } from './organization.schema';
-// import { Wifi } from './wifi.schema';
-// import { Room } from './rooms.schema';
-// import { Departement } from './departement.schema';
+import { City } from './city.schema';
+import { Organization } from './organization.schema';
+import { Wifi } from './wifi.schema';
+import { Room } from './rooms.schema';
+import { Departement } from './departement.schema';
+import { User } from './users.mysql.entity';
 
 @Entity()
 @ObjectType() // for add it in schema qraphql
@@ -26,35 +27,30 @@ export class Hotel extends AbstractEntity<Hotel> {
   @Field() // for graph
   address: string;
 
-  @Column()
-  @Field() // for graph
-  city_id: number;
+  @ManyToMany(() => Departement, { cascade: true })
+  @JoinTable()
+  departments: Departement[];
 
-  // @ManyToMany(() => City, { cascade: true })
-  // @JoinTable()
-  // cities: City[];
+  @ManyToOne(() => Organization, (organization) => organization.hotel, {
+    orphanedRowAction: 'delete',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  organization: Organization;
 
-  // @ManyToMany(() => Departement, { cascade: true })
-  // @JoinTable()
-  // departments: Departement[];
+  @ManyToOne(() => City, (city) => city.hotel, {
+    orphanedRowAction: 'delete',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  city: City;
 
-  // @ManyToOne(() => Organization, (organization) => organization.hotel, {
-  //   orphanedRowAction: 'delete',
-  //   onDelete: 'CASCADE',
-  //   onUpdate: 'CASCADE',
-  // })
-  // organization: Organization;
-
-  @Column()
-  @Field() // for graph
-  organization_id: number;
-
-  // @Field(() => [Wifi], { nullable: true })
-  // @OneToMany(() => Wifi, (wifi) => wifi.hotel, {
-  //   cascade: true,
-  //   eager: true,
-  // })
-  // wifi: Wifi[];
+  @Field(() => [Wifi], { nullable: true })
+  @OneToMany(() => Wifi, (wifi) => wifi.hotel, {
+    cascade: true,
+    eager: true,
+  })
+  wifi: Wifi[];
 
   @Column()
   @Field() // for graph
@@ -84,13 +80,16 @@ export class Hotel extends AbstractEntity<Hotel> {
   @Field() // for graph
   longitude: string;
 
-  @Column()
-  @Field() // for graph
-  user_id: number;
+  @OneToMany(() => Room, (room) => room.hotel, {
+    cascade: true,
+    eager: true,
+  })
+  room: Room[];
 
-  // @OneToMany(() => Room, (room) => room.hotel, {
-  //   cascade: true,
-  //   eager: true,
-  // })
-  // room: Room[];
+  @ManyToOne(() => User, (user) => user.hotel, {
+    orphanedRowAction: 'delete',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  user: User;
 }
