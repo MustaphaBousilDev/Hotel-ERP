@@ -6,6 +6,7 @@ import {
   JoinTable,
   ManyToMany,
   ManyToOne,
+  /*ManyToOne*/
   OneToMany,
 } from 'typeorm';
 import { Hotel } from './hotel.schema';

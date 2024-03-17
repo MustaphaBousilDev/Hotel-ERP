@@ -1,42 +1,78 @@
 import { Injectable } from '@nestjs/common';
 import { CreateRoomInput } from './dto/create-room.input';
-import { RoomRepositorySQL } from './room.repository';
+import {
+  HotelRepositorySQL,
+  RoomRepositorySQL,
+  UserRepositorySQL,
+} from './room.repository';
 import { User } from '@app/shared';
 import { Room } from '../../models/rooms.schema';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
+import { UpdateRoomInput } from './dto/update-room.input';
 
 @Injectable()
 export class RoomService {
-  constructor(private readonly roomRepository: RoomRepositorySQL) {}
+  constructor(
+    private readonly roomRepository: RoomRepositorySQL,
+    private readonly userRepository: UserRepositorySQL,
+    private readonly hotelRepository: HotelRepositorySQL,
+  ) {}
   async create(createRoomDto: CreateRoomInput, { _id: user_id }: UserInfoDto) {
-    /*const room = new Room({
-      ...createRoomDto,
-      user_id,
+    const user = await this.userRepository.findOne({
+      _id: user_id,
     });
-    return this.roomRepository.create(room);*/
+    const hotel = await this.hotelRepository.findOne({
+      _id: createRoomDto.hotel.id,
+    });
+    if (user && hotel) {
+      const room = new Room({
+        roomNumber: createRoomDto.roomNumber,
+        type: createRoomDto.type,
+        price: createRoomDto.price,
+        description: createRoomDto.description,
+        isAvailable: createRoomDto.isAvailable,
+        image: createRoomDto.image,
+        user: user,
+        hotel: hotel,
+      });
+      return this.roomRepository.create(room);
+    }
+
+    return false;
   }
 
   async findAll() {
-    //return this.roomRepository.find({});
+    return this.roomRepository.find({});
   }
 
   async findOne(_id: any) {
-    //return this.roomRepository.findOne({ _id });
+    return this.roomRepository.findOne({ _id });
   }
 
   async update(
     _id: any,
-    updateWifiDto: CreateRoomInput,
+    updateWifiDto: UpdateRoomInput,
     { _id: user_id }: User,
   ) {
-    /*const update = {
-      ...updateWifiDto,
-      user_id,
-    };
-    return this.roomRepository.findOneAndUpdate({ _id }, update);*/
+    const { hotel, ...updateDTO } = updateWifiDto;
+    if (hotel && hotel.id) {
+      const hotelSchema = await this.hotelRepository.findOne({
+        _id: hotel.id,
+      });
+      const user = await this.userRepository.findOne({
+        _id: user_id,
+      });
+      if (user) {
+        updateDTO['user'] = user;
+      }
+      if (hotelSchema) {
+        updateDTO['hotel'] = hotelSchema;
+      }
+      return this.roomRepository.findOneAndUpdate({ _id }, updateDTO);
+    }
   }
 
   remove(_id: any) {
-    //this.roomRepository.findOneAndDelete({ _id });
+    this.roomRepository.findOneAndDelete({ _id });
   }
 }

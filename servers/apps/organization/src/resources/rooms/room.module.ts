@@ -5,7 +5,11 @@ import { DatabaseModulemySQL } from '@app/shared';
 import { LoggerModule } from 'nestjs-pino';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
-import { RoomRepositorySQL } from './room.repository';
+import {
+  HotelRepositorySQL,
+  RoomRepositorySQL,
+  UserRepositorySQL,
+} from './room.repository';
 import {
   ApolloFederationDriver,
   ApolloFederationDriverConfig,
@@ -26,6 +30,12 @@ import { Room } from '../../models/rooms.schema';
     LoggerModule,
     ConfigModule.forRoot({ isGlobal: true }),
   ],
-  providers: [RoomResolver, RoomService, RoomRepositorySQL],
+  providers: [
+    RoomResolver,
+    RoomService,
+    RoomRepositorySQL,
+    UserRepositorySQL,
+    HotelRepositorySQL,
+  ],
 })
 export class RoomModule {}

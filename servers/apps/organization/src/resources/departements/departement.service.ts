@@ -1,5 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { DepartementRepositorySQL } from './departement.repository';
+import {
+  DepartementRepositorySQL,
+  UserRepositorySQL,
+} from './departement.repository';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
 import { CreateDepartementInput } from './dto/create-departement.input';
 import { Departement } from '../../models/departement.schema';
@@ -8,24 +11,33 @@ import { Departement } from '../../models/departement.schema';
 export class DepartementService {
   constructor(
     private readonly departementRepository: DepartementRepositorySQL,
+    private readonly userRepository: UserRepositorySQL,
   ) {}
   async create(
     createDepartementDto: CreateDepartementInput,
     { _id: user_id }: UserInfoDto,
   ) {
-    /*const departement = new Departement({
-      ...createDepartementDto,
-      user_id: user_id,
+    const user = await this.userRepository.findOne({
+      _id: user_id,
     });
-    return this.departementRepository.create(departement);*/
+    if (user) {
+      const departement = new Departement({
+        name: createDepartementDto.name,
+        description: createDepartementDto.description,
+        status: createDepartementDto.status,
+        image: createDepartementDto.image,
+        user: user,
+      });
+      return this.departementRepository.create(departement);
+    }
   }
 
   async findAll() {
-    //return this.departementRepository.find({});
+    return this.departementRepository.find({});
   }
 
   async findOne(_id: any) {
-    //return this.departementRepository.findOne({ _id });
+    return this.departementRepository.findOne({ _id });
   }
 
   async update(

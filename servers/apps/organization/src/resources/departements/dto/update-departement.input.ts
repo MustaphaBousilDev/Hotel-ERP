@@ -1,10 +1,30 @@
-import { CreateDepartementInput } from './create-departement.input';
-import { InputType, Field, Int, PartialType } from '@nestjs/graphql';
+import { InputType, Field } from '@nestjs/graphql';
+import { Type } from 'class-transformer';
+import { IsBoolean, IsOptional, IsString } from 'class-validator';
 
 @InputType()
-export class UpdateDepartementInput extends PartialType(
-  CreateDepartementInput,
-) {
-  @Field(() => Int)
-  id: number;
+export class UpdateDepartementInput {
+  @IsOptional()
+  @IsString()
+  @Type(() => String)
+  @Field()
+  name?: string;
+
+  @IsOptional()
+  @IsString()
+  @Type(() => String)
+  @Field()
+  description?: string;
+
+  @IsOptional()
+  @IsBoolean()
+  @Type(() => Boolean)
+  @Field()
+  status?: boolean;
+
+  @IsOptional()
+  @IsString()
+  @Type(() => String)
+  @Field()
+  image?: string;
 }

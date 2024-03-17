@@ -9,7 +9,13 @@ import {
 } from '@nestjs/apollo';
 import { HotelResolver } from './hotel.resolver';
 import { HotelService } from './hotel.service';
-import { HotelRepositorySQL } from './hotel.repository';
+import {
+  CityRepositorySQL,
+  DepartementRepositorySQL,
+  HotelRepositorySQL,
+  OrganizationRepositorySQL,
+  UserRepositorySQL,
+} from './hotel.repository';
 import { Hotel } from '../../models/hotel.schema';
 
 @Module({
@@ -25,6 +31,14 @@ import { Hotel } from '../../models/hotel.schema';
     LoggerModule,
     ConfigModule.forRoot({ isGlobal: true }),
   ],
-  providers: [HotelResolver, HotelService, HotelRepositorySQL],
+  providers: [
+    HotelResolver,
+    HotelService,
+    HotelRepositorySQL,
+    UserRepositorySQL,
+    CityRepositorySQL,
+    OrganizationRepositorySQL,
+    DepartementRepositorySQL,
+  ],
 })
 export class HotelModule {}

@@ -1,6 +1,6 @@
 import { InputType, Field } from '@nestjs/graphql';
 import { Type } from 'class-transformer';
-import { IsBoolean, IsNumber, IsString } from 'class-validator';
+import { IsBoolean, IsString } from 'class-validator';
 
 @InputType()
 export class CreateDepartementInput {
@@ -23,9 +23,4 @@ export class CreateDepartementInput {
   @Type(() => String)
   @Field()
   image: string;
-
-  @IsNumber()
-  @Type(() => Number)
-  @Field()
-  hotel_id: number;
 }
