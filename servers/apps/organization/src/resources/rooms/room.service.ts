@@ -5,7 +5,7 @@ import {
   RoomRepositorySQL,
   UserRepositorySQL,
 } from './room.repository';
-import { User } from '@app/shared';
+//import { User } from '@app/shared';
 import { Room } from '../../models/rooms.schema';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
 import { UpdateRoomInput } from './dto/update-room.input';
@@ -52,7 +52,7 @@ export class RoomService {
   async update(
     _id: any,
     updateWifiDto: UpdateRoomInput,
-    { _id: user_id }: User,
+    { _id: user_id }: UserInfoDto,
   ) {
     const { hotel, ...updateDTO } = updateWifiDto;
     if (hotel && hotel.id) {

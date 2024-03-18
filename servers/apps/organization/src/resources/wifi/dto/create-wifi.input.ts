@@ -1,6 +1,6 @@
 import { InputType, Field } from '@nestjs/graphql';
 import { Type } from 'class-transformer';
-import { IsNumber, IsString } from 'class-validator';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 @InputType()
 export class CreateWifiInput {
@@ -11,21 +11,28 @@ export class CreateWifiInput {
 
   @IsString()
   @Type(() => String)
-  @Field()
+  @Field({ nullable: true })
   ip: string;
 
   @IsString()
   @Type(() => String)
-  @Field()
+  @Field({ nullable: true })
   password: string;
 
-  @IsNumber()
-  @Type(() => Number)
-  @Field()
-  hotel_id: number;
+  @Field(() => HotelIDInputForWifi)
+  hotel: HotelIDInputForWifi;
+}
 
-  // @IsNumber()
-  // @Type(() => Number)
-  // @Field()
-  // user: number;
+@InputType()
+export class UserIDInputForWifi {
+  @Field(() => Number)
+  @IsNotEmpty()
+  id: number;
+}
+
+@InputType()
+export class HotelIDInputForWifi {
+  @Field(() => Number)
+  @IsNotEmpty()
+  id: number;
 }

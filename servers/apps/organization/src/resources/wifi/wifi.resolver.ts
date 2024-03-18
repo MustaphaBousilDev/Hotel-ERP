@@ -32,7 +32,7 @@ export class WifiResolver {
   updateWifi(
     @Args('id') id: number,
     @Args('updateWifiInput') updateWifiInput: CreateWifiInput,
-    @CurrentUser() user: User,
+    @CurrentUser() user: UserInfoDto,
   ) {
     return this.wifiService.update(id, updateWifiInput, user);
   }

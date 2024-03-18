@@ -6,6 +6,7 @@ import {
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
 import { CreateDepartementInput } from './dto/create-departement.input';
 import { Departement } from '../../models/departement.schema';
+import { UpdateDepartementInput } from './dto/update-departement.input';
 
 @Injectable()
 export class DepartementService {
@@ -42,17 +43,22 @@ export class DepartementService {
 
   async update(
     _id: any,
-    updateWifiDto: CreateDepartementInput,
+    updateDepartementDto: UpdateDepartementInput,
     { _id: user_id }: UserInfoDto,
   ) {
-    /*const update = {
-      ...updateWifiDto,
-      user_id,
-    };
-    return this.departementRepository.findOneAndUpdate({ _id }, update);*/
+    const user = await this.userRepository.findOne({
+      _id: user_id,
+    });
+    if (user) {
+      updateDepartementDto['user'] = user;
+    }
+    return this.departementRepository.findOneAndUpdate(
+      { _id },
+      updateDepartementDto,
+    );
   }
 
   remove(_id: any) {
-    //this.departementRepository.findOneAndDelete({ _id });
+    this.departementRepository.findOneAndDelete({ _id });
   }
 }
