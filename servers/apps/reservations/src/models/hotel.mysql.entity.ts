@@ -3,6 +3,7 @@ import { Field, ObjectType } from '@nestjs/graphql';
 import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 import { Room } from './rooms.mysql.entity';
 import { Organization } from './organization.mysql.entity';
+import { Reservation } from './reservation.mysql.entity';
 @Entity()
 @ObjectType() // for add it in schema qraphql
 export class Hotel extends AbstractEntity<Hotel> {
@@ -27,4 +28,10 @@ export class Hotel extends AbstractEntity<Hotel> {
     onUpdate: 'CASCADE',
   })
   organization: Organization;
+
+  @OneToMany(() => Reservation, (reservation) => reservation.hotel, {
+    cascade: true,
+    eager: true,
+  })
+  reservation: Reservation[];
 }

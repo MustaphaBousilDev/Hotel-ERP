@@ -9,6 +9,7 @@ import {
   Payload,
   RmqContext,
 } from '@nestjs/microservices';
+import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
 
 @Resolver(() => Organization)
 export class OrganizationResolver {
@@ -28,15 +29,9 @@ export class OrganizationResolver {
     @Args('id') id: number,
     @Args('updateOrganizationInputs')
     updateOrganizationInput: OrganizationInputDto,
-    @CurrentUser() user: User,
+    @CurrentUser() user: UserInfoDto,
   ) {
-    //check if organization exists
-    // const existingOrganization =
-    //   await this.organizationService.findOne(organizationId);
-    // if (!existingOrganization) {
-    //   throw new NotFoundException('Organization not found');
-    // }
-    return this.organizationService.update(id, updateOrganizationInput);
+    return this.organizationService.update(id, updateOrganizationInput, user);
   }
 
   @Query(() => [Organization], { name: 'organizations' })

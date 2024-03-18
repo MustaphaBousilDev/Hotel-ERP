@@ -4,6 +4,7 @@ import { Type } from 'class-transformer';
 import {
   IsDate,
   IsDefined,
+  IsNotEmpty,
   // IsNotEmpty,
   // IsNotEmpty,
   IsNotEmptyObject,
@@ -22,21 +23,6 @@ export class CreateReservationDto {
   @Type(() => Date)
   @Field()
   endDate: Date;
-  // @IsString()
-  // @IsNotEmpty()
-  // placeId: string;
-  // @IsString()
-  // @IsNotEmpty()
-  // invoiceId: string;
-
-  // @IsDefined()
-  // @IsNotEmptyObject()
-  // @ValidateNested()
-  // @Type(() => CardDto)
-  // card: CardDto;
-
-  // @IsNumber()
-  // amount: number;
 
   @IsDefined()
   @IsNotEmptyObject()
@@ -44,4 +30,34 @@ export class CreateReservationDto {
   @Type(() => CreateChargeDto)
   @Field(() => CreateChargeDto)
   charge: CreateChargeDto;
+
+  @Field(() => UserIDInputForReservation)
+  user: UserIDInputForReservation;
+
+  @Field(() => RoomIDInputForReservation)
+  room: RoomIDInputForReservation;
+
+  @Field(() => HotelIDInputForReservation)
+  hotel: HotelIDInputForReservation;
+}
+
+@InputType()
+export class UserIDInputForReservation {
+  @Field(() => Number)
+  @IsNotEmpty()
+  id: number;
+}
+
+@InputType()
+export class RoomIDInputForReservation {
+  @Field(() => Number)
+  @IsNotEmpty()
+  id: number;
+}
+
+@InputType()
+export class HotelIDInputForReservation {
+  @Field(() => Number)
+  @IsNotEmpty()
+  id: number;
 }

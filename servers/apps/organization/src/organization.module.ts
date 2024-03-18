@@ -15,7 +15,7 @@ import { Departement } from './models/departement.schema';
 import { Employee } from './models/employee.schema';
 import { WifiModule } from './resources/wifi/wifi.module';
 import { User } from './models/users.mysql.entity';
-import { UserRepositorySQL } from './resources/users/users.repository';
+import { UserRepositorySQL } from './organization.repository';
 import { OrganizationRepositorymySQL } from './organization.repository';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { GraphQLModule } from '@nestjs/graphql';
@@ -79,6 +79,7 @@ import { DepartementModule } from './resources/departements/departement.module';
     UserRepositorySQL,
     OrganizationRepositorymySQL,
     OrganizationResolver,
+    UserRepositorySQL,
   ],
 })
 export class OrganizationModule {}

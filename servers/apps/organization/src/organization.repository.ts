@@ -3,6 +3,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { Organization } from './models/organization.schema';
 import { InjectRepository } from '@nestjs/typeorm';
 import { EntityManager, Repository } from 'typeorm';
+import { User } from './models/users.mysql.entity';
 
 @Injectable()
 export class OrganizationRepositorymySQL extends AbstractRepositorymySQL<Organization> {
@@ -14,5 +15,18 @@ export class OrganizationRepositorymySQL extends AbstractRepositorymySQL<Organiz
     entityManager: EntityManager,
   ) {
     super(ReservationsRepository, entityManager);
+  }
+}
+
+@Injectable()
+export class UserRepositorySQL extends AbstractRepositorymySQL<User> {
+  protected readonly logger = new Logger(UserRepositorySQL.name);
+
+  constructor(
+    @InjectRepository(User)
+    UserRepository: Repository<User>,
+    entityManager: EntityManager,
+  ) {
+    super(UserRepository, entityManager);
   }
 }
