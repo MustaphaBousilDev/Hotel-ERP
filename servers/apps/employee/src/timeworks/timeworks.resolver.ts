@@ -1,34 +1,45 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { TimeworksService } from './timeworks.service';
-import { Timework } from './entities/timework.entity';
 import { CreateTimeworkInput } from './dto/create-timework.input';
 import { UpdateTimeworkInput } from './dto/update-timework.input';
+import { TimeWork } from '../models/time-work.schema';
+import { CurrentUser } from '@app/shared';
+import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
 
-@Resolver(() => Timework)
+@Resolver(() => TimeWork)
 export class TimeworksResolver {
   constructor(private readonly timeworksService: TimeworksService) {}
 
-  @Mutation(() => Timework)
-  createTimework(@Args('createTimeworkInput') createTimeworkInput: CreateTimeworkInput) {
-    return this.timeworksService.create(createTimeworkInput);
+  @Mutation(() => TimeWork)
+  createTimework(
+    @Args('createTimeworkInput')
+    createTimeworkInput: CreateTimeworkInput,
+    @CurrentUser() user: UserInfoDto,
+  ) {
+    return this.timeworksService.create(createTimeworkInput, user);
   }
 
-  @Query(() => [Timework], { name: 'timeworks' })
+  @Query(() => [TimeWork], { name: 'timeworks' })
   findAll() {
     return this.timeworksService.findAll();
   }
 
-  @Query(() => Timework, { name: 'timework' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
+  @Query(() => TimeWork, { name: 'timework' })
+  findOne(@Args('id', { type: () => Number }) id: number) {
     return this.timeworksService.findOne(id);
   }
 
-  @Mutation(() => Timework)
-  updateTimework(@Args('updateTimeworkInput') updateTimeworkInput: UpdateTimeworkInput) {
-    return this.timeworksService.update(updateTimeworkInput.id, updateTimeworkInput);
+  @Mutation(() => TimeWork)
+  async updateTimework(
+    @Args('id') id: number,
+    @Args('updateTimeworkInputs')
+    updateTimeWorkInput: UpdateTimeworkInput,
+    @CurrentUser() user: UserInfoDto,
+  ) {
+    return this.timeworksService.update(id, updateTimeWorkInput, user);
   }
 
-  @Mutation(() => Timework)
+  @Mutation(() => TimeWork)
   removeTimework(@Args('id', { type: () => Int }) id: number) {
     return this.timeworksService.remove(id);
   }

@@ -33,7 +33,7 @@ export class Employee extends AbstractEntity<Employee> {
     nullable: true,
   })
   @Field(() => Gender, { nullable: true }) // for graph
-  gender: string;
+  gender: Gender;
 
   @Column({ nullable: true })
   @Field() // for graph

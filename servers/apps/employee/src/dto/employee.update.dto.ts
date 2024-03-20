@@ -10,7 +10,6 @@ import {
 } from 'class-validator';
 import { Gender } from '../models/employee.schema';
 import { DepartementIDDtoInput } from './remote/departement.dto';
-import { UserIDDtoInput } from './remote/user.dto';
 import { PositionIDDtoInput } from '../positions/dto/create-position.input';
 import { TimeWorkIDDtoInput } from '../timeworks/dto/create-timework.input';
 

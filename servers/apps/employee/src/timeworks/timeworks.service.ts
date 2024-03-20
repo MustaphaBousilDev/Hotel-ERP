@@ -1,26 +1,62 @@
 import { Injectable } from '@nestjs/common';
 import { CreateTimeworkInput } from './dto/create-timework.input';
 import { UpdateTimeworkInput } from './dto/update-timework.input';
+import {
+  TimeWorkRepositorymySQL,
+  UserRepositorymySQL,
+} from './timeworks.repository';
+import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
+import { TimeWork } from '../models/time-work.schema';
 
 @Injectable()
 export class TimeworksService {
-  create(createTimeworkInput: CreateTimeworkInput) {
-    return 'This action adds a new timework';
+  constructor(
+    private readonly userRepository: UserRepositorymySQL,
+    private readonly timeWorkRepository: TimeWorkRepositorymySQL,
+  ) {}
+  async create(
+    createTimeWorkInput: CreateTimeworkInput,
+    { _id: userId }: UserInfoDto,
+  ) {
+    const user = await this.userRepository.findOne({
+      _id: userId,
+    });
+    if (user) {
+      const saveTimeWork = new TimeWork({
+        ...createTimeWorkInput,
+        user: user,
+      });
+      return this.timeWorkRepository.create(saveTimeWork);
+    }
+    return false;
   }
 
-  findAll() {
-    return `This action returns all timeworks`;
+  async findAll() {
+    return this.timeWorkRepository.find({});
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} timework`;
+  async findOne(_id: number) {
+    return this.timeWorkRepository.findOne({ _id });
   }
 
-  update(id: number, updateTimeworkInput: UpdateTimeworkInput) {
-    return `This action updates a #${id} timework`;
+  async update(
+    _id: any,
+    updateTimeWorkDTO: UpdateTimeworkInput,
+    { _id: userId }: UserInfoDto,
+  ) {
+    const user = await this.userRepository.findOne({
+      _id: userId,
+    });
+    if (user) {
+      updateTimeWorkDTO['user'] = user;
+      return this.timeWorkRepository.findOneAndUpdate(
+        { _id },
+        updateTimeWorkDTO,
+      );
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} timework`;
+  async remove(_id: number) {
+    await this.timeWorkRepository.findOneAndDelete({ _id });
   }
 }
