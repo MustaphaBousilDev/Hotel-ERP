@@ -1,26 +1,62 @@
 import { Injectable } from '@nestjs/common';
 import { CreatePositionInput } from './dto/create-position.input';
 import { UpdatePositionInput } from './dto/update-position.input';
+import {
+  PositionRepositorymySQL,
+  UserRepositorymySQL,
+} from './positions.repository';
+import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
+import { Position } from '../models/position.schema';
 
 @Injectable()
 export class PositionsService {
-  create(createPositionInput: CreatePositionInput) {
-    return 'This action adds a new position';
+  constructor(
+    private readonly userRepository: UserRepositorymySQL,
+    private readonly positionRepository: PositionRepositorymySQL,
+  ) {}
+  async create(
+    createPositionInput: CreatePositionInput,
+    { _id: userId }: UserInfoDto,
+  ) {
+    const user = await this.userRepository.findOne({
+      _id: userId,
+    });
+    if (user) {
+      const position = new Position({
+        ...createPositionInput,
+        user: user,
+      });
+      return this.positionRepository.create(position);
+    }
+    return false;
   }
 
-  findAll() {
-    return `This action returns all positions`;
+  async findAll() {
+    return this.positionRepository.find({});
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} position`;
+  async findOne(id: number) {
+    return this.positionRepository.findOne({ _id: id });
   }
 
-  update(id: number, updatePositionInput: UpdatePositionInput) {
-    return `This action updates a #${id} position`;
+  async update(
+    _id: any,
+    updatePositionInput: UpdatePositionInput,
+    { _id: userId }: UserInfoDto,
+  ) {
+    const user = await this.userRepository.findOne({
+      _id: userId,
+    });
+    if (user) {
+      updatePositionInput['user'] = user;
+      return this.positionRepository.findOneAndUpdate(
+        { _id },
+        updatePositionInput,
+      );
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} position`;
+  async remove(id: number) {
+    return this.positionRepository.findOneAndDelete({ _id: id });
   }
 }

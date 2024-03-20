@@ -1,16 +1,22 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { PositionsService } from './positions.service';
-import { Position } from './entities/position.entity';
 import { CreatePositionInput } from './dto/create-position.input';
 import { UpdatePositionInput } from './dto/update-position.input';
+import { CurrentUser } from '@app/shared';
+import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
+import { Position } from '../models/position.schema';
 
 @Resolver(() => Position)
 export class PositionsResolver {
   constructor(private readonly positionsService: PositionsService) {}
 
   @Mutation(() => Position)
-  createPosition(@Args('createPositionInput') createPositionInput: CreatePositionInput) {
-    return this.positionsService.create(createPositionInput);
+  createPosition(
+    @Args('createPositionInput')
+    createPositionInput: CreatePositionInput,
+    @CurrentUser() user: UserInfoDto,
+  ) {
+    return this.positionsService.create(createPositionInput, user);
   }
 
   @Query(() => [Position], { name: 'positions' })
@@ -24,8 +30,13 @@ export class PositionsResolver {
   }
 
   @Mutation(() => Position)
-  updatePosition(@Args('updatePositionInput') updatePositionInput: UpdatePositionInput) {
-    return this.positionsService.update(updatePositionInput.id, updatePositionInput);
+  updatePosition(
+    @Args('id') id: number,
+    @Args('updatePositionInput')
+    updatePositionInput: UpdatePositionInput,
+    @CurrentUser() user: UserInfoDto,
+  ) {
+    return this.positionsService.update(id, updatePositionInput, user);
   }
 
   @Mutation(() => Position)

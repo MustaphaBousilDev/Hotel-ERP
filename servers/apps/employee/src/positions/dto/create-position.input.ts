@@ -1,10 +1,15 @@
-import { InputType, Int, Field } from '@nestjs/graphql';
-import { IsNotEmpty } from 'class-validator';
+import { InputType, Field } from '@nestjs/graphql';
+import { IsBoolean, IsNotEmpty, IsString } from 'class-validator';
 
 @InputType()
 export class CreatePositionInput {
-  @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number;
+  @Field(() => String, { description: 'Example field (placeholder)' })
+  @IsString()
+  name: string;
+
+  @Field(() => Boolean, { description: 'status of position work' })
+  @IsBoolean()
+  status: boolean;
 }
 
 @InputType()

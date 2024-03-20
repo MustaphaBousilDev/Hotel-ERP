@@ -1,8 +1,15 @@
-import { CreatePositionInput } from './create-position.input';
-import { InputType, Field, Int, PartialType } from '@nestjs/graphql';
+import { InputType, Field } from '@nestjs/graphql';
+import { IsBoolean, IsOptional, IsString } from 'class-validator';
 
 @InputType()
-export class UpdatePositionInput extends PartialType(CreatePositionInput) {
-  @Field(() => Int)
-  id: number;
+export class UpdatePositionInput {
+  @IsOptional()
+  @Field(() => String, { description: 'Example field (placeholder)' })
+  @IsString()
+  name?: string;
+
+  @IsOptional()
+  @Field(() => Boolean, { description: 'status of position work' })
+  @IsBoolean()
+  status?: boolean;
 }
