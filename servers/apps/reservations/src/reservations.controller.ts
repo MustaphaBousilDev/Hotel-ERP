@@ -51,14 +51,14 @@ export class ReservationsController {
     return this.reservationsService.findOne(id);
   }
 
-  @UseGuards(JwtAuthGuard)
+  /*@UseGuards(JwtAuthGuard)
   @Patch(':id')
   async update(
     @Param('id') id: string | number,
     @Body() updateReservationDto: UpdateReservationDto,
   ) {
     return this.reservationsService.update(id, updateReservationDto);
-  }
+  }*/
 
   @UseGuards(JwtAuthGuard)
   @Delete(':id')

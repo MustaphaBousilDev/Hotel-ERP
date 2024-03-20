@@ -73,11 +73,11 @@ export class ReservationsService {
   }
 
   /*async update(_id: any, updateReservationDto: UpdateReservationDto) {
-    return this.reservationRepository.findOneAndUpdate(
-      { _id },
+    //return this.reservationRepository.findOneAndUpdate(
+      //{ _id },
       //updateReservationDto, // for typeORM
       // { $set: updateReservationDto }, # for mongo
-    );
+    //);
   }*/
 
   async remove(_id: any) {
