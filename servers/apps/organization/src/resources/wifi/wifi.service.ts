@@ -1,21 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { CreateWifiInput } from './dto/create-wifi.input';
-import {
-  HotelRepositorySQL,
-  UserRepositorySQL,
-  WifiRepositorySQL,
-} from './wifi.repository';
+import { HotelRepositorySQL, WifiRepositorySQL } from './wifi.repository';
 //import { User } from '@app/shared';
 import { Wifi } from '../../models/wifi.schema';
 // import { UpdateWifiInput } from './dto/update-wifi.input';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
 import { UpdateWifiInput } from './dto/update-wifi.input';
+import { UserRepositorySQLForRoom } from '../users/users.repository';
 
 @Injectable()
 export class WifiService {
   constructor(
     private readonly wifiRepository: WifiRepositorySQL,
-    private readonly userRepository: UserRepositorySQL,
+    private readonly userRepository: UserRepositorySQLForRoom,
     private readonly hotelRepository: HotelRepositorySQL,
   ) {}
   async create(createWifiDto: CreateWifiInput, { _id: userId }: UserInfoDto) {

@@ -1,7 +1,12 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { CreateReservationDto } from './dto/create-reservation.dto';
-import { UpdateReservationDto } from './dto/update-reservation.dto';
-import { ReservationsRepositorymySQL } from './reservations.repository';
+//import { UpdateReservationDto } from './dto/update-reservation.dto';
+import {
+  HotelRepositorySQL,
+  ReservationsRepositorymySQL,
+  RoomRepositorySQL,
+  UserRepositorySQL,
+} from './reservations.repository';
 import { PAYMENT_SERVICE, User } from '@app/shared';
 import { ClientProxy } from '@nestjs/microservices';
 import { map } from 'rxjs';
@@ -11,15 +16,34 @@ import { Reservation } from './models/reservation.mysql.entity';
 export class ReservationsService {
   constructor(
     private readonly reservationRepository: ReservationsRepositorymySQL,
+    private readonly userRepository: UserRepositorySQL,
+    private readonly hotelRepository: HotelRepositorySQL,
+    private readonly roomRepository: RoomRepositorySQL,
     @Inject(PAYMENT_SERVICE) private readonly paymentsService: ClientProxy,
   ) {}
   async create(
     createReservationDto: CreateReservationDto,
     { email, _id: userId }: User,
   ) {
+    const {
+      hotel: hotels,
+      room: rooms,
+      ...reservationDTO
+    } = createReservationDto;
+    console.log(rooms);
+    console.log(hotels);
+    const user = await this.userRepository.findOne({
+      _id: userId,
+    });
+    const room = await this.roomRepository.findOne({
+      _id: createReservationDto.room.id,
+    });
+    const hotel = await this.hotelRepository.findOne({
+      _id: createReservationDto.hotel.id,
+    });
     return this.paymentsService
       .send('create_charge', {
-        ...createReservationDto.charge,
+        ...reservationDTO.charge,
         email, //for using in notifications microservice
       }) //send is used to send a message to the microservice and 'create_charge' is the pattern that the microservice is listening for and createReservationDto.charge is the data that is sent to the microservice
       .pipe(
@@ -27,11 +51,13 @@ export class ReservationsService {
         //map is used to handle asynchronous operations
         map((res) => {
           const reservation = new Reservation({
-            ...createReservationDto,
+            ...reservationDTO,
             //id of payment in stripe
             invoiceId: res.id,
             timestamp: new Date(),
-            userId,
+            user: user,
+            room: room,
+            hotel: hotel,
           });
           return this.reservationRepository.create(reservation);
         }),
@@ -46,13 +72,13 @@ export class ReservationsService {
     return this.reservationRepository.findOne({ _id });
   }
 
-  async update(_id: any, updateReservationDto: UpdateReservationDto) {
+  /*async update(_id: any, updateReservationDto: UpdateReservationDto) {
     return this.reservationRepository.findOneAndUpdate(
       { _id },
-      updateReservationDto, // for typeORM
+      //updateReservationDto, // for typeORM
       // { $set: updateReservationDto }, # for mongo
     );
-  }
+  }*/
 
   async remove(_id: any) {
     return this.reservationRepository.findOneAndDelete({ _id });

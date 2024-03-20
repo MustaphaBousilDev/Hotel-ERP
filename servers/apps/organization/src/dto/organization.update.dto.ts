@@ -56,10 +56,3 @@ export class OrganizationUpdateDto {
   @Field({ nullable: true })
   logo?: string;
 }
-
-@InputType()
-export class HotelIDInputForOrganization {
-  @Field(() => Number)
-  @IsNotEmpty()
-  id: number;
-}

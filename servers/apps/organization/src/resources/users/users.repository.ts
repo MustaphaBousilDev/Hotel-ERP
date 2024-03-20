@@ -1,26 +1,18 @@
 import { AbstractRepositorymySQL } from '@app/shared';
-import { Logger } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
+import { User } from '../../models/users.mysql.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { EntityManager, Repository } from 'typeorm';
-import { User } from '../../models/users.mysql.entity';
 
-// @Injectable()
-// export class UsersRepository extends AbstractRepository<UserDocument> {
-//   protected readonly logger = new Logger(UsersRepository.name);
-
-//   constructor(@InjectModel(UserDocument.name) userModel: Model<UserDocument>) {
-//     super(userModel);
-//   }
-// }
-
-export class UserRepositorySQL extends AbstractRepositorymySQL<User> {
-  protected readonly logger = new Logger(UserRepositorySQL.name);
+@Injectable()
+export class UserRepositorySQLForRoom extends AbstractRepositorymySQL<User> {
+  protected readonly logger = new Logger(UserRepositorySQLForRoom.name);
 
   constructor(
     @InjectRepository(User)
-    usersRepository: Repository<User>,
+    usersRepositorySQL: Repository<User>,
     entityManager: EntityManager,
   ) {
-    super(usersRepository, entityManager);
+    super(usersRepositorySQL, entityManager);
   }
 }

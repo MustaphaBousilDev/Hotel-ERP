@@ -31,16 +31,3 @@ export class HotelRepositorySQL extends AbstractRepositorymySQL<Hotel> {
     super(HotelRepository, entityManager);
   }
 }
-
-@Injectable()
-export class UserRepositorySQL extends AbstractRepositorymySQL<User> {
-  protected readonly logger = new Logger(UserRepositorySQL.name);
-
-  constructor(
-    @InjectRepository(User)
-    UserRepository: Repository<User>,
-    entityManager: EntityManager,
-  ) {
-    super(UserRepository, entityManager);
-  }
-}

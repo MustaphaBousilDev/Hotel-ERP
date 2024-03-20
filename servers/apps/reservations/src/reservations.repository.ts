@@ -6,6 +6,9 @@ import { Reservation } from './models/reservation.mysql.entity';
 // import { Model } from 'mongoose';
 import { InjectRepository } from '@nestjs/typeorm';
 import { EntityManager, Repository } from 'typeorm';
+import { Room } from './models/rooms.mysql.entity';
+import { Hotel } from './models/hotel.mysql.entity';
+import { User } from './models/users.mysql.entity';
 
 // @Injectable()
 // export class ReservationsRepository extends AbstractRepository<ReservationDocument> {
@@ -28,5 +31,44 @@ export class ReservationsRepositorymySQL extends AbstractRepositorymySQL<Reserva
     entityManager: EntityManager,
   ) {
     super(ReservationsRepository, entityManager);
+  }
+}
+
+@Injectable()
+export class RoomRepositorySQL extends AbstractRepositorymySQL<Room> {
+  protected readonly logger = new Logger(RoomRepositorySQL.name);
+
+  constructor(
+    @InjectRepository(Room)
+    RoomRepository: Repository<Room>,
+    entityManager: EntityManager,
+  ) {
+    super(RoomRepository, entityManager);
+  }
+}
+
+@Injectable()
+export class HotelRepositorySQL extends AbstractRepositorymySQL<Hotel> {
+  protected readonly logger = new Logger(HotelRepositorySQL.name);
+
+  constructor(
+    @InjectRepository(Hotel)
+    HotelRepository: Repository<Hotel>,
+    entityManager: EntityManager,
+  ) {
+    super(HotelRepository, entityManager);
+  }
+}
+
+@Injectable()
+export class UserRepositorySQL extends AbstractRepositorymySQL<User> {
+  protected readonly logger = new Logger(UserRepositorySQL.name);
+
+  constructor(
+    @InjectRepository(User)
+    UserRepository: Repository<User>,
+    entityManager: EntityManager,
+  ) {
+    super(UserRepository, entityManager);
   }
 }

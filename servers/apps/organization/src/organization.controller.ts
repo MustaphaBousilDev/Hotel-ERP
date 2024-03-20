@@ -16,7 +16,7 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { OrganizationService } from './organization.service';
-import { UserRepositorySQL } from './resources/users/users.repository';
+import { UserRepositorySQLForRoom } from './resources/users/users.repository';
 import {
   ClientProxy,
   Ctx,
@@ -28,7 +28,7 @@ import { User as UserReservation } from './models/users.mysql.entity';
 import { CurrentUser, JwtAuthGuard, Roles, UPLOAD_S3 } from '@app/shared';
 import { OrganizationInputDto } from './dto/organization.input.dto';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
-import { UpdateOrganizationDto } from './dto/organization.update.dto';
+import { OrganizationUpdateDto } from './dto/organization.update.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 // import { map } from 'rxjs';
 import * as fs from 'fs';
@@ -37,7 +37,7 @@ import * as fs from 'fs';
 export class OrganizationController {
   constructor(
     private readonly organizationService: OrganizationService,
-    private readonly usersRepository: UserRepositorySQL,
+    private readonly usersRepository: UserRepositorySQLForRoom,
     @Inject(UPLOAD_S3)
     private readonly uploadLogoOrganization: ClientProxy,
   ) {}
@@ -63,9 +63,10 @@ export class OrganizationController {
   @Patch(':id')
   async update(
     @Param('id') id: number | string,
-    @Body() updateOrganizationDto: UpdateOrganizationDto,
+    @Body() updateOrganizationDto: OrganizationUpdateDto,
+    @CurrentUser() user: UserInfoDto,
   ) {
-    return this.organizationService.update(id, updateOrganizationDto);
+    return this.organizationService.update(id, updateOrganizationDto, user);
   }
 
   @UseGuards()

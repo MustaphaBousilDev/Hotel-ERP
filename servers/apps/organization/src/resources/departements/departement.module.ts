@@ -12,11 +12,15 @@ import { Departement } from '../../models/departement.schema';
 import { DepartementResolver } from './departement.resolver';
 import { DepartementService } from './departement.service';
 import { DepartementRepositorySQL } from './departement.repository';
+import { UserRepositorySQLForRoom } from '../users/users.repository';
+import { UserRepositoryModule } from '../users/users.module';
+import { User } from '../../models/users.mysql.entity';
 
 @Module({
   imports: [
+    UserRepositoryModule,
     DatabaseModulemySQL,
-    DatabaseModulemySQL.forFeature([Departement, Employee]),
+    DatabaseModulemySQL.forFeature([Departement, Employee, User]),
     GraphQLModule.forRoot<ApolloFederationDriverConfig>({
       driver: ApolloFederationDriver,
       autoSchemaFile: {
@@ -30,6 +34,7 @@ import { DepartementRepositorySQL } from './departement.repository';
     DepartementResolver,
     DepartementService,
     DepartementRepositorySQL,
+    UserRepositorySQLForRoom,
   ],
 })
 export class DepartementModule {}

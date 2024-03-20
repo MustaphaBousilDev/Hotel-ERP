@@ -33,6 +33,7 @@ export class Reservation extends AbstractEntity<Reservation> {
   user: User;
 
   @ManyToOne(() => Room, (room) => room.reservation, {
+    nullable: true,
     orphanedRowAction: 'delete',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',

@@ -33,6 +33,8 @@ export abstract class AbstractRepositorymySQL<T extends AbstractEntity<T>> {
     if (!entity) {
       this.logger.warn('Document was not found with filterQuery', where);
       throw new NotFoundException('Entity was not found');
+    } else {
+      this.logger.debug('Entity Found:', entity);
     }
     return entity;
   }

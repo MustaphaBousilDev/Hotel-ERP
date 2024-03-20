@@ -1,20 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { CreateRoomInput } from './dto/create-room.input';
-import {
-  HotelRepositorySQL,
-  RoomRepositorySQL,
-  UserRepositorySQL,
-} from './room.repository';
+import { HotelRepositorySQL, RoomRepositorySQL } from './room.repository';
 //import { User } from '@app/shared';
 import { Room } from '../../models/rooms.schema';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
 import { UpdateRoomInput } from './dto/update-room.input';
+import { UserRepositorySQLForRoom } from '../users/users.repository';
 
 @Injectable()
 export class RoomService {
   constructor(
     private readonly roomRepository: RoomRepositorySQL,
-    private readonly userRepository: UserRepositorySQL,
+    private readonly userRepository: UserRepositorySQLForRoom,
     private readonly hotelRepository: HotelRepositorySQL,
   ) {}
   async create(createRoomDto: CreateRoomInput, { _id: user_id }: UserInfoDto) {

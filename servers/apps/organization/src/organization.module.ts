@@ -15,7 +15,6 @@ import { Departement } from './models/departement.schema';
 import { Employee } from './models/employee.schema';
 import { WifiModule } from './resources/wifi/wifi.module';
 import { User } from './models/users.mysql.entity';
-import { UserRepositorySQL } from './organization.repository';
 import { OrganizationRepositorymySQL } from './organization.repository';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { GraphQLModule } from '@nestjs/graphql';
@@ -23,9 +22,12 @@ import { ApolloDriverConfig, ApolloFederationDriver } from '@nestjs/apollo';
 import { OrganizationResolver } from './organization.resolver';
 import { RoomModule } from './resources/rooms/room.module';
 import { DepartementModule } from './resources/departements/departement.module';
+import { UserRepositorySQLForRoom } from './resources/users/users.repository';
+import { UserRepositoryModule } from './resources/users/users.module';
 
 @Module({
   imports: [
+    UserRepositoryModule,
     DatabaseModulemySQL,
     DatabaseModulemySQL.forFeature([
       // Wifi,
@@ -43,8 +45,8 @@ import { DepartementModule } from './resources/departements/departement.module';
       },
     }),
     LoggerModule,
-    WifiModule,
     RoomModule,
+    WifiModule,
     DepartementModule,
     ConfigModule.forRoot({ isGlobal: true }),
     ClientsModule.registerAsync([
@@ -76,10 +78,9 @@ import { DepartementModule } from './resources/departements/departement.module';
   controllers: [OrganizationController],
   providers: [
     OrganizationService,
-    UserRepositorySQL,
     OrganizationRepositorymySQL,
     OrganizationResolver,
-    UserRepositorySQL,
+    UserRepositorySQLForRoom,
   ],
 })
 export class OrganizationModule {}

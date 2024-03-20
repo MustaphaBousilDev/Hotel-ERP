@@ -13,6 +13,8 @@ import {
   // IsString,
   ValidateNested,
 } from 'class-validator';
+import { HotelIDInput } from './hotel.dto';
+import { RoomIDInputForReservation } from './room.dto';
 @InputType() // for graphql shema when i create or update
 export class CreateReservationDto {
   @IsDate()
@@ -31,33 +33,9 @@ export class CreateReservationDto {
   @Field(() => CreateChargeDto)
   charge: CreateChargeDto;
 
-  @Field(() => UserIDInputForReservation)
-  user: UserIDInputForReservation;
+  @Field(() => HotelIDInput)
+  hotel: HotelIDInput;
 
   @Field(() => RoomIDInputForReservation)
   room: RoomIDInputForReservation;
-
-  @Field(() => HotelIDInputForReservation)
-  hotel: HotelIDInputForReservation;
-}
-
-@InputType()
-export class UserIDInputForReservation {
-  @Field(() => Number)
-  @IsNotEmpty()
-  id: number;
-}
-
-@InputType()
-export class RoomIDInputForReservation {
-  @Field(() => Number)
-  @IsNotEmpty()
-  id: number;
-}
-
-@InputType()
-export class HotelIDInputForReservation {
-  @Field(() => Number)
-  @IsNotEmpty()
-  id: number;
 }

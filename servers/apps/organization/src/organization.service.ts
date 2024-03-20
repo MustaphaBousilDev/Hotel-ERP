@@ -1,18 +1,16 @@
 import { Injectable } from '@nestjs/common';
-import {
-  OrganizationRepositorymySQL,
-  UserRepositorySQL,
-} from './organization.repository';
+import { OrganizationRepositorymySQL } from './organization.repository';
 import { OrganizationInputDto } from './dto/organization.input.dto';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
 import { Organization } from './models/organization.schema';
 import { OrganizationUpdateDto } from './dto/organization.update.dto';
+import { UserRepositorySQLForRoom } from './resources/users/users.repository';
 
 @Injectable()
 export class OrganizationService {
   constructor(
     private readonly organizationRepository: OrganizationRepositorymySQL,
-    private readonly userRepositorySQL: UserRepositorySQL,
+    private readonly userRepositorySQL: UserRepositorySQLForRoom,
   ) {}
 
   async create(

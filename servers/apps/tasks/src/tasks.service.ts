@@ -24,26 +24,18 @@ export class TasksService {
     const taskType = await this.tasksTypeRepository.findOne({
       _id: createTasksDto.taskType.id,
     });
-    console.log('############ taskType ############');
-    console.log(taskType);
     const taskAttachement = await this.tasksAttachementRepository.findOne({
       _id: createTasksDto.taskAttachement.id,
     });
-    console.log('############ taskAttachement ############');
-    console.log(taskAttachement);
     const ids = [];
-    ids[0] = createTasksDto.employees[0].id;
-    ids[1] = createTasksDto.employees[1].id;
-    console.log(ids);
+    createTasksDto.employees.forEach((emp) => {
+      ids.push(emp.id);
+    });
     const employee = await this.employeeRepository.findMany({
       where: {
         _id: In(ids),
       },
     });
-    console.log('############ employess ############');
-    console.log(employee);
-    console.log('######service');
-    console.log(taskType);
     const organization = new Tasks({
       name: createTasksDto.name,
       description: createTasksDto.description,
@@ -101,11 +93,14 @@ export class TasksService {
       const employeeIds = updateTasksDto.employees.map(
         (employee) => employee.id,
       );
-      const employees = await this.employeeRepository.findMany({
+      /*const employeesUpdated = await this.employeeRepository.findMany({
         where: {
           _id: In(employeeIds),
         },
       });
+      if (employeesUpdated) {
+        updateObject['employees'] = employeesUpdated;
+      }*/
       // updateObject['employees'] = employees;
       console.log('############################# update');
       console.log(updateObject);

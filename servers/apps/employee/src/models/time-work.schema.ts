@@ -1,16 +1,17 @@
 import { AbstractEntity } from '@app/shared';
 import { Field, ObjectType } from '@nestjs/graphql';
-import { Column, Entity, OneToMany } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 import { Employee } from './employee.schema';
+import { User } from './users.schema';
 
 @Entity()
 @ObjectType() // for add it in schema qraphql
 export class TimeWork extends AbstractEntity<TimeWork> {
-  @Column()
+  @Column({ nullable: true })
   @Field() // for graph
   name: string;
 
-  @Column()
+  @Column({ nullable: true })
   @Field() // for graph
   status: boolean;
 
@@ -19,4 +20,12 @@ export class TimeWork extends AbstractEntity<TimeWork> {
     eager: true,
   })
   employee: Employee[];
+
+  @ManyToOne(() => User, (user) => user.timeWork, {
+    nullable: true,
+    orphanedRowAction: 'delete',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  user: User;
 }

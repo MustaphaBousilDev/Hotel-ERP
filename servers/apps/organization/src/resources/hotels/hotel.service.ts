@@ -4,19 +4,19 @@ import {
   DepartementRepositorySQL,
   HotelRepositorySQL,
   OrganizationRepositorySQL,
-  UserRepositorySQL,
 } from './hotel.repository';
 import { In } from 'typeorm';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
 import { CreateHotelInput } from './dto/create-hotel.input';
 import { Hotel } from '../../models/hotel.schema';
 import { UpdateHotelInput } from './dto/update-hotel.input';
+import { UserRepositorySQLForRoom } from '../users/users.repository';
 
 @Injectable()
 export class HotelService {
   constructor(
     private readonly hotelRepository: HotelRepositorySQL,
-    private readonly userRepository: UserRepositorySQL,
+    private readonly userRepository: UserRepositorySQLForRoom,
     private readonly cityRepository: CityRepositorySQL,
     private readonly organizationRepository: OrganizationRepositorySQL,
     private readonly departementRepository: DepartementRepositorySQL,

@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ReservationsService } from './reservations.service';
-import { ReservationsController } from './reservations.controller';
+//import { ReservationsController } from './reservations.controller';
 import {
   LoggerModule,
   AUTH_SERVICE,
@@ -8,7 +8,11 @@ import {
   DatabaseModulemySQL,
   ORGANIZATION_SERVICE,
 } from '@app/shared';
-import { ReservationsRepositorymySQL } from './reservations.repository';
+import {
+  HotelRepositorySQL,
+  ReservationsRepositorymySQL,
+  RoomRepositorySQL,
+} from './reservations.repository';
 //for mysql typeorm
 import { Reservation } from './models/reservation.mysql.entity';
 import { User } from './models/users.mysql.entity';
@@ -21,7 +25,7 @@ import { ReservationsResolver } from './reservations.resolver';
 import { Room } from './models/rooms.mysql.entity';
 import { Hotel } from './models/hotel.mysql.entity';
 import { Organization } from './models/organization.mysql.entity';
-import { UserRepositorySQL } from './resources/users.repository';
+import { UserRepositorySQL } from './reservations.repository';
 
 @Module({
   imports: [
@@ -90,13 +94,15 @@ import { UserRepositorySQL } from './resources/users.repository';
       },
     ]),
   ],
-  controllers: [ReservationsController],
+  controllers: [],
   providers: [
     ReservationsService,
     // ReservationsRepository,
     ReservationsRepositorymySQL,
     ReservationsResolver,
     UserRepositorySQL,
+    HotelRepositorySQL,
+    RoomRepositorySQL,
   ],
 })
 export class ReservationsModule {}

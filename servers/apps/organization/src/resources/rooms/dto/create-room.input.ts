@@ -1,6 +1,7 @@
 import { InputType, Field } from '@nestjs/graphql';
 import { Type } from 'class-transformer';
-import { IsBoolean, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsBoolean, IsNumber, IsString } from 'class-validator';
+import { HotelIDDtoInput } from '../../hotels/dto/create-hotel.input';
 
 @InputType()
 export class CreateRoomInput {
@@ -34,20 +35,6 @@ export class CreateRoomInput {
   @Field()
   price: number;
 
-  @Field(() => HotelIDDtoInputForRoom)
-  hotel: HotelIDDtoInputForRoom;
-}
-
-@InputType()
-export class UserIDDtoInputForRoom {
-  @Field(() => Number)
-  @IsNotEmpty()
-  id: number;
-}
-
-@InputType()
-export class HotelIDDtoInputForRoom {
-  @Field(() => Number)
-  @IsNotEmpty()
-  id: number;
+  @Field(() => HotelIDDtoInput)
+  hotel: HotelIDDtoInput;
 }

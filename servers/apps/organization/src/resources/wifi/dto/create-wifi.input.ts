@@ -1,6 +1,7 @@
 import { InputType, Field } from '@nestjs/graphql';
 import { Type } from 'class-transformer';
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsString } from 'class-validator';
+import { HotelIDDtoInput } from '../../hotels/dto/create-hotel.input';
 
 @InputType()
 export class CreateWifiInput {
@@ -19,20 +20,6 @@ export class CreateWifiInput {
   @Field({ nullable: true })
   password: string;
 
-  @Field(() => HotelIDInputForWifi)
-  hotel: HotelIDInputForWifi;
-}
-
-@InputType()
-export class UserIDInputForWifi {
-  @Field(() => Number)
-  @IsNotEmpty()
-  id: number;
-}
-
-@InputType()
-export class HotelIDInputForWifi {
-  @Field(() => Number)
-  @IsNotEmpty()
-  id: number;
+  @Field(() => HotelIDDtoInput)
+  hotel: HotelIDDtoInput;
 }

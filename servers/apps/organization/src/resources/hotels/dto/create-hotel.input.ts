@@ -7,6 +7,9 @@ import {
   IsOptional,
   IsString,
 } from 'class-validator';
+import { OrganizationIDInput } from '../../../dto/organization.input.dto';
+import { DepartementIDDtoInput } from '../../departements/dto/create-departement.input';
+import { CityIDInput } from '../../../dto/cities.dto';
 
 @InputType()
 export class CreateHotelInput {
@@ -69,28 +72,7 @@ export class CreateHotelInput {
 }
 
 @InputType()
-export class CityIDInput {
-  @Field(() => Number)
-  @IsNotEmpty()
-  id: number;
-}
-
-@InputType()
-export class OrganizationIDInput {
-  @Field(() => Number)
-  @IsNotEmpty()
-  id: number;
-}
-
-@InputType()
-export class UserIDInput {
-  @Field(() => Number)
-  @IsNotEmpty()
-  id: number;
-}
-
-@InputType()
-export class DepartementIDDtoInput {
+export class HotelIDDtoInput {
   @Field(() => Number)
   @IsNotEmpty()
   id: number;

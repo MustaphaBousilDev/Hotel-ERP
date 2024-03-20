@@ -19,14 +19,14 @@ export class OrganizationRepositorymySQL extends AbstractRepositorymySQL<Organiz
 }
 
 @Injectable()
-export class UserRepositorySQL extends AbstractRepositorymySQL<User> {
-  protected readonly logger = new Logger(UserRepositorySQL.name);
+export class UserRepositorySQLOrg extends AbstractRepositorymySQL<User> {
+  protected readonly logger = new Logger(UserRepositorySQLOrg.name);
 
   constructor(
     @InjectRepository(User)
-    UserRepository: Repository<User>,
+    UserRepositorymySQL: Repository<User>,
     entityManager: EntityManager,
   ) {
-    super(UserRepository, entityManager);
+    super(UserRepositorymySQL, entityManager);
   }
 }

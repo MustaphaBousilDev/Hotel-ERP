@@ -3,11 +3,12 @@ import { Field, ObjectType } from '@nestjs/graphql';
 import { Column, Entity, ManyToMany, JoinTable, ManyToOne } from 'typeorm';
 import { Organization } from './organization.schema';
 import { Departement } from './departement.schema';
+import { User } from './users.schema';
 
 @Entity()
 @ObjectType() // for add it in schema qraphql
 export class Hotel extends AbstractEntity<Hotel> {
-  @Column()
+  @Column({ nullable: true })
   //i am not using type in field because nestjs and graphql pick up on the type of these properties and will use it
   @Field() // for graph
   name: string;
@@ -27,7 +28,11 @@ export class Hotel extends AbstractEntity<Hotel> {
   @Field() // for graph
   image: string;
 
-  @Column()
-  @Field() // for graph
-  user_id: number;
+  @ManyToOne(() => User, (user) => user.hotel, {
+    nullable: true,
+    orphanedRowAction: 'delete',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  user: User;
 }

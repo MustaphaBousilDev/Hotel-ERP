@@ -14,12 +14,14 @@ import {
   DepartementRepositorySQL,
   HotelRepositorySQL,
   OrganizationRepositorySQL,
-  UserRepositorySQL,
 } from './hotel.repository';
 import { Hotel } from '../../models/hotel.schema';
+import { UserRepositorySQLForRoom } from '../users/users.repository';
+import { UserRepositoryModule } from '../users/users.module';
 
 @Module({
   imports: [
+    UserRepositoryModule,
     DatabaseModulemySQL,
     DatabaseModulemySQL.forFeature([Hotel]),
     GraphQLModule.forRoot<ApolloFederationDriverConfig>({
@@ -35,7 +37,7 @@ import { Hotel } from '../../models/hotel.schema';
     HotelResolver,
     HotelService,
     HotelRepositorySQL,
-    UserRepositorySQL,
+    UserRepositorySQLForRoom,
     CityRepositorySQL,
     OrganizationRepositorySQL,
     DepartementRepositorySQL,

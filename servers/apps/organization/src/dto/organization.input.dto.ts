@@ -45,7 +45,7 @@ export class OrganizationInputDto {
 }
 
 @InputType()
-export class HotelIDInputForOrganization {
+export class OrganizationIDInput {
   @Field(() => Number)
   @IsNotEmpty()
   id: number;

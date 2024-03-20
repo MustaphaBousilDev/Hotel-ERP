@@ -7,6 +7,9 @@ import {
   IsOptional,
   IsString,
 } from 'class-validator';
+import { OrganizationIDInput } from '../../../dto/organization.input.dto';
+import { DepartementIDDtoInput } from '../../departements/dto/create-departement.input';
+import { CityIDInput } from '../../../dto/cities.dto';
 
 @InputType()
 export class UpdateHotelInput {
@@ -75,32 +78,4 @@ export class UpdateHotelInput {
   @Field(() => [DepartementIDDtoInput], { nullable: true })
   @IsOptional()
   departements?: DepartementIDDtoInput[];
-}
-
-@InputType()
-export class CityIDInput {
-  @Field(() => Number)
-  @IsNotEmpty()
-  id: number;
-}
-
-@InputType()
-export class OrganizationIDInput {
-  @Field(() => Number)
-  @IsNotEmpty()
-  id: number;
-}
-
-@InputType()
-export class UserIDInput {
-  @Field(() => Number)
-  @IsNotEmpty()
-  id: number;
-}
-
-@InputType()
-export class DepartementIDDtoInput {
-  @Field(() => Number)
-  @IsNotEmpty()
-  id: number;
 }
