@@ -21,7 +21,7 @@ export class HotelResolver {
     return this.hotelService.create(createHotelInput, user);
   }
 
-  @Query(() => [Hotel], { name: 'hotel' })
+  @Query(() => [Hotel], { name: 'hotels' })
   findAll() {
     return this.hotelService.findAll();
   }
