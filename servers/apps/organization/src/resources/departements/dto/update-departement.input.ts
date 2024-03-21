@@ -5,26 +5,23 @@ import { IsBoolean, IsOptional, IsString } from 'class-validator';
 @InputType()
 export class UpdateDepartementInput {
   @IsOptional()
-  @IsString()
   @Type(() => String)
-  @Field()
+  @Field({ nullable: true })
   name?: string;
 
   @IsOptional()
-  @IsString()
   @Type(() => String)
-  @Field()
+  @Field({ nullable: true })
   description?: string;
 
   @IsOptional()
   @IsBoolean()
   @Type(() => Boolean)
-  @Field()
+  @Field({ nullable: true })
   status?: boolean;
 
   @IsOptional()
-  @IsString()
   @Type(() => String)
-  @Field()
+  @Field({ nullable: true })
   image?: string;
 }

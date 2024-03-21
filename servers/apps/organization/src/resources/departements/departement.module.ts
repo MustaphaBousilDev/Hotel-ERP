@@ -15,12 +15,13 @@ import { DepartementRepositorySQL } from './departement.repository';
 import { UserRepositorySQLForRoom } from '../users/users.repository';
 import { UserRepositoryModule } from '../users/users.module';
 import { User } from '../../models/users.mysql.entity';
+import { Hotel } from '../../models/hotel.schema';
 
 @Module({
   imports: [
     UserRepositoryModule,
     DatabaseModulemySQL,
-    DatabaseModulemySQL.forFeature([Departement, Employee, User]),
+    DatabaseModulemySQL.forFeature([Departement, Employee, User, Hotel]),
     GraphQLModule.forRoot<ApolloFederationDriverConfig>({
       driver: ApolloFederationDriver,
       autoSchemaFile: {

@@ -4,6 +4,7 @@ import { CurrentUser } from '@app/shared';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
 import { Departement } from '../../models/departement.schema';
 import { CreateDepartementInput } from './dto/create-departement.input';
+import { UpdateDepartementInput } from './dto/update-departement.input';
 
 @Resolver(() => Departement)
 export class DepartementResolver {
@@ -15,10 +16,12 @@ export class DepartementResolver {
     createDepartementInput: CreateDepartementInput,
     @CurrentUser() user: UserInfoDto,
   ) {
+    console.log('########### resolver');
+    console.log(createDepartementInput);
     return this.departementService.create(createDepartementInput, user);
   }
 
-  @Query(() => [Departement], { name: 'departement' })
+  @Query(() => [Departement], { name: 'departements' })
   findAll() {
     return this.departementService.findAll();
   }
@@ -32,7 +35,7 @@ export class DepartementResolver {
   updateDepartement(
     @Args('id') id: number,
     @Args('updateDepartementInput')
-    updateDepartementInput: CreateDepartementInput,
+    updateDepartementInput: UpdateDepartementInput,
     @CurrentUser() user: UserInfoDto,
   ) {
     return this.departementService.update(id, updateDepartementInput, user);
