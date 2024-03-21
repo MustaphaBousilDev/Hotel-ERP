@@ -1,12 +1,6 @@
 import { InputType, Field } from '@nestjs/graphql';
 import { Type } from 'class-transformer';
-import {
-  IsBoolean,
-  IsNotEmpty,
-  IsNumber,
-  IsOptional,
-  IsString,
-} from 'class-validator';
+import { IsBoolean, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 import { OrganizationIDInput } from '../../../dto/organization.input.dto';
 import { DepartementIDDtoInput } from '../../departements/dto/create-departement.input';
 import { CityIDInput } from '../../../dto/cities.dto';

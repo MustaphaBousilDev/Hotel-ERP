@@ -3,8 +3,9 @@ import { WifiService } from './wifi.service';
 import { Wifi } from '../../models/wifi.schema';
 import { CreateWifiInput } from './dto/create-wifi.input';
 // import { UpdateWifiInput } from './dto/update-wifi.input';
-import { CurrentUser, User } from '@app/shared';
+import { CurrentUser } from '@app/shared';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
+import { UpdateWifiInput } from './dto/update-wifi.input';
 
 @Resolver(() => Wifi)
 export class WifiResolver {
@@ -31,7 +32,7 @@ export class WifiResolver {
   @Mutation(() => Wifi)
   updateWifi(
     @Args('id') id: number,
-    @Args('updateWifiInput') updateWifiInput: CreateWifiInput,
+    @Args('updateWifiInput') updateWifiInput: UpdateWifiInput,
     @CurrentUser() user: UserInfoDto,
   ) {
     return this.wifiService.update(id, updateWifiInput, user);

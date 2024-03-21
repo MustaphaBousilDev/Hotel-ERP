@@ -1,6 +1,6 @@
 import { InputType, Field } from '@nestjs/graphql';
 import { Type } from 'class-transformer';
-import { IsBoolean, IsOptional, IsString } from 'class-validator';
+import { IsBoolean, IsOptional } from 'class-validator';
 
 @InputType()
 export class UpdateDepartementInput {

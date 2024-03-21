@@ -4,6 +4,7 @@ import { CreateRoomInput } from './dto/create-room.input';
 import { CurrentUser, User } from '@app/shared';
 import { Room } from '../../models/rooms.schema';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
+import { UpdateRoomInput } from './dto/update-room.input';
 
 @Resolver(() => Room)
 export class RoomResolver {
@@ -32,7 +33,7 @@ export class RoomResolver {
   @Mutation(() => Room)
   updateRoom(
     @Args('id') id: number,
-    @Args('updateRoomInput') updateWifiInput: CreateRoomInput,
+    @Args('updateRoomInput') updateWifiInput: UpdateRoomInput,
     @CurrentUser() user: User,
   ) {
     return this.roomService.update(id, updateWifiInput, user);

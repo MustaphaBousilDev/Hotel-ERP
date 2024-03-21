@@ -14,13 +14,13 @@ export class UpdateRoomInput {
   @IsOptional()
   @IsNumber()
   @Type(() => Number)
-  @Field()
+  @Field({ nullable: true })
   roomNumber?: number;
 
   @IsOptional()
   @IsString()
   @Type(() => String)
-  @Field()
+  @Field({ nullable: true })
   type?: string;
 
   @IsOptional()
@@ -32,22 +32,22 @@ export class UpdateRoomInput {
   @IsOptional()
   @IsString()
   @Type(() => String)
-  @Field()
+  @Field({ nullable: true })
   image?: string;
 
   @IsOptional()
   @IsBoolean()
   @Type(() => Boolean)
-  @Field()
+  @Field({ nullable: true })
   isAvailable?: boolean;
 
   @IsOptional()
   @IsNumber()
   @Type(() => Number)
-  @Field()
+  @Field({ nullable: true })
   price?: number;
 
   @IsOptional()
-  @Field(() => HotelIDDtoInput)
+  @Field(() => HotelIDDtoInput, { nullable: true })
   hotel?: HotelIDDtoInput;
 }

@@ -8,7 +8,7 @@ export class UpdateWifiInput {
   @IsOptional()
   @IsString()
   @Type(() => String)
-  @Field()
+  @Field({ nullable: true })
   name?: string;
 
   @IsOptional()
@@ -24,6 +24,6 @@ export class UpdateWifiInput {
   password?: string;
 
   @IsOptional()
-  @Field(() => HotelIDDtoInput)
+  @Field(() => HotelIDDtoInput, { nullable: true })
   hotel?: HotelIDDtoInput;
 }
