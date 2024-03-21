@@ -19,8 +19,8 @@ export class UpdateHotelInput {
   @Field({ nullable: true })
   name?: string;
 
-  @IsString()
   @IsOptional()
+  @IsString()
   @Type(() => String)
   @Field({ nullable: true })
   address?: string;
@@ -67,14 +67,17 @@ export class UpdateHotelInput {
   @Field({ nullable: true })
   image?: string;
 
+  @IsOptional()
   @Field(() => OrganizationIDInput, { nullable: true })
   @IsNotEmpty()
   organization?: OrganizationIDInput;
 
+  @IsOptional()
   @IsNumber()
   @Field(() => CityIDInput, { nullable: true })
   city?: CityIDInput;
 
+  @IsOptional()
   @Field(() => [DepartementIDDtoInput], { nullable: true })
   @IsOptional()
   departements?: DepartementIDDtoInput[];

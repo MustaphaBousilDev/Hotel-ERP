@@ -4,6 +4,7 @@ import { CurrentUser } from '@app/shared';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
 import { CreateHotelInput } from './dto/create-hotel.input';
 import { Hotel } from '../../models/hotel.schema';
+import { UpdateHotelInput } from './dto/update-hotel.input';
 
 @Resolver(() => Hotel)
 export class HotelResolver {
@@ -35,14 +36,14 @@ export class HotelResolver {
   updateHotel(
     @Args('id') id: number,
     @Args('updateHotelInput')
-    updateHotelInput: CreateHotelInput,
+    updateHotelInput: UpdateHotelInput,
     @CurrentUser() user: UserInfoDto,
   ) {
     return this.hotelService.update(id, updateHotelInput, user);
   }
 
   @Mutation(() => Hotel)
-  removeDepartement(@Args('id', { type: () => Number }) id: number) {
+  removeHotel(@Args('id', { type: () => Number }) id: number) {
     return this.hotelService.remove(id);
   }
 }
