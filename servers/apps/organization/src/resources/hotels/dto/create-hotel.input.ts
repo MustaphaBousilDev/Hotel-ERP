@@ -62,8 +62,8 @@ export class CreateHotelInput {
   @IsNotEmpty()
   organization: OrganizationIDInput;
 
-  @IsNumber()
   @Field(() => CityIDInput)
+  @IsNotEmpty()
   city: CityIDInput;
 
   @Field(() => [DepartementIDDtoInput], { nullable: true })

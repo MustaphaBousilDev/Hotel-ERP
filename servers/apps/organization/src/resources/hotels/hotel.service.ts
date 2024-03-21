@@ -43,6 +43,11 @@ export class HotelService {
         _id: In(ids),
       },
     });
+    console.log('######################################');
+    console.log(user);
+    console.log(city);
+    console.log(organization);
+    console.log(departement);
     if (user && city && organization && departement) {
       const hotel = new Hotel({
         name: createHotelDto?.name,

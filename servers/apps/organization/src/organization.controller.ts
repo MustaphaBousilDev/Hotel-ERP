@@ -28,10 +28,10 @@ import { User as UserReservation } from './models/users.mysql.entity';
 import { CurrentUser, JwtAuthGuard, Roles, UPLOAD_S3 } from '@app/shared';
 import { OrganizationInputDto } from './dto/organization.input.dto';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
-import { OrganizationUpdateDto } from './dto/organization.update.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 // import { map } from 'rxjs';
 import * as fs from 'fs';
+import { UpdateOrganizationInputDto } from './dto/organization.input.update.dto';
 
 @Controller('organization')
 export class OrganizationController {
@@ -63,7 +63,7 @@ export class OrganizationController {
   @Patch(':id')
   async update(
     @Param('id') id: number | string,
-    @Body() updateOrganizationDto: OrganizationUpdateDto,
+    @Body() updateOrganizationDto: UpdateOrganizationInputDto,
     @CurrentUser() user: UserInfoDto,
   ) {
     return this.organizationService.update(id, updateOrganizationDto, user);

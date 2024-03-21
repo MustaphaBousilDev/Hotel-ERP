@@ -15,6 +15,9 @@ export class HotelResolver {
     createHotelInput: CreateHotelInput,
     @CurrentUser() user: UserInfoDto,
   ) {
+    console.log('######################################');
+    console.log('resolver');
+    console.log(createHotelInput.city);
     return this.hotelService.create(createHotelInput, user);
   }
 

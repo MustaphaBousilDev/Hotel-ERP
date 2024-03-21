@@ -27,10 +27,12 @@ export class Hotel extends AbstractEntity<Hotel> {
   @Field() // for graph
   address: string;
 
+  @Field(() => [Departement]) // for graph
   @ManyToMany(() => Departement, { cascade: true })
   @JoinTable()
   departments: Departement[];
 
+  @Field(() => Organization, { nullable: true })
   @ManyToOne(() => Organization, (organization) => organization.hotel, {
     orphanedRowAction: 'delete',
     onDelete: 'CASCADE',
@@ -38,6 +40,7 @@ export class Hotel extends AbstractEntity<Hotel> {
   })
   organization: Organization;
 
+  @Field(() => City, { nullable: true }) // for graph
   @ManyToOne(() => City, (city) => city.hotel, {
     orphanedRowAction: 'delete',
     onDelete: 'CASCADE',
@@ -80,6 +83,7 @@ export class Hotel extends AbstractEntity<Hotel> {
   @Field() // for graph
   longitude: string;
 
+  @Field(() => [Room]) // for graph
   @OneToMany(() => Room, (room) => room.hotel, {
     cascade: true,
     eager: true,
