@@ -24,6 +24,7 @@ import { RoomModule } from './resources/rooms/room.module';
 import { DepartementModule } from './resources/departements/departement.module';
 import { UserRepositorySQLForRoom } from './resources/users/users.repository';
 import { UserRepositoryModule } from './resources/users/users.module';
+import { HotelModule } from './resources/hotels/hotel.module';
 
 @Module({
   imports: [
@@ -46,6 +47,7 @@ import { UserRepositoryModule } from './resources/users/users.module';
     }),
     LoggerModule,
     RoomModule,
+    HotelModule,
     WifiModule,
     DepartementModule,
     ConfigModule.forRoot({ isGlobal: true }),

@@ -3,8 +3,8 @@ import { OrganizationRepositorymySQL } from './organization.repository';
 import { OrganizationInputDto } from './dto/organization.input.dto';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
 import { Organization } from './models/organization.schema';
-import { OrganizationUpdateDto } from './dto/organization.update.dto';
 import { UserRepositorySQLForRoom } from './resources/users/users.repository';
+import { UpdateOrganizationInputDto } from './dto/organization.input.update.dto';
 
 @Injectable()
 export class OrganizationService {
@@ -25,12 +25,12 @@ export class OrganizationService {
         ...createOrganizationDto,
         user: user,
       });
-      this.organizationRepository.create(organization);
+      return this.organizationRepository.create(organization);
     }
   }
 
   async findAll() {
-    return this.organizationRepository.findOne({});
+    return this.organizationRepository.find({});
   }
 
   async findOne(_id: any) {
@@ -39,7 +39,7 @@ export class OrganizationService {
 
   async update(
     _id: any,
-    updateOrganization: OrganizationUpdateDto,
+    updateOrganization: UpdateOrganizationInputDto,
     { _id: user_id }: UserInfoDto,
   ) {
     const user = await this.userRepositorySQL.findOne({

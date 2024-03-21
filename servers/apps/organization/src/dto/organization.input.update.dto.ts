@@ -10,7 +10,7 @@ import { Type } from 'class-transformer';
 import { IsPhoneNumber } from '@app/shared';
 
 @InputType() // for graphql shema when i create or update
-export class OrganizationUpdateDto {
+export class UpdateOrganizationInputDto {
   @IsOptional()
   @IsString()
   @Type(() => String)
@@ -55,4 +55,11 @@ export class OrganizationUpdateDto {
   @Type(() => String)
   @Field({ nullable: true })
   logo?: string;
+}
+
+@InputType()
+export class OrganizationIDInput {
+  @Field(() => Number)
+  @IsNotEmpty()
+  id: number;
 }

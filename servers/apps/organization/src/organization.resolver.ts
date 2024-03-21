@@ -10,6 +10,7 @@ import {
   RmqContext,
 } from '@nestjs/microservices';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
+import { UpdateOrganizationInputDto } from './dto/organization.input.update.dto';
 
 @Resolver(() => Organization)
 export class OrganizationResolver {
@@ -28,7 +29,7 @@ export class OrganizationResolver {
   updateOrganization(
     @Args('id') id: number,
     @Args('updateOrganizationInputs')
-    updateOrganizationInput: OrganizationInputDto,
+    updateOrganizationInput: UpdateOrganizationInputDto,
     @CurrentUser() user: UserInfoDto,
   ) {
     return this.organizationService.update(id, updateOrganizationInput, user);
@@ -50,6 +51,7 @@ export class OrganizationResolver {
     await this.organizationService.remove(id);
     return { message: 'Suceess' };
   }
+
   @MessagePattern('createUserResr')
   createUser(@Payload() data: any, @Ctx() context: RmqContext) {
     const channel = context.getChannelRef();

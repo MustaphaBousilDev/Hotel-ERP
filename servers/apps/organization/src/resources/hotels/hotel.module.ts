@@ -18,12 +18,26 @@ import {
 import { Hotel } from '../../models/hotel.schema';
 import { UserRepositorySQLForRoom } from '../users/users.repository';
 import { UserRepositoryModule } from '../users/users.module';
+import { City } from '../../models/city.schema';
+import { Departement } from '../../models/departement.schema';
+import { Organization } from '../../models/organization.schema';
+import { Wifi } from '../../models/wifi.schema';
+import { Room } from '../../models/rooms.schema';
+import { User } from '../../models/users.mysql.entity';
 
 @Module({
   imports: [
     UserRepositoryModule,
     DatabaseModulemySQL,
-    DatabaseModulemySQL.forFeature([Hotel]),
+    DatabaseModulemySQL.forFeature([
+      Hotel,
+      City,
+      Departement,
+      Organization,
+      Wifi,
+      Room,
+      User,
+    ]),
     GraphQLModule.forRoot<ApolloFederationDriverConfig>({
       driver: ApolloFederationDriver,
       autoSchemaFile: {
