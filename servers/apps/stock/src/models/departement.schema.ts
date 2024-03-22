@@ -31,7 +31,7 @@ export class Departement extends AbstractEntity<Departement> {
   @Field() // for graph
   image: string;
 
-  @ManyToMany(() => Hotel, (hotel) => hotel.departement)
+  @ManyToMany(() => Hotel, (hotel) => hotel.departments)
   @JoinTable()
   hotels: Hotel[];
 

@@ -4,12 +4,16 @@ import { Field, ObjectType } from '@nestjs/graphql';
 import { Departement } from './departement.schema';
 import { Hotel } from './hotel.schema';
 import { Organization } from './organization.schema';
-import { Product } from './product.details.schema';
 import { Brand } from './brands.schema';
 import { Category } from './categories.schema';
 import { SubCategory } from './subcategories.schema';
 import { Employee } from './employe.responsable.schema';
 import { Suppliers } from './suppliers.schema';
+import { Product } from './products.schema';
+import { StockLocation } from './stock.location.schema';
+import { StockMovement } from './stock.movment.schema';
+import { StockTransaction } from './stock.transaction.schema';
+import { Tags } from './tags.schema';
 
 @Entity()
 @ObjectType()
@@ -80,12 +84,40 @@ export class User extends AbstractEntity<User> {
     cascade: true,
     eager: true,
   })
-  employee: Employee;
+  employee: Employee[];
 
   @Field(() => [Suppliers], { nullable: true })
   @OneToMany(() => Suppliers, (sup) => sup.user, {
     cascade: true,
     eager: true,
   })
-  suplies: Suppliers;
+  suplies: Suppliers[];
+
+  @Field(() => [StockLocation], { nullable: true })
+  @OneToMany(() => StockLocation, (stock) => stock.user, {
+    cascade: true,
+    eager: true,
+  })
+  stockLocation: StockLocation[];
+
+  @Field(() => [StockMovement], { nullable: true })
+  @OneToMany(() => StockMovement, (stock) => stock.user, {
+    cascade: true,
+    eager: true,
+  })
+  movmentStock: StockMovement[];
+
+  @Field(() => [StockTransaction], { nullable: true })
+  @OneToMany(() => StockTransaction, (stock) => stock.user, {
+    cascade: true,
+    eager: true,
+  })
+  stockTransaction: StockTransaction[];
+
+  @Field(() => [Tags], { nullable: true })
+  @OneToMany(() => Tags, (tags) => tags.user, {
+    cascade: true,
+    eager: true,
+  })
+  tags: Tags[];
 }

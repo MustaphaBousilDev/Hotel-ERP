@@ -1,6 +1,9 @@
 import { AbstractEntity } from '@app/shared';
 import { Field, ObjectType } from '@nestjs/graphql';
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
+import { Departement } from './departement.schema';
+import { User } from './users.schema';
+import { ProductDetails } from './product.details.schema';
 // import { Departement } from './departement.schema';
 
 @Entity()
@@ -14,11 +17,25 @@ export class Employee extends AbstractEntity<Employee> {
   @Field() // for graph
   image: string;
 
-  @Column()
-  @Field() // for graph
-  departement: string;
+  @ManyToOne(() => Departement, (departement) => departement.employee, {
+    nullable: true,
+    orphanedRowAction: 'delete',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  departement: Departement;
 
-  @Column()
-  @Field()
-  stock_responsable: string;
+  @OneToMany(() => ProductDetails, (product) => product.employee, {
+    cascade: true,
+    eager: true,
+  })
+  products: ProductDetails[];
+
+  @ManyToOne(() => User, (user) => user.employee, {
+    nullable: true,
+    orphanedRowAction: 'delete',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  user: User;
 }

@@ -1,6 +1,18 @@
 import { AbstractEntity } from '@app/shared';
 import { Field, ObjectType } from '@nestjs/graphql';
-import { Column, Entity } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
+  OneToMany,
+} from 'typeorm';
+import { Organization } from './organization.schema';
+import { User } from './users.schema';
+import { Departement } from './departement.schema';
+import { ProductDetails } from './product.details.schema';
+import { Category } from './categories.schema';
 @Entity()
 @ObjectType() // for add it in schema qraphql
 export class Hotel extends AbstractEntity<Hotel> {
@@ -13,15 +25,32 @@ export class Hotel extends AbstractEntity<Hotel> {
   @Field() // for graph
   image: string;
 
-  @Column()
-  @Field()
-  organization: string;
+  @ManyToOne(() => Organization, (organization) => organization.hotel, {
+    orphanedRowAction: 'delete',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  organization: Organization;
 
-  @Column()
-  @Field()
-  user: string;
+  @ManyToOne(() => User, (user) => user.hotel, {
+    nullable: true,
+    orphanedRowAction: 'delete',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  user: User;
 
-  @Column()
-  @Field()
-  departement: string;
+  @ManyToMany(() => Departement, (departments) => departments.hotels)
+  @JoinTable()
+  departments: Departement[];
+
+  @ManyToMany(() => Category, (category) => category.hotels)
+  @JoinTable()
+  categories: Category[];
+
+  @OneToMany(() => ProductDetails, (product) => product.hotel, {
+    cascade: true,
+    eager: true,
+  })
+  products: ProductDetails[];
 }

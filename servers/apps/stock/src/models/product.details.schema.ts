@@ -1,52 +1,55 @@
 import { AbstractEntity } from '@app/shared';
 import { Field, ObjectType } from '@nestjs/graphql';
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, JoinTable, ManyToOne, OneToOne } from 'typeorm';
+import { User } from './users.schema';
+import { Employee } from './employe.responsable.schema';
+import { Hotel } from './hotel.schema';
+import { Product } from './products.schema';
 
 @Entity()
 @ObjectType() // for add it in schema qraphql
-export class Product extends AbstractEntity<Product> {
-  @Column()
-  //i am not using type in field because nestjs and graphql pick up on the type of these properties and will use it
-  @Field({ nullable: true }) // for graph
-  name: string;
+export class ProductDetails extends AbstractEntity<ProductDetails> {
+  @OneToOne(() => Product, { nullable: true })
+  @JoinTable()
+  product: Product;
 
   @Column()
   @Field({ nullable: true }) // for graph
-  description: string;
-
-  @Column()
-  @Field({ nullable: true })
-  subcategory: string;
-
-  @Column()
-  @Field({ nullable: true })
-  quantity: string;
+  regular_price: string;
 
   @Column()
   @Field({ nullable: true })
   price: string;
 
   @Column()
-  @Field()
-  supplierID: string;
+  @Field({ nullable: true })
+  made: string;
 
   @Column()
-  @Field()
-  user: string;
+  @Field({ nullable: true })
+  code: string;
 
-  @Column()
-  @Field()
-  tags: string;
+  @ManyToOne(() => User, (user) => user.product, {
+    nullable: true,
+    orphanedRowAction: 'delete',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  user: User;
 
-  @Column()
-  @Field()
-  brands: string;
+  @ManyToOne(() => Employee, (emp) => emp.products, {
+    nullable: true,
+    orphanedRowAction: 'delete',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  employee: Employee;
 
-  @Column()
-  @Field()
-  status: boolean;
-
-  @Column()
-  @Field()
-  hotel: string;
+  @ManyToOne(() => Hotel, (hotel) => hotel.products, {
+    nullable: true,
+    orphanedRowAction: 'delete',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  hotel: Hotel;
 }

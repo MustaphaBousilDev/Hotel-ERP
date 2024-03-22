@@ -1,7 +1,8 @@
 import { AbstractEntity } from '@app/shared';
 import { Field, ObjectType } from '@nestjs/graphql';
-import { Column, Entity, ManyToOne } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 import { User } from './users.schema';
+import { Product } from './products.schema';
 @Entity()
 @ObjectType() // for add it in schema qraphql
 export class Brand extends AbstractEntity<Brand> {
@@ -26,4 +27,10 @@ export class Brand extends AbstractEntity<Brand> {
     onUpdate: 'CASCADE',
   })
   user: User;
+
+  @OneToMany(() => Product, (product) => product.brand, {
+    cascade: true,
+    eager: true,
+  })
+  products: Product[];
 }
