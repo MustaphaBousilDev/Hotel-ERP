@@ -1,6 +1,16 @@
 import { AbstractEntity } from '@app/shared';
 import { Field, ObjectType } from '@nestjs/graphql';
-import { Column, Entity } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
+  OneToMany,
+} from 'typeorm';
+import { User } from './users.schema';
+import { Employee } from './employe.responsable.schema';
+import { Hotel } from './hotel.schema';
 
 @Entity()
 @ObjectType() // for add it in schema qraphql
@@ -21,15 +31,23 @@ export class Departement extends AbstractEntity<Departement> {
   @Field() // for graph
   image: string;
 
-  @Column()
-  @Field()
-  hotels: string;
+  @ManyToMany(() => Hotel, (hotel) => hotel.departement)
+  @JoinTable()
+  hotels: Hotel[];
 
-  @Column()
-  @Field()
-  user: string;
+  @Field(() => User, { nullable: true })
+  @ManyToOne(() => User, (user) => user.departements, {
+    nullable: true,
+    orphanedRowAction: 'delete',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  user: User;
 
-  @Column()
-  @Field()
-  employee: string;
+  @Field(() => [Employee], { nullable: true })
+  @OneToMany(() => Employee, (emp) => emp.departement, {
+    cascade: true,
+    eager: true,
+  })
+  employee: Employee[];
 }

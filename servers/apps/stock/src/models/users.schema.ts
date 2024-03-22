@@ -1,6 +1,15 @@
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
 import { AbstractEntity } from '@app/shared';
 import { Field, ObjectType } from '@nestjs/graphql';
+import { Departement } from './departement.schema';
+import { Hotel } from './hotel.schema';
+import { Organization } from './organization.schema';
+import { Product } from './product.details.schema';
+import { Brand } from './brands.schema';
+import { Category } from './categories.schema';
+import { SubCategory } from './subcategories.schema';
+import { Employee } from './employe.responsable.schema';
+import { Suppliers } from './suppliers.schema';
 
 @Entity()
 @ObjectType()
@@ -17,43 +26,66 @@ export class User extends AbstractEntity<User> {
   @Field()
   email: string;
 
-  @Column()
-  @Field()
-  departement: string;
+  @Field(() => [Departement], { nullable: true })
+  @OneToMany(() => Departement, (departement) => departement.user, {
+    cascade: true,
+    eager: true,
+  })
+  departements: Departement[];
 
-  @Column()
-  @Field()
-  hotel: string;
+  @Field(() => [Hotel], { nullable: true })
+  @OneToMany(() => Hotel, (hotel) => hotel.user, {
+    cascade: true,
+    eager: true,
+  })
+  hotel: Hotel[];
 
-  @Column()
-  @Field()
-  organization: string;
+  @Field(() => [Organization], { nullable: true })
+  @OneToMany(() => Organization, (organization) => organization.user, {
+    cascade: true,
+    eager: true,
+  })
+  organization: Organization[];
 
-  @Column()
-  @Field()
-  product: string;
+  @Field(() => [Product], { nullable: true })
+  @OneToMany(() => Product, (product) => product.user, {
+    cascade: true,
+    eager: true,
+  })
+  product: Product[];
 
-  @Column()
-  @Field()
-  brand: string;
+  @Field(() => [Brand], { nullable: true })
+  @OneToMany(() => Brand, (brand) => brand.user, {
+    cascade: true,
+    eager: true,
+  })
+  brand: Brand[];
 
-  @Column()
-  @Field()
-  category: string;
+  @Field(() => [Category], { nullable: true })
+  @OneToMany(() => Category, (category) => category.user, {
+    cascade: true,
+    eager: true,
+  })
+  category: Category[];
 
-  @Column()
-  @Field()
-  subcategory: string;
+  @Field(() => [SubCategory], { nullable: true })
+  @OneToMany(() => SubCategory, (subcat) => subcat.user, {
+    cascade: true,
+    eager: true,
+  })
+  subcategory: SubCategory[];
 
-  @Column()
-  @Field()
-  employee: string;
+  @Field(() => [Employee], { nullable: true })
+  @OneToMany(() => Employee, (emp) => emp.user, {
+    cascade: true,
+    eager: true,
+  })
+  employee: Employee;
 
-  @Column()
-  @Field()
-  suplies: string;
-
-  @Column()
-  @Field()
-  tags: string;
+  @Field(() => [Suppliers], { nullable: true })
+  @OneToMany(() => Suppliers, (sup) => sup.user, {
+    cascade: true,
+    eager: true,
+  })
+  suplies: Suppliers;
 }
