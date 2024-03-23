@@ -2,12 +2,6 @@ import { Module } from '@nestjs/common';
 import { TaskstypesService } from './taskstypes.service';
 import { TaskstypesResolver } from './taskstypes.resolver';
 import { DatabaseModulemySQL } from '@app/shared';
-import { GraphQLModule } from '@nestjs/graphql';
-import {
-  ApolloDriverConfig,
-  ApolloFederationDriver,
-  ApolloFederationDriverConfig,
-} from '@nestjs/apollo';
 import { LoggerModule } from 'nestjs-pino';
 import { ConfigModule } from '@nestjs/config';
 import { Tasks } from '../../models/tasks.entity';

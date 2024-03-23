@@ -1,26 +1,54 @@
 import { Injectable } from '@nestjs/common';
 import { CreateCategoryInput } from './dto/create-category.input';
 import { UpdateCategoryInput } from './dto/update-category.input';
+import {
+  CategoryRepositorymySQL,
+  UserRepositorySQL,
+} from './categories.repository';
+import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
+import { Category } from '../../models';
 
 @Injectable()
 export class CategoriesService {
-  create(createCategoryInput: CreateCategoryInput) {
-    return 'This action adds a new category';
+  constructor(
+    private readonly userRepository: UserRepositorySQL,
+    private readonly categoryRepository: CategoryRepositorymySQL,
+  ) {}
+  async create(
+    createCategoryInput: CreateCategoryInput,
+    { _id: userId }: UserInfoDto,
+  ) {
+    const user = await this.userRepository.findOne({
+      _id: userId,
+    });
+    const categories = new Category({
+      ...createCategoryInput,
+      user: user,
+    });
+    return this.categoryRepository.create(categories);
   }
 
-  findAll() {
-    return `This action returns all categories`;
+  async findAll() {
+    return this.categoryRepository.find({});
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} category`;
+  async findOne(_id: number) {
+    return this.categoryRepository.findOne({ _id });
   }
 
-  update(id: number, updateCategoryInput: UpdateCategoryInput) {
-    return `This action updates a #${id} category`;
+  async update(
+    _id: any,
+    updateCategoryDTO: UpdateCategoryInput,
+    { _id: userId }: UserInfoDto,
+  ) {
+    const user = await this.userRepository.findOne({
+      _id: userId,
+    });
+    updateCategoryDTO['user'] = user;
+    return this.categoryRepository.findOneAndUpdate({ _id }, updateCategoryDTO);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} category`;
+  async remove(_id: number) {
+    return this.categoryRepository.findOneAndDelete({ _id });
   }
 }

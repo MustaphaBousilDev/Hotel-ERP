@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { DatabaseModulemySQL, LoggerModule } from '@app/shared';
 import {
-  Brand,
   Category,
   Departement,
   Employee,
@@ -16,7 +15,6 @@ import {
   SubCategory,
   Suppliers,
   Tags,
-  User,
 } from './models';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriverConfig, ApolloFederationDriver } from '@nestjs/apollo';
@@ -30,8 +28,6 @@ import { TagsModule } from './resources/tags/tags.module';
   imports: [
     DatabaseModulemySQL,
     DatabaseModulemySQL.forFeature([
-      User,
-      Brand,
       Category,
       SubCategory,
       Departement,

@@ -5,6 +5,7 @@ import { DatabaseModulemySQL } from '@app/shared';
 import { Brand, Product, User } from '../../models';
 import { LoggerModule } from 'nestjs-pino';
 import { ConfigModule } from '@nestjs/config';
+import { BrandRepositorymySQL, UserRepositorySQL } from './brands.repository';
 
 @Module({
   imports: [
@@ -13,6 +14,11 @@ import { ConfigModule } from '@nestjs/config';
     LoggerModule,
     ConfigModule.forRoot({ isGlobal: true }),
   ],
-  providers: [BrandsResolver, BrandsService],
+  providers: [
+    BrandsResolver,
+    BrandsService,
+    UserRepositorySQL,
+    BrandRepositorymySQL,
+  ],
 })
 export class BrandsModule {}

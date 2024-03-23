@@ -3,14 +3,20 @@ import { CategoriesService } from './categories.service';
 import { Category } from './entities/category.entity';
 import { CreateCategoryInput } from './dto/create-category.input';
 import { UpdateCategoryInput } from './dto/update-category.input';
+import { CurrentUser } from '@app/shared';
+import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
 
 @Resolver(() => Category)
 export class CategoriesResolver {
   constructor(private readonly categoriesService: CategoriesService) {}
 
   @Mutation(() => Category)
-  createCategory(@Args('createCategoryInput') createCategoryInput: CreateCategoryInput) {
-    return this.categoriesService.create(createCategoryInput);
+  createCategory(
+    @Args('createCategoryInput')
+    createCategoryInput: CreateCategoryInput,
+    @CurrentUser() user: UserInfoDto,
+  ) {
+    return this.categoriesService.create(createCategoryInput, user);
   }
 
   @Query(() => [Category], { name: 'categories' })
@@ -24,8 +30,13 @@ export class CategoriesResolver {
   }
 
   @Mutation(() => Category)
-  updateCategory(@Args('updateCategoryInput') updateCategoryInput: UpdateCategoryInput) {
-    return this.categoriesService.update(updateCategoryInput.id, updateCategoryInput);
+  updateCategory(
+    @Args('id') id: number,
+    @Args('updateCategoryInput')
+    updateCategoryInput: UpdateCategoryInput,
+    @CurrentUser() user: UserInfoDto,
+  ) {
+    return this.categoriesService.update(id, updateCategoryInput, user);
   }
 
   @Mutation(() => Category)
