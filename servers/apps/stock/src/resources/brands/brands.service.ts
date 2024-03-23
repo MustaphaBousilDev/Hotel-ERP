@@ -2,6 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { CreateBrandInput } from './dto/create-brand.input';
 import { UpdateBrandInput } from './dto/update-brand.input';
 import { BrandRepositorymySQL, UserRepositorySQL } from './brands.repository';
+import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
+import { Brand } from '../../models';
 
 @Injectable()
 export class BrandsService {
@@ -9,23 +11,41 @@ export class BrandsService {
     private readonly userRepository: UserRepositorySQL,
     private readonly brandRepository: BrandRepositorymySQL,
   ) {}
-  create(createBrandInput: CreateBrandInput) {
-    return 'This action adds a new brand';
+  async create(
+    createBrandInput: CreateBrandInput,
+    { _id: userId }: UserInfoDto,
+  ) {
+    const user = await this.userRepository.findOne({
+      _id: userId,
+    });
+    const brand = new Brand({
+      ...createBrandInput,
+      user: user,
+    });
+    return this.brandRepository.create(brand);
   }
 
-  findAll() {
-    return `This action returns all brands`;
+  async findOne(_id: any) {
+    return this.brandRepository.findOne({ _id });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} brand`;
+  async findAll() {
+    return this.brandRepository.find({});
   }
 
-  update(id: number, updateBrandInput: UpdateBrandInput) {
-    return `This action updates a #${id} brand`;
+  async update(
+    _id: any,
+    updateBrandDto: UpdateBrandInput,
+    { _id: userId }: UserInfoDto,
+  ) {
+    const user = await this.userRepository.findOne({
+      _id: userId,
+    });
+    updateBrandDto['user'] = user;
+    return this.brandRepository.findOneAndUpdate({ _id }, updateBrandDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} brand`;
+  async remove(_id: any) {
+    return this.brandRepository.findOneAndDelete({ _id });
   }
 }

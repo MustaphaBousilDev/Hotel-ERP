@@ -22,5 +22,11 @@ export class User extends AbstractEntity<User> {
     cascade: true,
     eager: true,
   })
-  reservation: Reservation[] = null;
+  reservation: Reservation[];
+
+  @OneToMany(() => Reservation, (room) => room.user, {
+    cascade: true,
+    eager: true,
+  })
+  room: Reservation[];
 }
