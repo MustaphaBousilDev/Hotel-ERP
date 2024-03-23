@@ -39,6 +39,7 @@ export class Room extends AbstractEntity<Room> {
   })
   user: User;
 
+  @Field(() => Hotel, { nullable: true })
   @ManyToOne(() => Hotel, (hotel) => hotel.room, {
     orphanedRowAction: 'delete',
     onDelete: 'CASCADE',

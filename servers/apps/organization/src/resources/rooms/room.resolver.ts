@@ -16,7 +16,7 @@ export class RoomResolver {
     @CurrentUser() user: UserInfoDto,
   ) {
     console.log('################# room');
-    console.log(createRoomInput);
+    console.log(createRoomInput.hotel);
     return this.roomService.create(createRoomInput, user);
   }
 

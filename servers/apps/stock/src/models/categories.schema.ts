@@ -24,10 +24,6 @@ export class Category extends AbstractEntity<Category> {
   status: boolean;
 
   @Column()
-  @Field()
-  product: string;
-
-  @Column()
   @Field() // for graph
   image: string;
 

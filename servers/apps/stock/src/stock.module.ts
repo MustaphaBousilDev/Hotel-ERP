@@ -1,10 +1,67 @@
 import { Module } from '@nestjs/common';
-import { StockController } from './stock.controller';
-import { StockService } from './stock.service';
+import { DatabaseModulemySQL, LoggerModule } from '@app/shared';
+import {
+  Brand,
+  Category,
+  Departement,
+  Employee,
+  Hotel,
+  Organization,
+  Product,
+  ProductDetails,
+  ProductImage,
+  StockLocation,
+  StockMovement,
+  StockTransaction,
+  SubCategory,
+  Suppliers,
+  Tags,
+  User,
+} from './models';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriverConfig, ApolloFederationDriver } from '@nestjs/apollo';
+import { BrandsModule } from './resources/brands/brands.module';
+import { CategoriesModule } from './resources/categories/categories.module';
+import { SubcategoririesModule } from './resources/subcategoriries/subcategoriries.module';
+import { SuppliersModule } from './resources/suppliers/suppliers.module';
+import { TagsModule } from './resources/tags/tags.module';
 
 @Module({
-  imports: [],
-  controllers: [StockController],
-  providers: [StockService],
+  imports: [
+    DatabaseModulemySQL,
+    DatabaseModulemySQL.forFeature([
+      User,
+      Brand,
+      Category,
+      SubCategory,
+      Departement,
+      Employee,
+      Hotel,
+      Organization,
+      Product,
+      ProductDetails,
+      ProductImage,
+      StockLocation,
+      StockMovement,
+      StockTransaction,
+      SubCategory,
+      Suppliers,
+      Tags,
+    ]),
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloFederationDriver,
+      autoSchemaFile: {
+        federation: 2,
+      },
+    }),
+    LoggerModule,
+    BrandsModule,
+    CategoriesModule,
+    SubcategoririesModule,
+    SuppliersModule,
+    TagsModule,
+  ],
+  controllers: [],
+  providers: [],
 })
 export class StockModule {}
