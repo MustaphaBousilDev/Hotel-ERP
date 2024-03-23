@@ -1,7 +1,20 @@
-import { InputType, Int, Field } from '@nestjs/graphql';
+import { InputType, Field } from '@nestjs/graphql';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 @InputType()
 export class CreateSupplierInput {
-  @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number;
+  @Field()
+  @IsString()
+  name: string;
+
+  @Field()
+  @IsString()
+  contactInfo: string;
+}
+
+@InputType()
+export class SupplierIDDtoInput {
+  @Field(() => Number)
+  @IsNotEmpty()
+  id: number;
 }

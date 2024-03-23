@@ -1,9 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { CreateBrandInput } from './dto/create-brand.input';
 import { UpdateBrandInput } from './dto/update-brand.input';
+import { BrandRepositorymySQL, UserRepositorySQL } from './brands.repository';
 
 @Injectable()
 export class BrandsService {
+  constructor(
+    private readonly userRepository: UserRepositorySQL,
+    private readonly brandRepository: BrandRepositorymySQL,
+  ) {}
   create(createBrandInput: CreateBrandInput) {
     return 'This action adds a new brand';
   }

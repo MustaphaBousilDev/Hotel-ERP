@@ -1,7 +1,23 @@
-import { InputType, Int, Field } from '@nestjs/graphql';
+import { InputType, Field } from '@nestjs/graphql';
+import { IsBoolean, IsString } from 'class-validator';
 
 @InputType()
 export class CreateCategoryInput {
-  @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number;
+  @Field()
+  @IsString()
+  name: string;
+
+  @Field()
+  @IsBoolean()
+  status: boolean;
+
+  @Field()
+  @IsString()
+  image: string;
+}
+
+@InputType()
+export class CategoryInputID {
+  @Field(() => Number)
+  id: number;
 }

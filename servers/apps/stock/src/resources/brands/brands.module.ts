@@ -1,8 +1,18 @@
 import { Module } from '@nestjs/common';
 import { BrandsService } from './brands.service';
 import { BrandsResolver } from './brands.resolver';
+import { DatabaseModulemySQL } from '@app/shared';
+import { Brand, Product, User } from '../../models';
+import { LoggerModule } from 'nestjs-pino';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
+  imports: [
+    DatabaseModulemySQL,
+    DatabaseModulemySQL.forFeature([User, Brand, Product]),
+    LoggerModule,
+    ConfigModule.forRoot({ isGlobal: true }),
+  ],
   providers: [BrandsResolver, BrandsService],
 })
 export class BrandsModule {}

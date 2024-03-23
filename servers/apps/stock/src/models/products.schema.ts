@@ -98,6 +98,7 @@ export class Product extends AbstractEntity<Product> {
     {
       cascade: true,
       eager: true,
+      nullable: true,
     },
   )
   productTransaction: StockTransaction[];
