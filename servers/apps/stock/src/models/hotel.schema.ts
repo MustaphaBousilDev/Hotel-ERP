@@ -11,8 +11,8 @@ import {
 import { Organization } from './organization.schema';
 import { User } from './users.schema';
 import { Departement } from './departement.schema';
-import { ProductDetails } from './product.details.schema';
 import { Category } from './categories.schema';
+import { Product } from './products.schema';
 @Entity()
 @ObjectType() // for add it in schema qraphql
 export class Hotel extends AbstractEntity<Hotel> {
@@ -48,9 +48,9 @@ export class Hotel extends AbstractEntity<Hotel> {
   @JoinTable()
   categories: Category[];
 
-  @OneToMany(() => ProductDetails, (product) => product.hotel, {
+  @OneToMany(() => Product, (product) => product.hotel, {
     cascade: true,
     eager: true,
   })
-  products: ProductDetails[];
+  products: Product[];
 }

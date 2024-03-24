@@ -14,6 +14,30 @@ import { StockLocationIDDtoInput } from '../../stockLocation/stock-location.dto'
 import { TransactionIDDtoInput } from '../../transactions/transaction.dto';
 @InputType()
 export class CreateProductInput {
+  @Field(() => SubCategoryInputID)
+  @IsNotEmpty()
+  subCategory: SubCategoryInputID;
+
+  @Field(() => SupplierIDDtoInput)
+  @IsNotEmpty()
+  supplier: SupplierIDDtoInput;
+
+  @Field(() => BrandInputID)
+  @IsNotEmpty()
+  brand: BrandInputID;
+
+  @Field(() => HotelIDDtoInput)
+  @IsNotEmpty()
+  hotel: HotelIDDtoInput;
+
+  @Field(() => StockLocationIDDtoInput)
+  @IsNotEmpty()
+  location: StockLocationIDDtoInput;
+
+  @Field(() => [SupplierIDDtoInput])
+  @IsNotEmpty()
+  tags: SupplierIDDtoInput[];
+
   @Field()
   @IsString()
   name: string;
@@ -21,10 +45,6 @@ export class CreateProductInput {
   @Field()
   @IsString()
   description: string;
-
-  @Field(() => SubCategoryInputID)
-  @IsNotEmpty()
-  subCategory: SubCategoryInputID;
 
   @Field()
   @IsNumber()
@@ -34,29 +54,9 @@ export class CreateProductInput {
   @IsNumber()
   price: number;
 
-  @Field(() => SupplierIDDtoInput)
-  @IsNotEmpty()
-  supplier: SupplierIDDtoInput;
-
-  @Field(() => [SupplierIDDtoInput])
-  @IsNotEmpty()
-  tags: SupplierIDDtoInput[];
-
-  @Field(() => BrandInputID)
-  @IsNotEmpty()
-  brand: BrandInputID;
-
   @Field()
   @IsBoolean()
   status: boolean;
-
-  @Field(() => HotelIDDtoInput)
-  @IsNotEmpty()
-  hotel: HotelIDDtoInput;
-
-  @Field(() => StockLocationIDDtoInput)
-  @IsNotEmpty()
-  location: StockLocationIDDtoInput;
 
   @Field(() => TransactionIDDtoInput, { nullable: true })
   @IsOptional()
