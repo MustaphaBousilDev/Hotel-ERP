@@ -11,7 +11,6 @@ import { SupplierIDDtoInput } from '../../suppliers/dto/create-supplier.input';
 import { BrandInputID } from '../../brands/dto/create-brand.input';
 import { HotelIDDtoInput } from '../../hotels/hotel.dto';
 import { StockLocationIDDtoInput } from '../../stockLocation/stock-location.dto';
-import { TransactionIDDtoInput } from '../../transactions/transaction.dto';
 @InputType()
 export class UpdateProductInput {
   @IsOptional()
@@ -68,9 +67,4 @@ export class UpdateProductInput {
   @Field(() => StockLocationIDDtoInput)
   @IsNotEmpty()
   location?: StockLocationIDDtoInput;
-
-  @IsOptional()
-  @Field(() => TransactionIDDtoInput, { nullable: true })
-  @IsOptional()
-  productTransaction?: TransactionIDDtoInput;
 }

@@ -3,14 +3,20 @@ import { ProductsService } from './products.service';
 import { Product } from './entities/product.entity';
 import { CreateProductInput } from './dto/create-product.input';
 import { UpdateProductInput } from './dto/update-product.input';
+import { CurrentUser } from '@app/shared';
+import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
 
 @Resolver(() => Product)
 export class ProductsResolver {
   constructor(private readonly productsService: ProductsService) {}
 
   @Mutation(() => Product)
-  createProduct(@Args('createProductInput') createProductInput: CreateProductInput) {
-    return this.productsService.create(createProductInput);
+  createProduct(
+    @Args('createProductInput')
+    createProductInput: CreateProductInput,
+    @CurrentUser() user: UserInfoDto,
+  ) {
+    return this.productsService.create(createProductInput, user);
   }
 
   @Query(() => [Product], { name: 'products' })
@@ -24,8 +30,13 @@ export class ProductsResolver {
   }
 
   @Mutation(() => Product)
-  updateProduct(@Args('updateProductInput') updateProductInput: UpdateProductInput) {
-    return this.productsService.update(updateProductInput.id, updateProductInput);
+  updateProduct(
+    @Args('id') id: number,
+    @Args('updateProductInput')
+    updateProductInput: UpdateProductInput,
+    @CurrentUser() user: UserInfoDto,
+  ) {
+    return this.productsService.update(id, updateProductInput, user);
   }
 
   @Mutation(() => Product)

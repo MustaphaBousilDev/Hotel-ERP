@@ -51,7 +51,8 @@ export class ProductsService {
         tagsDTO,
         transactionDTO,
       );
-      const [user, subCategory, supplier, brand, hotel, stockLocation] = await Promise.all([
+      const [user, subCategory, supplier, brand, hotel, stockLocation] =
+        await Promise.all([
           this.userRepository.findOne({ _id: userId }),
           this.subCategoryRepository.findOne({
             _id: createProductInput.subCategory.id,
@@ -69,7 +70,7 @@ export class ProductsService {
             _id: createProductInput.location.id,
           }),
         ]);
-  
+
       if (
         !user ||
         !subCategory ||
@@ -113,8 +114,74 @@ export class ProductsService {
     return this.productRepository.findOne({ _id });
   }
 
-  update(id: number, updateProductInput: UpdateProductInput) {
-    return `This action updates a #${id} product`;
+  async update(
+    _id: number,
+    updateProductInput: UpdateProductInput,
+    { _id: userId }: UserInfoDto,
+  ) {
+    const {
+      subCategory: subDTO,
+      supplier: soppDTO,
+      brand: brandDTO,
+      hotel: hotelDTO,
+      location: stockDTO,
+      tags: tagsDTO,
+      ...otherDTO
+    } = updateProductInput;
+    console.log(tagsDTO);
+    const user = await this.userRepository.findOne({
+      _id: userId,
+    });
+    otherDTO['user'] = user;
+    if (subDTO && subDTO.id) {
+      const subcategory = await this.subCategoryRepository.findOne({
+        _id: subDTO.id,
+      });
+      if (subcategory) {
+        otherDTO['subCategory'] = subcategory;
+      }
+    }
+    if (soppDTO && soppDTO.id) {
+      const sopplier = await this.supplierRepository.findOne({
+        _id: soppDTO.id,
+      });
+      if (sopplier) {
+        otherDTO['supplier'] = sopplier;
+      }
+    }
+    if (brandDTO && brandDTO.id) {
+      const brand = await this.brandRepository.findOne({
+        _id: brandDTO.id,
+      });
+      if (brand) {
+        otherDTO['brand'] = brand;
+      }
+    }
+    if (hotelDTO && hotelDTO.id) {
+      const hotel = await this.hotelRepository.findOne({
+        _id: hotelDTO.id,
+      });
+      if (hotel) {
+        otherDTO['hotel'] = hotel;
+      }
+    }
+    if (stockDTO && stockDTO.id) {
+      const stockLocation = await this.stockLocationRepository.findOne({
+        _id: stockDTO.id,
+      });
+      if (stockLocation) {
+        otherDTO['stockLocation'] = stockLocation;
+      }
+    }
+    if (stockDTO && stockDTO.id) {
+      const stockLocation = await this.stockLocationRepository.findOne({
+        _id: stockDTO.id,
+      });
+      if (stockLocation) {
+        otherDTO['stockLocation'] = stockLocation;
+      }
+    }
+    return this.productRepository.findOneAndUpdate({ _id }, otherDTO);
   }
 
   async remove(_id: any) {
