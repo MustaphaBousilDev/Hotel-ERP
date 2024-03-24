@@ -82,3 +82,10 @@ export class UpdateHotelInput {
   @IsOptional()
   departements?: DepartementIDDtoInput[];
 }
+
+@InputType()
+export class HotelIDDtoUpdate {
+  @Field(() => Number)
+  @IsOptional()
+  id: number;
+}

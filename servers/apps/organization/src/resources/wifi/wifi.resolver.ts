@@ -19,7 +19,7 @@ export class WifiResolver {
     return this.wifiService.create(createWifiInput, user);
   }
 
-  @Query(() => [Wifi], { name: 'wifi' })
+  @Query(() => [Wifi], { name: 'wifis' })
   findAll() {
     return this.wifiService.findAll();
   }

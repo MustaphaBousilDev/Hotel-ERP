@@ -7,13 +7,11 @@ import { HotelIDDtoInput } from '../../hotels/dto/create-hotel.input';
 export class UpdateWifiInput {
   @IsOptional()
   @IsString()
-  @Type(() => String)
   @Field({ nullable: true })
   name?: string;
 
   @IsOptional()
   @IsString()
-  @Type(() => String)
   @Field({ nullable: true })
   ip?: string;
 

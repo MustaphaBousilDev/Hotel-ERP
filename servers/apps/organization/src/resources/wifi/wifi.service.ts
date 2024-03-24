@@ -63,8 +63,8 @@ export class WifiService {
       if (userSchema) {
         updateDTO['user'] = userSchema;
       }
-      return this.wifiRepository.findOneAndUpdate({ _id }, updateDTO);
     }
+    return this.wifiRepository.findOneAndUpdate({ _id }, updateDTO);
   }
 
   remove(_id: any) {
