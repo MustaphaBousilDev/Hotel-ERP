@@ -86,7 +86,7 @@ export class EmployeeDtoUpdate {
   image?: string;
 
   @IsOptional()
-  @Field(() => [], { nullable: true })
+  @Field(() => DepartementIDDtoInput, { nullable: true })
   @IsOptional()
   departement?: DepartementIDDtoInput;
 

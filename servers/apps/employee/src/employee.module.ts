@@ -1,13 +1,12 @@
 import { Module } from '@nestjs/common';
-import { EmployeeController } from './employee.controller';
 import { EmployeeService } from './employee.service';
 import { DatabaseModulemySQL, LoggerModule } from '@app/shared';
 import { ConfigModule } from '@nestjs/config';
-import { User } from './models/users.schema';
-import { Hotel } from './models/hotel.schema';
-import { Organization } from './models/organization.schema';
-import { Departement } from './models/departement.schema';
-import { Employee } from './models/employee.schema';
+import { UserEMP } from './models/users.schema';
+import { HotelEMP } from './models/hotel.schema';
+import { OrganizationEMP } from './models/organization.schema';
+import { DepartementEMP } from './models/departement.schema';
+import { EmployeeEMP } from './models/employee.schema';
 import { Position } from './models/position.schema';
 import { TimeWork } from './models/time-work.schema';
 import { GraphQLModule } from '@nestjs/graphql';
@@ -21,16 +20,17 @@ import {
   UserRepositorymySQL,
   timeWorkRepositorymySQL,
 } from './employee.repository';
+import { EmployeeResolver } from './employee.resolver';
 
 @Module({
   imports: [
     DatabaseModulemySQL,
     DatabaseModulemySQL.forFeature([
-      User,
-      Hotel,
-      Organization,
-      Departement,
-      Employee,
+      UserEMP,
+      HotelEMP,
+      OrganizationEMP,
+      DepartementEMP,
+      EmployeeEMP,
       Position,
       TimeWork,
     ]),
@@ -45,8 +45,8 @@ import {
     PositionsModule,
     TimeworksModule,
   ],
-  controllers: [EmployeeController],
   providers: [
+    EmployeeResolver,
     EmployeeService,
     EmployeeRepositorymySQL,
     DepartementRepositorymySQL,

@@ -1,16 +1,16 @@
 import { Column, Entity, OneToMany } from 'typeorm';
 import { AbstractEntity } from '@app/shared';
 import { Field, ObjectType } from '@nestjs/graphql';
-import { Organization } from './organization.schema';
-import { Departement } from './departement.schema';
-import { Hotel } from './hotel.schema';
-import { Employee } from './employee.schema';
+import { OrganizationEMP } from './organization.schema';
+import { DepartementEMP } from './departement.schema';
+import { HotelEMP } from './hotel.schema';
+import { EmployeeEMP } from './employee.schema';
 import { Position } from './position.schema';
 import { TimeWork } from './time-work.schema';
 
 @Entity()
 @ObjectType()
-export class User extends AbstractEntity<User> {
+export class UserEMP extends AbstractEntity<UserEMP> {
   @Column({ nullable: true })
   @Field()
   firstName: string;
@@ -23,12 +23,12 @@ export class User extends AbstractEntity<User> {
   @Field()
   email: string;
 
-  @Field(() => [Employee], { nullable: true })
-  @OneToMany(() => Employee, (emp) => emp.user, {
+  @Field(() => [EmployeeEMP], { nullable: true })
+  @OneToMany(() => EmployeeEMP, (emp) => emp.user, {
     cascade: true,
     eager: true,
   })
-  employees: Employee[];
+  employees: EmployeeEMP[];
 
   @Field(() => [Position], { nullable: true })
   @OneToMany(() => Position, (position) => position.user, {
@@ -37,12 +37,12 @@ export class User extends AbstractEntity<User> {
   })
   position: Position[];
 
-  @Field(() => [Organization], { nullable: true })
-  @OneToMany(() => Organization, (organization) => organization.user, {
+  @Field(() => [OrganizationEMP], { nullable: true })
+  @OneToMany(() => OrganizationEMP, (organization) => organization.user, {
     cascade: true,
     eager: true,
   })
-  organization: Organization[];
+  organization: OrganizationEMP[];
 
   @Field(() => [TimeWork], { nullable: true })
   @OneToMany(() => TimeWork, (timeWork) => timeWork.user, {
@@ -51,17 +51,17 @@ export class User extends AbstractEntity<User> {
   })
   timeWork: TimeWork[];
 
-  @Field(() => [Departement], { nullable: true })
-  @OneToMany(() => Departement, (departement) => departement.user, {
+  @Field(() => [DepartementEMP], { nullable: true })
+  @OneToMany(() => DepartementEMP, (departement) => departement.user, {
     cascade: true,
     eager: true,
   })
-  departement: Departement[];
+  departement: DepartementEMP[];
 
-  @Field(() => [Hotel], { nullable: true })
-  @OneToMany(() => Hotel, (hotel) => hotel.user, {
+  @Field(() => [HotelEMP], { nullable: true })
+  @OneToMany(() => HotelEMP, (hotel) => hotel.user, {
     cascade: true,
     eager: true,
   })
-  hotel: Hotel[];
+  hotel: HotelEMP[];
 }

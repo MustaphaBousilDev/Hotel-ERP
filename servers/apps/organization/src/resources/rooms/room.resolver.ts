@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { RoomService } from './room.service';
 import { CreateRoomInput } from './dto/create-room.input';
 import { CurrentUser, User } from '@app/shared';
@@ -20,7 +20,7 @@ export class RoomResolver {
     return this.roomService.create(createRoomInput, user);
   }
 
-  @Query(() => [Room], { name: 'room' })
+  @Query(() => [Room], { name: 'rooms' })
   findAll() {
     return this.roomService.findAll();
   }
@@ -32,11 +32,13 @@ export class RoomResolver {
 
   @Mutation(() => Room)
   updateRoom(
-    @Args('id') id: number,
-    @Args('updateRoomInput') updateWifiInput: UpdateRoomInput,
+    @Args('id', { type: () => Int }) id: number,
+    @Args('updateRoomInput') updateRoomInput: UpdateRoomInput,
     @CurrentUser() user: User,
   ) {
-    return this.roomService.update(id, updateWifiInput, user);
+    console.log('######### update resolver');
+    console.log(updateRoomInput);
+    return this.roomService.update(id, updateRoomInput, user);
   }
 
   @Mutation(() => Room)

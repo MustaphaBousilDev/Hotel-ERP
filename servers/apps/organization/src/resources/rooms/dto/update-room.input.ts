@@ -11,8 +11,8 @@ import { HotelIDDtoInput } from '../../hotels/dto/create-hotel.input';
 
 @InputType()
 export class UpdateRoomInput {
-  @IsOptional()
   @IsNumber()
+  @IsOptional()
   @Type(() => Number)
   @Field({ nullable: true })
   roomNumber?: number;
@@ -24,9 +24,7 @@ export class UpdateRoomInput {
   type?: string;
 
   @IsOptional()
-  @IsString()
-  @Type(() => String)
-  @Field()
+  @Field({ nullable: true })
   description?: string;
 
   @IsOptional()

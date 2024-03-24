@@ -178,6 +178,21 @@ services:
     depends_on:
       - rabbitmq
     container_name: tasks
+  employee:
+    image: employee
+    build:
+      context: .
+      args:
+        - APP=employee
+      target: development
+    command: npm run start:dev employee 
+    env_file:
+      - ./apps/employee/.env
+    ports:
+      - '5011:5011'
+    depends_on:
+      - rabbitmq
+    container_name: employee
   
 
   # db:

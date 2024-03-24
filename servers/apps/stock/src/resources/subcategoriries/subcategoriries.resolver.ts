@@ -3,14 +3,22 @@ import { SubcategoririesService } from './subcategoriries.service';
 import { Subcategoriry } from './entities/subcategoriry.entity';
 import { CreateSubcategoriryInput } from './dto/create-subcategoriry.input';
 import { UpdateSubcategoriryInput } from './dto/update-subcategoriry.input';
+import { CurrentUser } from '@app/shared';
+import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
 
 @Resolver(() => Subcategoriry)
 export class SubcategoririesResolver {
-  constructor(private readonly subcategoririesService: SubcategoririesService) {}
+  constructor(
+    private readonly subcategoririesService: SubcategoririesService,
+  ) {}
 
   @Mutation(() => Subcategoriry)
-  createSubcategoriry(@Args('createSubcategoriryInput') createSubcategoriryInput: CreateSubcategoriryInput) {
-    return this.subcategoririesService.create(createSubcategoriryInput);
+  createSubcategoriry(
+    @Args('createSubcategoriryInput')
+    createSubcategoriryInput: CreateSubcategoriryInput,
+    @CurrentUser() user: UserInfoDto,
+  ) {
+    return this.subcategoririesService.create(createSubcategoriryInput, user);
   }
 
   @Query(() => [Subcategoriry], { name: 'subcategoriries' })
@@ -24,8 +32,17 @@ export class SubcategoririesResolver {
   }
 
   @Mutation(() => Subcategoriry)
-  updateSubcategoriry(@Args('updateSubcategoriryInput') updateSubcategoriryInput: UpdateSubcategoriryInput) {
-    return this.subcategoririesService.update(updateSubcategoriryInput.id, updateSubcategoriryInput);
+  updateSubcategoriry(
+    @Args('id') id: number,
+    @Args('updateSubcategoriryInput')
+    updateSubcategoriryInput: UpdateSubcategoriryInput,
+    @CurrentUser() user: UserInfoDto,
+  ) {
+    return this.subcategoririesService.update(
+      id,
+      updateSubcategoriryInput,
+      user,
+    );
   }
 
   @Mutation(() => Subcategoriry)

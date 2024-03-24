@@ -51,7 +51,9 @@ export class RoomService {
     updateWifiDto: UpdateRoomInput,
     { _id: user_id }: UserInfoDto,
   ) {
+    console.log('### from service');
     const { hotel, ...updateDTO } = updateWifiDto;
+    console.log('### from service 1');
     if (hotel && hotel.id) {
       const hotelSchema = await this.hotelRepository.findOne({
         _id: hotel.id,
@@ -65,8 +67,10 @@ export class RoomService {
       if (hotelSchema) {
         updateDTO['hotel'] = hotelSchema;
       }
-      return this.roomRepository.findOneAndUpdate({ _id }, updateDTO);
+      console.log('#### service');
+      console.log(updateDTO);
     }
+    return this.roomRepository.findOneAndUpdate({ _id }, updateDTO);
   }
 
   remove(_id: any) {

@@ -7,7 +7,7 @@ import {
   timeWorkRepositorymySQL,
 } from './employee.repository';
 import { EmployeeDtoInput } from './dto/employee.input.dto';
-import { Employee } from './models/employee.schema';
+import { EmployeeEMP } from './models/employee.schema';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
 import { EmployeeDtoUpdate } from './dto/employee.update.dto';
 
@@ -45,7 +45,7 @@ export class EmployeeService {
       _id: createEmployeeDto.timeWork.id,
     });
     if (departement && user && position && timeWork) {
-      const saveEmp = new Employee({
+      const saveEmp = new EmployeeEMP({
         ...EmployeDTO,
         user: user,
         position: position,

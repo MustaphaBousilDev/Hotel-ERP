@@ -31,41 +31,41 @@ export class EmployeeDtoInput {
   gender: Gender;
 
   @IsDateString()
-  @Field({ nullable: true })
+  @Field()
   dateOfBirth: Date;
 
   @IsDateString()
-  @Field({ nullable: true })
+  @Field()
   dateOfHired: Date;
 
   @IsString()
   @Type(() => String)
-  @Field({ nullable: true })
+  @Field()
   contactNumber: string;
 
   @IsString()
   @Type(() => String)
-  @Field({ nullable: true })
+  @Field()
   email: string;
 
   @IsString()
   @Type(() => String)
-  @Field({ nullable: true })
+  @Field()
   address: string;
 
   @IsString()
   @Type(() => Number)
-  @Field({ nullable: true })
+  @Field()
   salary: number;
 
   @IsString()
   @Type(() => String)
-  @Field({ nullable: true })
+  @Field()
   superVisorID: string;
 
   @IsBoolean()
   @Type(() => Boolean)
-  @Field({ nullable: true })
+  @Field()
   isActivate: boolean;
 
   @IsString()
@@ -73,16 +73,13 @@ export class EmployeeDtoInput {
   @Field({ nullable: true })
   image: string;
 
-  @Field(() => [], { nullable: true })
-  @IsOptional()
+  @Field(() => DepartementIDDtoInput)
   departement: DepartementIDDtoInput;
 
-  @Field(() => PositionIDDtoInput, { nullable: true })
-  @IsOptional()
+  @Field(() => PositionIDDtoInput)
   position: PositionIDDtoInput;
 
-  @Field(() => TimeWorkIDDtoInput, { nullable: true })
-  @IsOptional()
+  @Field(() => TimeWorkIDDtoInput)
   timeWork: TimeWorkIDDtoInput;
 }
 

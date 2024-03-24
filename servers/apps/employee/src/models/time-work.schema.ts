@@ -1,8 +1,8 @@
 import { AbstractEntity } from '@app/shared';
 import { Field, ObjectType, registerEnumType } from '@nestjs/graphql';
 import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
-import { Employee } from './employee.schema';
-import { User } from './users.schema';
+import { EmployeeEMP } from './employee.schema';
+import { UserEMP } from './users.schema';
 
 export enum TIME_WORK {
   MORNING = '06:00->14:00',
@@ -30,17 +30,17 @@ export class TimeWork extends AbstractEntity<TimeWork> {
   @Field() // for graph
   status: boolean;
 
-  @OneToMany(() => Employee, (employee) => employee.timeWork, {
+  @OneToMany(() => EmployeeEMP, (employee) => employee.timeWork, {
     cascade: true,
     eager: true,
   })
-  employee: Employee[];
+  employee: EmployeeEMP[];
 
-  @ManyToOne(() => User, (user) => user.timeWork, {
+  @ManyToOne(() => UserEMP, (user) => user.timeWork, {
     nullable: true,
     orphanedRowAction: 'delete',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  user: User;
+  user: UserEMP;
 }

@@ -2,19 +2,19 @@ import { AbstractRepositorymySQL } from '@app/shared';
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { EntityManager, Repository } from 'typeorm';
-import { Employee } from './models/employee.schema';
-import { Departement } from './models/departement.schema';
-import { User } from './models/users.schema';
+import { EmployeeEMP } from './models/employee.schema';
+import { DepartementEMP } from './models/departement.schema';
+import { UserEMP } from './models/users.schema';
 import { Position } from './models/position.schema';
 import { TimeWork } from './models/time-work.schema';
 
 @Injectable()
-export class EmployeeRepositorymySQL extends AbstractRepositorymySQL<Employee> {
+export class EmployeeRepositorymySQL extends AbstractRepositorymySQL<EmployeeEMP> {
   protected readonly logger = new Logger(EmployeeRepositorymySQL.name);
 
   constructor(
-    @InjectRepository(Employee)
-    EmployeeRepository: Repository<Employee>,
+    @InjectRepository(EmployeeEMP)
+    EmployeeRepository: Repository<EmployeeEMP>,
     entityManager: EntityManager,
   ) {
     super(EmployeeRepository, entityManager);
@@ -22,12 +22,12 @@ export class EmployeeRepositorymySQL extends AbstractRepositorymySQL<Employee> {
 }
 
 @Injectable()
-export class DepartementRepositorymySQL extends AbstractRepositorymySQL<Departement> {
+export class DepartementRepositorymySQL extends AbstractRepositorymySQL<DepartementEMP> {
   protected readonly logger = new Logger(DepartementRepositorymySQL.name);
 
   constructor(
-    @InjectRepository(Departement)
-    DepartementRepository: Repository<Departement>,
+    @InjectRepository(DepartementEMP)
+    DepartementRepository: Repository<DepartementEMP>,
     entityManager: EntityManager,
   ) {
     super(DepartementRepository, entityManager);
@@ -35,12 +35,12 @@ export class DepartementRepositorymySQL extends AbstractRepositorymySQL<Departem
 }
 
 @Injectable()
-export class UserRepositorymySQL extends AbstractRepositorymySQL<User> {
+export class UserRepositorymySQL extends AbstractRepositorymySQL<UserEMP> {
   protected readonly logger = new Logger(UserRepositorymySQL.name);
 
   constructor(
-    @InjectRepository(User)
-    UserRepository: Repository<User>,
+    @InjectRepository(UserEMP)
+    UserRepository: Repository<UserEMP>,
     entityManager: EntityManager,
   ) {
     super(UserRepository, entityManager);

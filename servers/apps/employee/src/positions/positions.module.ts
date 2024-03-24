@@ -2,17 +2,21 @@ import { Module } from '@nestjs/common';
 import { PositionsService } from './positions.service';
 import { PositionsResolver } from './positions.resolver';
 import { DatabaseModulemySQL, LoggerModule } from '@app/shared';
-import { User } from '../models/users.schema';
+import { UserEMP } from '../models/users.schema';
 import { Position } from '../models/position.schema';
-import { Employee } from '../models/employee.schema';
+import { EmployeeEMP } from '../models/employee.schema';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriverConfig, ApolloFederationDriver } from '@nestjs/apollo';
 import { ConfigModule } from '@nestjs/config';
+import {
+  PositionRepositorymySQL,
+  UserRepositorymySQL,
+} from './positions.repository';
 
 @Module({
   imports: [
     DatabaseModulemySQL,
-    DatabaseModulemySQL.forFeature([User, Position, Employee]),
+    DatabaseModulemySQL.forFeature([UserEMP, Position, EmployeeEMP]),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloFederationDriver,
       autoSchemaFile: {
@@ -22,6 +26,11 @@ import { ConfigModule } from '@nestjs/config';
     LoggerModule,
     ConfigModule.forRoot({ isGlobal: true }),
   ],
-  providers: [PositionsResolver, PositionsService],
+  providers: [
+    PositionsResolver,
+    PositionsService,
+    UserRepositorymySQL,
+    PositionRepositorymySQL,
+  ],
 })
 export class PositionsModule {}

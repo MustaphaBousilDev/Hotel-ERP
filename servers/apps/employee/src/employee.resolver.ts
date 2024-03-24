@@ -1,6 +1,6 @@
 import { Resolver, Args, Mutation, Query } from '@nestjs/graphql';
-import { Employee } from './models/employee.schema';
-import { CurrentUser, User } from '@app/shared';
+import { EmployeeEMP } from './models/employee.schema';
+import { CurrentUser } from '@app/shared';
 import {
   Ctx,
   MessagePattern,
@@ -12,20 +12,20 @@ import { EmployeeService } from './employee.service';
 import { EmployeeDtoInput } from './dto/employee.input.dto';
 import { EmployeeDtoUpdate } from './dto/employee.update.dto';
 
-@Resolver(() => Employee)
+@Resolver(() => EmployeeEMP)
 export class EmployeeResolver {
   constructor(private readonly employeeService: EmployeeService) {}
 
-  @Mutation(() => Employee)
+  @Mutation(() => EmployeeEMP)
   createEmployee(
     @Args('createEmployeeInput')
     createEmployeeInput: EmployeeDtoInput,
-    @CurrentUser() user: User,
+    @CurrentUser() user: UserInfoDto,
   ) {
     return this.employeeService.create(createEmployeeInput, user);
   }
 
-  @Mutation(() => Employee)
+  @Mutation(() => EmployeeEMP)
   updateEmployee(
     @Args('id') id: number,
     @Args('updateEmployeeInputs')
@@ -35,17 +35,17 @@ export class EmployeeResolver {
     return this.employeeService.update(id, updateEmployeeInput, user);
   }
 
-  @Query(() => [Employee], { name: 'employees' })
+  @Query(() => [EmployeeEMP], { name: 'employees' })
   findAll() {
     return this.employeeService.findAll();
   }
 
-  @Query(() => Employee, { name: 'employee' })
+  @Query(() => EmployeeEMP, { name: 'employee' })
   findOne(@Args('id', { type: () => Number }) id: number) {
     return this.employeeService.findOne(id);
   }
 
-  @Mutation(() => Employee)
+  @Mutation(() => EmployeeEMP)
   async removeEmployee(@Args('id', { type: () => Number }) id: number) {
     console.log(id);
     await this.employeeService.remove(id);

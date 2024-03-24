@@ -8,13 +8,13 @@ import {
   OneToMany,
   ManyToOne,
 } from 'typeorm';
-import { Hotel } from './hotel.schema';
-import { Employee } from './employee.schema';
-import { User } from './users.schema';
+import { HotelEMP } from './hotel.schema';
+import { EmployeeEMP } from './employee.schema';
+import { UserEMP } from './users.schema';
 
 @Entity()
 @ObjectType() // for add it in schema qraphql
-export class Departement extends AbstractEntity<Departement> {
+export class DepartementEMP extends AbstractEntity<DepartementEMP> {
   @Column({ nullable: true })
   @Field() // for graph
   name: string;
@@ -23,21 +23,21 @@ export class Departement extends AbstractEntity<Departement> {
   @Field() // for graph
   image: string;
 
-  @ManyToMany(() => Hotel, (hotel) => hotel.departments)
+  @ManyToMany(() => HotelEMP, (hotel) => hotel.departments)
   @JoinTable()
-  hotels: Hotel[];
+  hotels: HotelEMP[];
 
-  @OneToMany(() => Employee, (employee) => employee.departement, {
+  @OneToMany(() => EmployeeEMP, (employee) => employee.departement, {
     cascade: true,
     eager: true,
   })
-  employee: Employee[];
+  employee: EmployeeEMP[];
 
-  @ManyToOne(() => User, (user) => user.departement, {
+  @ManyToOne(() => UserEMP, (user) => user.departement, {
     nullable: true,
     orphanedRowAction: 'delete',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  user: User;
+  user: UserEMP;
 }

@@ -1,10 +1,10 @@
 import { AbstractEntity } from '@app/shared';
 import { Field, ObjectType, registerEnumType } from '@nestjs/graphql';
 import { Column, Entity, ManyToOne } from 'typeorm';
-import { Departement } from './departement.schema';
+import { DepartementEMP } from './departement.schema';
 import { Position } from './position.schema';
 import { TimeWork } from './time-work.schema';
-import { User } from './users.schema';
+import { UserEMP } from './users.schema';
 
 export enum Gender {
   HOMME = 'homme',
@@ -17,7 +17,7 @@ registerEnumType(Gender, {
 
 @Entity()
 @ObjectType() // for add it in schema qraphql
-export class Employee extends AbstractEntity<Employee> {
+export class EmployeeEMP extends AbstractEntity<EmployeeEMP> {
   @Column({ nullable: true })
   @Field() // for graph
   firstName: string;
@@ -71,23 +71,23 @@ export class Employee extends AbstractEntity<Employee> {
   @Field() // for graph
   image: string;
 
-  @Field(() => Departement, { nullable: true })
-  @ManyToOne(() => Departement, (departement) => departement.employee, {
+  @Field(() => DepartementEMP, { nullable: true })
+  @ManyToOne(() => DepartementEMP, (departement) => departement.employee, {
     nullable: true,
     orphanedRowAction: 'delete',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  departement: Departement;
+  departement: DepartementEMP;
 
-  @Field(() => User, { nullable: true })
-  @ManyToOne(() => User, (user) => user.employees, {
+  @Field(() => UserEMP, { nullable: true })
+  @ManyToOne(() => UserEMP, (user) => user.employees, {
     nullable: true,
     orphanedRowAction: 'delete',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  user: User;
+  user: UserEMP;
 
   @Field(() => Position, { nullable: true })
   @ManyToOne(() => Position, (position) => position.employee, {
