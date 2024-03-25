@@ -3,14 +3,20 @@ import { SuppliersService } from './suppliers.service';
 import { Supplier } from './entities/supplier.entity';
 import { CreateSupplierInput } from './dto/create-supplier.input';
 import { UpdateSupplierInput } from './dto/update-supplier.input';
+import { CurrentUser } from '@app/shared';
+import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
 
 @Resolver(() => Supplier)
 export class SuppliersResolver {
   constructor(private readonly suppliersService: SuppliersService) {}
 
   @Mutation(() => Supplier)
-  createSupplier(@Args('createSupplierInput') createSupplierInput: CreateSupplierInput) {
-    return this.suppliersService.create(createSupplierInput);
+  createSupplier(
+    @Args('createSupplierInput')
+    createSupplierInput: CreateSupplierInput,
+    @CurrentUser() user: UserInfoDto,
+  ) {
+    return this.suppliersService.create(createSupplierInput, user);
   }
 
   @Query(() => [Supplier], { name: 'suppliers' })
@@ -24,8 +30,13 @@ export class SuppliersResolver {
   }
 
   @Mutation(() => Supplier)
-  updateSupplier(@Args('updateSupplierInput') updateSupplierInput: UpdateSupplierInput) {
-    return this.suppliersService.update(updateSupplierInput.id, updateSupplierInput);
+  updateSupplier(
+    @Args('id') _id: number,
+    @Args('updateSupplierInput')
+    updateSupplierInput: UpdateSupplierInput,
+    @CurrentUser() user: UserInfoDto,
+  ) {
+    return this.suppliersService.update(_id, updateSupplierInput, user);
   }
 
   @Mutation(() => Supplier)

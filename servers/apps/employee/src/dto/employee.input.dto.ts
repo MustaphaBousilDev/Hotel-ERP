@@ -5,7 +5,7 @@ import {
   IsDateString,
   IsEnum,
   IsNotEmpty,
-  IsOptional,
+  //IsOptional,
   IsString,
 } from 'class-validator';
 import { Gender } from '../models/employee.schema';

@@ -1,26 +1,57 @@
 import { Injectable } from '@nestjs/common';
 import { CreateSupplierInput } from './dto/create-supplier.input';
 import { UpdateSupplierInput } from './dto/update-supplier.input';
+import {
+  SupplierRepositorymySQL,
+  UserRepositorySQL,
+} from './supplier.repository';
+import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
+import { Suppliers } from '../../models';
 
 @Injectable()
 export class SuppliersService {
-  create(createSupplierInput: CreateSupplierInput) {
-    return 'This action adds a new supplier';
+  constructor(
+    private readonly userRepository: UserRepositorySQL,
+    private readonly supplierRepository: SupplierRepositorymySQL,
+  ) {}
+  async create(
+    createSupplierInput: CreateSupplierInput,
+    { _id: userId }: UserInfoDto,
+  ) {
+    const user = await this.userRepository.findOne({
+      _id: userId,
+    });
+    const supplier = new Suppliers({
+      ...createSupplierInput,
+      user,
+    });
+    return this.supplierRepository.create(supplier);
   }
 
-  findAll() {
-    return `This action returns all suppliers`;
+  async findAll() {
+    return this.supplierRepository.find({});
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} supplier`;
+  async findOne(_id: number) {
+    return this.supplierRepository.findOne({ _id });
   }
 
-  update(id: number, updateSupplierInput: UpdateSupplierInput) {
-    return `This action updates a #${id} supplier`;
+  async update(
+    _id: number,
+    updateSupplierInput: UpdateSupplierInput,
+    { _id: userId }: UserInfoDto,
+  ) {
+    const user = await this.userRepository.findOne({
+      _id: userId,
+    });
+    updateSupplierInput['user'] = user;
+    return this.supplierRepository.findOneAndUpdate(
+      { _id },
+      updateSupplierInput,
+    );
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} supplier`;
+  async remove(_id: number) {
+    await this.supplierRepository.findOneAndDelete({ _id });
   }
 }
