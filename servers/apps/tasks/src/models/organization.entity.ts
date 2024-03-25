@@ -1,7 +1,8 @@
 import { AbstractEntity } from '@app/shared';
 import { Field, ObjectType } from '@nestjs/graphql';
-import { Column, Entity, OneToMany } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 import { Hotel } from './hotel.entity';
+import { User } from './users.repository';
 
 @Entity()
 @ObjectType() // for add it in schema qraphql
@@ -20,4 +21,12 @@ export class Organization extends AbstractEntity<Organization> {
     eager: true,
   })
   hotel: Hotel[];
+
+  @ManyToOne(() => User, (user) => user.organization, {
+    orphanedRowAction: 'delete',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+    nullable: true,
+  })
+  user: User;
 }

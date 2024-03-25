@@ -24,6 +24,8 @@ import { Departement } from './models/departement.entity';
 import { TaskstypesModule } from './resources/taskstypes/taskstypes.module';
 import { AttachementModule } from './resources/attachement/attachement.module';
 import { HisytoryModule } from './resources/hisytory/hisytory.module';
+import { UserRepositorySQL } from './resources/users.repository';
+import { User } from './models/users.repository';
 
 @Module({
   imports: [
@@ -37,6 +39,7 @@ import { HisytoryModule } from './resources/hisytory/hisytory.module';
       Task_History,
       TasksAttach,
       Departement,
+      User,
     ]),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloFederationDriver,
@@ -71,6 +74,7 @@ import { HisytoryModule } from './resources/hisytory/hisytory.module';
     TasksTypeRepositorymySQL,
     TaskAttachementRepositorymySQL,
     EmployeeRepositorymySQL,
+    UserRepositorySQL,
   ],
 })
 export class TasksModule {}

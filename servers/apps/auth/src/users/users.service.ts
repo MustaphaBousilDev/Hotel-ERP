@@ -13,6 +13,7 @@ import {
   ORGANIZATION_SERVICE,
   RESERVATION_SERVICE,
   Role,
+  TASKS_SERVICE,
   User,
 } from '@app/shared';
 import { ClientProxy } from '@nestjs/microservices';
@@ -24,6 +25,8 @@ export class UsersService {
     private readonly createUserReservation: ClientProxy,
     @Inject(ORGANIZATION_SERVICE)
     private readonly createUserOrganization: ClientProxy,
+    @Inject(TASKS_SERVICE)
+    private readonly createUserTasks: ClientProxy,
   ) {}
   async create(createUserDto: CreateUserDto) {
     console.log('services');
@@ -34,7 +37,7 @@ export class UsersService {
       password: await bcrypt.hash(createUserDto.password, 10),
       roles: createUserDto.roles?.map((roleDto) => new Role(roleDto)),
     });
-    const promises = [];
+    //const promises = [];
     console.log('user Service (((----', user);
     /*promises.push(
       this.createUserReservation
@@ -59,8 +62,11 @@ export class UsersService {
       ...createUserDto,
       password: undefined,
     });
-
     this.createUserReservation.emit('createUserComminicate', {
+      ...createUserDto,
+      password: undefined,
+    });
+    this.createUserTasks.emit('createUserComminicate', {
       ...createUserDto,
       password: undefined,
     });

@@ -7,6 +7,7 @@ import {
   ORGANIZATION_SERVICE,
   RESERVATION_SERVICE,
   Role,
+  TASKS_SERVICE,
   User,
 } from '@app/shared';
 import { LoggerModule } from 'nestjs-pino';
@@ -46,6 +47,17 @@ import { ConfigService } from '@nestjs/config';
           options: {
             urls: [configService.getOrThrow<string>('RABBITMQ_URI')],
             queue: 'reservations',
+          },
+        }),
+        inject: [ConfigService],
+      },
+      {
+        name: TASKS_SERVICE,
+        useFactory: (configService: ConfigService) => ({
+          transport: Transport.RMQ,
+          options: {
+            urls: [configService.getOrThrow<string>('RABBITMQ_URI')],
+            queue: 'tasks',
           },
         }),
         inject: [ConfigService],
