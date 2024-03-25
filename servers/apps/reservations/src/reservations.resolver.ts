@@ -37,7 +37,7 @@ export class ReservationsResolver {
   removeReservation(@Args('id', { type: () => Number }) id: number) {
     return this.reservationsService.remove(id);
   }
-  @MessagePattern('createUserResr')
+  /*@MessagePattern('createUserResr')
   createUser(@Payload() data: any, @Ctx() context: RmqContext) {
     console.log(' ########################## success message ');
     console.log(' ########################## success  ');
@@ -46,5 +46,5 @@ export class ReservationsResolver {
     //telling RabbitMQ that it has been successfully received and processed. This is important in message queue systems to prevent messages from being reprocessed in case of failures.
     channel.ack(originalMsg);
     console.log(data);
-  }
+  }*/
 }

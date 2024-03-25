@@ -23,6 +23,7 @@ import { CategoriesModule } from './resources/categories/categories.module';
 import { SubcategoririesModule } from './resources/subcategoriries/subcategoriries.module';
 import { SuppliersModule } from './resources/suppliers/suppliers.module';
 import { TagsModule } from './resources/tags/tags.module';
+import { ProductsModule } from './resources/products/products.module';
 
 @Module({
   imports: [
@@ -51,6 +52,7 @@ import { TagsModule } from './resources/tags/tags.module';
       },
     }),
     LoggerModule,
+    ProductsModule,
     BrandsModule,
     CategoriesModule,
     SubcategoririesModule,

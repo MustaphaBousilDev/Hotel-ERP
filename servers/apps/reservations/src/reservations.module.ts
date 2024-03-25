@@ -26,7 +26,8 @@ import { Room } from './models/rooms.mysql.entity';
 import { Hotel } from './models/hotel.mysql.entity';
 import { Organization } from './models/organization.mysql.entity';
 import { UserRepositorySQL } from './reservations.repository';
-
+import { ReservationsController } from './reservations.controller';
+import { UserRepositorySQL as UserRemoteRepository } from './resources/users.repository';
 @Module({
   imports: [
     DatabaseModulemySQL,
@@ -94,7 +95,7 @@ import { UserRepositorySQL } from './reservations.repository';
       },
     ]),
   ],
-  controllers: [],
+  controllers: [ReservationsController],
   providers: [
     ReservationsService,
     // ReservationsRepository,
@@ -103,6 +104,7 @@ import { UserRepositorySQL } from './reservations.repository';
     UserRepositorySQL,
     HotelRepositorySQL,
     RoomRepositorySQL,
+    UserRemoteRepository,
   ],
 })
 export class ReservationsModule {}

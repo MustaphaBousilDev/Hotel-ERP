@@ -118,7 +118,7 @@ export class OrganizationController {
 
   @MessagePattern('createUserComminicate')
   async createUser(@Payload() data: any, @Ctx() context: RmqContext) {
-    console.log(' ########################## success message org ');
+    console.log(' ########################## success message org ggggq');
     console.log(' ########################## success  orgs');
     console.log(data);
     const channel = context.getChannelRef();

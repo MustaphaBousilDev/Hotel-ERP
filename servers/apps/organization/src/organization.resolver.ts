@@ -52,12 +52,12 @@ export class OrganizationResolver {
     return { message: 'Suceess' };
   }
 
-  @MessagePattern('createUserResr')
+  /*@MessagePattern('createUserResr')
   createUser(@Payload() data: any, @Ctx() context: RmqContext) {
     const channel = context.getChannelRef();
     const originalMsg = context.getMessage();
     //telling RabbitMQ that it has been successfully received and processed. This is important in message queue systems to prevent messages from being reprocessed in case of failures.
     channel.ack(originalMsg);
     console.log(data);
-  }
+  }*/
 }
