@@ -1,16 +1,16 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { SuppliersService } from './suppliers.service';
-import { Supplier } from './entities/supplier.entity';
 import { CreateSupplierInput } from './dto/create-supplier.input';
 import { UpdateSupplierInput } from './dto/update-supplier.input';
 import { CurrentUser } from '@app/shared';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
+import { Suppliers } from '../../models';
 
-@Resolver(() => Supplier)
+@Resolver(() => Suppliers)
 export class SuppliersResolver {
   constructor(private readonly suppliersService: SuppliersService) {}
 
-  @Mutation(() => Supplier)
+  @Mutation(() => Suppliers)
   createSupplier(
     @Args('createSupplierInput')
     createSupplierInput: CreateSupplierInput,
@@ -19,17 +19,17 @@ export class SuppliersResolver {
     return this.suppliersService.create(createSupplierInput, user);
   }
 
-  @Query(() => [Supplier], { name: 'suppliers' })
+  @Query(() => [Suppliers], { name: 'suppliers' })
   findAll() {
     return this.suppliersService.findAll();
   }
 
-  @Query(() => Supplier, { name: 'supplier' })
+  @Query(() => Suppliers, { name: 'supplier' })
   findOne(@Args('id', { type: () => Int }) id: number) {
     return this.suppliersService.findOne(id);
   }
 
-  @Mutation(() => Supplier)
+  @Mutation(() => Suppliers)
   updateSupplier(
     @Args('id') _id: number,
     @Args('updateSupplierInput')
@@ -39,7 +39,7 @@ export class SuppliersResolver {
     return this.suppliersService.update(_id, updateSupplierInput, user);
   }
 
-  @Mutation(() => Supplier)
+  @Mutation(() => Suppliers)
   removeSupplier(@Args('id', { type: () => Int }) id: number) {
     return this.suppliersService.remove(id);
   }

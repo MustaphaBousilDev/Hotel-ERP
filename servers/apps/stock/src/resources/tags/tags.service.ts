@@ -1,26 +1,48 @@
 import { Injectable } from '@nestjs/common';
 import { CreateTagInput } from './dto/create-tag.input';
 import { UpdateTagInput } from './dto/update-tag.input';
+import { TagRepositorymySQL, UserRepositorySQL } from './tags.repository';
+import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
+import { Tags } from '../../models';
 
 @Injectable()
 export class TagsService {
-  create(createTagInput: CreateTagInput) {
-    return 'This action adds a new tag';
+  constructor(
+    private readonly userRepository: UserRepositorySQL,
+    private readonly tagsRepository: TagRepositorymySQL,
+  ) {}
+  async create(createTagInput: CreateTagInput, { _id: userId }: UserInfoDto) {
+    const user = await this.userRepository.findOne({
+      _id: userId,
+    });
+    const tags = new Tags({
+      ...createTagInput,
+      user,
+    });
+    return this.tagsRepository.create(tags);
   }
 
   findAll() {
-    return `This action returns all tags`;
+    return this.tagsRepository.find({});
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} tag`;
+  findOne(_id: number) {
+    return this.tagsRepository.findOne({ _id });
   }
 
-  update(id: number, updateTagInput: UpdateTagInput) {
-    return `This action updates a #${id} tag`;
+  async update(
+    _id: number,
+    updateTagInput: UpdateTagInput,
+    { _id: userId }: UserInfoDto,
+  ) {
+    const user = await this.userRepository.findOne({
+      _id: userId,
+    });
+    updateTagInput['user'] = user;
+    return this.tagsRepository.findOneAndUpdate({ _id }, updateTagInput);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} tag`;
+  remove(_id: number) {
+    return this.tagsRepository.findOneAndDelete({ _id });
   }
 }

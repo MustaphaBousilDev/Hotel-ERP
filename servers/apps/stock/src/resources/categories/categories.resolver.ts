@@ -1,10 +1,10 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { CategoriesService } from './categories.service';
-import { Category } from './entities/category.entity';
 import { CreateCategoryInput } from './dto/create-category.input';
 import { UpdateCategoryInput } from './dto/update-category.input';
 import { CurrentUser } from '@app/shared';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
+import { Category } from '../../models';
 
 @Resolver(() => Category)
 export class CategoriesResolver {

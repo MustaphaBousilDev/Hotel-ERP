@@ -1,18 +1,18 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { SubcategoririesService } from './subcategoriries.service';
-import { Subcategoriry } from './entities/subcategoriry.entity';
 import { CreateSubcategoriryInput } from './dto/create-subcategoriry.input';
 import { UpdateSubcategoriryInput } from './dto/update-subcategoriry.input';
 import { CurrentUser } from '@app/shared';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
+import { SubCategory } from '../../models';
 
-@Resolver(() => Subcategoriry)
+@Resolver(() => SubCategory)
 export class SubcategoririesResolver {
   constructor(
     private readonly subcategoririesService: SubcategoririesService,
   ) {}
 
-  @Mutation(() => Subcategoriry)
+  @Mutation(() => SubCategory)
   createSubcategoriry(
     @Args('createSubcategoriryInput')
     createSubcategoriryInput: CreateSubcategoriryInput,
@@ -21,17 +21,17 @@ export class SubcategoririesResolver {
     return this.subcategoririesService.create(createSubcategoriryInput, user);
   }
 
-  @Query(() => [Subcategoriry], { name: 'subcategoriries' })
+  @Query(() => [SubCategory], { name: 'subcategoriries' })
   findAll() {
     return this.subcategoririesService.findAll();
   }
 
-  @Query(() => Subcategoriry, { name: 'subcategoriry' })
+  @Query(() => SubCategory, { name: 'subcategoriry' })
   findOne(@Args('id', { type: () => Int }) id: number) {
     return this.subcategoririesService.findOne(id);
   }
 
-  @Mutation(() => Subcategoriry)
+  @Mutation(() => SubCategory)
   updateSubcategoriry(
     @Args('id') id: number,
     @Args('updateSubcategoriryInput')
@@ -45,7 +45,7 @@ export class SubcategoririesResolver {
     );
   }
 
-  @Mutation(() => Subcategoriry)
+  @Mutation(() => SubCategory)
   removeSubcategoriry(@Args('id', { type: () => Int }) id: number) {
     return this.subcategoririesService.remove(id);
   }
