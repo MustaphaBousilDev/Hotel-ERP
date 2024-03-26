@@ -2,13 +2,15 @@ import { Resolver, Args, Mutation, Query } from '@nestjs/graphql';
 import { Reservation } from './models/reservation.mysql.entity';
 import { ReservationsService } from './reservations.service';
 import { CreateReservationDto } from './dto/create-reservation.dto';
-import { CurrentUser, User } from '@app/shared';
+import { CurrentUser } from '@app/shared';
 import {
   Ctx,
   MessagePattern,
   Payload,
   RmqContext,
 } from '@nestjs/microservices';
+import { UserRES } from './models/users.mysql.entity';
+import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
 
 @Resolver(() => Reservation)
 export class ReservationsResolver {
@@ -18,8 +20,12 @@ export class ReservationsResolver {
   createReservation(
     @Args('createReservationInput')
     createReservationInput: CreateReservationDto,
-    @CurrentUser() user: User,
+    @CurrentUser() user: UserInfoDto,
   ) {
+    console.log('############reservations############');
+    console.log(createReservationInput);
+    console.log('############## user');
+    console.log(user);
     return this.reservationsService.create(createReservationInput, user);
   }
 

@@ -4,6 +4,7 @@ import { Type } from 'class-transformer';
 import {
   IsDate,
   IsDefined,
+  IsNotEmpty,
   //IsNotEmpty,
   // IsNotEmpty,
   // IsNotEmpty,
@@ -34,8 +35,10 @@ export class CreateReservationDto {
   charge: CreateChargeDto;
 
   @Field(() => HotelIDInput)
+  @IsNotEmpty()
   hotel: HotelIDInput;
 
   @Field(() => RoomIDInputForReservation)
+  @IsNotEmpty()
   room: RoomIDInputForReservation;
 }

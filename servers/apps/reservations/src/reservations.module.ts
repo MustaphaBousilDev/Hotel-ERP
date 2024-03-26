@@ -15,7 +15,7 @@ import {
 } from './reservations.repository';
 //for mysql typeorm
 import { Reservation } from './models/reservation.mysql.entity';
-import { User } from './models/users.mysql.entity';
+import { UserRES } from './models/users.mysql.entity';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as Joi from 'joi';
 import { ClientsModule, Transport } from '@nestjs/microservices';
@@ -33,7 +33,7 @@ import { UserRepositorySQL as UserRemoteRepository } from './resources/users.rep
     DatabaseModulemySQL,
     DatabaseModulemySQL.forFeature([
       Reservation,
-      User,
+      UserRES,
       Room,
       Hotel,
       Organization,

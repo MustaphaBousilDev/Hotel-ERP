@@ -11,7 +11,7 @@ import {
 import { ReservationsService } from './reservations.service';
 import { CreateReservationDto } from './dto/create-reservation.dto';
 //import { UpdateReservationDto } from './dto/update-reservation.dto';
-import { JwtAuthGuard, Roles, User, CurrentUser } from '@app/shared';
+import { JwtAuthGuard, Roles, CurrentUser } from '@app/shared';
 import {
   Ctx,
   MessagePattern,
@@ -19,7 +19,11 @@ import {
   RmqContext,
 } from '@nestjs/microservices';
 import { UserRepositorySQL } from './resources/users.repository';
-import { User as UserReservation } from './models/users.mysql.entity';
+import {
+  UserRES,
+  UserRES as UserReservation,
+} from './models/users.mysql.entity';
+import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
 
 @Controller('reservations')
 export class ReservationsController {
@@ -33,7 +37,7 @@ export class ReservationsController {
   @Roles('Admin')
   async create(
     @Body() createReservationDto: CreateReservationDto,
-    @CurrentUser() user: User,
+    @CurrentUser() user: UserInfoDto,
   ) {
     console.log('###################hhhh############################');
     return this.reservationsService.create(createReservationDto, user);

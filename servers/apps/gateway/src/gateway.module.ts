@@ -27,10 +27,10 @@ import { authContext } from './auth.context';
                 name: 'auth',
                 url: configService.getOrThrow('AUTH_GRAPHQL_URL'),
               },
-              /*{
+              {
                 name: 'payments',
                 url: configService.getOrThrow('PAYMENTS_GRAPHQL_URL'),
-              },*/
+              },
               /*{
                 name: 'organization',
                 url: configService.getOrThrow('ORGANIZATION_GRAPHQL_URL'),

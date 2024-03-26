@@ -8,7 +8,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { EntityManager, Repository } from 'typeorm';
 import { Room } from './models/rooms.mysql.entity';
 import { Hotel } from './models/hotel.mysql.entity';
-import { User } from './models/users.mysql.entity';
+import { UserRES } from './models/users.mysql.entity';
 
 // @Injectable()
 // export class ReservationsRepository extends AbstractRepository<ReservationDocument> {
@@ -61,12 +61,12 @@ export class HotelRepositorySQL extends AbstractRepositorymySQL<Hotel> {
 }
 
 @Injectable()
-export class UserRepositorySQL extends AbstractRepositorymySQL<User> {
+export class UserRepositorySQL extends AbstractRepositorymySQL<UserRES> {
   protected readonly logger = new Logger(UserRepositorySQL.name);
 
   constructor(
-    @InjectRepository(User)
-    UserRepository: Repository<User>,
+    @InjectRepository(UserRES)
+    UserRepository: Repository<UserRES>,
     entityManager: EntityManager,
   ) {
     super(UserRepository, entityManager);

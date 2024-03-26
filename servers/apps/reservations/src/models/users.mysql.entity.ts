@@ -4,10 +4,11 @@ import { Field, ObjectType } from '@nestjs/graphql';
 import { Reservation } from './reservation.mysql.entity';
 import { Hotel } from './hotel.mysql.entity';
 import { Organization } from './organization.mysql.entity';
+import { Room } from './rooms.mysql.entity';
 
 @Entity()
 @ObjectType()
-export class User extends AbstractEntity<User> {
+export class UserRES extends AbstractEntity<UserRES> {
   @Column()
   @Field()
   firstName: string;
@@ -26,11 +27,11 @@ export class User extends AbstractEntity<User> {
   })
   reservation: Reservation[];
 
-  @OneToMany(() => Reservation, (room) => room.user, {
+  @OneToMany(() => Room, (room) => room.user, {
     cascade: true,
     eager: true,
   })
-  room: Reservation[];
+  room: Room[];
 
   @OneToMany(() => Hotel, (hotel) => hotel.user, {
     cascade: true,

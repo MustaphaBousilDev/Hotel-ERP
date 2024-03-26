@@ -7,10 +7,12 @@ import {
   RoomRepositorySQL,
   UserRepositorySQL,
 } from './reservations.repository';
-import { PAYMENT_SERVICE, User } from '@app/shared';
+import { PAYMENT_SERVICE } from '@app/shared';
 import { ClientProxy } from '@nestjs/microservices';
 import { map } from 'rxjs';
 import { Reservation } from './models/reservation.mysql.entity';
+import { UserRES } from './models/users.mysql.entity';
+import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
 
 @Injectable()
 export class ReservationsService {
@@ -23,8 +25,10 @@ export class ReservationsService {
   ) {}
   async create(
     createReservationDto: CreateReservationDto,
-    { email, _id: userId }: User,
+    { email, _id: userId }: UserInfoDto,
   ) {
+    console.log('################## email');
+    console.log(email);
     const {
       hotel: hotels,
       room: rooms,

@@ -3,7 +3,7 @@ import { Field, ObjectType } from '@nestjs/graphql';
 import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 import { Hotel } from './hotel.mysql.entity';
 import { Reservation } from './reservation.mysql.entity';
-import { User } from './users.mysql.entity';
+import { UserRES } from './users.mysql.entity';
 
 @Entity()
 @ObjectType() // for add it in schema qraphql
@@ -40,12 +40,12 @@ export class Room extends AbstractEntity<Room> {
   @Field() // for graph
   image: string;
 
-  @ManyToOne(() => User, (user) => user.room, {
+  @ManyToOne(() => UserRES, (user) => user.room, {
     orphanedRowAction: 'delete',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  user: User;
+  user: UserRES;
 
   @OneToMany(() => Reservation, (reservation) => reservation.room, {
     cascade: true,

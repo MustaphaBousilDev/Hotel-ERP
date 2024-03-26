@@ -1,7 +1,7 @@
 import { AbstractEntity } from '@app/shared';
 import { Field, ObjectType } from '@nestjs/graphql';
 import { Column, Entity, ManyToOne } from 'typeorm';
-import { User } from './users.mysql.entity';
+import { UserRES } from './users.mysql.entity';
 import { Room } from './rooms.mysql.entity';
 import { Hotel } from './hotel.mysql.entity';
 
@@ -25,12 +25,13 @@ export class Reservation extends AbstractEntity<Reservation> {
   @Field() // for graph
   invoiceId: string;
 
-  @ManyToOne(() => User, (user) => user.reservation, {
+  @ManyToOne(() => UserRES, (user) => user.reservation, {
     orphanedRowAction: 'delete',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
+    nullable: true,
   })
-  user: User;
+  user: UserRES;
 
   @ManyToOne(() => Room, (room) => room.reservation, {
     nullable: true,

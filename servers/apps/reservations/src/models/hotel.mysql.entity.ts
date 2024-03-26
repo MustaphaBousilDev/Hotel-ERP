@@ -4,7 +4,7 @@ import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 import { Room } from './rooms.mysql.entity';
 import { Organization } from './organization.mysql.entity';
 import { Reservation } from './reservation.mysql.entity';
-import { User } from './users.mysql.entity';
+import { UserRES } from './users.mysql.entity';
 @Entity()
 @ObjectType() // for add it in schema qraphql
 export class Hotel extends AbstractEntity<Hotel> {
@@ -36,10 +36,10 @@ export class Hotel extends AbstractEntity<Hotel> {
   })
   reservation: Reservation[];
 
-  @ManyToOne(() => User, (user) => user.hotel, {
+  @ManyToOne(() => UserRES, (user) => user.hotel, {
     orphanedRowAction: 'delete',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  user: User;
+  user: UserRES;
 }

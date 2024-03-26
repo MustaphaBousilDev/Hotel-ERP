@@ -2,7 +2,7 @@ import { AbstractEntity } from '@app/shared';
 import { Field, ObjectType } from '@nestjs/graphql';
 import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 import { Hotel } from './hotel.mysql.entity';
-import { User } from './users.mysql.entity';
+import { UserRES } from './users.mysql.entity';
 
 @Entity()
 @ObjectType() // for add it in schema qraphql
@@ -22,12 +22,12 @@ export class Organization extends AbstractEntity<Organization> {
   })
   hotel: Hotel[];
 
-  @Field(() => User, { nullable: true })
-  @ManyToOne(() => User, (user) => user.organization, {
+  @Field(() => UserRES, { nullable: true })
+  @ManyToOne(() => UserRES, (user) => user.organization, {
     nullable: true,
     orphanedRowAction: 'delete',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  user: User;
+  user: UserRES;
 }
