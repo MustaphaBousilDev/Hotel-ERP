@@ -5,6 +5,10 @@ import { DatabaseModulemySQL } from '@app/shared';
 import { Category, Hotel, SubCategory, User } from '../../models';
 import { LoggerModule } from 'nestjs-pino';
 import { ConfigModule } from '@nestjs/config';
+import {
+  CategoryRepositorymySQL,
+  UserRepositorySQL,
+} from './categories.repository';
 
 @Module({
   imports: [
@@ -13,6 +17,11 @@ import { ConfigModule } from '@nestjs/config';
     LoggerModule,
     ConfigModule.forRoot({ isGlobal: true }),
   ],
-  providers: [CategoriesResolver, CategoriesService],
+  providers: [
+    CategoriesResolver,
+    CategoriesService,
+    UserRepositorySQL,
+    CategoryRepositorymySQL,
+  ],
 })
 export class CategoriesModule {}

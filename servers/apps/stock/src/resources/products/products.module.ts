@@ -11,10 +11,10 @@ import {
   StockLocation,
   StockTransaction,
   SubCategory,
+  Suppliers,
   Tags,
   User,
 } from '../../models';
-import { Supplier } from '../suppliers/entities/supplier.entity';
 import {
   BrandRepositorySQL,
   HotelRepositorySQL,
@@ -42,7 +42,7 @@ import { ConfigModule } from '@nestjs/config';
       StockTransaction,
       Hotel,
       Tags,
-      Supplier,
+      Suppliers,
     ]),
     LoggerModule,
     ConfigModule.forRoot({ isGlobal: true }),

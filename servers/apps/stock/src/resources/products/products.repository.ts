@@ -58,10 +58,10 @@ export class SupplierRepositorySQL extends AbstractRepositorymySQL<Suppliers> {
 
   constructor(
     @InjectRepository(Suppliers)
-    SuplierRepositorymySQL: Repository<Suppliers>,
+    suplierRepository: Repository<Suppliers>,
     entityManager: EntityManager,
   ) {
-    super(SuplierRepositorymySQL, entityManager);
+    super(suplierRepository, entityManager);
   }
 }
 
