@@ -14,6 +14,7 @@ import {
   ORGANIZATION_SERVICE,
   RESERVATION_SERVICE,
   Role,
+  STOCK_SERVICE,
   TASKS_SERVICE,
   User,
 } from '@app/shared';
@@ -30,6 +31,8 @@ export class UsersService {
     private readonly createUserTasks: ClientProxy,
     @Inject(EMPLOYEE_SERVICE)
     private readonly createUserEmployee: ClientProxy,
+    @Inject(STOCK_SERVICE)
+    private readonly createUserStock: ClientProxy,
   ) {}
   async create(createUserDto: CreateUserDto) {
     console.log('services');
@@ -74,6 +77,10 @@ export class UsersService {
       password: undefined,
     });
     this.createUserEmployee.emit('createUserComminicate', {
+      ...createUserDto,
+      password: undefined,
+    });
+    this.createUserStock.emit('createUserComminicate', {
       ...createUserDto,
       password: undefined,
     });

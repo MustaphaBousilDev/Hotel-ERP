@@ -8,6 +8,7 @@ import {
   ORGANIZATION_SERVICE,
   RESERVATION_SERVICE,
   Role,
+  STOCK_SERVICE,
   TASKS_SERVICE,
   User,
 } from '@app/shared';
@@ -70,6 +71,17 @@ import { ConfigService } from '@nestjs/config';
           options: {
             urls: [configService.getOrThrow<string>('RABBITMQ_URI')],
             queue: 'employee',
+          },
+        }),
+        inject: [ConfigService],
+      },
+      {
+        name: STOCK_SERVICE,
+        useFactory: (configService: ConfigService) => ({
+          transport: Transport.RMQ,
+          options: {
+            urls: [configService.getOrThrow<string>('RABBITMQ_URI')],
+            queue: 'stock',
           },
         }),
         inject: [ConfigService],

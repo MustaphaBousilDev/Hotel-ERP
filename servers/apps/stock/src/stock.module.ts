@@ -15,6 +15,7 @@ import {
   SubCategory,
   Suppliers,
   Tags,
+  UserSTOCK,
 } from './models';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriverConfig, ApolloFederationDriver } from '@nestjs/apollo';
@@ -24,6 +25,8 @@ import { SubcategoririesModule } from './resources/subcategoriries/subcategoriri
 import { SuppliersModule } from './resources/suppliers/suppliers.module';
 import { TagsModule } from './resources/tags/tags.module';
 import { ProductsModule } from './resources/products/products.module';
+import { OrganizationController } from './stock.controller';
+import { UserRepositorySQL } from './resources/users/users.repository';
 
 @Module({
   imports: [
@@ -44,6 +47,7 @@ import { ProductsModule } from './resources/products/products.module';
       SubCategory,
       Suppliers,
       Tags,
+      UserSTOCK,
     ]),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloFederationDriver,
@@ -59,7 +63,7 @@ import { ProductsModule } from './resources/products/products.module';
     SuppliersModule,
     TagsModule,
   ],
-  controllers: [],
-  providers: [],
+  controllers: [OrganizationController],
+  providers: [UserRepositorySQL],
 })
 export class StockModule {}
