@@ -10,7 +10,7 @@ import {
   SubCategory,
   Suppliers,
   Tags,
-  User,
+  UserSTOCK,
 } from '../../models';
 
 @Injectable()
@@ -27,12 +27,12 @@ export class ProductRepositorymySQL extends AbstractRepositorymySQL<Product> {
 }
 
 @Injectable()
-export class UserRepositorySQL extends AbstractRepositorymySQL<User> {
+export class UserRepositorySQL extends AbstractRepositorymySQL<UserSTOCK> {
   protected readonly logger = new Logger(UserRepositorySQL.name);
 
   constructor(
-    @InjectRepository(User)
-    UserRepositorymySQL: Repository<User>,
+    @InjectRepository(UserSTOCK)
+    UserRepositorymySQL: Repository<UserSTOCK>,
     entityManager: EntityManager,
   ) {
     super(UserRepositorymySQL, entityManager);
@@ -44,7 +44,7 @@ export class SubCategoryRepositorySQL extends AbstractRepositorymySQL<SubCategor
   protected readonly logger = new Logger(SubCategoryRepositorySQL.name);
 
   constructor(
-    @InjectRepository(User)
+    @InjectRepository(SubCategory)
     SubCategoryRepositorymySQL: Repository<SubCategory>,
     entityManager: EntityManager,
   ) {

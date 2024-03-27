@@ -1,7 +1,7 @@
 import { AbstractEntity } from '@app/shared';
 import { Field, ObjectType } from '@nestjs/graphql';
 import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
-import { User } from './users.schema';
+import { UserSTOCK } from './users.schema';
 import { Product } from './products.schema';
 import { StockMovement } from './stock.movment.schema';
 
@@ -12,13 +12,13 @@ export class StockLocation extends AbstractEntity<StockLocation> {
   @Field({ nullable: true }) // for graph
   location_Name: string;
 
-  @ManyToOne(() => User, (user) => user.stockLocation, {
+  @ManyToOne(() => UserSTOCK, (user) => user.stockLocation, {
     nullable: true,
     orphanedRowAction: 'delete',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  user: User;
+  user: UserSTOCK;
 
   @OneToMany(() => Product, (product) => product.location, {
     cascade: true,

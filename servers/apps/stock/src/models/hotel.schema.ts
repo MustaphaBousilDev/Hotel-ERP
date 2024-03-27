@@ -9,7 +9,7 @@ import {
   OneToMany,
 } from 'typeorm';
 import { Organization } from './organization.schema';
-import { User } from './users.schema';
+import { UserSTOCK } from './users.schema';
 import { Departement } from './departement.schema';
 import { Category } from './categories.schema';
 import { Product } from './products.schema';
@@ -32,13 +32,13 @@ export class Hotel extends AbstractEntity<Hotel> {
   })
   organization: Organization;
 
-  @ManyToOne(() => User, (user) => user.hotel, {
+  @ManyToOne(() => UserSTOCK, (user) => user.hotel, {
     nullable: true,
     orphanedRowAction: 'delete',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  user: User;
+  user: UserSTOCK;
 
   @ManyToMany(() => Departement, (departments) => departments.hotels)
   @JoinTable()

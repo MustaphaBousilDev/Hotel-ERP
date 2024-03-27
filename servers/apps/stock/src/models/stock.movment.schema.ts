@@ -1,7 +1,7 @@
 import { AbstractEntity } from '@app/shared';
 import { Field, ObjectType } from '@nestjs/graphql';
 import { Column, Entity, ManyToOne } from 'typeorm';
-import { User } from './users.schema';
+import { UserSTOCK } from './users.schema';
 import { StockLocation } from './stock.location.schema';
 
 @Entity()
@@ -31,11 +31,11 @@ export class StockMovement extends AbstractEntity<StockMovement> {
   @Field()
   MovementDate: Date;
 
-  @ManyToOne(() => User, (user) => user.movmentStock, {
+  @ManyToOne(() => UserSTOCK, (user) => user.movmentStock, {
     nullable: true,
     orphanedRowAction: 'delete',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  user: User;
+  user: UserSTOCK;
 }

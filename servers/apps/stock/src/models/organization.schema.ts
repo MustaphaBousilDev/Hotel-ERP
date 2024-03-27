@@ -1,7 +1,7 @@
 import { AbstractEntity } from '@app/shared';
 import { Field, ObjectType } from '@nestjs/graphql';
 import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
-import { User } from './users.schema';
+import { UserSTOCK } from './users.schema';
 import { Hotel } from './hotel.schema';
 
 @Entity()
@@ -20,13 +20,13 @@ export class Organization extends AbstractEntity<Organization> {
   @Field({ nullable: true })
   logo: string;
 
-  @ManyToOne(() => User, (user) => user.organization, {
+  @ManyToOne(() => UserSTOCK, (user) => user.organization, {
     nullable: true,
     orphanedRowAction: 'delete',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  user: User;
+  user: UserSTOCK;
 
   @OneToMany(() => Hotel, (hotel) => hotel.organization, {
     cascade: true,

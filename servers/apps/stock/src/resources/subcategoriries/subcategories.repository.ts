@@ -2,7 +2,7 @@ import { AbstractRepositorymySQL } from '@app/shared';
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { EntityManager, Repository } from 'typeorm';
-import { Category, SubCategory, User } from '../../models';
+import { Category, SubCategory, UserSTOCK } from '../../models';
 @Injectable()
 export class SubCategoryRepositorymySQL extends AbstractRepositorymySQL<SubCategory> {
   protected readonly logger = new Logger(SubCategoryRepositorymySQL.name);
@@ -17,12 +17,12 @@ export class SubCategoryRepositorymySQL extends AbstractRepositorymySQL<SubCateg
 }
 
 @Injectable()
-export class UserRepositorymySQL extends AbstractRepositorymySQL<User> {
+export class UserRepositorymySQL extends AbstractRepositorymySQL<UserSTOCK> {
   protected readonly logger = new Logger(UserRepositorymySQL.name);
 
   constructor(
-    @InjectRepository(User)
-    UserRepository: Repository<User>,
+    @InjectRepository(UserSTOCK)
+    UserRepository: Repository<UserSTOCK>,
     entityManager: EntityManager,
   ) {
     super(UserRepository, entityManager);

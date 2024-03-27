@@ -13,7 +13,7 @@ import {
   SubCategory,
   Suppliers,
   Tags,
-  User,
+  UserSTOCK,
 } from '../../models';
 import {
   BrandRepositorySQL,
@@ -32,7 +32,7 @@ import { ConfigModule } from '@nestjs/config';
   imports: [
     DatabaseModulemySQL,
     DatabaseModulemySQL.forFeature([
-      User,
+      UserSTOCK,
       Product,
       ProductImage,
       ProductDetails,

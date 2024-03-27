@@ -8,7 +8,7 @@ import {
   ManyToOne,
   OneToMany,
 } from 'typeorm';
-import { User } from './users.schema';
+import { UserSTOCK } from './users.schema';
 import { SubCategory } from './subcategories.schema';
 import { Hotel } from './hotel.schema';
 import { Brand } from './brands.schema';
@@ -28,13 +28,13 @@ export class Product extends AbstractEntity<Product> {
   @Field({ nullable: true }) // for graph
   description: string;
 
-  @ManyToOne(() => User, (user) => user.product, {
+  @ManyToOne(() => UserSTOCK, (user) => user.product, {
     nullable: true,
     orphanedRowAction: 'delete',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  user: User;
+  user: UserSTOCK;
 
   @ManyToOne(() => SubCategory, (subCat) => subCat.products, {
     nullable: true,

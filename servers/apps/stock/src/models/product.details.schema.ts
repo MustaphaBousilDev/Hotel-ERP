@@ -1,7 +1,7 @@
 import { AbstractEntity } from '@app/shared';
 import { Field, ObjectType } from '@nestjs/graphql';
 import { Column, Entity, JoinTable, ManyToOne, OneToOne } from 'typeorm';
-import { User } from './users.schema';
+import { UserSTOCK } from './users.schema';
 import { Employee } from './employe.responsable.schema';
 import { Hotel } from './hotel.schema';
 import { Product } from './products.schema';
@@ -29,13 +29,13 @@ export class ProductDetails extends AbstractEntity<ProductDetails> {
   @Field({ nullable: true })
   code: string;
 
-  @ManyToOne(() => User, (user) => user.product, {
+  @ManyToOne(() => UserSTOCK, (user) => user.product, {
     nullable: true,
     orphanedRowAction: 'delete',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  user: User;
+  user: UserSTOCK;
 
   @ManyToOne(() => Employee, (emp) => emp.products, {
     nullable: true,

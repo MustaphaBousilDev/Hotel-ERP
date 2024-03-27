@@ -17,7 +17,7 @@ import { Tags } from './tags.schema';
 
 @Entity()
 @ObjectType()
-export class User extends AbstractEntity<User> {
+export class UserSTOCK extends AbstractEntity<UserSTOCK> {
   @Column()
   @Field()
   firstName: string;

@@ -2,7 +2,7 @@ import { AbstractEntity } from '@app/shared';
 import { Field, ObjectType } from '@nestjs/graphql';
 import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 import { Departement } from './departement.schema';
-import { User } from './users.schema';
+import { UserSTOCK } from './users.schema';
 import { ProductDetails } from './product.details.schema';
 // import { Departement } from './departement.schema';
 
@@ -31,11 +31,11 @@ export class Employee extends AbstractEntity<Employee> {
   })
   products: ProductDetails[];
 
-  @ManyToOne(() => User, (user) => user.employee, {
+  @ManyToOne(() => UserSTOCK, (user) => user.employee, {
     nullable: true,
     orphanedRowAction: 'delete',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  user: User;
+  user: UserSTOCK;
 }

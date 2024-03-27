@@ -8,7 +8,7 @@ import {
   ManyToOne,
   OneToMany,
 } from 'typeorm';
-import { User } from './users.schema';
+import { UserSTOCK } from './users.schema';
 import { Employee } from './employe.responsable.schema';
 import { Hotel } from './hotel.schema';
 
@@ -35,14 +35,14 @@ export class Departement extends AbstractEntity<Departement> {
   @JoinTable()
   hotels: Hotel[];
 
-  @Field(() => User, { nullable: true })
-  @ManyToOne(() => User, (user) => user.departements, {
+  @Field(() => UserSTOCK, { nullable: true })
+  @ManyToOne(() => UserSTOCK, (user) => user.departements, {
     nullable: true,
     orphanedRowAction: 'delete',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  user: User;
+  user: UserSTOCK;
 
   @Field(() => [Employee], { nullable: true })
   @OneToMany(() => Employee, (emp) => emp.departement, {

@@ -19,18 +19,18 @@ import { authContext } from './auth.context';
         gateway: {
           supergraphSdl: new IntrospectAndCompose({
             subgraphs: [
-              {
+              /*{
                 name: 'reservations',
                 url: configService.getOrThrow('RESERVATIONS_GRAPHQL_URL'),
-              },
+              },*/
               {
                 name: 'auth',
                 url: configService.getOrThrow('AUTH_GRAPHQL_URL'),
               },
-              {
+              /*{
                 name: 'payments',
                 url: configService.getOrThrow('PAYMENTS_GRAPHQL_URL'),
-              },
+              },*/
               /*{
                 name: 'organization',
                 url: configService.getOrThrow('ORGANIZATION_GRAPHQL_URL'),
@@ -43,6 +43,10 @@ import { authContext } from './auth.context';
                 name: 'employee',
                 url: configService.getOrThrow('EMPLOYEE_GRAPHQL_URL'),
               },*/
+              {
+                name: 'stock',
+                url: configService.getOrThrow('STOCK_GRAPHQL_URL'),
+              },
             ],
           }),
           buildService({ url }) {

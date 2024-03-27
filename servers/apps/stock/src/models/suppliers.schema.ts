@@ -2,7 +2,7 @@ import { AbstractEntity } from '@app/shared';
 import { Field, ObjectType } from '@nestjs/graphql';
 import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 import { Product } from './products.schema';
-import { User } from './users.schema';
+import { UserSTOCK } from './users.schema';
 @Entity()
 @ObjectType() // for add it in schema qraphql
 export class Suppliers extends AbstractEntity<Suppliers> {
@@ -21,11 +21,11 @@ export class Suppliers extends AbstractEntity<Suppliers> {
   })
   products: Product[];
 
-  @ManyToOne(() => User, (user) => user.suplies, {
+  @ManyToOne(() => UserSTOCK, (user) => user.suplies, {
     nullable: true,
     orphanedRowAction: 'delete',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  user: User;
+  user: UserSTOCK;
 }
