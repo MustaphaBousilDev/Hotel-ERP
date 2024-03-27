@@ -192,13 +192,13 @@ const listLinks = [
       ]
     },
     {
-      name: "employéé",
-      path: "/dashboard/brands",
+      name: "employes",
+      path: "/dashboard/employes",
       icon: FaUserTie,
       child:[
         {
-          name: "overview",
-          path: "/dashboard",
+          name: "all",
+          path: "/dashboard/employes",
           icon: TfiDashboard,
         },
         {

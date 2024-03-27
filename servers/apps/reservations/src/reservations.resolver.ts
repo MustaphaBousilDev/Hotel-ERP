@@ -3,13 +3,13 @@ import { Reservation } from './models/reservation.mysql.entity';
 import { ReservationsService } from './reservations.service';
 import { CreateReservationDto } from './dto/create-reservation.dto';
 import { CurrentUser } from '@app/shared';
-import {
+/*import {
   Ctx,
   MessagePattern,
   Payload,
   RmqContext,
-} from '@nestjs/microservices';
-import { UserRES } from './models/users.mysql.entity';
+} from '@nestjs/microservices';*/
+//import { UserRES } from './models/users.mysql.entity';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
 
 @Resolver(() => Reservation)

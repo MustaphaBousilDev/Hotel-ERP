@@ -19,10 +19,7 @@ import {
   RmqContext,
 } from '@nestjs/microservices';
 import { UserRepositorySQL } from './resources/users.repository';
-import {
-  UserRES,
-  UserRES as UserReservation,
-} from './models/users.mysql.entity';
+import { UserRES as UserReservation } from './models/users.mysql.entity';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
 
 @Controller('reservations')

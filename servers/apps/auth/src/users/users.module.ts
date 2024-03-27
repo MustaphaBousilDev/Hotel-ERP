@@ -4,6 +4,7 @@ import { UsersService } from './users.service';
 import { UserRepositorySQL } from './users.repository';
 import {
   DatabaseModulemySQL,
+  EMPLOYEE_SERVICE,
   ORGANIZATION_SERVICE,
   RESERVATION_SERVICE,
   Role,
@@ -58,6 +59,17 @@ import { ConfigService } from '@nestjs/config';
           options: {
             urls: [configService.getOrThrow<string>('RABBITMQ_URI')],
             queue: 'tasks',
+          },
+        }),
+        inject: [ConfigService],
+      },
+      {
+        name: EMPLOYEE_SERVICE,
+        useFactory: (configService: ConfigService) => ({
+          transport: Transport.RMQ,
+          options: {
+            urls: [configService.getOrThrow<string>('RABBITMQ_URI')],
+            queue: 'employee',
           },
         }),
         inject: [ConfigService],

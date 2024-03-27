@@ -21,6 +21,7 @@ import {
   timeWorkRepositorymySQL,
 } from './employee.repository';
 import { EmployeeResolver } from './employee.resolver';
+import { EmployeeController } from './employee.controller';
 
 @Module({
   imports: [
@@ -45,6 +46,7 @@ import { EmployeeResolver } from './employee.resolver';
     PositionsModule,
     TimeworksModule,
   ],
+  controllers: [EmployeeController],
   providers: [
     EmployeeResolver,
     EmployeeService,

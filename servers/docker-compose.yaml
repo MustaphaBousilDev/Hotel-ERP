@@ -193,6 +193,21 @@ services:
     depends_on:
       - rabbitmq
     container_name: employee
+  stock:
+    image: stock
+    build:
+      context: .
+      args:
+        - APP=stock
+      target: development
+    command: npm run start:dev stock
+    env_file:
+      - ./apps/stock/.env
+    ports:
+      - '5011:5011'
+    depends_on:
+      - rabbitmq
+    container_name: stock
   
 
   # db:

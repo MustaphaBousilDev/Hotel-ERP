@@ -10,6 +10,7 @@ import Home from "./pages/Home";
 //tasks 
 import {Add,Tasks,Config,Raport} from './pages/tasks'
 import Authentication from './pages/auth';
+import { Employee } from "./pages/employes";
 
 
 const App:React.FC = () => (
@@ -24,6 +25,7 @@ const App:React.FC = () => (
         <Route path='/dashboard/tasks/add' element={<Add/>} />
         <Route path='/dashboard/tasks/config' element={<Config/>} />
         <Route path='/dashboard/tasks/report' element={<Raport/>} />
+        <Route path='/dashboard/employes' element={<Employee/>} />
       </Route>
     </Routes>
   </Router>

@@ -10,6 +10,7 @@ import { UserRepositorySQL } from './users.repository';
 import * as bcrypt from 'bcryptjs';
 import { GetUserDto } from './dto/get-user.dto';
 import {
+  EMPLOYEE_SERVICE,
   ORGANIZATION_SERVICE,
   RESERVATION_SERVICE,
   Role,
@@ -27,6 +28,8 @@ export class UsersService {
     private readonly createUserOrganization: ClientProxy,
     @Inject(TASKS_SERVICE)
     private readonly createUserTasks: ClientProxy,
+    @Inject(EMPLOYEE_SERVICE)
+    private readonly createUserEmployee: ClientProxy,
   ) {}
   async create(createUserDto: CreateUserDto) {
     console.log('services');
@@ -67,6 +70,10 @@ export class UsersService {
       password: undefined,
     });
     this.createUserTasks.emit('createUserComminicate', {
+      ...createUserDto,
+      password: undefined,
+    });
+    this.createUserEmployee.emit('createUserComminicate', {
       ...createUserDto,
       password: undefined,
     });
