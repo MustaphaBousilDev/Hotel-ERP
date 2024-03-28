@@ -49,11 +49,11 @@ export class PositionsService {
     });
     if (user) {
       updatePositionInput['user'] = user;
-      return this.positionRepository.findOneAndUpdate(
-        { _id },
-        updatePositionInput,
-      );
     }
+    return this.positionRepository.findOneAndUpdate(
+      { _id },
+      updatePositionInput,
+    );
   }
 
   async remove(id: number) {
