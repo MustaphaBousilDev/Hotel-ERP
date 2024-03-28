@@ -3,17 +3,17 @@ import { IsBoolean, IsOptional, IsString } from 'class-validator';
 
 @InputType()
 export class UpdateBrandInput {
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   @IsString()
   name?: string;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   @IsBoolean()
   status?: boolean;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   @IsString()
   image?: string;
