@@ -35,15 +35,19 @@ export class EmployeeService {
     const departement = await this.departementRepository.findOne({
       _id: createEmployeeDto.departement.id,
     });
+    console.log('departement', departement);
     const user = await this.userRepository.findOne({
       _id: userId,
     });
+    console.log('user', user);
     const position = await this.positionRepository.findOne({
       _id: createEmployeeDto.position.id,
     });
+    console.log('position', position);
     const timeWork = await this.timeWorkRepository.findOne({
       _id: createEmployeeDto.timeWork.id,
     });
+    console.log('timework', timeWork);
     if (departement && user && position && timeWork) {
       const saveEmp = new EmployeeEMP({
         ...EmployeDTO,

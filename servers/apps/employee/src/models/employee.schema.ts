@@ -41,7 +41,7 @@ export class EmployeeEMP extends AbstractEntity<EmployeeEMP> {
 
   @Column({ nullable: true })
   @Field() // for graph
-  dateHired: Date;
+  dateOfHired: Date;
 
   @Column({ nullable: true })
   @Field() // for graph

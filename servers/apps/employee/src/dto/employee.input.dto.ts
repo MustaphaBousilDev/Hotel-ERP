@@ -2,9 +2,10 @@ import { Field, InputType } from '@nestjs/graphql';
 import { Type } from 'class-transformer';
 import {
   IsBoolean,
-  IsDateString,
+  IsDate,
   IsEnum,
   IsNotEmpty,
+  IsNumber,
   //IsOptional,
   IsString,
 } from 'class-validator';
@@ -30,11 +31,17 @@ export class EmployeeDtoInput {
   @Field(() => Gender, { nullable: true })
   gender: Gender;
 
-  @IsDateString()
+  //@IsDateString()
+  //@IsString()
+  @IsDate()
+  @Type(() => Date)
   @Field()
   dateOfBirth: Date;
 
-  @IsDateString()
+  //@IsDateString()
+  //@IsString()
+  @IsDate()
+  @Type(() => Date)
   @Field()
   dateOfHired: Date;
 
@@ -53,7 +60,7 @@ export class EmployeeDtoInput {
   @Field()
   address: string;
 
-  @IsString()
+  @IsNumber()
   @Type(() => Number)
   @Field()
   salary: number;
@@ -74,12 +81,15 @@ export class EmployeeDtoInput {
   image: string;
 
   @Field(() => DepartementIDDtoInput)
+  @IsNotEmpty()
   departement: DepartementIDDtoInput;
 
   @Field(() => PositionIDDtoInput)
+  @IsNotEmpty()
   position: PositionIDDtoInput;
 
   @Field(() => TimeWorkIDDtoInput)
+  @IsNotEmpty()
   timeWork: TimeWorkIDDtoInput;
 }
 

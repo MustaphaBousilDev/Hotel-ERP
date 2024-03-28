@@ -22,6 +22,8 @@ export class EmployeeResolver {
     createEmployeeInput: EmployeeDtoInput,
     @CurrentUser() user: UserInfoDto,
   ) {
+    console.log('########### employee ################');
+    console.log(createEmployeeInput);
     return this.employeeService.create(createEmployeeInput, user);
   }
 

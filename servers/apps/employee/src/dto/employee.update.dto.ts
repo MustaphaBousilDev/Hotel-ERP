@@ -2,6 +2,7 @@ import { Field, InputType } from '@nestjs/graphql';
 import { Type } from 'class-transformer';
 import {
   IsBoolean,
+  IsDate,
   IsDateString,
   IsEnum,
   IsNotEmpty,
@@ -34,12 +35,12 @@ export class EmployeeDtoUpdate {
   gender?: Gender;
 
   @IsOptional()
-  @IsDateString()
+  @IsDate()
   @Field({ nullable: true })
   dateOfBirth?: Date;
 
   @IsOptional()
-  @IsDateString()
+  @IsDate()
   @Field({ nullable: true })
   dateOfHired?: Date;
 
