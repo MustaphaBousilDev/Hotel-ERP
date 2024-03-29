@@ -4,24 +4,24 @@ import { CategoryInputID } from '../../categories/dto/create-category.input';
 
 @InputType()
 export class UpdateSubcategoriryInput {
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   @IsString()
   @IsNotEmpty()
   name?: string;
 
   @IsOptional()
-  @Field()
+  @Field({ nullable: true })
   @IsBoolean()
   status?: boolean;
 
   @IsOptional()
-  @Field()
+  @Field({ nullable: true })
   @IsString()
   image?: string;
 
   @IsOptional()
-  @Field(() => CategoryInputID)
+  @Field(() => CategoryInputID, { nullable: true })
   @IsNotEmpty()
   category?: CategoryInputID;
 }

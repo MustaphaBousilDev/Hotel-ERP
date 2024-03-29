@@ -3,12 +3,12 @@ import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 @InputType()
 export class UpdateSupplierInput {
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   @IsString()
   name?: string;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   @IsString()
   contactInfo?: string;
