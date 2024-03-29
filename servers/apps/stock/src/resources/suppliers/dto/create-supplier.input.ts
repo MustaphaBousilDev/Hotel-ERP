@@ -9,7 +9,7 @@ export class CreateSupplierInput {
 
   @Field()
   @IsString()
-  contactInfo: string;
+  ContactInfo: string;
 }
 
 @InputType()

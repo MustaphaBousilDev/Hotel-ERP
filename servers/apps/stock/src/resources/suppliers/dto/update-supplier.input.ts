@@ -11,7 +11,7 @@ export class UpdateSupplierInput {
   @Field({ nullable: true })
   @IsOptional()
   @IsString()
-  contactInfo?: string;
+  ContactInfo?: string;
 }
 
 @InputType()
