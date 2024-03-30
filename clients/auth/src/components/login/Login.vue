@@ -5,14 +5,44 @@
   import Users from '../icons/User.vue'
   import Emails from '../icons/Email.vue'
   import Password from '../icons/Password.vue'
+  import axios from 'axios'
 
   const schema = Yup.object().shape({
-    username: Yup.string().required('Username is required'),
+    username: Yup.string().required('Username ddis required'),
     password: Yup.string().required('Password is required')
   })
 
-  function onSubmit(values){
+  async function onSubmit(values){
     const { username, password } = values 
+    console.log('credentials', username, password)
+    const formData = new FormData()
+    let data = {
+      email: username,
+      password: password
+    }
+    console.log(data)
+    /*fetch('http://localhost:5001/auth/login', {
+      method: 'POST',
+      body: data,
+    })
+      .then((response) => {
+        if(!response.ok) {
+          throw new Error('Network response was not ok')
+        }
+        return response.json()
+      })
+      .then((data) => {
+        console.log('Login Succesfly', data)
+      })
+      .catch((error) =>{
+        console.error('Error loggin in ', error)
+      })*/
+      try {
+      const response = await axios.post('http://localhost:5001/auth/login', data)
+      console.log('Login Successful', response.data)
+    } catch (error) {
+      console.error('Error logging in', error)
+    }
   }
 </script>
 
