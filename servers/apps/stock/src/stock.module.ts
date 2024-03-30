@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { DatabaseModulemySQL, LoggerModule } from '@app/shared';
+import { CacheModule } from '@nestjs/cache-manager';
 import {
   CategorySTOCK,
   DepartementSTOCK,
@@ -27,7 +28,7 @@ import { TagsModule } from './resources/tags/tags.module';
 import { ProductsModule } from './resources/products/products.module';
 import { OrganizationController } from './stock.controller';
 import { UserRepositorySQL } from './resources/users/users.repository';
-import { RedisModule } from 'nestjs-redis';
+import { CacheService } from './cache/cache.service';
 
 @Module({
   imports: [
@@ -50,9 +51,9 @@ import { RedisModule } from 'nestjs-redis';
       TagsSTOCK,
       UserSTOCK,
     ]),
-    RedisModule.register({
-      host: 'redis',
-      port: 6379,
+    CacheModule.register({
+      isGlobal: true,
+      ttl: 1000,
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloFederationDriver,
@@ -69,6 +70,6 @@ import { RedisModule } from 'nestjs-redis';
     TagsModule,
   ],
   controllers: [OrganizationController],
-  providers: [UserRepositorySQL],
+  providers: [UserRepositorySQL, CacheService],
 })
 export class StockModule {}

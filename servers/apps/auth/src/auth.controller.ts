@@ -18,7 +18,8 @@ export class AuthController {
     @Res({ passthrough: true }) response: Response,
   ) {
     console.log('####------------------controller', user);
-    await this.authService.login(user, response);
+    const token = await this.authService.login(user, response);
+    user['token'] = token;
     response.send(user);
   }
 

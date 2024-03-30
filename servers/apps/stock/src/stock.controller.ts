@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, UseInterceptors } from '@nestjs/common';
 import {
   Ctx,
   MessagePattern,
@@ -8,6 +8,9 @@ import {
 import { UserRepositorySQL } from './resources/users/users.repository';
 import { UserSTOCK } from './models';
 import { CacheService } from './cache/cache.service';
+import { CacheInterceptor } from '@nestjs/cache-manager';
+
+@UseInterceptors(CacheInterceptor)
 @Controller('stock')
 export class OrganizationController {
   constructor(
@@ -17,10 +20,7 @@ export class OrganizationController {
   @Get('cache')
   async cacheExample(): Promise<any> {
     // Set a value in Redis
-    await this.cacheService.setValue('example_key', 'example_value');
-    // Retrieve the value from Redis
-    const cachedValue = await this.cacheService.getValue('example_key');
-    return { cachedValue };
+    return this.cacheService.getHello();
   }
 
   @MessagePattern('createUserComminicate')

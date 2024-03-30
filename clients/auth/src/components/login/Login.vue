@@ -11,7 +11,6 @@
     username: Yup.string().required('Username ddis required'),
     password: Yup.string().required('Password is required')
   })
-
   async function onSubmit(values){
     const { username, password } = values 
     console.log('credentials', username, password)
@@ -21,25 +20,12 @@
       password: password
     }
     console.log(data)
-    /*fetch('http://localhost:5001/auth/login', {
-      method: 'POST',
-      body: data,
-    })
-      .then((response) => {
-        if(!response.ok) {
-          throw new Error('Network response was not ok')
-        }
-        return response.json()
-      })
-      .then((data) => {
-        console.log('Login Succesfly', data)
-      })
-      .catch((error) =>{
-        console.error('Error loggin in ', error)
-      })*/
       try {
       const response = await axios.post('http://localhost:5001/auth/login', data)
       console.log('Login Successful', response.data)
+      localStorage.setItem('token', response.data.token)
+      window.location.href = '/dashboard'
+
     } catch (error) {
       console.error('Error logging in', error)
     }
