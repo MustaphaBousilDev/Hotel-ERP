@@ -207,6 +207,7 @@ services:
       - '5012:5012'
     depends_on:
       - rabbitmq
+      - redis
     container_name: stock
   
 

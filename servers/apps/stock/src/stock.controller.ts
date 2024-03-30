@@ -1,4 +1,4 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import {
   Ctx,
   MessagePattern,
@@ -7,9 +7,22 @@ import {
 } from '@nestjs/microservices';
 import { UserRepositorySQL } from './resources/users/users.repository';
 import { UserSTOCK } from './models';
-@Controller('organization')
+import { CacheService } from './cache/cache.service';
+@Controller('stock')
 export class OrganizationController {
-  constructor(private readonly usersRepository: UserRepositorySQL) {}
+  constructor(
+    private readonly usersRepository: UserRepositorySQL,
+    private readonly cacheService: CacheService,
+  ) {}
+  @Get('cache')
+  async cacheExample(): Promise<any> {
+    // Set a value in Redis
+    await this.cacheService.setValue('example_key', 'example_value');
+    // Retrieve the value from Redis
+    const cachedValue = await this.cacheService.getValue('example_key');
+    return { cachedValue };
+  }
+
   @MessagePattern('createUserComminicate')
   async createUser(@Payload() data: any, @Ctx() context: RmqContext) {
     console.log(' ########################## success message org ggggq');

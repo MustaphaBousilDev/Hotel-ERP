@@ -27,6 +27,7 @@ import { TagsModule } from './resources/tags/tags.module';
 import { ProductsModule } from './resources/products/products.module';
 import { OrganizationController } from './stock.controller';
 import { UserRepositorySQL } from './resources/users/users.repository';
+import { RedisModule } from 'nestjs-redis';
 
 @Module({
   imports: [
@@ -49,6 +50,10 @@ import { UserRepositorySQL } from './resources/users/users.repository';
       TagsSTOCK,
       UserSTOCK,
     ]),
+    RedisModule.register({
+      host: 'redis',
+      port: 6379,
+    }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloFederationDriver,
       autoSchemaFile: {
