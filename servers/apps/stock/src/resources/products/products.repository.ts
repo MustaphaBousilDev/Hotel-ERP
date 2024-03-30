@@ -3,23 +3,23 @@ import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { EntityManager, Repository } from 'typeorm';
 import {
-  Brand,
-  Hotel,
-  Product,
-  StockLocation,
-  SubCategory,
-  Suppliers,
-  Tags,
+  BrandSTOCK,
+  HotelSTOCK,
+  ProductSTOCK,
+  StockLocationSTOCK,
+  SubCategorySTOCK,
+  SuppliersSTOCK,
+  TagsSTOCK,
   UserSTOCK,
 } from '../../models';
 
 @Injectable()
-export class ProductRepositorymySQL extends AbstractRepositorymySQL<Product> {
+export class ProductRepositorymySQL extends AbstractRepositorymySQL<ProductSTOCK> {
   protected readonly logger = new Logger(ProductRepositorymySQL.name);
 
   constructor(
-    @InjectRepository(Product)
-    ProductRepository: Repository<Product>,
+    @InjectRepository(ProductSTOCK)
+    ProductRepository: Repository<ProductSTOCK>,
     entityManager: EntityManager,
   ) {
     super(ProductRepository, entityManager);
@@ -40,12 +40,12 @@ export class UserRepositorySQL extends AbstractRepositorymySQL<UserSTOCK> {
 }
 
 @Injectable()
-export class SubCategoryRepositorySQL extends AbstractRepositorymySQL<SubCategory> {
+export class SubCategoryRepositorySQL extends AbstractRepositorymySQL<SubCategorySTOCK> {
   protected readonly logger = new Logger(SubCategoryRepositorySQL.name);
 
   constructor(
-    @InjectRepository(SubCategory)
-    SubCategoryRepositorymySQL: Repository<SubCategory>,
+    @InjectRepository(SubCategorySTOCK)
+    SubCategoryRepositorymySQL: Repository<SubCategorySTOCK>,
     entityManager: EntityManager,
   ) {
     super(SubCategoryRepositorymySQL, entityManager);
@@ -53,12 +53,12 @@ export class SubCategoryRepositorySQL extends AbstractRepositorymySQL<SubCategor
 }
 
 @Injectable()
-export class SupplierRepositorySQL extends AbstractRepositorymySQL<Suppliers> {
+export class SupplierRepositorySQL extends AbstractRepositorymySQL<SuppliersSTOCK> {
   protected readonly logger = new Logger(SupplierRepositorySQL.name);
 
   constructor(
-    @InjectRepository(Suppliers)
-    suplierRepository: Repository<Suppliers>,
+    @InjectRepository(SuppliersSTOCK)
+    suplierRepository: Repository<SuppliersSTOCK>,
     entityManager: EntityManager,
   ) {
     super(suplierRepository, entityManager);
@@ -66,12 +66,12 @@ export class SupplierRepositorySQL extends AbstractRepositorymySQL<Suppliers> {
 }
 
 @Injectable()
-export class BrandRepositorySQL extends AbstractRepositorymySQL<Brand> {
+export class BrandRepositorySQL extends AbstractRepositorymySQL<BrandSTOCK> {
   protected readonly logger = new Logger(BrandRepositorySQL.name);
 
   constructor(
-    @InjectRepository(Brand)
-    BrandRepositorymySQL: Repository<Brand>,
+    @InjectRepository(BrandSTOCK)
+    BrandRepositorymySQL: Repository<BrandSTOCK>,
     entityManager: EntityManager,
   ) {
     super(BrandRepositorymySQL, entityManager);
@@ -79,12 +79,12 @@ export class BrandRepositorySQL extends AbstractRepositorymySQL<Brand> {
 }
 
 @Injectable()
-export class HotelRepositorySQL extends AbstractRepositorymySQL<Hotel> {
+export class HotelRepositorySQL extends AbstractRepositorymySQL<HotelSTOCK> {
   protected readonly logger = new Logger(HotelRepositorySQL.name);
 
   constructor(
-    @InjectRepository(Hotel)
-    HotelRepositorymySQL: Repository<Hotel>,
+    @InjectRepository(HotelSTOCK)
+    HotelRepositorymySQL: Repository<HotelSTOCK>,
     entityManager: EntityManager,
   ) {
     super(HotelRepositorymySQL, entityManager);
@@ -92,12 +92,12 @@ export class HotelRepositorySQL extends AbstractRepositorymySQL<Hotel> {
 }
 
 @Injectable()
-export class StockLocationRepositorySQL extends AbstractRepositorymySQL<StockLocation> {
+export class StockLocationRepositorySQL extends AbstractRepositorymySQL<StockLocationSTOCK> {
   protected readonly logger = new Logger(StockLocationRepositorySQL.name);
 
   constructor(
-    @InjectRepository(StockLocation)
-    StockLocationRepository: Repository<StockLocation>,
+    @InjectRepository(StockLocationSTOCK)
+    StockLocationRepository: Repository<StockLocationSTOCK>,
     entityManager: EntityManager,
   ) {
     super(StockLocationRepository, entityManager);
@@ -105,12 +105,12 @@ export class StockLocationRepositorySQL extends AbstractRepositorymySQL<StockLoc
 }
 
 @Injectable()
-export class TagsRepositorySQL extends AbstractRepositorymySQL<Tags> {
+export class TagsRepositorySQL extends AbstractRepositorymySQL<TagsSTOCK> {
   protected readonly logger = new Logger(TagsRepositorySQL.name);
 
   constructor(
-    @InjectRepository(Tags)
-    TagsRepositorymySQL: Repository<Tags>,
+    @InjectRepository(TagsSTOCK)
+    TagsRepositorymySQL: Repository<TagsSTOCK>,
     entityManager: EntityManager,
   ) {
     super(TagsRepositorymySQL, entityManager);

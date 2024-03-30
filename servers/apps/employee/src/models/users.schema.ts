@@ -5,8 +5,8 @@ import { OrganizationEMP } from './organization.schema';
 import { DepartementEMP } from './departement.schema';
 import { HotelEMP } from './hotel.schema';
 import { EmployeeEMP } from './employee.schema';
-import { Position } from './position.schema';
-import { TimeWork } from './time-work.schema';
+import { PositionEMP } from './position.schema';
+import { TimeWorkEMP } from './time-work.schema';
 
 @Entity()
 @ObjectType()
@@ -30,12 +30,12 @@ export class UserEMP extends AbstractEntity<UserEMP> {
   })
   employees: EmployeeEMP[];
 
-  @Field(() => [Position], { nullable: true })
-  @OneToMany(() => Position, (position) => position.user, {
+  @Field(() => [PositionEMP], { nullable: true })
+  @OneToMany(() => PositionEMP, (position) => position.user, {
     cascade: true,
     eager: true,
   })
-  position: Position[];
+  position: PositionEMP[];
 
   @Field(() => [OrganizationEMP], { nullable: true })
   @OneToMany(() => OrganizationEMP, (organization) => organization.user, {
@@ -44,12 +44,12 @@ export class UserEMP extends AbstractEntity<UserEMP> {
   })
   organization: OrganizationEMP[];
 
-  @Field(() => [TimeWork], { nullable: true })
-  @OneToMany(() => TimeWork, (timeWork) => timeWork.user, {
+  @Field(() => [TimeWorkEMP], { nullable: true })
+  @OneToMany(() => TimeWorkEMP, (timeWork) => timeWork.user, {
     cascade: true,
     eager: true,
   })
-  timeWork: TimeWork[];
+  timeWork: TimeWorkEMP[];
 
   @Field(() => [DepartementEMP], { nullable: true })
   @OneToMany(() => DepartementEMP, (departement) => departement.user, {

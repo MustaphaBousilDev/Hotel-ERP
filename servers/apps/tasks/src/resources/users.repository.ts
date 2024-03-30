@@ -8,7 +8,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 // import { Model } from 'mongoose';
 import { EntityManager, Repository } from 'typeorm';
-import { User } from '../models/users.repository';
+import { UserTASKS } from '../models/users.repository';
 
 // @Injectable()
 // export class UsersRepository extends AbstractRepository<UserDocument> {
@@ -20,12 +20,12 @@ import { User } from '../models/users.repository';
 // }
 
 @Injectable()
-export class UserRepositorySQL extends AbstractRepositorymySQL<User> {
+export class UserRepositorySQL extends AbstractRepositorymySQL<UserTASKS> {
   protected readonly logger = new Logger(UserRepositorySQL.name);
 
   constructor(
-    @InjectRepository(User)
-    usersRepository: Repository<User>,
+    @InjectRepository(UserTASKS)
+    usersRepository: Repository<UserTASKS>,
     entityManager: EntityManager,
   ) {
     super(usersRepository, entityManager);

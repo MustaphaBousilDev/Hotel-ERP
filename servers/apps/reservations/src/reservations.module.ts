@@ -14,7 +14,7 @@ import {
   RoomRepositorySQL,
 } from './reservations.repository';
 //for mysql typeorm
-import { Reservation } from './models/reservation.mysql.entity';
+import { ReservationRES } from './models/reservation.mysql.entity';
 import { UserRES } from './models/users.mysql.entity';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as Joi from 'joi';
@@ -22,9 +22,9 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriverConfig, ApolloFederationDriver } from '@nestjs/apollo';
 import { ReservationsResolver } from './reservations.resolver';
-import { Room } from './models/rooms.mysql.entity';
-import { Hotel } from './models/hotel.mysql.entity';
-import { Organization } from './models/organization.mysql.entity';
+import { RoomRES } from './models/rooms.mysql.entity';
+import { HotelRES } from './models/hotel.mysql.entity';
+import { OrganizationRES } from './models/organization.mysql.entity';
 import { UserRepositorySQL } from './reservations.repository';
 import { ReservationsController } from './reservations.controller';
 import { UserRepositorySQL as UserRemoteRepository } from './resources/users.repository';
@@ -32,11 +32,11 @@ import { UserRepositorySQL as UserRemoteRepository } from './resources/users.rep
   imports: [
     DatabaseModulemySQL,
     DatabaseModulemySQL.forFeature([
-      Reservation,
+      ReservationRES,
       UserRES,
-      Room,
-      Hotel,
-      Organization,
+      RoomRES,
+      HotelRES,
+      OrganizationRES,
     ]),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloFederationDriver,

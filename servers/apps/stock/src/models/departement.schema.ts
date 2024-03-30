@@ -9,12 +9,12 @@ import {
   OneToMany,
 } from 'typeorm';
 import { UserSTOCK } from './users.schema';
-import { Employee } from './employe.responsable.schema';
-import { Hotel } from './hotel.schema';
+import { EmployeeSTOCK } from './employe.responsable.schema';
+import { HotelSTOCK } from './hotel.schema';
 
 @Entity()
 @ObjectType() // for add it in schema qraphql
-export class Departement extends AbstractEntity<Departement> {
+export class DepartementSTOCK extends AbstractEntity<DepartementSTOCK> {
   @Column()
   @Field() // for graph
   name: string;
@@ -31,9 +31,9 @@ export class Departement extends AbstractEntity<Departement> {
   @Field() // for graph
   image: string;
 
-  @ManyToMany(() => Hotel, (hotel) => hotel.departments)
+  @ManyToMany(() => HotelSTOCK, (hotel) => hotel.departments)
   @JoinTable()
-  hotels: Hotel[];
+  hotels: HotelSTOCK[];
 
   @Field(() => UserSTOCK, { nullable: true })
   @ManyToOne(() => UserSTOCK, (user) => user.departements, {
@@ -44,10 +44,10 @@ export class Departement extends AbstractEntity<Departement> {
   })
   user: UserSTOCK;
 
-  @Field(() => [Employee], { nullable: true })
-  @OneToMany(() => Employee, (emp) => emp.departement, {
+  @Field(() => [EmployeeSTOCK], { nullable: true })
+  @OneToMany(() => EmployeeSTOCK, (emp) => emp.departement, {
     cascade: true,
     eager: true,
   })
-  employee: Employee[];
+  employee: EmployeeSTOCK[];
 }

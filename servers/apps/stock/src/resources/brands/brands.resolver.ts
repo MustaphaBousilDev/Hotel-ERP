@@ -4,13 +4,13 @@ import { CreateBrandInput } from './dto/create-brand.input';
 import { UpdateBrandInput } from './dto/update-brand.input';
 import { CurrentUser } from '@app/shared';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
-import { Brand } from '../../models';
+import { BrandSTOCK } from '../../models';
 
-@Resolver(() => Brand)
+@Resolver(() => BrandSTOCK)
 export class BrandsResolver {
   constructor(private readonly brandsService: BrandsService) {}
 
-  @Mutation(() => Brand)
+  @Mutation(() => BrandSTOCK)
   createBrand(
     @Args('createBrandInput')
     createBrandInput: CreateBrandInput,
@@ -19,17 +19,17 @@ export class BrandsResolver {
     return this.brandsService.create(createBrandInput, user);
   }
 
-  @Query(() => [Brand], { name: 'brands' })
+  @Query(() => [BrandSTOCK], { name: 'brands' })
   findAll() {
     return this.brandsService.findAll();
   }
 
-  @Query(() => Brand, { name: 'brand' })
+  @Query(() => BrandSTOCK, { name: 'brand' })
   findOne(@Args('id', { type: () => Int }) id: number) {
     return this.brandsService.findOne(id);
   }
 
-  @Mutation(() => Brand)
+  @Mutation(() => BrandSTOCK)
   updateBrand(
     @Args('id') id: number,
     @Args('updateBrandInput')
@@ -39,7 +39,7 @@ export class BrandsResolver {
     return this.brandsService.update(id, updateBrandInput, user);
   }
 
-  @Mutation(() => Brand)
+  @Mutation(() => BrandSTOCK)
   removeBrand(@Args('id', { type: () => Int }) id: number) {
     return this.brandsService.remove(id);
   }

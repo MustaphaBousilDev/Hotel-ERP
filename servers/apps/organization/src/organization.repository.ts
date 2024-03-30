@@ -1,17 +1,17 @@
 import { AbstractRepositorymySQL } from '@app/shared';
 import { Injectable, Logger } from '@nestjs/common';
-import { Organization } from './models/organization.schema';
+import { OrganizationORG } from './models/organization.schema';
 import { InjectRepository } from '@nestjs/typeorm';
 import { EntityManager, Repository } from 'typeorm';
-import { User } from './models/users.mysql.entity';
+import { UserORG } from './models/users.mysql.entity';
 
 @Injectable()
-export class OrganizationRepositorymySQL extends AbstractRepositorymySQL<Organization> {
+export class OrganizationRepositorymySQL extends AbstractRepositorymySQL<OrganizationORG> {
   protected readonly logger = new Logger(OrganizationRepositorymySQL.name);
 
   constructor(
-    @InjectRepository(Organization)
-    ReservationsRepository: Repository<Organization>,
+    @InjectRepository(OrganizationORG)
+    ReservationsRepository: Repository<OrganizationORG>,
     entityManager: EntityManager,
   ) {
     super(ReservationsRepository, entityManager);
@@ -19,12 +19,12 @@ export class OrganizationRepositorymySQL extends AbstractRepositorymySQL<Organiz
 }
 
 @Injectable()
-export class UserRepositorySQLOrg extends AbstractRepositorymySQL<User> {
+export class UserRepositorySQLOrg extends AbstractRepositorymySQL<UserORG> {
   protected readonly logger = new Logger(UserRepositorySQLOrg.name);
 
   constructor(
-    @InjectRepository(User)
-    UserRepositorymySQL: Repository<User>,
+    @InjectRepository(UserORG)
+    UserRepositorymySQL: Repository<UserORG>,
     entityManager: EntityManager,
   ) {
     super(UserRepositorymySQL, entityManager);

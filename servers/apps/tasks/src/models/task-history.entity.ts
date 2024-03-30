@@ -1,5 +1,5 @@
-import { Tasks } from './tasks.entity';
-import { Employee } from './employee.entity';
+import { TasksTASKS } from './tasks.entity';
+import { EmployeeTASKS } from './employee.entity';
 import { Field, ObjectType, registerEnumType } from '@nestjs/graphql';
 import { Column, Entity, ManyToOne } from 'typeorm';
 import { AbstractEntity } from '@app/shared';
@@ -26,7 +26,7 @@ registerEnumType(TaskPriorityHistory, {
 
 @ObjectType()
 @Entity()
-export class Task_History extends AbstractEntity<Task_History> {
+export class Task_HistoryTASKS extends AbstractEntity<Task_HistoryTASKS> {
   @Field(() => Date)
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   changeDate: Date;
@@ -50,19 +50,19 @@ export class Task_History extends AbstractEntity<Task_History> {
   priority: TaskPriorityHistory;
 
   // Define relationships
-  @Field(() => Tasks, { nullable: true })
-  @ManyToOne(() => Tasks, (task) => task.tasks_history, {
+  @Field(() => TasksTASKS, { nullable: true })
+  @ManyToOne(() => TasksTASKS, (task) => task.tasks_history, {
     nullable: true,
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  task: Tasks;
+  task: TasksTASKS;
 
-  @Field(() => Employee, { nullable: true })
-  @ManyToOne(() => Employee, (employee) => employee.tasks_history, {
+  @Field(() => EmployeeTASKS, { nullable: true })
+  @ManyToOne(() => EmployeeTASKS, (employee) => employee.tasks_history, {
     nullable: true,
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  employee: Employee;
+  employee: EmployeeTASKS;
 }

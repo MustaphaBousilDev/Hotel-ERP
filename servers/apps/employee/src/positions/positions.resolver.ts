@@ -4,13 +4,13 @@ import { CreatePositionInput } from './dto/create-position.input';
 import { UpdatePositionInput } from './dto/update-position.input';
 import { CurrentUser } from '@app/shared';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
-import { Position } from '../models/position.schema';
+import { PositionEMP } from '../models/position.schema';
 
-@Resolver(() => Position)
+@Resolver(() => PositionEMP)
 export class PositionsResolver {
   constructor(private readonly positionsService: PositionsService) {}
 
-  @Mutation(() => Position)
+  @Mutation(() => PositionEMP)
   createPosition(
     @Args('createPositionInput')
     createPositionInput: CreatePositionInput,
@@ -19,17 +19,17 @@ export class PositionsResolver {
     return this.positionsService.create(createPositionInput, user);
   }
 
-  @Query(() => [Position], { name: 'positions' })
+  @Query(() => [PositionEMP], { name: 'positions' })
   findAll() {
     return this.positionsService.findAll();
   }
 
-  @Query(() => Position, { name: 'position' })
+  @Query(() => PositionEMP, { name: 'position' })
   findOne(@Args('id', { type: () => Int }) id: number) {
     return this.positionsService.findOne(id);
   }
 
-  @Mutation(() => Position)
+  @Mutation(() => PositionEMP)
   updatePosition(
     @Args('id') id: number,
     @Args('updatePositionInput')
@@ -39,7 +39,7 @@ export class PositionsResolver {
     return this.positionsService.update(id, updatePositionInput, user);
   }
 
-  @Mutation(() => Position)
+  @Mutation(() => PositionEMP)
   removePosition(@Args('id', { type: () => Int }) id: number) {
     return this.positionsService.remove(id);
   }

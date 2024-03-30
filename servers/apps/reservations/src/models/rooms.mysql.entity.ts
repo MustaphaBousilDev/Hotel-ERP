@@ -1,13 +1,13 @@
 import { AbstractEntity } from '@app/shared';
 import { Field, ObjectType } from '@nestjs/graphql';
 import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
-import { Hotel } from './hotel.mysql.entity';
-import { Reservation } from './reservation.mysql.entity';
+import { HotelRES } from './hotel.mysql.entity';
+import { ReservationRES } from './reservation.mysql.entity';
 import { UserRES } from './users.mysql.entity';
 
 @Entity()
 @ObjectType() // for add it in schema qraphql
-export class Room extends AbstractEntity<Room> {
+export class RoomRES extends AbstractEntity<RoomRES> {
   @Column()
   //i am not using type in field because nestjs and graphql pick up on the type of these properties and will use it
   @Field() // for graph
@@ -29,12 +29,12 @@ export class Room extends AbstractEntity<Room> {
   @Field()
   isAvailable: boolean;
 
-  @ManyToOne(() => Hotel, (hotel) => hotel.room, {
+  @ManyToOne(() => HotelRES, (hotel) => hotel.room, {
     orphanedRowAction: 'delete',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  hotel: Hotel;
+  hotel: HotelRES;
 
   @Column()
   @Field() // for graph
@@ -47,9 +47,9 @@ export class Room extends AbstractEntity<Room> {
   })
   user: UserRES;
 
-  @OneToMany(() => Reservation, (reservation) => reservation.room, {
+  @OneToMany(() => ReservationRES, (reservation) => reservation.room, {
     cascade: true,
     eager: true,
   })
-  reservation: Reservation[];
+  reservation: ReservationRES[];
 }

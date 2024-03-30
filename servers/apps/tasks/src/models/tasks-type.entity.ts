@@ -1,23 +1,23 @@
 import { AbstractEntity } from '@app/shared';
 import { Field, ObjectType } from '@nestjs/graphql';
 import { Column, Entity, JoinColumn, OneToMany, OneToOne } from 'typeorm';
-import { Tasks } from './tasks.entity';
-import { Departement } from './departement.entity';
+import { TasksTASKS } from './tasks.entity';
+import { DepartementTASKS } from './departement.entity';
 
 @ObjectType()
 @Entity()
-export class TasksType extends AbstractEntity<TasksType> {
+export class TasksTypeTASKS extends AbstractEntity<TasksTypeTASKS> {
   @Field(() => String)
   @Column()
   name: string;
 
-  @Field(() => [Tasks], { nullable: true })
-  @OneToMany(() => Tasks, (tasks) => tasks.taskType, {
+  @Field(() => [TasksTASKS], { nullable: true })
+  @OneToMany(() => TasksTASKS, (tasks) => tasks.taskType, {
     nullable: true,
   })
-  tasks: Tasks[];
+  tasks: TasksTASKS[];
 
-  @OneToOne(() => Departement, { nullable: true })
+  @OneToOne(() => DepartementTASKS, { nullable: true })
   @JoinColumn()
-  departement: Departement;
+  departement: DepartementTASKS;
 }

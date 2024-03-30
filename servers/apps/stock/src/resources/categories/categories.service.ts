@@ -6,7 +6,7 @@ import {
   UserRepositorySQL,
 } from './categories.repository';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
-import { Category } from '../../models';
+import { CategorySTOCK } from '../../models';
 
 @Injectable()
 export class CategoriesService {
@@ -21,7 +21,7 @@ export class CategoriesService {
     const user = await this.userRepository.findOne({
       _id: userId,
     });
-    const categories = new Category({
+    const categories = new CategorySTOCK({
       ...createCategoryInput,
       user: user,
     });

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { DepartementRepositorySQL } from './departement.repository';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
 import { CreateDepartementInput } from './dto/create-departement.input';
-import { Departement } from '../../models/departement.schema';
+import { DepartementORG } from '../../models/departement.schema';
 import { UpdateDepartementInput } from './dto/update-departement.input';
 import { UserRepositorySQLForRoom } from '../users/users.repository';
 
@@ -20,7 +20,7 @@ export class DepartementService {
       _id: user_id,
     });
     if (user) {
-      const departement = new Departement({
+      const departement = new DepartementORG({
         name: createDepartementDto.name,
         description: createDepartementDto.description,
         status: createDepartementDto.status,

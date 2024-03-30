@@ -6,7 +6,7 @@ import {
 } from './history.repository';
 import { TasksHistoryDtoInput } from '../../dto/task-history.dto';
 import { TasksHistoryUpdateDTO } from '../../dto/task-history-update.dto';
-import { Task_History } from '../../models/task-history.entity';
+import { Task_HistoryTASKS } from '../../models/task-history.entity';
 
 @Injectable()
 export class HisytoryService {
@@ -22,7 +22,7 @@ export class HisytoryService {
     const task = await this.taskRepository.findOne({
       _id: createTaskHistoryInput.task.id,
     });
-    const taskHistory = new Task_History({
+    const taskHistory = new Task_HistoryTASKS({
       ...createTaskHistoryInput,
       task: task,
       employee: employee,

@@ -4,15 +4,15 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { EntityManager, Repository } from 'typeorm';
 //import { TimeWork } from '../models/time-work.schema';
 import { UserEMP } from '../models/users.schema';
-import { Position } from '../models/position.schema';
+import { PositionEMP } from '../models/position.schema';
 
 @Injectable()
-export class PositionRepositorymySQL extends AbstractRepositorymySQL<Position> {
+export class PositionRepositorymySQL extends AbstractRepositorymySQL<PositionEMP> {
   protected readonly logger = new Logger(PositionRepositorymySQL.name);
 
   constructor(
-    @InjectRepository(Position)
-    PositionRepository: Repository<Position>,
+    @InjectRepository(PositionEMP)
+    PositionRepository: Repository<PositionEMP>,
     entityManager: EntityManager,
   ) {
     super(PositionRepository, entityManager);

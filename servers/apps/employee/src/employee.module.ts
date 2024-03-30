@@ -1,14 +1,20 @@
 import { Module } from '@nestjs/common';
 import { EmployeeService } from './employee.service';
-import { DatabaseModulemySQL, LoggerModule } from '@app/shared';
-import { ConfigModule } from '@nestjs/config';
+import {
+  DatabaseModulemySQL,
+  LoggerModule,
+  ORGANIZATION_SERVICE,
+  STOCK_SERVICE,
+  TASKS_SERVICE,
+} from '@app/shared';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UserEMP } from './models/users.schema';
 import { HotelEMP } from './models/hotel.schema';
 import { OrganizationEMP } from './models/organization.schema';
 import { DepartementEMP } from './models/departement.schema';
 import { EmployeeEMP } from './models/employee.schema';
-import { Position } from './models/position.schema';
-import { TimeWork } from './models/time-work.schema';
+import { PositionEMP } from './models/position.schema';
+import { TimeWorkEMP } from './models/time-work.schema';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriverConfig, ApolloFederationDriver } from '@nestjs/apollo';
 import { PositionsModule } from './positions/positions.module';
@@ -22,6 +28,7 @@ import {
 } from './employee.repository';
 import { EmployeeResolver } from './employee.resolver';
 import { EmployeeController } from './employee.controller';
+import { ClientsModule, Transport } from '@nestjs/microservices';
 
 @Module({
   imports: [
@@ -32,8 +39,8 @@ import { EmployeeController } from './employee.controller';
       OrganizationEMP,
       DepartementEMP,
       EmployeeEMP,
-      Position,
-      TimeWork,
+      PositionEMP,
+      TimeWorkEMP,
     ]),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloFederationDriver,
@@ -45,6 +52,41 @@ import { EmployeeController } from './employee.controller';
     ConfigModule.forRoot({ isGlobal: true }),
     PositionsModule,
     TimeworksModule,
+    ClientsModule.registerAsync([
+      {
+        name: ORGANIZATION_SERVICE,
+        useFactory: (configService: ConfigService) => ({
+          transport: Transport.RMQ,
+          options: {
+            urls: [configService.getOrThrow<string>('RABBITMQ_URI')],
+            queue: 'organization',
+          },
+        }),
+        inject: [ConfigService],
+      },
+      {
+        name: TASKS_SERVICE,
+        useFactory: (configService: ConfigService) => ({
+          transport: Transport.RMQ,
+          options: {
+            urls: [configService.getOrThrow<string>('RABBITMQ_URI')],
+            queue: 'tasks',
+          },
+        }),
+        inject: [ConfigService],
+      },
+      {
+        name: STOCK_SERVICE,
+        useFactory: (configService: ConfigService) => ({
+          transport: Transport.RMQ,
+          options: {
+            urls: [configService.getOrThrow<string>('RABBITMQ_URI')],
+            queue: 'stock',
+          },
+        }),
+        inject: [ConfigService],
+      },
+    ]),
   ],
   controllers: [EmployeeController],
   providers: [

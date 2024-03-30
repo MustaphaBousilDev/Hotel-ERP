@@ -4,7 +4,7 @@ import {
   TasksAttachementRepositorymySQL,
 } from './attachement.repository';
 import { TaskAttachementInput } from '../../dto/task-attachement.dto';
-import { TasksAttach } from '../../models/tasks-attachement.entity';
+import { TasksAttachTASKS } from '../../models/tasks-attachement.entity';
 import { TaskAttachementUpdateDTO } from '../../dto/task-attachement-update.dto';
 
 @Injectable()
@@ -17,7 +17,7 @@ export class AttachementService {
     const employee = await this.employeeRepository.findOne({
       _id: createAttachementInput.employee.id,
     });
-    const taskAttachement = new TasksAttach({
+    const taskAttachement = new TasksAttachTASKS({
       name: createAttachementInput.name,
       file_name: createAttachementInput.file_name,
       file_url: createAttachementInput.file_url,

@@ -10,8 +10,8 @@ import {
 import { PAYMENT_SERVICE } from '@app/shared';
 import { ClientProxy } from '@nestjs/microservices';
 import { map } from 'rxjs';
-import { Reservation } from './models/reservation.mysql.entity';
-import { UserRES } from './models/users.mysql.entity';
+import { ReservationRES } from './models/reservation.mysql.entity';
+//import { UserRES } from './models/users.mysql.entity';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
 
 @Injectable()
@@ -54,7 +54,7 @@ export class ReservationsService {
         //tap is used to perform side effects on the data coming in from the microservice in other words it is used to perform operations on the data coming in from the microservice(for example logging the data coming in from the microservice)
         //map is used to handle asynchronous operations
         map((res) => {
-          const reservation = new Reservation({
+          const reservation = new ReservationRES({
             ...reservationDTO,
             //id of payment in stripe
             invoiceId: res.id,

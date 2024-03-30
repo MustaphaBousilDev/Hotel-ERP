@@ -2,8 +2,8 @@ import { AbstractEntity } from '@app/shared';
 import { Field, ObjectType, registerEnumType } from '@nestjs/graphql';
 import { Column, Entity, ManyToOne } from 'typeorm';
 import { DepartementEMP } from './departement.schema';
-import { Position } from './position.schema';
-import { TimeWork } from './time-work.schema';
+import { PositionEMP } from './position.schema';
+import { TimeWorkEMP } from './time-work.schema';
 import { UserEMP } from './users.schema';
 
 export enum Gender {
@@ -89,21 +89,21 @@ export class EmployeeEMP extends AbstractEntity<EmployeeEMP> {
   })
   user: UserEMP;
 
-  @Field(() => Position, { nullable: true })
-  @ManyToOne(() => Position, (position) => position.employee, {
+  @Field(() => PositionEMP, { nullable: true })
+  @ManyToOne(() => PositionEMP, (position) => position.employee, {
     nullable: true,
     orphanedRowAction: 'delete',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  position: Position;
+  position: PositionEMP;
 
-  @Field(() => TimeWork, { nullable: true })
-  @ManyToOne(() => TimeWork, (organization) => organization.employee, {
+  @Field(() => TimeWorkEMP, { nullable: true })
+  @ManyToOne(() => TimeWorkEMP, (organization) => organization.employee, {
     nullable: true,
     orphanedRowAction: 'delete',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  timeWork: TimeWork;
+  timeWork: TimeWorkEMP;
 }

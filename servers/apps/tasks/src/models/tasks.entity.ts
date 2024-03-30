@@ -8,10 +8,10 @@ import {
   ManyToOne,
   OneToMany,
 } from 'typeorm';
-import { TasksType } from './tasks-type.entity';
-import { Employee } from './employee.entity';
-import { TasksAttach } from './tasks-attachement.entity';
-import { Task_History } from './task-history.entity';
+import { TasksTypeTASKS } from './tasks-type.entity';
+import { EmployeeTASKS } from './employee.entity';
+import { TasksAttachTASKS } from './tasks-attachement.entity';
+import { Task_HistoryTASKS } from './task-history.entity';
 
 export enum TaskStatus {
   PENDING = 'pending',
@@ -36,7 +36,7 @@ registerEnumType(TaskPriority, {
 
 @ObjectType()
 @Entity()
-export class Tasks extends AbstractEntity<Tasks> {
+export class TasksTASKS extends AbstractEntity<TasksTASKS> {
   @Field(() => String, { nullable: true })
   @Column({ nullable: true })
   name: string;
@@ -63,13 +63,13 @@ export class Tasks extends AbstractEntity<Tasks> {
   })
   priority: TaskPriority;
 
-  @Field(() => TasksType, { nullable: true })
-  @ManyToOne(() => TasksType, (tasktype) => tasktype.tasks, {
+  @Field(() => TasksTypeTASKS, { nullable: true })
+  @ManyToOne(() => TasksTypeTASKS, (tasktype) => tasktype.tasks, {
     nullable: true,
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  taskType: TasksType;
+  taskType: TasksTypeTASKS;
 
   @Field(() => Date, { nullable: true })
   @Column({ type: 'date', nullable: true })
@@ -83,20 +83,20 @@ export class Tasks extends AbstractEntity<Tasks> {
   @Column({ type: 'date', nullable: true })
   dueDate: Date;
 
-  @Field(() => [Employee], { nullable: true })
-  @ManyToMany(() => Employee, { nullable: true })
+  @Field(() => [EmployeeTASKS], { nullable: true })
+  @ManyToMany(() => EmployeeTASKS, { nullable: true })
   @JoinTable()
-  employees: Employee[];
+  employees: EmployeeTASKS[];
 
-  @Field(() => TasksAttach, { nullable: true })
-  @ManyToOne(() => TasksAttach, (taskAttach) => taskAttach.tasks, {
+  @Field(() => TasksAttachTASKS, { nullable: true })
+  @ManyToOne(() => TasksAttachTASKS, (taskAttach) => taskAttach.tasks, {
     nullable: true,
   })
-  taskAttachement: TasksAttach;
+  taskAttachement: TasksAttachTASKS;
 
-  @Field(() => [Task_History], { nullable: true })
-  @OneToMany(() => Task_History, (tasksHistory) => tasksHistory.task, {
+  @Field(() => [Task_HistoryTASKS], { nullable: true })
+  @OneToMany(() => Task_HistoryTASKS, (tasksHistory) => tasksHistory.task, {
     nullable: true,
   })
-  tasks_history: Task_History[];
+  tasks_history: Task_HistoryTASKS[];
 }

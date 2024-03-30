@@ -1,10 +1,10 @@
 import { Column, Entity, OneToMany } from 'typeorm';
 import { AbstractEntity } from '@app/shared';
 import { Field, ObjectType } from '@nestjs/graphql';
-import { Reservation } from './reservation.mysql.entity';
-import { Hotel } from './hotel.mysql.entity';
-import { Organization } from './organization.mysql.entity';
-import { Room } from './rooms.mysql.entity';
+import { ReservationRES } from './reservation.mysql.entity';
+import { HotelRES } from './hotel.mysql.entity';
+import { OrganizationRES } from './organization.mysql.entity';
+import { RoomRES } from './rooms.mysql.entity';
 
 @Entity()
 @ObjectType()
@@ -21,27 +21,27 @@ export class UserRES extends AbstractEntity<UserRES> {
   @Field()
   email: string;
 
-  @OneToMany(() => Reservation, (reservation) => reservation.user, {
+  @OneToMany(() => ReservationRES, (reservation) => reservation.user, {
     cascade: true,
     eager: true,
   })
-  reservation: Reservation[];
+  reservation: ReservationRES[];
 
-  @OneToMany(() => Room, (room) => room.user, {
+  @OneToMany(() => RoomRES, (room) => room.user, {
     cascade: true,
     eager: true,
   })
-  room: Room[];
+  room: RoomRES[];
 
-  @OneToMany(() => Hotel, (hotel) => hotel.user, {
+  @OneToMany(() => HotelRES, (hotel) => hotel.user, {
     cascade: true,
     eager: true,
   })
-  hotel: Hotel[];
+  hotel: HotelRES[];
 
-  @OneToMany(() => Organization, (org) => org.user, {
+  @OneToMany(() => OrganizationRES, (org) => org.user, {
     cascade: true,
     eager: true,
   })
-  organization: Organization[];
+  organization: OrganizationRES[];
 }

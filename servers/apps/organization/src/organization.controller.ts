@@ -24,7 +24,7 @@ import {
   Payload,
   RmqContext,
 } from '@nestjs/microservices';
-import { User as UserReservation } from './models/users.mysql.entity';
+import { UserORG as UserReservation } from './models/users.mysql.entity';
 import { CurrentUser, JwtAuthGuard, Roles, UPLOAD_S3 } from '@app/shared';
 import { OrganizationInputDto } from './dto/organization.input.dto';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
@@ -32,6 +32,8 @@ import { FileInterceptor } from '@nestjs/platform-express';
 // import { map } from 'rxjs';
 import * as fs from 'fs';
 import { UpdateOrganizationInputDto } from './dto/organization.input.update.dto';
+import { EmployeeRepositorySQL } from './remote/employee.repository';
+//import { EmployeeORG } from './models/employee.schema';
 
 @Controller('organization')
 export class OrganizationController {
@@ -40,6 +42,7 @@ export class OrganizationController {
     private readonly usersRepository: UserRepositorySQLForRoom,
     @Inject(UPLOAD_S3)
     private readonly uploadLogoOrganization: ClientProxy,
+    private readonly employeeRepository: EmployeeRepositorySQL,
   ) {}
 
   // @UseInterceptors(FileInterceptor('logo'))
@@ -129,5 +132,21 @@ export class OrganizationController {
       ...data,
     });
     return this.usersRepository.create(user);
+  }
+
+  @MessagePattern('createEmployeeCuminicate')
+  async createEmployee(@Payload() data: any, @Ctx() context: RmqContext) {
+    console.log(' ########################## success message from employee ');
+    console.log(' ########################## success  ');
+    console.log(data);
+    const channel = context.getChannelRef();
+    const originalMsg = context.getMessage();
+    //telling RabbitMQ that it has been successfully received and processed. This is important in message queue systems to prevent messages from being reprocessed in case of failures.
+    channel.ack(originalMsg);
+    /*const employee = new Employee({
+      ...data,
+    });*/
+    //return this.userRepository.create(user);
+    console.log(data);
   }
 }

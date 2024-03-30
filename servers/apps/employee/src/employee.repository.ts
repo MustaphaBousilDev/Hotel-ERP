@@ -5,8 +5,8 @@ import { EntityManager, Repository } from 'typeorm';
 import { EmployeeEMP } from './models/employee.schema';
 import { DepartementEMP } from './models/departement.schema';
 import { UserEMP } from './models/users.schema';
-import { Position } from './models/position.schema';
-import { TimeWork } from './models/time-work.schema';
+import { PositionEMP } from './models/position.schema';
+import { TimeWorkEMP } from './models/time-work.schema';
 
 @Injectable()
 export class EmployeeRepositorymySQL extends AbstractRepositorymySQL<EmployeeEMP> {
@@ -48,12 +48,12 @@ export class UserRepositorymySQL extends AbstractRepositorymySQL<UserEMP> {
 }
 
 @Injectable()
-export class PositionRepositorymySQL extends AbstractRepositorymySQL<Position> {
+export class PositionRepositorymySQL extends AbstractRepositorymySQL<PositionEMP> {
   protected readonly logger = new Logger(PositionRepositorymySQL.name);
 
   constructor(
-    @InjectRepository(Position)
-    PositionRepository: Repository<Position>,
+    @InjectRepository(PositionEMP)
+    PositionRepository: Repository<PositionEMP>,
     entityManager: EntityManager,
   ) {
     super(PositionRepository, entityManager);
@@ -61,12 +61,12 @@ export class PositionRepositorymySQL extends AbstractRepositorymySQL<Position> {
 }
 
 @Injectable()
-export class timeWorkRepositorymySQL extends AbstractRepositorymySQL<TimeWork> {
+export class timeWorkRepositorymySQL extends AbstractRepositorymySQL<TimeWorkEMP> {
   protected readonly logger = new Logger(timeWorkRepositorymySQL.name);
 
   constructor(
-    @InjectRepository(TimeWork)
-    timeWorkRepository: Repository<TimeWork>,
+    @InjectRepository(TimeWorkEMP)
+    timeWorkRepository: Repository<TimeWorkEMP>,
     entityManager: EntityManager,
   ) {
     super(timeWorkRepository, entityManager);

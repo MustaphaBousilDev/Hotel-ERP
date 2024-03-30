@@ -1,13 +1,13 @@
 import { Column, Entity, OneToMany } from 'typeorm';
 import { AbstractEntity } from '@app/shared';
 import { Field, ObjectType } from '@nestjs/graphql';
-import { Organization } from './organization.entity';
-import { Departement } from './departement.entity';
-import { Hotel } from './hotel.entity';
+import { OrganizationTASKS } from './organization.entity';
+import { DepartementTASKS } from './departement.entity';
+import { HotelTASKS } from './hotel.entity';
 
 @Entity()
 @ObjectType()
-export class User extends AbstractEntity<User> {
+export class UserTASKS extends AbstractEntity<UserTASKS> {
   @Column()
   @Field()
   firstName: string;
@@ -20,24 +20,24 @@ export class User extends AbstractEntity<User> {
   @Field()
   email: string;
 
-  @Field(() => [Organization], { nullable: true })
-  @OneToMany(() => Organization, (organization) => organization.user, {
+  @Field(() => [OrganizationTASKS], { nullable: true })
+  @OneToMany(() => OrganizationTASKS, (organization) => organization.user, {
     cascade: true,
     eager: true,
   })
-  organization: Organization[];
+  organization: OrganizationTASKS[];
 
-  @Field(() => [Departement], { nullable: true })
-  @OneToMany(() => Departement, (departement) => departement.user, {
+  @Field(() => [DepartementTASKS], { nullable: true })
+  @OneToMany(() => DepartementTASKS, (departement) => departement.user, {
     cascade: true,
     eager: true,
   })
-  departement: Departement[];
+  departement: DepartementTASKS[];
 
-  @Field(() => [Hotel], { nullable: true })
-  @OneToMany(() => Hotel, (hotel) => hotel.user, {
+  @Field(() => [HotelTASKS], { nullable: true })
+  @OneToMany(() => HotelTASKS, (hotel) => hotel.user, {
     cascade: true,
     eager: true,
   })
-  hotel: Hotel[];
+  hotel: HotelTASKS[];
 }

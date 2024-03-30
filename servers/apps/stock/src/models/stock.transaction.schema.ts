@@ -1,12 +1,12 @@
 import { AbstractEntity } from '@app/shared';
 import { Field, ObjectType } from '@nestjs/graphql';
 import { Column, Entity, ManyToOne } from 'typeorm';
-import { Product } from './products.schema';
+import { ProductSTOCK } from './products.schema';
 import { UserSTOCK } from './users.schema';
 
 @Entity()
 @ObjectType() // for add it in schema qraphql
-export class StockTransaction extends AbstractEntity<StockTransaction> {
+export class StockTransactionSTOCK extends AbstractEntity<StockTransactionSTOCK> {
   @Column()
   @Field()
   TransactionType: number; // enum('IN','OUT')
@@ -19,13 +19,13 @@ export class StockTransaction extends AbstractEntity<StockTransaction> {
   @Field()
   TransactionDate: number;
 
-  @ManyToOne(() => Product, (product) => product.productTransaction, {
+  @ManyToOne(() => ProductSTOCK, (product) => product.productTransaction, {
     nullable: true,
     orphanedRowAction: 'delete',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  product: Product;
+  product: ProductSTOCK;
 
   @ManyToOne(() => UserSTOCK, (user) => user.stockTransaction, {
     nullable: true,

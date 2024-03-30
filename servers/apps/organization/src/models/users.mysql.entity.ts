@@ -1,16 +1,16 @@
 import { Column, Entity, OneToMany } from 'typeorm';
 import { AbstractEntity } from '@app/shared';
 import { Field, ObjectType } from '@nestjs/graphql';
-import { Wifi } from './wifi.schema';
-import { Room } from './rooms.schema';
-import { Organization } from './organization.schema';
-import { City } from './city.schema';
-import { Departement } from './departement.schema';
-import { Hotel } from './hotel.schema';
+import { WifiORG } from './wifi.schema';
+import { RoomORG } from './rooms.schema';
+import { OrganizationORG } from './organization.schema';
+import { CityORG } from './city.schema';
+import { DepartementORG } from './departement.schema';
+import { HotelORG } from './hotel.schema';
 
 @Entity()
 @ObjectType()
-export class User extends AbstractEntity<User> {
+export class UserORG extends AbstractEntity<UserORG> {
   @Column()
   @Field()
   firstName: string;
@@ -23,45 +23,45 @@ export class User extends AbstractEntity<User> {
   @Field()
   email: string;
 
-  @Field(() => [Wifi], { nullable: true })
-  @OneToMany(() => Wifi, (wifi) => wifi.user, {
+  @Field(() => [WifiORG], { nullable: true })
+  @OneToMany(() => WifiORG, (wifi) => wifi.user, {
     cascade: true,
     eager: true,
   })
-  wifi: Wifi[];
+  wifi: WifiORG[];
 
-  @Field(() => [Room], { nullable: true })
-  @OneToMany(() => Room, (room) => room.user, {
+  @Field(() => [RoomORG], { nullable: true })
+  @OneToMany(() => RoomORG, (room) => room.user, {
     cascade: true,
     eager: true,
   })
-  room: Room[];
+  room: RoomORG[];
 
-  @Field(() => [Organization], { nullable: true })
-  @OneToMany(() => Organization, (organization) => organization.user, {
+  @Field(() => [OrganizationORG], { nullable: true })
+  @OneToMany(() => OrganizationORG, (organization) => organization.user, {
     cascade: true,
     eager: true,
   })
-  organization: Organization[];
+  organization: OrganizationORG[];
 
-  @Field(() => [City], { nullable: true })
-  @OneToMany(() => City, (city) => city.user, {
+  @Field(() => [CityORG], { nullable: true })
+  @OneToMany(() => CityORG, (city) => city.user, {
     cascade: true,
     eager: true,
   })
-  city: City[];
+  city: CityORG[];
 
-  @Field(() => [Departement], { nullable: true })
-  @OneToMany(() => Departement, (departement) => departement.user, {
+  @Field(() => [DepartementORG], { nullable: true })
+  @OneToMany(() => DepartementORG, (departement) => departement.user, {
     cascade: true,
     eager: true,
   })
-  departement: Departement[];
+  departement: DepartementORG[];
 
-  @Field(() => [Hotel], { nullable: true })
-  @OneToMany(() => Hotel, (hotel) => hotel.user, {
+  @Field(() => [HotelORG], { nullable: true })
+  @OneToMany(() => HotelORG, (hotel) => hotel.user, {
     cascade: true,
     eager: true,
   })
-  hotel: Hotel[];
+  hotel: HotelORG[];
 }

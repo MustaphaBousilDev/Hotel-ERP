@@ -11,7 +11,7 @@ import {
   TagsRepositorySQL,
   UserRepositorySQL,
 } from './products.repository';
-import { Product } from '../../models';
+import { ProductSTOCK } from '../../models';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
 import { In } from 'typeorm';
 
@@ -88,7 +88,7 @@ export class ProductsService {
       if (!tags) {
         throw new Error('Failed to fetch tags.');
       }
-      const products = new Product({
+      const products = new ProductSTOCK({
         ...otherDTO,
         user,
         subCategory,

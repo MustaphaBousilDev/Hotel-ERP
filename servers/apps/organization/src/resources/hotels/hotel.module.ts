@@ -15,28 +15,28 @@ import {
   HotelRepositorySQL,
   OrganizationRepositorySQL,
 } from './hotel.repository';
-import { Hotel } from '../../models/hotel.schema';
+import { HotelORG } from '../../models/hotel.schema';
 import { UserRepositorySQLForRoom } from '../users/users.repository';
 import { UserRepositoryModule } from '../users/users.module';
-import { City } from '../../models/city.schema';
-import { Departement } from '../../models/departement.schema';
-import { Organization } from '../../models/organization.schema';
-import { Wifi } from '../../models/wifi.schema';
-import { Room } from '../../models/rooms.schema';
-import { User } from '../../models/users.mysql.entity';
+import { CityORG } from '../../models/city.schema';
+import { DepartementORG } from '../../models/departement.schema';
+import { OrganizationORG } from '../../models/organization.schema';
+import { WifiORG } from '../../models/wifi.schema';
+import { RoomORG } from '../../models/rooms.schema';
+import { UserORG } from '../../models/users.mysql.entity';
 
 @Module({
   imports: [
     UserRepositoryModule,
     DatabaseModulemySQL,
     DatabaseModulemySQL.forFeature([
-      Hotel,
-      City,
-      Departement,
-      Organization,
-      Wifi,
-      Room,
-      User,
+      HotelORG,
+      CityORG,
+      DepartementORG,
+      OrganizationORG,
+      WifiORG,
+      RoomORG,
+      UserORG,
     ]),
     GraphQLModule.forRoot<ApolloFederationDriverConfig>({
       driver: ApolloFederationDriver,

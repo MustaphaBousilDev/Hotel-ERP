@@ -9,17 +9,17 @@ import {
   OneToMany,
 } from 'typeorm';
 import { UserSTOCK } from './users.schema';
-import { SubCategory } from './subcategories.schema';
-import { Hotel } from './hotel.schema';
-import { Brand } from './brands.schema';
-import { Suppliers } from './suppliers.schema';
-import { Tags } from './tags.schema';
-import { StockLocation } from './stock.location.schema';
-import { StockTransaction } from './stock.transaction.schema';
+import { SubCategorySTOCK } from './subcategories.schema';
+import { HotelSTOCK } from './hotel.schema';
+import { BrandSTOCK } from './brands.schema';
+import { SuppliersSTOCK } from './suppliers.schema';
+import { TagsSTOCK } from './tags.schema';
+import { StockLocationSTOCK } from './stock.location.schema';
+import { StockTransactionSTOCK } from './stock.transaction.schema';
 
 @Entity()
 @ObjectType() // for add it in schema qraphql
-export class Product extends AbstractEntity<Product> {
+export class ProductSTOCK extends AbstractEntity<ProductSTOCK> {
   @Column()
   @Field({ nullable: true }) // for graph
   name: string;
@@ -36,13 +36,13 @@ export class Product extends AbstractEntity<Product> {
   })
   user: UserSTOCK;
 
-  @ManyToOne(() => SubCategory, (subCat) => subCat.products, {
+  @ManyToOne(() => SubCategorySTOCK, (subCat) => subCat.products, {
     nullable: true,
     orphanedRowAction: 'delete',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  subCategory: SubCategory;
+  subCategory: SubCategorySTOCK;
 
   @Column()
   @Field({ nullable: true })
@@ -52,48 +52,48 @@ export class Product extends AbstractEntity<Product> {
   @Field({ nullable: true })
   price: number;
 
-  @ManyToOne(() => Suppliers, (supplier) => supplier.products, {
+  @ManyToOne(() => SuppliersSTOCK, (supplier) => supplier.products, {
     nullable: true,
     orphanedRowAction: 'delete',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  supplier: Suppliers;
+  supplier: SuppliersSTOCK;
 
-  @ManyToMany(() => Tags)
+  @ManyToMany(() => TagsSTOCK)
   @JoinTable()
-  tags: Tags[];
+  tags: TagsSTOCK[];
 
-  @ManyToOne(() => Brand, (brand) => brand.products, {
+  @ManyToOne(() => BrandSTOCK, (brand) => brand.products, {
     nullable: true,
     orphanedRowAction: 'delete',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  brand: Brand;
+  brand: BrandSTOCK;
 
   @Column()
   @Field()
   status: boolean;
 
-  @ManyToOne(() => Hotel, (hotel) => hotel.products, {
+  @ManyToOne(() => HotelSTOCK, (hotel) => hotel.products, {
     nullable: true,
     orphanedRowAction: 'delete',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  hotel: Hotel;
+  hotel: HotelSTOCK;
 
-  @ManyToOne(() => StockLocation, (stock) => stock.products, {
+  @ManyToOne(() => StockLocationSTOCK, (stock) => stock.products, {
     nullable: true,
     orphanedRowAction: 'delete',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  location: StockLocation;
+  location: StockLocationSTOCK;
 
   @OneToMany(
-    () => StockTransaction,
+    () => StockTransactionSTOCK,
     (stockTransaction) => stockTransaction.product,
     {
       cascade: true,
@@ -101,5 +101,5 @@ export class Product extends AbstractEntity<Product> {
       nullable: true,
     },
   )
-  productTransaction: StockTransaction[];
+  productTransaction: StockTransactionSTOCK[];
 }

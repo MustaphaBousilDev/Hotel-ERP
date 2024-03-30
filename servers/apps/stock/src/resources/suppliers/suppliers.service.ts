@@ -6,7 +6,7 @@ import {
   UserRepositorySQL,
 } from './supplier.repository';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
-import { Suppliers } from '../../models';
+import { SuppliersSTOCK } from '../../models';
 
 @Injectable()
 export class SuppliersService {
@@ -21,7 +21,7 @@ export class SuppliersService {
     const user = await this.userRepository.findOne({
       _id: userId,
     });
-    const supplier = new Suppliers({
+    const supplier = new SuppliersSTOCK({
       ...createSupplierInput,
       user,
     });

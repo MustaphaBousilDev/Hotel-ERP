@@ -2,12 +2,12 @@ import { AbstractEntity } from '@app/shared';
 import { Field, ObjectType } from '@nestjs/graphql';
 import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 import { UserSTOCK } from './users.schema';
-import { Product } from './products.schema';
-import { StockMovement } from './stock.movment.schema';
+import { ProductSTOCK } from './products.schema';
+import { StockMovementSTOCK } from './stock.movment.schema';
 
 @Entity()
 @ObjectType() // for add it in schema qraphql
-export class StockLocation extends AbstractEntity<StockLocation> {
+export class StockLocationSTOCK extends AbstractEntity<StockLocationSTOCK> {
   @Column()
   @Field({ nullable: true }) // for graph
   location_Name: string;
@@ -20,25 +20,29 @@ export class StockLocation extends AbstractEntity<StockLocation> {
   })
   user: UserSTOCK;
 
-  @OneToMany(() => Product, (product) => product.location, {
+  @OneToMany(() => ProductSTOCK, (product) => product.location, {
     cascade: true,
     eager: true,
   })
-  products: Product[];
+  products: ProductSTOCK[];
 
   @OneToMany(
-    () => StockMovement,
+    () => StockMovementSTOCK,
     (stockMovment) => stockMovment.FromLocationID,
     {
       cascade: true,
       eager: true,
     },
   )
-  stockMovementStart: StockMovement[];
+  stockMovementStart: StockMovementSTOCK[];
 
-  @OneToMany(() => StockMovement, (stockMovment) => stockMovment.ToLocationID, {
-    cascade: true,
-    eager: true,
-  })
-  stockMovementEnd: StockMovement[];
+  @OneToMany(
+    () => StockMovementSTOCK,
+    (stockMovment) => stockMovment.ToLocationID,
+    {
+      cascade: true,
+      eager: true,
+    },
+  )
+  stockMovementEnd: StockMovementSTOCK[];
 }

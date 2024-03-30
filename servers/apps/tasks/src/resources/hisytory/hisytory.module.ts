@@ -2,9 +2,9 @@ import { Module } from '@nestjs/common';
 import { HisytoryService } from './hisytory.service';
 import { HisytoryResolver } from './hisytory.resolver';
 import { DatabaseModulemySQL } from '@app/shared';
-import { Task_History } from '../../models/task-history.entity';
-import { Tasks } from '../../models/tasks.entity';
-import { Employee } from '../../models/employee.entity';
+import { Task_HistoryTASKS } from '../../models/task-history.entity';
+import { TasksTASKS } from '../../models/tasks.entity';
+import { EmployeeTASKS } from '../../models/employee.entity';
 import { LoggerModule } from 'nestjs-pino';
 import { ConfigModule } from '@nestjs/config';
 import {
@@ -16,7 +16,11 @@ import {
 @Module({
   imports: [
     DatabaseModulemySQL,
-    DatabaseModulemySQL.forFeature([Task_History, Tasks, Employee]),
+    DatabaseModulemySQL.forFeature([
+      Task_HistoryTASKS,
+      TasksTASKS,
+      EmployeeTASKS,
+    ]),
     // GraphQLModule.forRoot<ApolloDriverConfig>({
     //   driver: ApolloFederationDriver,
     //   autoSchemaFile: {

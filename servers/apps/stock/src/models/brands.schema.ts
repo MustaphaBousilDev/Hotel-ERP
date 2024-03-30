@@ -2,10 +2,10 @@ import { AbstractEntity } from '@app/shared';
 import { Field, ObjectType } from '@nestjs/graphql';
 import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 import { UserSTOCK } from './users.schema';
-import { Product } from './products.schema';
+import { ProductSTOCK } from './products.schema';
 @Entity()
 @ObjectType() // for add it in schema qraphql
-export class Brand extends AbstractEntity<Brand> {
+export class BrandSTOCK extends AbstractEntity<BrandSTOCK> {
   @Column()
   //i am not using type in field because nestjs and graphql pick up on the type of these properties and will use it
   @Field() // for graph
@@ -28,9 +28,9 @@ export class Brand extends AbstractEntity<Brand> {
   })
   user: UserSTOCK;
 
-  @OneToMany(() => Product, (product) => product.brand, {
+  @OneToMany(() => ProductSTOCK, (product) => product.brand, {
     cascade: true,
     eager: true,
   })
-  products: Product[];
+  products: ProductSTOCK[];
 }

@@ -3,7 +3,7 @@ import { PositionsService } from './positions.service';
 import { PositionsResolver } from './positions.resolver';
 import { DatabaseModulemySQL, LoggerModule } from '@app/shared';
 import { UserEMP } from '../models/users.schema';
-import { Position } from '../models/position.schema';
+import { PositionEMP } from '../models/position.schema';
 import { EmployeeEMP } from '../models/employee.schema';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriverConfig, ApolloFederationDriver } from '@nestjs/apollo';
@@ -16,7 +16,7 @@ import {
 @Module({
   imports: [
     DatabaseModulemySQL,
-    DatabaseModulemySQL.forFeature([UserEMP, Position, EmployeeEMP]),
+    DatabaseModulemySQL.forFeature([UserEMP, PositionEMP, EmployeeEMP]),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloFederationDriver,
       autoSchemaFile: {

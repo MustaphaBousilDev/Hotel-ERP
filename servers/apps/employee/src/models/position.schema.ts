@@ -6,7 +6,7 @@ import { UserEMP } from './users.schema';
 
 @Entity()
 @ObjectType() // for add it in schema qraphql
-export class Position extends AbstractEntity<Position> {
+export class PositionEMP extends AbstractEntity<PositionEMP> {
   @Column({ nullable: true })
   @Field() // for graph
   name: string;

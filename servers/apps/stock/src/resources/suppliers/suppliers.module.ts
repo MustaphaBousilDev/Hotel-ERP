@@ -6,14 +6,14 @@ import {
   UserRepositorySQL,
 } from './supplier.repository';
 import { DatabaseModulemySQL } from '@app/shared';
-import { Product, Suppliers, UserSTOCK } from '../../models';
+import { ProductSTOCK, SuppliersSTOCK, UserSTOCK } from '../../models';
 import { LoggerModule } from 'nestjs-pino';
 import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
     DatabaseModulemySQL,
-    DatabaseModulemySQL.forFeature([UserSTOCK, Suppliers, Product]),
+    DatabaseModulemySQL.forFeature([UserSTOCK, SuppliersSTOCK, ProductSTOCK]),
     LoggerModule,
     ConfigModule.forRoot({ isGlobal: true }),
   ],

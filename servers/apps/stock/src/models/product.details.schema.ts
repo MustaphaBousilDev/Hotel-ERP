@@ -2,16 +2,16 @@ import { AbstractEntity } from '@app/shared';
 import { Field, ObjectType } from '@nestjs/graphql';
 import { Column, Entity, JoinTable, ManyToOne, OneToOne } from 'typeorm';
 import { UserSTOCK } from './users.schema';
-import { Employee } from './employe.responsable.schema';
-import { Hotel } from './hotel.schema';
-import { Product } from './products.schema';
+import { EmployeeSTOCK } from './employe.responsable.schema';
+import { HotelSTOCK } from './hotel.schema';
+import { ProductSTOCK } from './products.schema';
 
 @Entity()
 @ObjectType() // for add it in schema qraphql
-export class ProductDetails extends AbstractEntity<ProductDetails> {
-  @OneToOne(() => Product, { nullable: true })
+export class ProductDetailsSTOCK extends AbstractEntity<ProductDetailsSTOCK> {
+  @OneToOne(() => ProductSTOCK, { nullable: true })
   @JoinTable()
-  product: Product;
+  product: ProductSTOCK;
 
   @Column()
   @Field({ nullable: true }) // for graph
@@ -37,19 +37,19 @@ export class ProductDetails extends AbstractEntity<ProductDetails> {
   })
   user: UserSTOCK;
 
-  @ManyToOne(() => Employee, (emp) => emp.products, {
+  @ManyToOne(() => EmployeeSTOCK, (emp) => emp.products, {
     nullable: true,
     orphanedRowAction: 'delete',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  employee: Employee;
+  employee: EmployeeSTOCK;
 
-  @ManyToOne(() => Hotel, (hotel) => hotel.products, {
+  @ManyToOne(() => HotelSTOCK, (hotel) => hotel.products, {
     nullable: true,
     orphanedRowAction: 'delete',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  hotel: Hotel;
+  hotel: HotelSTOCK;
 }

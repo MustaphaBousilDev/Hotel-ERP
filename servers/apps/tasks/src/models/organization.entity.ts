@@ -1,12 +1,12 @@
 import { AbstractEntity } from '@app/shared';
 import { Field, ObjectType } from '@nestjs/graphql';
 import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
-import { Hotel } from './hotel.entity';
-import { User } from './users.repository';
+import { HotelTASKS } from './hotel.entity';
+import { UserTASKS } from './users.repository';
 
 @Entity()
 @ObjectType() // for add it in schema qraphql
-export class Organization extends AbstractEntity<Organization> {
+export class OrganizationTASKS extends AbstractEntity<OrganizationTASKS> {
   @Column()
   //i am not using type in field because nestjs and graphql pick up on the type of these properties and will use it
   @Field() // for graph
@@ -16,17 +16,17 @@ export class Organization extends AbstractEntity<Organization> {
   @Field() // for graph
   logo: string;
 
-  @OneToMany(() => Hotel, (hotel) => hotel.organization, {
+  @OneToMany(() => HotelTASKS, (hotel) => hotel.organization, {
     cascade: true,
     eager: true,
   })
-  hotel: Hotel[];
+  hotel: HotelTASKS[];
 
-  @ManyToOne(() => User, (user) => user.organization, {
+  @ManyToOne(() => UserTASKS, (user) => user.organization, {
     orphanedRowAction: 'delete',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
     nullable: true,
   })
-  user: User;
+  user: UserTASKS;
 }

@@ -4,13 +4,13 @@ import { CreateProductInput } from './dto/create-product.input';
 import { UpdateProductInput } from './dto/update-product.input';
 import { CurrentUser } from '@app/shared';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
-import { Product } from '../../models';
+import { ProductSTOCK } from '../../models';
 
-@Resolver(() => Product)
+@Resolver(() => ProductSTOCK)
 export class ProductsResolver {
   constructor(private readonly productsService: ProductsService) {}
 
-  @Mutation(() => Product)
+  @Mutation(() => ProductSTOCK)
   createProduct(
     @Args('createProductInput')
     createProductInput: CreateProductInput,
@@ -19,17 +19,17 @@ export class ProductsResolver {
     return this.productsService.create(createProductInput, user);
   }
 
-  @Query(() => [Product], { name: 'products' })
+  @Query(() => [ProductSTOCK], { name: 'products' })
   findAll() {
     return this.productsService.findAll();
   }
 
-  @Query(() => Product, { name: 'product' })
+  @Query(() => ProductSTOCK, { name: 'product' })
   findOne(@Args('id', { type: () => Int }) id: number) {
     return this.productsService.findOne(id);
   }
 
-  @Mutation(() => Product)
+  @Mutation(() => ProductSTOCK)
   updateProduct(
     @Args('id') id: number,
     @Args('updateProductInput')
@@ -39,7 +39,7 @@ export class ProductsResolver {
     return this.productsService.update(id, updateProductInput, user);
   }
 
-  @Mutation(() => Product)
+  @Mutation(() => ProductSTOCK)
   removeProduct(@Args('id', { type: () => Int }) id: number) {
     return this.productsService.remove(id);
   }

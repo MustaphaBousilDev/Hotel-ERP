@@ -6,8 +6,8 @@ import { ApolloDriverConfig, ApolloFederationDriver } from '@nestjs/apollo';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { AUTH_SERVICE, DatabaseModulemySQL, LoggerModule } from '@app/shared';
-import { Tasks } from './models/tasks.entity';
-import { TasksType } from './models/tasks-type.entity';
+import { TasksTASKS } from './models/tasks.entity';
+import { TasksTypeTASKS } from './models/tasks-type.entity';
 import { TasksResolver } from './tasks.resolver';
 import {
   EmployeeRepositorymySQL,
@@ -15,31 +15,31 @@ import {
   TasksRepositorymySQL,
   TasksTypeRepositorymySQL,
 } from './tasks.repository';
-import { Employee } from './models/employee.entity';
-import { Organization } from './models/organization.entity';
-import { Hotel } from './models/hotel.entity';
-import { Task_History } from './models/task-history.entity';
-import { TasksAttach } from './models/tasks-attachement.entity';
-import { Departement } from './models/departement.entity';
+import { EmployeeTASKS } from './models/employee.entity';
+import { OrganizationTASKS } from './models/organization.entity';
+import { HotelTASKS } from './models/hotel.entity';
+import { Task_HistoryTASKS } from './models/task-history.entity';
+import { TasksAttachTASKS } from './models/tasks-attachement.entity';
+import { DepartementTASKS } from './models/departement.entity';
 import { TaskstypesModule } from './resources/taskstypes/taskstypes.module';
 import { AttachementModule } from './resources/attachement/attachement.module';
 import { HisytoryModule } from './resources/hisytory/hisytory.module';
 import { UserRepositorySQL } from './resources/users.repository';
-import { User } from './models/users.repository';
+import { UserTASKS } from './models/users.repository';
 
 @Module({
   imports: [
     DatabaseModulemySQL,
     DatabaseModulemySQL.forFeature([
-      Tasks,
-      TasksType,
-      Employee,
-      Organization,
-      Hotel,
-      Task_History,
-      TasksAttach,
-      Departement,
-      User,
+      TasksTASKS,
+      TasksTypeTASKS,
+      EmployeeTASKS,
+      OrganizationTASKS,
+      HotelTASKS,
+      Task_HistoryTASKS,
+      TasksAttachTASKS,
+      DepartementTASKS,
+      UserTASKS,
     ]),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloFederationDriver,

@@ -2,15 +2,15 @@ import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { TimeworksService } from './timeworks.service';
 import { CreateTimeworkInput } from './dto/create-timework.input';
 import { UpdateTimeworkInput } from './dto/update-timework.input';
-import { TimeWork } from '../models/time-work.schema';
+import { TimeWorkEMP } from '../models/time-work.schema';
 import { CurrentUser } from '@app/shared';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
 
-@Resolver(() => TimeWork)
+@Resolver(() => TimeWorkEMP)
 export class TimeworksResolver {
   constructor(private readonly timeworksService: TimeworksService) {}
 
-  @Mutation(() => TimeWork)
+  @Mutation(() => TimeWorkEMP)
   createTimework(
     @Args('createTimeworkInput')
     createTimeworkInput: CreateTimeworkInput,
@@ -19,17 +19,17 @@ export class TimeworksResolver {
     return this.timeworksService.create(createTimeworkInput, user);
   }
 
-  @Query(() => [TimeWork], { name: 'timeworks' })
+  @Query(() => [TimeWorkEMP], { name: 'timeworks' })
   findAll() {
     return this.timeworksService.findAll();
   }
 
-  @Query(() => TimeWork, { name: 'timework' })
+  @Query(() => TimeWorkEMP, { name: 'timework' })
   findOne(@Args('id', { type: () => Number }) id: number) {
     return this.timeworksService.findOne(id);
   }
 
-  @Mutation(() => TimeWork)
+  @Mutation(() => TimeWorkEMP)
   async updateTimework(
     @Args('id') id: number,
     @Args('updateTimeworkInputs')
@@ -39,7 +39,7 @@ export class TimeworksResolver {
     return this.timeworksService.update(id, updateTimeWorkInput, user);
   }
 
-  @Mutation(() => TimeWork)
+  @Mutation(() => TimeWorkEMP)
   removeTimework(@Args('id', { type: () => Int }) id: number) {
     return this.timeworksService.remove(id);
   }

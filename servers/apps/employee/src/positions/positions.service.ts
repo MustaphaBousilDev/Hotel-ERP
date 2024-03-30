@@ -6,7 +6,7 @@ import {
   UserRepositorymySQL,
 } from './positions.repository';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
-import { Position } from '../models/position.schema';
+import { PositionEMP } from '../models/position.schema';
 
 @Injectable()
 export class PositionsService {
@@ -22,7 +22,7 @@ export class PositionsService {
       _id: userId,
     });
     if (user) {
-      const position = new Position({
+      const position = new PositionEMP({
         ...createPositionInput,
         user: user,
       });

@@ -2,19 +2,19 @@ import { AbstractRepositorymySQL } from '@app/shared';
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { EntityManager, Repository } from 'typeorm';
-import { Hotel } from '../../models/hotel.schema';
-import { Organization } from '../../models/organization.schema';
-import { City } from '../../models/city.schema';
-import { User } from '../../models/users.mysql.entity';
-import { Departement } from '../../models/departement.schema';
+import { HotelORG } from '../../models/hotel.schema';
+import { OrganizationORG } from '../../models/organization.schema';
+import { CityORG } from '../../models/city.schema';
+import { UserORG } from '../../models/users.mysql.entity';
+import { DepartementORG } from '../../models/departement.schema';
 
 @Injectable()
-export class HotelRepositorySQL extends AbstractRepositorymySQL<Hotel> {
+export class HotelRepositorySQL extends AbstractRepositorymySQL<HotelORG> {
   protected readonly logger = new Logger(HotelRepositorySQL.name);
 
   constructor(
-    @InjectRepository(Hotel)
-    HotelRepository: Repository<Hotel>,
+    @InjectRepository(HotelORG)
+    HotelRepository: Repository<HotelORG>,
     entityManager: EntityManager,
   ) {
     super(HotelRepository, entityManager);
@@ -22,12 +22,12 @@ export class HotelRepositorySQL extends AbstractRepositorymySQL<Hotel> {
 }
 
 @Injectable()
-export class OrganizationRepositorySQL extends AbstractRepositorymySQL<Organization> {
+export class OrganizationRepositorySQL extends AbstractRepositorymySQL<OrganizationORG> {
   protected readonly logger = new Logger(OrganizationRepositorySQL.name);
 
   constructor(
-    @InjectRepository(Organization)
-    OrganizationRepository: Repository<Organization>,
+    @InjectRepository(OrganizationORG)
+    OrganizationRepository: Repository<OrganizationORG>,
     entityManager: EntityManager,
   ) {
     super(OrganizationRepository, entityManager);
@@ -35,12 +35,12 @@ export class OrganizationRepositorySQL extends AbstractRepositorymySQL<Organizat
 }
 
 @Injectable()
-export class CityRepositorySQL extends AbstractRepositorymySQL<City> {
+export class CityRepositorySQL extends AbstractRepositorymySQL<CityORG> {
   protected readonly logger = new Logger(CityRepositorySQL.name);
 
   constructor(
-    @InjectRepository(City)
-    CityRepository: Repository<City>,
+    @InjectRepository(CityORG)
+    CityRepository: Repository<CityORG>,
     entityManager: EntityManager,
   ) {
     super(CityRepository, entityManager);
@@ -48,12 +48,12 @@ export class CityRepositorySQL extends AbstractRepositorymySQL<City> {
 }
 
 @Injectable()
-export class UserRepositorySQL extends AbstractRepositorymySQL<User> {
+export class UserRepositorySQL extends AbstractRepositorymySQL<UserORG> {
   protected readonly logger = new Logger(UserRepositorySQL.name);
 
   constructor(
-    @InjectRepository(User)
-    UserRepository: Repository<User>,
+    @InjectRepository(UserORG)
+    UserRepository: Repository<UserORG>,
     entityManager: EntityManager,
   ) {
     super(UserRepository, entityManager);
@@ -61,12 +61,12 @@ export class UserRepositorySQL extends AbstractRepositorymySQL<User> {
 }
 
 @Injectable()
-export class DepartementRepositorySQL extends AbstractRepositorymySQL<Departement> {
+export class DepartementRepositorySQL extends AbstractRepositorymySQL<DepartementORG> {
   protected readonly logger = new Logger(UserRepositorySQL.name);
 
   constructor(
-    @InjectRepository(Departement)
-    DepartementRepository: Repository<Departement>,
+    @InjectRepository(DepartementORG)
+    DepartementRepository: Repository<DepartementORG>,
     entityManager: EntityManager,
   ) {
     super(DepartementRepository, entityManager);

@@ -2,15 +2,15 @@ import { AbstractRepositorymySQL } from '@app/shared';
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { EntityManager, Repository } from 'typeorm';
-import { Suppliers, UserSTOCK } from '../../models';
+import { SuppliersSTOCK, UserSTOCK } from '../../models';
 
 @Injectable()
-export class SupplierRepositorymySQL extends AbstractRepositorymySQL<Suppliers> {
+export class SupplierRepositorymySQL extends AbstractRepositorymySQL<SuppliersSTOCK> {
   protected readonly logger = new Logger(SupplierRepositorymySQL.name);
 
   constructor(
-    @InjectRepository(Suppliers)
-    SupplierRepository: Repository<Suppliers>,
+    @InjectRepository(SuppliersSTOCK)
+    SupplierRepository: Repository<SuppliersSTOCK>,
     entityManager: EntityManager,
   ) {
     super(SupplierRepository, entityManager);

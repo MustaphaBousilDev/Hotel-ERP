@@ -6,7 +6,7 @@ import {
   UserRepositorymySQL,
 } from './timeworks.repository';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
-import { TimeWork } from '../models/time-work.schema';
+import { TimeWorkEMP } from '../models/time-work.schema';
 
 @Injectable()
 export class TimeworksService {
@@ -22,7 +22,7 @@ export class TimeworksService {
       _id: userId,
     });
     if (user) {
-      const saveTimeWork = new TimeWork({
+      const saveTimeWork = new TimeWorkEMP({
         ...createTimeWorkInput,
         user: user,
       });

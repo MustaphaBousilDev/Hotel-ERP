@@ -4,15 +4,15 @@ import { CreateSubcategoriryInput } from './dto/create-subcategoriry.input';
 import { UpdateSubcategoriryInput } from './dto/update-subcategoriry.input';
 import { CurrentUser } from '@app/shared';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
-import { SubCategory } from '../../models';
+import { SubCategorySTOCK } from '../../models';
 
-@Resolver(() => SubCategory)
+@Resolver(() => SubCategorySTOCK)
 export class SubcategoririesResolver {
   constructor(
     private readonly subcategoririesService: SubcategoririesService,
   ) {}
 
-  @Mutation(() => SubCategory)
+  @Mutation(() => SubCategorySTOCK)
   createSubcategoriry(
     @Args('createSubcategoriryInput')
     createSubcategoriryInput: CreateSubcategoriryInput,
@@ -21,17 +21,17 @@ export class SubcategoririesResolver {
     return this.subcategoririesService.create(createSubcategoriryInput, user);
   }
 
-  @Query(() => [SubCategory], { name: 'subcategoriries' })
+  @Query(() => [SubCategorySTOCK], { name: 'subcategoriries' })
   findAll() {
     return this.subcategoririesService.findAll();
   }
 
-  @Query(() => SubCategory, { name: 'subcategoriry' })
+  @Query(() => SubCategorySTOCK, { name: 'subcategoriry' })
   findOne(@Args('id', { type: () => Int }) id: number) {
     return this.subcategoririesService.findOne(id);
   }
 
-  @Mutation(() => SubCategory)
+  @Mutation(() => SubCategorySTOCK)
   updateSubcategoriry(
     @Args('id') id: number,
     @Args('updateSubcategoriryInput')
@@ -45,7 +45,7 @@ export class SubcategoririesResolver {
     );
   }
 
-  @Mutation(() => SubCategory)
+  @Mutation(() => SubCategorySTOCK)
   removeSubcategoriry(@Args('id', { type: () => Int }) id: number) {
     return this.subcategoririesService.remove(id);
   }

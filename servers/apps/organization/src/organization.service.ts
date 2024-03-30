@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { OrganizationRepositorymySQL } from './organization.repository';
 import { OrganizationInputDto } from './dto/organization.input.dto';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
-import { Organization } from './models/organization.schema';
+import { OrganizationORG } from './models/organization.schema';
 import { UserRepositorySQLForRoom } from './resources/users/users.repository';
 import { UpdateOrganizationInputDto } from './dto/organization.input.update.dto';
 
@@ -21,7 +21,7 @@ export class OrganizationService {
       _id: userId,
     });
     if (user) {
-      const organization = new Organization({
+      const organization = new OrganizationORG({
         ...createOrganizationDto,
         user: user,
       });

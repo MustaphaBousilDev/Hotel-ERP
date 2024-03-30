@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateWifiInput } from './dto/create-wifi.input';
 import { HotelRepositorySQL, WifiRepositorySQL } from './wifi.repository';
 //import { User } from '@app/shared';
-import { Wifi } from '../../models/wifi.schema';
+import { WifiORG } from '../../models/wifi.schema';
 // import { UpdateWifiInput } from './dto/update-wifi.input';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
 import { UpdateWifiInput } from './dto/update-wifi.input';
@@ -23,7 +23,7 @@ export class WifiService {
       _id: createWifiDto.hotel.id,
     });
     if (user && hotel) {
-      const wifi = new Wifi({
+      const wifi = new WifiORG({
         name: createWifiDto.name,
         ip: createWifiDto.ip,
         password: createWifiDto.password,

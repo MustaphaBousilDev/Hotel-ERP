@@ -8,7 +8,7 @@ import {
 import { In } from 'typeorm';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
 import { CreateHotelInput } from './dto/create-hotel.input';
-import { Hotel } from '../../models/hotel.schema';
+import { HotelORG } from '../../models/hotel.schema';
 import { UpdateHotelInput } from './dto/update-hotel.input';
 import { UserRepositorySQLForRoom } from '../users/users.repository';
 
@@ -49,7 +49,7 @@ export class HotelService {
     console.log(organization);
     console.log(departement);
     if (user && city && organization && departement) {
-      const hotel = new Hotel({
+      const hotel = new HotelORG({
         name: createHotelDto?.name,
         address: createHotelDto?.address,
         organization: organization,

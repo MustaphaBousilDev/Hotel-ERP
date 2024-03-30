@@ -2,26 +2,24 @@ import { Module } from '@nestjs/common';
 import { AttachementService } from './attachement.service';
 import { AttachementResolver } from './attachement.resolver';
 import { DatabaseModulemySQL } from '@app/shared';
-import { TasksAttach } from '../../models/tasks-attachement.entity';
-import { GraphQLModule } from '@nestjs/graphql';
-import {
-  ApolloDriverConfig,
-  ApolloFederationDriver,
-  ApolloFederationDriverConfig,
-} from '@nestjs/apollo';
+import { TasksAttachTASKS } from '../../models/tasks-attachement.entity';
 import { LoggerModule } from 'nestjs-pino';
 import { ConfigModule } from '@nestjs/config';
 import {
   EmployeeRepositorymySQL,
   TasksAttachementRepositorymySQL,
 } from './attachement.repository';
-import { Employee } from '../../models/employee.entity';
-import { Tasks } from '../../models/tasks.entity';
+import { EmployeeTASKS } from '../../models/employee.entity';
+import { TasksTASKS } from '../../models/tasks.entity';
 
 @Module({
   imports: [
     DatabaseModulemySQL,
-    DatabaseModulemySQL.forFeature([TasksAttach, Employee, Tasks]),
+    DatabaseModulemySQL.forFeature([
+      TasksAttachTASKS,
+      EmployeeTASKS,
+      TasksTASKS,
+    ]),
     // GraphQLModule.forRoot<ApolloDriverConfig>({
     //   driver: ApolloFederationDriver,
     //   autoSchemaFile: {

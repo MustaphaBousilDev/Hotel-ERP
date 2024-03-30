@@ -1,5 +1,5 @@
 import { Resolver, Args, Mutation, Query } from '@nestjs/graphql';
-import { Reservation } from './models/reservation.mysql.entity';
+import { ReservationRES } from './models/reservation.mysql.entity';
 import { ReservationsService } from './reservations.service';
 import { CreateReservationDto } from './dto/create-reservation.dto';
 import { CurrentUser } from '@app/shared';
@@ -12,11 +12,11 @@ import { CurrentUser } from '@app/shared';
 //import { UserRES } from './models/users.mysql.entity';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
 
-@Resolver(() => Reservation)
+@Resolver(() => ReservationRES)
 export class ReservationsResolver {
   constructor(private readonly reservationsService: ReservationsService) {}
 
-  @Mutation(() => Reservation)
+  @Mutation(() => ReservationRES)
   createReservation(
     @Args('createReservationInput')
     createReservationInput: CreateReservationDto,
@@ -29,17 +29,17 @@ export class ReservationsResolver {
     return this.reservationsService.create(createReservationInput, user);
   }
 
-  @Query(() => [Reservation], { name: 'reservations' })
+  @Query(() => [ReservationRES], { name: 'reservations' })
   findAll() {
     return this.reservationsService.findAll();
   }
 
-  @Query(() => Reservation, { name: 'reservation' })
+  @Query(() => ReservationRES, { name: 'reservation' })
   findOne(@Args('id', { type: () => Number }) id: number) {
     return this.reservationsService.findOne(id);
   }
 
-  @Mutation(() => Reservation)
+  @Mutation(() => ReservationRES)
   removeReservation(@Args('id', { type: () => Number }) id: number) {
     return this.reservationsService.remove(id);
   }

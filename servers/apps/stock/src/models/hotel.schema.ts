@@ -8,14 +8,14 @@ import {
   ManyToOne,
   OneToMany,
 } from 'typeorm';
-import { Organization } from './organization.schema';
+import { OrganizationSTOCK } from './organization.schema';
 import { UserSTOCK } from './users.schema';
-import { Departement } from './departement.schema';
-import { Category } from './categories.schema';
-import { Product } from './products.schema';
+import { DepartementSTOCK } from './departement.schema';
+import { CategorySTOCK } from './categories.schema';
+import { ProductSTOCK } from './products.schema';
 @Entity()
 @ObjectType() // for add it in schema qraphql
-export class Hotel extends AbstractEntity<Hotel> {
+export class HotelSTOCK extends AbstractEntity<HotelSTOCK> {
   @Column()
   //i am not using type in field because nestjs and graphql pick up on the type of these properties and will use it
   @Field() // for graph
@@ -25,12 +25,12 @@ export class Hotel extends AbstractEntity<Hotel> {
   @Field() // for graph
   image: string;
 
-  @ManyToOne(() => Organization, (organization) => organization.hotel, {
+  @ManyToOne(() => OrganizationSTOCK, (organization) => organization.hotel, {
     orphanedRowAction: 'delete',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  organization: Organization;
+  organization: OrganizationSTOCK;
 
   @ManyToOne(() => UserSTOCK, (user) => user.hotel, {
     nullable: true,
@@ -40,17 +40,17 @@ export class Hotel extends AbstractEntity<Hotel> {
   })
   user: UserSTOCK;
 
-  @ManyToMany(() => Departement, (departments) => departments.hotels)
+  @ManyToMany(() => DepartementSTOCK, (departments) => departments.hotels)
   @JoinTable()
-  departments: Departement[];
+  departments: DepartementSTOCK[];
 
-  @ManyToMany(() => Category, (category) => category.hotels)
+  @ManyToMany(() => CategorySTOCK, (category) => category.hotels)
   @JoinTable()
-  categories: Category[];
+  categories: CategorySTOCK[];
 
-  @OneToMany(() => Product, (product) => product.hotel, {
+  @OneToMany(() => ProductSTOCK, (product) => product.hotel, {
     cascade: true,
     eager: true,
   })
-  products: Product[];
+  products: ProductSTOCK[];
 }

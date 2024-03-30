@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { OrganizationController } from './organization.controller';
 import { OrganizationService } from './organization.service';
-import { City } from './models/city.schema';
-import { Hotel } from './models/hotel.schema';
+import { CityORG } from './models/city.schema';
+import { HotelORG } from './models/hotel.schema';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import {
   AUTH_SERVICE,
@@ -10,11 +10,11 @@ import {
   LoggerModule,
   UPLOAD_S3,
 } from '@app/shared';
-import { Organization } from './models/organization.schema';
-import { Departement } from './models/departement.schema';
-import { Employee } from './models/employee.schema';
+import { OrganizationORG } from './models/organization.schema';
+import { DepartementORG } from './models/departement.schema';
+import { EmployeeORG } from './models/employee.schema';
 import { WifiModule } from './resources/wifi/wifi.module';
-import { User } from './models/users.mysql.entity';
+import { UserORG } from './models/users.mysql.entity';
 import { OrganizationRepositorymySQL } from './organization.repository';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { GraphQLModule } from '@nestjs/graphql';
@@ -25,6 +25,7 @@ import { DepartementModule } from './resources/departements/departement.module';
 import { UserRepositorySQLForRoom } from './resources/users/users.repository';
 import { UserRepositoryModule } from './resources/users/users.module';
 import { HotelModule } from './resources/hotels/hotel.module';
+import { EmployeeRepositorySQL } from './remote/employee.repository';
 
 @Module({
   imports: [
@@ -32,12 +33,12 @@ import { HotelModule } from './resources/hotels/hotel.module';
     DatabaseModulemySQL,
     DatabaseModulemySQL.forFeature([
       // Wifi,
-      City,
-      Hotel,
-      Organization,
-      Departement,
-      Employee,
-      User,
+      CityORG,
+      HotelORG,
+      OrganizationORG,
+      DepartementORG,
+      EmployeeORG,
+      UserORG,
     ]),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloFederationDriver,
@@ -83,6 +84,7 @@ import { HotelModule } from './resources/hotels/hotel.module';
     OrganizationRepositorymySQL,
     OrganizationResolver,
     UserRepositorySQLForRoom,
+    EmployeeRepositorySQL,
   ],
 })
 export class OrganizationModule {}

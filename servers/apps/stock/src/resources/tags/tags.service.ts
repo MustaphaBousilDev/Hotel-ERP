@@ -3,7 +3,7 @@ import { CreateTagInput } from './dto/create-tag.input';
 import { UpdateTagInput } from './dto/update-tag.input';
 import { TagRepositorymySQL, UserRepositorySQL } from './tags.repository';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
-import { Tags } from '../../models';
+import { TagsSTOCK } from '../../models';
 
 @Injectable()
 export class TagsService {
@@ -15,7 +15,7 @@ export class TagsService {
     const user = await this.userRepository.findOne({
       _id: userId,
     });
-    const tags = new Tags({
+    const tags = new TagsSTOCK({
       ...createTagInput,
       user,
     });

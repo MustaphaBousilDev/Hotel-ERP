@@ -7,7 +7,7 @@ import {
   UserRepositorymySQL,
 } from './subcategories.repository';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
-import { SubCategory } from '../../models';
+import { SubCategorySTOCK } from '../../models';
 
 @Injectable()
 export class SubcategoririesService {
@@ -34,7 +34,7 @@ export class SubcategoririesService {
       if (!user || !category) {
         throw new Error('Failed to fetch required data');
       }
-      const subCategory = new SubCategory({
+      const subCategory = new SubCategorySTOCK({
         ...createDTO,
         user,
         category,

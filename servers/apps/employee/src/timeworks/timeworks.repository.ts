@@ -2,16 +2,16 @@ import { AbstractRepositorymySQL } from '@app/shared';
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { EntityManager, Repository } from 'typeorm';
-import { TimeWork } from '../models/time-work.schema';
+import { TimeWorkEMP } from '../models/time-work.schema';
 import { UserEMP } from '../models/users.schema';
 
 @Injectable()
-export class TimeWorkRepositorymySQL extends AbstractRepositorymySQL<TimeWork> {
+export class TimeWorkRepositorymySQL extends AbstractRepositorymySQL<TimeWorkEMP> {
   protected readonly logger = new Logger(TimeWorkRepositorymySQL.name);
 
   constructor(
-    @InjectRepository(TimeWork)
-    TimeWorkRepository: Repository<TimeWork>,
+    @InjectRepository(TimeWorkEMP)
+    TimeWorkRepository: Repository<TimeWorkEMP>,
     entityManager: EntityManager,
   ) {
     super(TimeWorkRepository, entityManager);

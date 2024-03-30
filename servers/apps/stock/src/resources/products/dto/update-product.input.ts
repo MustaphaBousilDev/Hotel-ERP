@@ -14,57 +14,57 @@ import { StockLocationIDDtoInput } from '../../stockLocation/stock-location.dto'
 @InputType()
 export class UpdateProductInput {
   @IsOptional()
-  @Field()
+  @Field({ nullable: true })
   @IsString()
   name?: string;
 
   @IsOptional()
-  @Field()
+  @Field({ nullable: true })
   @IsString()
   description?: string;
 
   @IsOptional()
-  @Field(() => SubCategoryInputID)
+  @Field(() => SubCategoryInputID, { nullable: true })
   @IsNotEmpty()
   subCategory?: SubCategoryInputID;
 
   @IsOptional()
-  @Field()
+  @Field({ nullable: true })
   @IsNumber()
   quantity?: number;
 
   @IsOptional()
-  @Field()
+  @Field({ nullable: true })
   @IsNumber()
   price?: number;
 
   @IsOptional()
-  @Field(() => SupplierIDDtoInput)
+  @Field(() => SupplierIDDtoInput, { nullable: true })
   @IsNotEmpty()
   supplier?: SupplierIDDtoInput;
 
   @IsOptional()
-  @Field(() => [SupplierIDDtoInput])
+  @Field(() => [SupplierIDDtoInput], { nullable: true })
   @IsNotEmpty()
   tags?: SupplierIDDtoInput[];
 
   @IsOptional()
-  @Field(() => BrandInputID)
+  @Field(() => BrandInputID, { nullable: true })
   @IsNotEmpty()
   brand?: BrandInputID;
 
   @IsOptional()
-  @Field()
+  @Field({ nullable: true })
   @IsBoolean()
   status?: boolean;
 
   @IsOptional()
-  @Field(() => HotelIDDtoInput)
+  @Field(() => HotelIDDtoInput, { nullable: true })
   @IsNotEmpty()
   hotel?: HotelIDDtoInput;
 
   @IsOptional()
-  @Field(() => StockLocationIDDtoInput)
+  @Field(() => StockLocationIDDtoInput, { nullable: true })
   @IsNotEmpty()
   location?: StockLocationIDDtoInput;
 }

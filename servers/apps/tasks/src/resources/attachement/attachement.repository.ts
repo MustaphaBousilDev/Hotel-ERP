@@ -2,27 +2,27 @@ import { AbstractRepositorymySQL } from '@app/shared';
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { EntityManager, Repository } from 'typeorm';
-import { TasksAttach } from '../../models/tasks-attachement.entity';
-import { Employee } from '../../models/employee.entity';
+import { TasksAttachTASKS } from '../../models/tasks-attachement.entity';
+import { EmployeeTASKS } from '../../models/employee.entity';
 @Injectable()
-export class TasksAttachementRepositorymySQL extends AbstractRepositorymySQL<TasksAttach> {
+export class TasksAttachementRepositorymySQL extends AbstractRepositorymySQL<TasksAttachTASKS> {
   protected readonly logger = new Logger(TasksAttachementRepositorymySQL.name);
 
   constructor(
-    @InjectRepository(TasksAttach)
-    TasksAttachementRepository: Repository<TasksAttach>,
+    @InjectRepository(TasksAttachTASKS)
+    TasksAttachementRepository: Repository<TasksAttachTASKS>,
     entityManager: EntityManager,
   ) {
     super(TasksAttachementRepository, entityManager);
   }
 }
 @Injectable()
-export class EmployeeRepositorymySQL extends AbstractRepositorymySQL<Employee> {
+export class EmployeeRepositorymySQL extends AbstractRepositorymySQL<EmployeeTASKS> {
   protected readonly logger = new Logger(EmployeeRepositorymySQL.name);
 
   constructor(
-    @InjectRepository(Employee)
-    EmployeeRepository: Repository<Employee>,
+    @InjectRepository(EmployeeTASKS)
+    EmployeeRepository: Repository<EmployeeTASKS>,
     entityManager: EntityManager,
   ) {
     super(EmployeeRepository, entityManager);

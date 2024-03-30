@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import {
   DepartementRepositorymySQL,
   EmployeeRepositorymySQL,
@@ -10,6 +10,12 @@ import { EmployeeDtoInput } from './dto/employee.input.dto';
 import { EmployeeEMP } from './models/employee.schema';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
 import { EmployeeDtoUpdate } from './dto/employee.update.dto';
+import {
+  ORGANIZATION_SERVICE,
+  STOCK_SERVICE,
+  TASKS_SERVICE,
+} from '@app/shared';
+import { ClientProxy } from '@nestjs/microservices';
 
 @Injectable()
 export class EmployeeService {
@@ -19,6 +25,12 @@ export class EmployeeService {
     private readonly userRepository: UserRepositorymySQL,
     private readonly positionRepository: PositionRepositorymySQL,
     private readonly timeWorkRepository: timeWorkRepositorymySQL,
+    @Inject(ORGANIZATION_SERVICE)
+    private readonly createEmployeeOrganization: ClientProxy,
+    @Inject(TASKS_SERVICE)
+    private readonly createEmployeeTasks: ClientProxy,
+    @Inject(STOCK_SERVICE)
+    private readonly createEmployeeStock: ClientProxy,
   ) {}
 
   async create(
@@ -55,6 +67,15 @@ export class EmployeeService {
         position: position,
         timeWork: timeWork,
         departement: departement,
+      });
+      this.createEmployeeOrganization.emit('createEmployeeCuminicate', {
+        ...createEmployeeDto,
+      });
+      this.createEmployeeTasks.emit('createEmployeeCuminicate', {
+        ...createEmployeeDto,
+      });
+      this.createEmployeeStock.emit('createEmployeeCuminicate', {
+        ...createEmployeeDto,
       });
       return this.employeeRepository.create(saveEmp);
     }

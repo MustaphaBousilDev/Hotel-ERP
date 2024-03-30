@@ -4,13 +4,13 @@ import { CreateCategoryInput } from './dto/create-category.input';
 import { UpdateCategoryInput } from './dto/update-category.input';
 import { CurrentUser } from '@app/shared';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
-import { Category } from '../../models';
+import { CategorySTOCK } from '../../models';
 
-@Resolver(() => Category)
+@Resolver(() => CategorySTOCK)
 export class CategoriesResolver {
   constructor(private readonly categoriesService: CategoriesService) {}
 
-  @Mutation(() => Category)
+  @Mutation(() => CategorySTOCK)
   createCategory(
     @Args('createCategoryInput')
     createCategoryInput: CreateCategoryInput,
@@ -19,17 +19,17 @@ export class CategoriesResolver {
     return this.categoriesService.create(createCategoryInput, user);
   }
 
-  @Query(() => [Category], { name: 'categories' })
+  @Query(() => [CategorySTOCK], { name: 'categories' })
   findAll() {
     return this.categoriesService.findAll();
   }
 
-  @Query(() => Category, { name: 'category' })
+  @Query(() => CategorySTOCK, { name: 'category' })
   findOne(@Args('id', { type: () => Int }) id: number) {
     return this.categoriesService.findOne(id);
   }
 
-  @Mutation(() => Category)
+  @Mutation(() => CategorySTOCK)
   updateCategory(
     @Args('id') id: number,
     @Args('updateCategoryInput')
@@ -39,7 +39,7 @@ export class CategoriesResolver {
     return this.categoriesService.update(id, updateCategoryInput, user);
   }
 
-  @Mutation(() => Category)
+  @Mutation(() => CategorySTOCK)
   removeCategory(@Args('id', { type: () => Int }) id: number) {
     return this.categoriesService.remove(id);
   }

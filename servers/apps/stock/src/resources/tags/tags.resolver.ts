@@ -2,15 +2,15 @@ import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { TagsService } from './tags.service';
 import { CreateTagInput } from './dto/create-tag.input';
 import { UpdateTagInput } from './dto/update-tag.input';
-import { Tags } from '../../models';
+import { TagsSTOCK } from '../../models';
 import { CurrentUser } from '@app/shared';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
 
-@Resolver(() => Tags)
+@Resolver(() => TagsSTOCK)
 export class TagsResolver {
   constructor(private readonly tagsService: TagsService) {}
 
-  @Mutation(() => Tags)
+  @Mutation(() => TagsSTOCK)
   createTag(
     @Args('createTagInput') createTagInput: CreateTagInput,
     @CurrentUser() user: UserInfoDto,
@@ -18,17 +18,17 @@ export class TagsResolver {
     return this.tagsService.create(createTagInput, user);
   }
 
-  @Query(() => [Tags], { name: 'tags' })
+  @Query(() => [TagsSTOCK], { name: 'tags' })
   findAll() {
     return this.tagsService.findAll();
   }
 
-  @Query(() => Tags, { name: 'tag' })
+  @Query(() => TagsSTOCK, { name: 'tag' })
   findOne(@Args('id', { type: () => Int }) id: number) {
     return this.tagsService.findOne(id);
   }
 
-  @Mutation(() => Tags)
+  @Mutation(() => TagsSTOCK)
   updateTag(
     @Args('id') _id: number,
     @Args('updateTagInput')
@@ -38,7 +38,7 @@ export class TagsResolver {
     return this.tagsService.update(_id, updateTagInput, user);
   }
 
-  @Mutation(() => Tags)
+  @Mutation(() => TagsSTOCK)
   removeTag(@Args('id', { type: () => Int }) id: number) {
     return this.tagsService.remove(id);
   }

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateRoomInput } from './dto/create-room.input';
 import { HotelRepositorySQL, RoomRepositorySQL } from './room.repository';
 //import { User } from '@app/shared';
-import { Room } from '../../models/rooms.schema';
+import { RoomORG } from '../../models/rooms.schema';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
 import { UpdateRoomInput } from './dto/update-room.input';
 import { UserRepositorySQLForRoom } from '../users/users.repository';
@@ -22,7 +22,7 @@ export class RoomService {
       _id: createRoomDto.hotel.id,
     });
     if (user && hotel) {
-      const room = new Room({
+      const room = new RoomORG({
         roomNumber: createRoomDto.roomNumber,
         type: createRoomDto.type,
         price: createRoomDto.price,

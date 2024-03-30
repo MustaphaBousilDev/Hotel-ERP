@@ -3,14 +3,14 @@ import { HotelService } from './hotel.service';
 import { CurrentUser } from '@app/shared';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
 import { CreateHotelInput } from './dto/create-hotel.input';
-import { Hotel } from '../../models/hotel.schema';
+import { HotelORG } from '../../models/hotel.schema';
 import { UpdateHotelInput } from './dto/update-hotel.input';
 
-@Resolver(() => Hotel)
+@Resolver(() => HotelORG)
 export class HotelResolver {
   constructor(private readonly hotelService: HotelService) {}
 
-  @Mutation(() => Hotel)
+  @Mutation(() => HotelORG)
   createHotel(
     @Args('createHotelInput')
     createHotelInput: CreateHotelInput,
@@ -22,17 +22,17 @@ export class HotelResolver {
     return this.hotelService.create(createHotelInput, user);
   }
 
-  @Query(() => [Hotel], { name: 'hotels' })
+  @Query(() => [HotelORG], { name: 'hotels' })
   findAll() {
     return this.hotelService.findAll();
   }
 
-  @Query(() => Hotel, { name: 'hotel' })
+  @Query(() => HotelORG, { name: 'hotel' })
   findOne(@Args('id', { type: () => Number }) id: number) {
     return this.hotelService.findOne(id);
   }
 
-  @Mutation(() => Hotel)
+  @Mutation(() => HotelORG)
   updateHotel(
     @Args('id') id: number,
     @Args('updateHotelInput')
@@ -42,7 +42,7 @@ export class HotelResolver {
     return this.hotelService.update(id, updateHotelInput, user);
   }
 
-  @Mutation(() => Hotel)
+  @Mutation(() => HotelORG)
   removeHotel(@Args('id', { type: () => Number }) id: number) {
     return this.hotelService.remove(id);
   }

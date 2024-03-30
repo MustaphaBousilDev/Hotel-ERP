@@ -1,13 +1,13 @@
 import { AbstractRepositorymySQL } from '@app/shared';
 import { Injectable, Logger } from '@nestjs/common';
 // import { ReservationDocument } from './models/reservation.mongo.schema';
-import { Reservation } from './models/reservation.mysql.entity';
+import { ReservationRES } from './models/reservation.mysql.entity';
 // import { InjectModel } from '@nestjs/mongoose';
 // import { Model } from 'mongoose';
 import { InjectRepository } from '@nestjs/typeorm';
 import { EntityManager, Repository } from 'typeorm';
-import { Room } from './models/rooms.mysql.entity';
-import { Hotel } from './models/hotel.mysql.entity';
+import { RoomRES } from './models/rooms.mysql.entity';
+import { HotelRES } from './models/hotel.mysql.entity';
 import { UserRES } from './models/users.mysql.entity';
 
 // @Injectable()
@@ -22,12 +22,12 @@ import { UserRES } from './models/users.mysql.entity';
 //   }
 // }
 @Injectable()
-export class ReservationsRepositorymySQL extends AbstractRepositorymySQL<Reservation> {
+export class ReservationsRepositorymySQL extends AbstractRepositorymySQL<ReservationRES> {
   protected readonly logger = new Logger(ReservationsRepositorymySQL.name);
 
   constructor(
-    @InjectRepository(Reservation)
-    ReservationsRepository: Repository<Reservation>,
+    @InjectRepository(ReservationRES)
+    ReservationsRepository: Repository<ReservationRES>,
     entityManager: EntityManager,
   ) {
     super(ReservationsRepository, entityManager);
@@ -35,12 +35,12 @@ export class ReservationsRepositorymySQL extends AbstractRepositorymySQL<Reserva
 }
 
 @Injectable()
-export class RoomRepositorySQL extends AbstractRepositorymySQL<Room> {
+export class RoomRepositorySQL extends AbstractRepositorymySQL<RoomRES> {
   protected readonly logger = new Logger(RoomRepositorySQL.name);
 
   constructor(
-    @InjectRepository(Room)
-    RoomRepository: Repository<Room>,
+    @InjectRepository(RoomRES)
+    RoomRepository: Repository<RoomRES>,
     entityManager: EntityManager,
   ) {
     super(RoomRepository, entityManager);
@@ -48,12 +48,12 @@ export class RoomRepositorySQL extends AbstractRepositorymySQL<Room> {
 }
 
 @Injectable()
-export class HotelRepositorySQL extends AbstractRepositorymySQL<Hotel> {
+export class HotelRepositorySQL extends AbstractRepositorymySQL<HotelRES> {
   protected readonly logger = new Logger(HotelRepositorySQL.name);
 
   constructor(
-    @InjectRepository(Hotel)
-    HotelRepository: Repository<Hotel>,
+    @InjectRepository(HotelRES)
+    HotelRepository: Repository<HotelRES>,
     entityManager: EntityManager,
   ) {
     super(HotelRepository, entityManager);

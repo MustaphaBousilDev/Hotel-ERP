@@ -2,27 +2,27 @@ import { AbstractRepositorymySQL } from '@app/shared';
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { EntityManager, Repository } from 'typeorm';
-import { TasksType } from '../../models/tasks-type.entity';
-import { Departement } from '../../models/departement.entity';
+import { TasksTypeTASKS } from '../../models/tasks-type.entity';
+import { DepartementTASKS } from '../../models/departement.entity';
 @Injectable()
-export class TasksTypeRepositorymySQL extends AbstractRepositorymySQL<TasksType> {
+export class TasksTypeRepositorymySQL extends AbstractRepositorymySQL<TasksTypeTASKS> {
   protected readonly logger = new Logger(TasksTypeRepositorymySQL.name);
 
   constructor(
-    @InjectRepository(TasksType)
-    TasksTypeRepository: Repository<TasksType>,
+    @InjectRepository(TasksTypeTASKS)
+    TasksTypeRepository: Repository<TasksTypeTASKS>,
     entityManager: EntityManager,
   ) {
     super(TasksTypeRepository, entityManager);
   }
 }
 @Injectable()
-export class DepartementRepositorymySQL extends AbstractRepositorymySQL<Departement> {
+export class DepartementRepositorymySQL extends AbstractRepositorymySQL<DepartementTASKS> {
   protected readonly logger = new Logger(DepartementRepositorymySQL.name);
 
   constructor(
-    @InjectRepository(Departement)
-    DepartementRepository: Repository<Departement>,
+    @InjectRepository(DepartementTASKS)
+    DepartementRepository: Repository<DepartementTASKS>,
     entityManager: EntityManager,
   ) {
     super(DepartementRepository, entityManager);

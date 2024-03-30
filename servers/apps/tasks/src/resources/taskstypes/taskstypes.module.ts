@@ -4,9 +4,9 @@ import { TaskstypesResolver } from './taskstypes.resolver';
 import { DatabaseModulemySQL } from '@app/shared';
 import { LoggerModule } from 'nestjs-pino';
 import { ConfigModule } from '@nestjs/config';
-import { Tasks } from '../../models/tasks.entity';
-import { TasksType } from '../../models/tasks-type.entity';
-import { Departement } from '../../models/departement.entity';
+import { TasksTASKS } from '../../models/tasks.entity';
+import { TasksTypeTASKS } from '../../models/tasks-type.entity';
+import { DepartementTASKS } from '../../models/departement.entity';
 import {
   DepartementRepositorymySQL,
   TasksTypeRepositorymySQL,
@@ -14,7 +14,11 @@ import {
 @Module({
   imports: [
     DatabaseModulemySQL,
-    DatabaseModulemySQL.forFeature([Tasks, TasksType, Departement]),
+    DatabaseModulemySQL.forFeature([
+      TasksTASKS,
+      TasksTypeTASKS,
+      DepartementTASKS,
+    ]),
     // GraphQLModule.forRoot<ApolloDriverConfig>({
     //   driver: ApolloFederationDriver,
     //   autoSchemaFile: {

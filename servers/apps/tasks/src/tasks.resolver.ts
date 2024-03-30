@@ -7,7 +7,7 @@ import {
   RmqContext,
 } from '@nestjs/microservices';
 import { TasksService } from './tasks.service';
-import { Tasks } from './models/tasks.entity';
+import { TasksTASKS } from './models/tasks.entity';
 import { TasksDtoInput } from './dto/tasks.dto';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
 import { TasksDtoUpdate } from './dto/tasks-update.dto';
@@ -16,7 +16,7 @@ import { TasksDtoUpdate } from './dto/tasks-update.dto';
 export class TasksResolver {
   constructor(private readonly tasksService: TasksService) {}
 
-  @Mutation(() => Tasks)
+  @Mutation(() => TasksTASKS)
   createTasks(
     @Args('createTaskInput')
     createTaskInput: TasksDtoInput,
@@ -35,7 +35,7 @@ export class TasksResolver {
     return this.tasksService.create(createTaskInput, user);
   }
 
-  @Mutation(() => Tasks)
+  @Mutation(() => TasksTASKS)
   updateTasks(
     @Args('id') id: number,
     @Args('updateTasksInputs')
@@ -51,17 +51,17 @@ export class TasksResolver {
     return this.tasksService.update(id, updateTasksInput, user);
   }
 
-  @Query(() => [Tasks], { name: 'tasksAll' })
+  @Query(() => [TasksTASKS], { name: 'tasksAll' })
   findAllTasks() {
     return this.tasksService.findAll();
   }
 
-  @Query(() => Tasks, { name: 'task' })
+  @Query(() => TasksTASKS, { name: 'task' })
   findOne(@Args('id', { type: () => Number }) id: number) {
     return this.tasksService.findOne(id);
   }
 
-  @Mutation(() => Tasks)
+  @Mutation(() => TasksTASKS)
   async removeTasks(@Args('id', { type: () => Number }) id: number) {
     console.log(id);
     await this.tasksService.remove(id);

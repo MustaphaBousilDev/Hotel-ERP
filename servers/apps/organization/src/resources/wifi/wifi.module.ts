@@ -10,10 +10,10 @@ import {
   ApolloFederationDriver,
   ApolloFederationDriverConfig,
 } from '@nestjs/apollo';
-import { Wifi } from '../../models/wifi.schema';
-import { Hotel } from '../../models/hotel.schema';
-import { User } from '../../models/users.mysql.entity';
-import { Room } from '../../models/rooms.schema';
+import { WifiORG } from '../../models/wifi.schema';
+import { HotelORG } from '../../models/hotel.schema';
+import { UserORG } from '../../models/users.mysql.entity';
+import { RoomORG } from '../../models/rooms.schema';
 import { UserRepositorySQLForRoom } from '../users/users.repository';
 import { UserRepositoryModule } from '../users/users.module';
 
@@ -21,7 +21,7 @@ import { UserRepositoryModule } from '../users/users.module';
   imports: [
     UserRepositoryModule,
     DatabaseModulemySQL,
-    DatabaseModulemySQL.forFeature([Wifi, Hotel, User, Room]),
+    DatabaseModulemySQL.forFeature([WifiORG, HotelORG, UserORG, RoomORG]),
     GraphQLModule.forRoot<ApolloFederationDriverConfig>({
       driver: ApolloFederationDriver,
       autoSchemaFile: {

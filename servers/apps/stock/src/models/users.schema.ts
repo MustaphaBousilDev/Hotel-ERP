@@ -1,19 +1,19 @@
 import { Column, Entity, OneToMany } from 'typeorm';
 import { AbstractEntity } from '@app/shared';
 import { Field, ObjectType } from '@nestjs/graphql';
-import { Departement } from './departement.schema';
-import { Hotel } from './hotel.schema';
-import { Organization } from './organization.schema';
-import { Brand } from './brands.schema';
-import { Category } from './categories.schema';
-import { SubCategory } from './subcategories.schema';
-import { Employee } from './employe.responsable.schema';
-import { Suppliers } from './suppliers.schema';
-import { Product } from './products.schema';
-import { StockLocation } from './stock.location.schema';
-import { StockMovement } from './stock.movment.schema';
-import { StockTransaction } from './stock.transaction.schema';
-import { Tags } from './tags.schema';
+import { DepartementSTOCK } from './departement.schema';
+import { HotelSTOCK } from './hotel.schema';
+import { OrganizationSTOCK } from './organization.schema';
+import { BrandSTOCK } from './brands.schema';
+import { CategorySTOCK } from './categories.schema';
+import { SubCategorySTOCK } from './subcategories.schema';
+import { EmployeeSTOCK } from './employe.responsable.schema';
+import { SuppliersSTOCK } from './suppliers.schema';
+import { ProductSTOCK } from './products.schema';
+import { StockLocationSTOCK } from './stock.location.schema';
+import { StockMovementSTOCK } from './stock.movment.schema';
+import { StockTransactionSTOCK } from './stock.transaction.schema';
+import { TagsSTOCK } from './tags.schema';
 
 @Entity()
 @ObjectType()
@@ -30,94 +30,94 @@ export class UserSTOCK extends AbstractEntity<UserSTOCK> {
   @Field()
   email: string;
 
-  @Field(() => [Departement], { nullable: true })
-  @OneToMany(() => Departement, (departement) => departement.user, {
+  @Field(() => [DepartementSTOCK], { nullable: true })
+  @OneToMany(() => DepartementSTOCK, (departement) => departement.user, {
     cascade: true,
     eager: true,
   })
-  departements: Departement[];
+  departements: DepartementSTOCK[];
 
-  @Field(() => [Hotel], { nullable: true })
-  @OneToMany(() => Hotel, (hotel) => hotel.user, {
+  @Field(() => [HotelSTOCK], { nullable: true })
+  @OneToMany(() => HotelSTOCK, (hotel) => hotel.user, {
     cascade: true,
     eager: true,
   })
-  hotel: Hotel[];
+  hotel: HotelSTOCK[];
 
-  @Field(() => [Organization], { nullable: true })
-  @OneToMany(() => Organization, (organization) => organization.user, {
+  @Field(() => [OrganizationSTOCK], { nullable: true })
+  @OneToMany(() => OrganizationSTOCK, (organization) => organization.user, {
     cascade: true,
     eager: true,
   })
-  organization: Organization[];
+  organization: OrganizationSTOCK[];
 
-  @Field(() => [Product], { nullable: true })
-  @OneToMany(() => Product, (product) => product.user, {
+  @Field(() => [ProductSTOCK], { nullable: true })
+  @OneToMany(() => ProductSTOCK, (product) => product.user, {
     cascade: true,
     eager: true,
   })
-  product: Product[];
+  product: ProductSTOCK[];
 
-  @Field(() => [Brand], { nullable: true })
-  @OneToMany(() => Brand, (brand) => brand.user, {
+  @Field(() => [BrandSTOCK], { nullable: true })
+  @OneToMany(() => BrandSTOCK, (brand) => brand.user, {
     cascade: true,
     eager: true,
   })
-  brand: Brand[];
+  brand: BrandSTOCK[];
 
-  @Field(() => [Category], { nullable: true })
-  @OneToMany(() => Category, (category) => category.user, {
+  @Field(() => [CategorySTOCK], { nullable: true })
+  @OneToMany(() => CategorySTOCK, (category) => category.user, {
     cascade: true,
     eager: true,
   })
-  category: Category[];
+  category: CategorySTOCK[];
 
-  @Field(() => [SubCategory], { nullable: true })
-  @OneToMany(() => SubCategory, (subcat) => subcat.user, {
+  @Field(() => [SubCategorySTOCK], { nullable: true })
+  @OneToMany(() => SubCategorySTOCK, (subcat) => subcat.user, {
     cascade: true,
     eager: true,
   })
-  subcategory: SubCategory[];
+  subcategory: SubCategorySTOCK[];
 
-  @Field(() => [Employee], { nullable: true })
-  @OneToMany(() => Employee, (emp) => emp.user, {
+  @Field(() => [EmployeeSTOCK], { nullable: true })
+  @OneToMany(() => EmployeeSTOCK, (emp) => emp.user, {
     cascade: true,
     eager: true,
   })
-  employee: Employee[];
+  employee: EmployeeSTOCK[];
 
-  @Field(() => [Suppliers], { nullable: true })
-  @OneToMany(() => Suppliers, (sup) => sup.user, {
+  @Field(() => [SuppliersSTOCK], { nullable: true })
+  @OneToMany(() => SuppliersSTOCK, (sup) => sup.user, {
     cascade: true,
     eager: true,
   })
-  suplies: Suppliers[];
+  suplies: SuppliersSTOCK[];
 
-  @Field(() => [StockLocation], { nullable: true })
-  @OneToMany(() => StockLocation, (stock) => stock.user, {
+  @Field(() => [StockLocationSTOCK], { nullable: true })
+  @OneToMany(() => StockLocationSTOCK, (stock) => stock.user, {
     cascade: true,
     eager: true,
   })
-  stockLocation: StockLocation[];
+  stockLocation: StockLocationSTOCK[];
 
-  @Field(() => [StockMovement], { nullable: true })
-  @OneToMany(() => StockMovement, (stock) => stock.user, {
+  @Field(() => [StockMovementSTOCK], { nullable: true })
+  @OneToMany(() => StockMovementSTOCK, (stock) => stock.user, {
     cascade: true,
     eager: true,
   })
-  movmentStock: StockMovement[];
+  movmentStock: StockMovementSTOCK[];
 
-  @Field(() => [StockTransaction], { nullable: true })
-  @OneToMany(() => StockTransaction, (stock) => stock.user, {
+  @Field(() => [StockTransactionSTOCK], { nullable: true })
+  @OneToMany(() => StockTransactionSTOCK, (stock) => stock.user, {
     cascade: true,
     eager: true,
   })
-  stockTransaction: StockTransaction[];
+  stockTransaction: StockTransactionSTOCK[];
 
-  @Field(() => [Tags], { nullable: true })
-  @OneToMany(() => Tags, (tags) => tags.user, {
+  @Field(() => [TagsSTOCK], { nullable: true })
+  @OneToMany(() => TagsSTOCK, (tags) => tags.user, {
     cascade: true,
     eager: true,
   })
-  tags: Tags[];
+  tags: TagsSTOCK[];
 }

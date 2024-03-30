@@ -16,7 +16,7 @@ registerEnumType(TIME_WORK, {
 
 @Entity()
 @ObjectType() // for add it in schema qraphql
-export class TimeWork extends AbstractEntity<TimeWork> {
+export class TimeWorkEMP extends AbstractEntity<TimeWorkEMP> {
   @Column({
     nullable: true,
     type: 'enum',

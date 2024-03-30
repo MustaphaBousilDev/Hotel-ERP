@@ -7,7 +7,7 @@ import {
   TasksTypeRepositorymySQL,
 } from './tasks.repository';
 import { TasksDtoInput } from './dto/tasks.dto';
-import { Tasks } from './models/tasks.entity';
+import { TasksTASKS } from './models/tasks.entity';
 import { In } from 'typeorm';
 import { TasksDtoUpdate } from './dto/tasks-update.dto';
 
@@ -36,7 +36,7 @@ export class TasksService {
         _id: In(ids),
       },
     });
-    const organization = new Tasks({
+    const organization = new TasksTASKS({
       name: createTasksDto.name,
       description: createTasksDto.description,
       status: createTasksDto.status,

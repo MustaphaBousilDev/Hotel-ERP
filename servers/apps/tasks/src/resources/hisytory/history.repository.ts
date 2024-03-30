@@ -2,17 +2,17 @@ import { AbstractRepositorymySQL } from '@app/shared';
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { EntityManager, Repository } from 'typeorm';
-import { Tasks } from '../../models/tasks.entity';
-import { Employee } from '../../models/employee.entity';
-import { Task_History } from '../../models/task-history.entity';
+import { TasksTASKS } from '../../models/tasks.entity';
+import { EmployeeTASKS } from '../../models/employee.entity';
+import { Task_HistoryTASKS } from '../../models/task-history.entity';
 
 @Injectable()
-export class TasksRepositorymySQL extends AbstractRepositorymySQL<Tasks> {
+export class TasksRepositorymySQL extends AbstractRepositorymySQL<TasksTASKS> {
   protected readonly logger = new Logger(TasksRepositorymySQL.name);
 
   constructor(
-    @InjectRepository(Tasks)
-    TasksRepository: Repository<Tasks>,
+    @InjectRepository(TasksTASKS)
+    TasksRepository: Repository<TasksTASKS>,
     entityManager: EntityManager,
   ) {
     super(TasksRepository, entityManager);
@@ -20,12 +20,12 @@ export class TasksRepositorymySQL extends AbstractRepositorymySQL<Tasks> {
 }
 
 @Injectable()
-export class TaskHistoryRepositorymySQL extends AbstractRepositorymySQL<Task_History> {
+export class TaskHistoryRepositorymySQL extends AbstractRepositorymySQL<Task_HistoryTASKS> {
   protected readonly logger = new Logger(TaskHistoryRepositorymySQL.name);
 
   constructor(
-    @InjectRepository(Task_History)
-    TaskHistoryRepository: Repository<Task_History>,
+    @InjectRepository(Task_HistoryTASKS)
+    TaskHistoryRepository: Repository<Task_HistoryTASKS>,
     entityManager: EntityManager,
   ) {
     super(TaskHistoryRepository, entityManager);
@@ -33,12 +33,12 @@ export class TaskHistoryRepositorymySQL extends AbstractRepositorymySQL<Task_His
 }
 
 @Injectable()
-export class EmployeeRepositorymySQL extends AbstractRepositorymySQL<Employee> {
+export class EmployeeRepositorymySQL extends AbstractRepositorymySQL<EmployeeTASKS> {
   protected readonly logger = new Logger(EmployeeRepositorymySQL.name);
 
   constructor(
-    @InjectRepository(Employee)
-    EmployeeRepository: Repository<Employee>,
+    @InjectRepository(EmployeeTASKS)
+    EmployeeRepository: Repository<EmployeeTASKS>,
     entityManager: EntityManager,
   ) {
     super(EmployeeRepository, entityManager);

@@ -4,13 +4,13 @@ import { CreateSupplierInput } from './dto/create-supplier.input';
 import { UpdateSupplierInput } from './dto/update-supplier.input';
 import { CurrentUser } from '@app/shared';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
-import { Suppliers } from '../../models';
+import { SuppliersSTOCK } from '../../models';
 
-@Resolver(() => Suppliers)
+@Resolver(() => SuppliersSTOCK)
 export class SuppliersResolver {
   constructor(private readonly suppliersService: SuppliersService) {}
 
-  @Mutation(() => Suppliers)
+  @Mutation(() => SuppliersSTOCK)
   createSupplier(
     @Args('createSupplierInput')
     createSupplierInput: CreateSupplierInput,
@@ -19,17 +19,17 @@ export class SuppliersResolver {
     return this.suppliersService.create(createSupplierInput, user);
   }
 
-  @Query(() => [Suppliers], { name: 'suppliers' })
+  @Query(() => [SuppliersSTOCK], { name: 'suppliers' })
   findAll() {
     return this.suppliersService.findAll();
   }
 
-  @Query(() => Suppliers, { name: 'supplier' })
+  @Query(() => SuppliersSTOCK, { name: 'supplier' })
   findOne(@Args('id', { type: () => Int }) id: number) {
     return this.suppliersService.findOne(id);
   }
 
-  @Mutation(() => Suppliers)
+  @Mutation(() => SuppliersSTOCK)
   updateSupplier(
     @Args('id') _id: number,
     @Args('updateSupplierInput')
@@ -39,7 +39,7 @@ export class SuppliersResolver {
     return this.suppliersService.update(_id, updateSupplierInput, user);
   }
 
-  @Mutation(() => Suppliers)
+  @Mutation(() => SuppliersSTOCK)
   removeSupplier(@Args('id', { type: () => Int }) id: number) {
     return this.suppliersService.remove(id);
   }

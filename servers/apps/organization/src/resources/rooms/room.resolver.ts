@@ -2,15 +2,15 @@ import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { RoomService } from './room.service';
 import { CreateRoomInput } from './dto/create-room.input';
 import { CurrentUser, User } from '@app/shared';
-import { Room } from '../../models/rooms.schema';
+import { RoomORG } from '../../models/rooms.schema';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
 import { UpdateRoomInput } from './dto/update-room.input';
 
-@Resolver(() => Room)
+@Resolver(() => RoomORG)
 export class RoomResolver {
   constructor(private readonly roomService: RoomService) {}
 
-  @Mutation(() => Room)
+  @Mutation(() => RoomORG)
   createRoom(
     @Args('createRoomInput') createRoomInput: CreateRoomInput,
     @CurrentUser() user: UserInfoDto,
@@ -20,17 +20,17 @@ export class RoomResolver {
     return this.roomService.create(createRoomInput, user);
   }
 
-  @Query(() => [Room], { name: 'rooms' })
+  @Query(() => [RoomORG], { name: 'rooms' })
   findAll() {
     return this.roomService.findAll();
   }
 
-  @Query(() => Room, { name: 'room' })
+  @Query(() => RoomORG, { name: 'room' })
   findOne(@Args('id', { type: () => Number }) id: number) {
     return this.roomService.findOne(id);
   }
 
-  @Mutation(() => Room)
+  @Mutation(() => RoomORG)
   updateRoom(
     @Args('id', { type: () => Int }) id: number,
     @Args('updateRoomInput') updateRoomInput: UpdateRoomInput,
@@ -41,7 +41,7 @@ export class RoomResolver {
     return this.roomService.update(id, updateRoomInput, user);
   }
 
-  @Mutation(() => Room)
+  @Mutation(() => RoomORG)
   removeRoom(@Args('id', { type: () => Number }) id: number) {
     return this.roomService.remove(id);
   }

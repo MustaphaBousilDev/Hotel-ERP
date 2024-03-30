@@ -4,7 +4,7 @@ import {
   TasksTypeRepositorymySQL,
 } from './tasksTypes.repository';
 import { TasksTypeDtoInput } from '../../dto/tasks-type.dto';
-import { TasksType } from '../../models/tasks-type.entity';
+import { TasksTypeTASKS } from '../../models/tasks-type.entity';
 import { TaskTypeDtoUpdate } from '../../dto/task-type-update.dto';
 
 @Injectable()
@@ -18,7 +18,7 @@ export class TaskstypesService {
     const departement = await this.departementRepository.findOne({
       _id: createTaskstypeInput.departement.id,
     });
-    const tasksType = new TasksType({
+    const tasksType = new TasksTypeTASKS({
       name: createTaskstypeInput.name,
       departement: departement,
     });

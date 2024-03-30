@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserRepositorySQLForRoom } from './users.repository';
-import { User } from '../../models/users.mysql.entity';
+import { UserORG } from '../../models/users.mysql.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User])], // Import TypeOrmModule with User repository
+  imports: [TypeOrmModule.forFeature([UserORG])], // Import TypeOrmModule with User repository
   providers: [UserRepositorySQLForRoom], // Provide UserRepositorySQLForRoom
   exports: [UserRepositorySQLForRoom], // Export UserRepositorySQLForRoom for dependency injection
 })

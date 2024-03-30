@@ -1,18 +1,18 @@
 import { AbstractRepositorymySQL } from '@app/shared';
 import { Injectable, Logger } from '@nestjs/common';
-import { Wifi } from '../../models/wifi.schema';
+import { WifiORG } from '../../models/wifi.schema';
 import { InjectRepository } from '@nestjs/typeorm';
 import { EntityManager, Repository } from 'typeorm';
-import { Hotel } from '../../models/hotel.schema';
-import { User } from '../../models/users.mysql.entity';
+import { HotelORG } from '../../models/hotel.schema';
+import { UserORG } from '../../models/users.mysql.entity';
 
 @Injectable()
-export class WifiRepositorySQL extends AbstractRepositorymySQL<Wifi> {
+export class WifiRepositorySQL extends AbstractRepositorymySQL<WifiORG> {
   protected readonly logger = new Logger(WifiRepositorySQL.name);
 
   constructor(
-    @InjectRepository(Wifi)
-    WifiRepository: Repository<Wifi>,
+    @InjectRepository(WifiORG)
+    WifiRepository: Repository<WifiORG>,
     entityManager: EntityManager,
   ) {
     super(WifiRepository, entityManager);
@@ -20,12 +20,12 @@ export class WifiRepositorySQL extends AbstractRepositorymySQL<Wifi> {
 }
 
 @Injectable()
-export class HotelRepositorySQL extends AbstractRepositorymySQL<Hotel> {
+export class HotelRepositorySQL extends AbstractRepositorymySQL<HotelORG> {
   protected readonly logger = new Logger(HotelRepositorySQL.name);
 
   constructor(
-    @InjectRepository(Hotel)
-    HotelRepository: Repository<Hotel>,
+    @InjectRepository(HotelORG)
+    HotelRepository: Repository<HotelORG>,
     entityManager: EntityManager,
   ) {
     super(HotelRepository, entityManager);
@@ -33,12 +33,12 @@ export class HotelRepositorySQL extends AbstractRepositorymySQL<Hotel> {
 }
 
 @Injectable()
-export class UserRepositorySQL extends AbstractRepositorymySQL<User> {
+export class UserRepositorySQL extends AbstractRepositorymySQL<UserORG> {
   protected readonly logger = new Logger(UserRepositorySQL.name);
 
   constructor(
-    @InjectRepository(User)
-    UserRepository: Repository<User>,
+    @InjectRepository(UserORG)
+    UserRepository: Repository<UserORG>,
     entityManager: EntityManager,
   ) {
     super(UserRepository, entityManager);

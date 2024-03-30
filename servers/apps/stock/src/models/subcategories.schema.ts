@@ -1,12 +1,12 @@
 import { AbstractEntity } from '@app/shared';
 import { Field, ObjectType } from '@nestjs/graphql';
 import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
-import { Category } from './categories.schema';
+import { CategorySTOCK } from './categories.schema';
 import { UserSTOCK } from './users.schema';
-import { Product } from './products.schema';
+import { ProductSTOCK } from './products.schema';
 @Entity()
 @ObjectType() // for add it in schema qraphql
-export class SubCategory extends AbstractEntity<SubCategory> {
+export class SubCategorySTOCK extends AbstractEntity<SubCategorySTOCK> {
   @Column()
   //i am not using type in field because nestjs and graphql pick up on the type of these properties and will use it
   @Field() // for graph
@@ -16,23 +16,23 @@ export class SubCategory extends AbstractEntity<SubCategory> {
   @Field()
   status: boolean;
 
-  @OneToMany(() => Product, (product) => product.subCategory, {
+  @OneToMany(() => ProductSTOCK, (product) => product.subCategory, {
     cascade: true,
     eager: true,
   })
-  products: Product[];
+  products: ProductSTOCK[];
 
   @Column()
   @Field() // for graph
   image: string;
 
-  @ManyToOne(() => Category, (category) => category.subCategories, {
+  @ManyToOne(() => CategorySTOCK, (category) => category.subCategories, {
     nullable: true,
     orphanedRowAction: 'delete',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  category: Category;
+  category: CategorySTOCK;
 
   @ManyToOne(() => UserSTOCK, (user) => user.subcategory, {
     nullable: true,

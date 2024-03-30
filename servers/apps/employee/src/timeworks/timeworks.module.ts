@@ -3,7 +3,7 @@ import { TimeworksService } from './timeworks.service';
 import { TimeworksResolver } from './timeworks.resolver';
 import { DatabaseModulemySQL, LoggerModule } from '@app/shared';
 import { UserEMP } from '../models/users.schema';
-import { TimeWork } from '../models/time-work.schema';
+import { TimeWorkEMP } from '../models/time-work.schema';
 import { EmployeeEMP } from '../models/employee.schema';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriverConfig, ApolloFederationDriver } from '@nestjs/apollo';
@@ -16,7 +16,7 @@ import {
 @Module({
   imports: [
     DatabaseModulemySQL,
-    DatabaseModulemySQL.forFeature([UserEMP, TimeWork, EmployeeEMP]),
+    DatabaseModulemySQL.forFeature([UserEMP, TimeWorkEMP, EmployeeEMP]),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloFederationDriver,
       autoSchemaFile: {

@@ -3,7 +3,7 @@ import { CreateBrandInput } from './dto/create-brand.input';
 import { UpdateBrandInput } from './dto/update-brand.input';
 import { BrandRepositorymySQL, UserRepositorySQL } from './brands.repository';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
-import { Brand } from '../../models';
+import { BrandSTOCK } from '../../models';
 
 @Injectable()
 export class BrandsService {
@@ -18,7 +18,7 @@ export class BrandsService {
     const user = await this.userRepository.findOne({
       _id: userId,
     });
-    const brand = new Brand({
+    const brand = new BrandSTOCK({
       ...createBrandInput,
       user: user,
     });

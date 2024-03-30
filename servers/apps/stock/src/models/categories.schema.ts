@@ -9,11 +9,11 @@ import {
   OneToMany,
 } from 'typeorm';
 import { UserSTOCK } from './users.schema';
-import { SubCategory } from './subcategories.schema';
-import { Hotel } from './hotel.schema';
+import { SubCategorySTOCK } from './subcategories.schema';
+import { HotelSTOCK } from './hotel.schema';
 @Entity()
 @ObjectType() // for add it in schema qraphql
-export class Category extends AbstractEntity<Category> {
+export class CategorySTOCK extends AbstractEntity<CategorySTOCK> {
   @Column()
   //i am not using type in field because nestjs and graphql pick up on the type of these properties and will use it
   @Field() // for graph
@@ -36,13 +36,13 @@ export class Category extends AbstractEntity<Category> {
   })
   user: UserSTOCK;
 
-  @OneToMany(() => SubCategory, (subcat) => subcat.category, {
+  @OneToMany(() => SubCategorySTOCK, (subcat) => subcat.category, {
     cascade: true,
     eager: true,
   })
-  subCategories: SubCategory[];
+  subCategories: SubCategorySTOCK[];
 
-  @ManyToMany(() => Hotel, (hotel) => hotel.categories)
+  @ManyToMany(() => HotelSTOCK, (hotel) => hotel.categories)
   @JoinTable()
-  hotels: Hotel[];
+  hotels: HotelSTOCK[];
 }
