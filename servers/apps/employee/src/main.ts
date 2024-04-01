@@ -8,7 +8,15 @@ import { ValidationPipe } from '@nestjs/common';
 import { Logger } from 'nestjs-pino';
 
 async function bootstrap() {
+  console.log('################### emp coming');
   const app = await NestFactory.create(EmployeeModule);
+  app.enableCors({
+    origin: 'http://localhost:3000',
+    methods: 'GET,POST,PUT,PATCH,HEAD,DELETE',
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+    credentials: true,
+  });
   app.use(bodyParser.urlencoded({ extended: true }));
   const configService = app.get(ConfigService);
   app.connectMicroservice({

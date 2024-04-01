@@ -4,60 +4,47 @@ services:
     image: reservations
     build:
       context: .
-      # dockerfile: ./apps/reservations/Dockerfile djfdjkf
       args:
         - APP=reservations
       target: development
     restart: always
       
     command: npm run start:dev reservations
-    #if each microservice has own envirement vairiable
     env_file:
       - ./apps/reservations/.env
     ports:
       - '5000:5000'
     depends_on:
-      #- redis
       - rabbitmq
     container_name: reservations
-    # volumes:
-    #   - .:/usr/src/app
   auth:
     image: auth
     build:
       context: .
-      # dockerfile: ./apps/auth/Dockerfile
       args:
         - APP=auth
       target: development
     restart: always
     command: npm run start:dev auth
-    #if each microservice has own envirement vairiable
     env_file:
       - ./apps/auth/.env
     ports:
       - '5001:5001'
     depends_on:
-      #- redis
       - rabbitmq
     container_name: auth
-    # volumes: 
-    #   - .:/usr/src/app
   payments:
     image: payments
     build:
       context: .
-      # dockerfile: ./apps/payments/Dockerfile
       args:
         - APP=payments
       target: development
     restart: always
     command: npm run start:dev payments
-    #if each microservice has own envirement vairiable
     env_file:
       - ./apps/payments/.env
     depends_on:
-      #- redis
       - rabbitmq
     # ports:
     #   - '5003:5003'
@@ -68,20 +55,16 @@ services:
     image: notifications
     build:
       context: .
-      # dockerfile: ./apps/notifications/Dockerfile
       args:
         - APP=notifications
       target: development
     restart: always
     command: npm run start:dev notifications
-    #if each microservice has own envirement vairiable
     env_file:
       - ./apps/notifications/.env
     depends_on:
       #- redis
       - rabbitmq
-    # volumes: 
-    #   - .:/usr/src/app
     container_name: notifications
   redis:
     image: "redis:7-alpine"
@@ -89,8 +72,6 @@ services:
       - 6379
     depends_on:
       - rabbitmq
-    # volumes: 
-    #   - .:/usr/src/app
     container_name: redis
   rabbitmq:
     image: rabbitmq 
@@ -101,26 +82,19 @@ services:
     image: gateway
     build:
       context: .
-      # dockerfile: ./apps/notifications/Dockerfile
       args:
         - APP=gateway
       target: development
     command: npm run start:dev gateway
-    # command: npm run start:dev gateway
-    #if each microservice has own envirement vairiable
     env_file:
       - ./apps/gateway/.env
-    # depends_on:
-    #   #- redis
-    #   - rabbitmq
-    #   - reservations
-    #   - auth
-    #   - payments
-    #   - notifications
-    #   - redis
-    #   - organization
-    # volumes: 
-    #   - .:/usr/src/app
+    #depends_on:
+     #- rabbitmq
+     #- reservations
+     #- auth
+     #- payments
+     #- notifications
+     #- organization
     container_name: gateway
     ports:
       - 5007:5007
@@ -129,7 +103,6 @@ services:
     image: organization
     build:
       context: .
-      # dockerfile: ./apps/notifications/Dockerfile
       args:
         - APP=organization
       target: development
@@ -139,17 +112,12 @@ services:
     ports:
       - '5006:5006'
     depends_on:
-      #- redis 
       - rabbitmq
-    # volumes: 
-    #   - .:/usr/src/app
-    #   - /usr/src/app/node_modules
     container_name: organization
   s3:
     image: s3
     build: 
       context: .
-      # dockerfile: ./apps/s3/Dockerfile
       args:
         - APP=s3
       target: development
@@ -160,8 +128,6 @@ services:
       - '5008:5008'
     depends_on:
       - rabbitmq
-    # volumes: 
-    #   - .:/usr/src/app
     container_name: s3
   tasks:
     image: tasks 
@@ -209,24 +175,8 @@ services:
       - rabbitmq
       - redis
     container_name: stock
-  
-
-  # db:
-  #   image: mysql 
-  #   restart: always
-  #   environment:
-  #     MYSQL_ROOT_PASSWORD: example
-  # adminer:
-  #   image: adminer
-  #   restart: always
-  #   ports:
-  #     - 8080:8080
-    # ports:
-    #   - '5004:5004'
-    # volumes: 
-    #   - .:/usr/src/app
-  # mongo:
-  #   image: mongo
+  mongo:
+    image: mongo
   db:
     image: postgres
     ports:

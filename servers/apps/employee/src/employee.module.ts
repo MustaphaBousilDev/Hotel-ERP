@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { EmployeeService } from './employee.service';
 import {
+  AUTH_SERVICE,
   DatabaseModulemySQL,
   LoggerModule,
   ORGANIZATION_SERVICE,
@@ -53,6 +54,18 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
     PositionsModule,
     TimeworksModule,
     ClientsModule.registerAsync([
+      {
+        name: AUTH_SERVICE,
+        useFactory: (configService: ConfigService) => ({
+          transport: Transport.RMQ,
+          options: {
+            urls: [configService.getOrThrow<string>('RABBITMQ_URI')],
+            //actual name of the queu that were going to be using in this service
+            queue: 'auth',
+          },
+        }),
+        inject: [ConfigService],
+      },
       {
         name: ORGANIZATION_SERVICE,
         useFactory: (configService: ConfigService) => ({

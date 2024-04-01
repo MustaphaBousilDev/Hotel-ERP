@@ -4,6 +4,8 @@ export class UserWithoutPassword {
   lastName: string;
   email: string;
   roles: string;
+  lastLogin: Date;
+  hashRefreshToken: string;
 }
 
 export class Role {
