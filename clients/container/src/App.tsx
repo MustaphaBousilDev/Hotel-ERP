@@ -42,7 +42,6 @@ const client = new ApolloClient({
 });
 
 const App:React.FC = () => (
-  <ApolloProvider client={client}>
     <LayoutProvider>
     <Router>
       <Routes>
@@ -59,6 +58,5 @@ const App:React.FC = () => (
       </Routes>
     </Router>
     </LayoutProvider>
-  </ApolloProvider>
 );
 ReactDOM.render(<App />, document.getElementById("app"));

@@ -21,6 +21,7 @@ import { CurrentUser, JwtAuthGuard, Roles } from '@app/shared';
 import { EmployeeDtoInput } from './dto/employee.input.dto';
 import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
 import { EmployeeDtoUpdate } from './dto/employee.update.dto';
+
 @Controller('employee')
 export class EmployeeController {
   constructor(
@@ -44,7 +45,10 @@ export class EmployeeController {
   @UseGuards(JwtAuthGuard)
   @Get()
   async findAll() {
-    return this.employeeService.findAll();
+    console.log('#####################"""""""find all');
+    const allEMp = await this.employeeService.findAll();
+    console.log('controller', allEMp);
+    return allEMp;
   }
 
   @UseGuards(JwtAuthGuard)

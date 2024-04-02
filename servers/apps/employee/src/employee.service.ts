@@ -82,7 +82,8 @@ export class EmployeeService {
   }
 
   async findAll() {
-    return this.employeeRepository.find({});
+    const employees = await this.employeeRepository.find({});
+    return employees;
   }
 
   async findOne(_id: any) {
