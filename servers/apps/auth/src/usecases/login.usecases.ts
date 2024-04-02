@@ -42,8 +42,8 @@ export class LoginUseCases {
     return cookie;
   }
 
-  async validateUserForLocalStragtegy(username: string, pass: string) {
-    const user = await this.userRepository.getUserByUsername(username);
+  async validateUserForLocalStragtegy(userId: number, pass: string) {
+    const user = await this.userRepository.getUserByUsername(userId);
     if (!user) {
       return null;
     }
@@ -57,8 +57,8 @@ export class LoginUseCases {
     return null;
   }
 
-  async validateUserForJWTStragtegy(username: string) {
-    const user = await this.userRepository.getUserByUsername(username);
+  async validateUserForJWTStragtegy(userId: number) {
+    const user = await this.userRepository.getUserByUsername(userId);
     if (!user) {
       return null;
     }
@@ -78,8 +78,8 @@ export class LoginUseCases {
     );
   }
 
-  async getUserIfRefreshTokenMatches(refreshToken: string, username: string) {
-    const user = await this.userRepository.getUserByUsername(username);
+  async getUserIfRefreshTokenMatches(refreshToken: string, userId: number) {
+    const user = await this.userRepository.getUserByUsername(userId);
     if (!user) {
       return null;
     }
