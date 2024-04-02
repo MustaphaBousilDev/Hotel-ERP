@@ -187,7 +187,6 @@ services:
       POSTGRES_DB: erp_authentifications
       POSTGRES_INITDB_ARGS: '--data-checksums --encoding=UTF8'
     volumes:
-      - ./db-data/product-db:/var/lib/postgresql/data
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
   pgadmin: 
     image: dpage/pgadmin4
