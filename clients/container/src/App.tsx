@@ -20,13 +20,13 @@ const httpLink = createHttpLink({
 
 export const config = {
   headers: {
-      Authentication: `Bearer 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`,
+      Authentication: ``,
   }
 }
 
 const authLink = setContext((_, { headers }) => {
   // Get the authentication token from wherever it's stored (e.g., local storage, context, etc.)
-  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcxMTkyMzYwOCwiZXhwIjoxNzExOTI3MjA4fQ.N1R3uu248yEIUMiYDjACJCpkjXjkylQwGkvUq_RGa2o";
+  const token = "";
   // Return the headers to the context so httpLink can read them
   return {
     headers: {
