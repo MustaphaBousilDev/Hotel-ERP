@@ -18,11 +18,7 @@ const httpLink = createHttpLink({
   uri: 'http://localhost:5007/graphql', // Your GraphQL server URL
 });
 
-export const config = {
-  headers: {
-      Authentication: ``,
-  }
-}
+
 
 const authLink = setContext((_, { headers }) => {
   // Get the authentication token from wherever it's stored (e.g., local storage, context, etc.)
@@ -36,10 +32,7 @@ const authLink = setContext((_, { headers }) => {
 });
 
 
-const client = new ApolloClient({
-  link: authLink.concat(httpLink),
-  cache: new InMemoryCache()
-});
+
 
 const App:React.FC = () => (
     <LayoutProvider>
