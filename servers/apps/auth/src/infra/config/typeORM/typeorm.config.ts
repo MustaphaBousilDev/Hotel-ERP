@@ -18,9 +18,9 @@ const config: ConnectionOptions = {
   migrationsRun: true,
   migrationsTableName: 'migration_todo',
   migrations: ['database/migrations/**/*{.ts,.js}'],
-  cli: {
+  /*cli: {
     migrationsDir: 'database/migrations',
-  },
+  },*/
   // ssl: {
   //   rejectUnauthorized: false,
   // },
