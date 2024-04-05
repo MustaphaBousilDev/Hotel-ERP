@@ -198,7 +198,7 @@ services:
   sonarqube:
     image: sonarqube
     ports:
-      - "9000:9000"  # Adjust the port as needed
+      - "9000:9000"  # Adjust the port as neededdd
     container_name: sonarqube
     environment:
       - SONARQUBE_JDBC_URL=jdbc:postgresql://db:5432/erp_authentifications
