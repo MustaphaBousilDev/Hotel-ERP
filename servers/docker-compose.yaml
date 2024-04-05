@@ -211,6 +211,7 @@ services:
       - sonarqube_temp:/opt/sonarqube/temp
     depends_on:
       - db  # Ensures that SonarQube starts after the database
+      - pgadmin
 volumes:
   sonarqube_data:
   sonarqube_extensions:
