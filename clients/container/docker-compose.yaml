@@ -1,0 +1,10 @@
+services:
+  frontend: 
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    image: container
+    command: npm start 
+    ports:
+      - 3000:3000

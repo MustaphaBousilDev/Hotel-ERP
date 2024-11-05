@@ -8,7 +8,7 @@ COPY nest-cli.json nest-cli.json
 RUN npm install 
 # Copy only necessary source files
 COPY apps/notifications apps/notifications
-COPY libs libs
+COPY libs/shared/src/logger libs/shared/src/logger
 # Build the application
 RUN cd apps/notifications && npm install
 RUN npm run build notifications

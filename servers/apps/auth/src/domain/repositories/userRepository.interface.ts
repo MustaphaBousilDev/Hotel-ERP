@@ -1,8 +1,7 @@
 import { UserM } from '../model/user';
-// import { UserWithoutPassword } from '../model/user';
+
 export interface UserRepository {
-  getUserByUsername(username: string): Promise<UserM>;
-  updateLastLogin(username: string): Promise<void>;
-  updateRefreshToken(username: string, refreshToken: string): Promise<void>;
-  // getAllUsers(): Promise<UserWithoutPassword[]>;
+  getUserByUsername(userId: number): Promise<UserM>;
+  updateLastLogin(userId: number): Promise<void>;
+  updateRefreshToken(userId: number, refreshToken: string): Promise<void>;
 }

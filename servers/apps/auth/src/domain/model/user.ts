@@ -1,20 +1,19 @@
 export class UserWithoutPassword {
-  // id: number;
-  // username: string;
-  // createDate: Date;
-  // updatedDate: Date;
-  // lastLogin: Date;
-  // hashRefreshToken: string;
+  id: number;
+  firstName: string;
+  lastName: string;
   email: string;
-  username: string;
+  roles: string;
+  lastLogin: Date;
+  hashRefreshToken: string;
+  createDate: Date;
+  updatedDate: Date;
+}
+
+export class Role {
+  name: string;
 }
 
 export class UserM extends UserWithoutPassword {
   password: string;
-  username: string;
-  id: number;
-  createDate: Date;
-  updatedDate: Date;
-  lastLogin: any;
-  hashRefreshToken: string;
 }

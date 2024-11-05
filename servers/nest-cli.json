@@ -61,6 +61,60 @@
       "compilerOptions": {
         "tsConfigPath": "apps/notifications/tsconfig.app.json"
       }
+    },
+    "gateway": {
+      "type": "application",
+      "root": "apps/gateway",
+      "entryFile": "main",
+      "sourceRoot": "apps/gateway/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/gateway/tsconfig.app.json"
+      }
+    },
+    "organization": {
+      "type": "application",
+      "root": "apps/organization",
+      "entryFile": "main",
+      "sourceRoot": "apps/organization/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/organization/tsconfig.app.json"
+      }
+    },
+    "employee": {
+      "type": "application",
+      "root": "apps/employee",
+      "entryFile": "main",
+      "sourceRoot": "apps/employee/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/employee/tsconfig.app.json"
+      }
+    },
+    "s3": {
+      "type": "application",
+      "root": "apps/s3",
+      "entryFile": "main",
+      "sourceRoot": "apps/s3/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/s3/tsconfig.app.json"
+      }
+    },
+    "tasks": {
+      "type": "application",
+      "root": "apps/tasks",
+      "entryFile": "main",
+      "sourceRoot": "apps/tasks/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/tasks/tsconfig.app.json"
+      }
+    },
+    "stock": {
+      "type": "application",
+      "root": "apps/stock",
+      "entryFile": "main",
+      "sourceRoot": "apps/stock/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/stock/tsconfig.app.json"
+      }
     }
   },
   "monorepo": true,

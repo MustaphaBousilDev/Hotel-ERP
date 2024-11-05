@@ -5,6 +5,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as Joi from 'joi';
 import { LoggerModule, NOTIFICATION_SERVICE } from '@app/shared';
 import { ClientsModule, Transport } from '@nestjs/microservices';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriverConfig, ApolloFederationDriver } from '@nestjs/apollo';
+import { PaymentsResolver } from './payments.resolver';
 
 @Module({
   imports: [
@@ -15,6 +18,12 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
         STRIPE_SECRET_KEY: Joi.string().required(),
       }),
     }),
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloFederationDriver,
+      autoSchemaFile: {
+        federation: 2,
+      },
+    }),
     LoggerModule,
     ClientsModule.registerAsync([
       {
@@ -22,6 +31,9 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
         useFactory: (configService: ConfigService) => ({
           transport: Transport.TCP,
           options: {
+            // urls: [configService.getOrThrow<string>('RABBITMQ_URI')],
+            // //actual name of the queu that were going to be using in this service
+            // queue: 'notifications',
             host: configService.get('HOST_NOTIFICATIONS'),
             port: configService.get('HTTP_PORT_NOTIFICATIONS'),
           },
@@ -32,6 +44,6 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
     ]),
   ],
   controllers: [PaymentsController],
-  providers: [PaymentsService],
+  providers: [PaymentsService, PaymentsResolver],
 })
 export class PaymentsModule {}

@@ -1,31 +1,50 @@
 import { Module } from '@nestjs/common';
 import { ReservationsService } from './reservations.service';
-import { ReservationsController } from './reservations.controller';
+//import { ReservationsController } from './reservations.controller';
 import {
-  DatabaseModule,
   LoggerModule,
   AUTH_SERVICE,
   PAYMENT_SERVICE,
+  DatabaseModulemySQL,
+  ORGANIZATION_SERVICE,
 } from '@app/shared';
-import { ReservationsRepository } from './reservations.repository';
 import {
-  ReservationDocument,
-  ReservationSchema,
-} from './models/reservation.schema';
+  HotelRepositorySQL,
+  ReservationsRepositorymySQL,
+  RoomRepositorySQL,
+} from './reservations.repository';
+//for mysql typeorm
+import { ReservationRES } from './models/reservation.mysql.entity';
+import { UserRES } from './models/users.mysql.entity';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as Joi from 'joi';
 import { ClientsModule, Transport } from '@nestjs/microservices';
-
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriverConfig, ApolloFederationDriver } from '@nestjs/apollo';
+import { ReservationsResolver } from './reservations.resolver';
+import { RoomRES } from './models/rooms.mysql.entity';
+import { HotelRES } from './models/hotel.mysql.entity';
+import { OrganizationRES } from './models/organization.mysql.entity';
+import { UserRepositorySQL } from './reservations.repository';
+import { ReservationsController } from './reservations.controller';
+import { UserRepositorySQL as UserRemoteRepository } from './resources/users.repository';
 @Module({
   imports: [
-    DatabaseModule,
-    //DatabaseModule.forFeature in databaseModel inside shared folder
-    DatabaseModule.forFeature([
-      {
-        name: ReservationDocument.name,
-        schema: ReservationSchema,
-      },
+    DatabaseModulemySQL,
+    DatabaseModulemySQL.forFeature([
+      ReservationRES,
+      UserRES,
+      RoomRES,
+      HotelRES,
+      OrganizationRES,
     ]),
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloFederationDriver,
+      //generate automaticely graphQL schema using federation version 2
+      autoSchemaFile: {
+        federation: 2,
+      },
+    }),
     LoggerModule,
     ConfigModule.forRoot({
       isGlobal: true,
@@ -44,6 +63,9 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
         useFactory: (configService: ConfigService) => ({
           transport: Transport.TCP,
           options: {
+            // urls: [configService.getOrThrow<string>('RABBITMQ_URI')],
+            // //actual name of the queu that were going to be using in this service
+            // queue: 'auth',
             host: configService.get('AUTH_HOST'),
             port: configService.get('AUTH_PORT'),
           },
@@ -55,8 +77,22 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
         useFactory: (configService: ConfigService) => ({
           transport: Transport.TCP,
           options: {
+            // urls: [configService.getOrThrow<string>('RABBITMQ_URI')],
+            // //actual name of the queu that were going to be using in this service
+            // queue: 'payments',
             host: configService.get('PAYMENTS_HOST'),
             port: configService.get('PAYMENTS_PORT'),
+          },
+        }),
+        inject: [ConfigService],
+      },
+      {
+        name: ORGANIZATION_SERVICE,
+        useFactory: (configService: ConfigService) => ({
+          transport: Transport.RMQ,
+          options: {
+            urls: [configService.getOrThrow<string>('RABBITMQ_URI')],
+            queue: 'organization',
           },
         }),
         inject: [ConfigService],
@@ -64,6 +100,15 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
     ]),
   ],
   controllers: [ReservationsController],
-  providers: [ReservationsService, ReservationsRepository],
+  providers: [
+    ReservationsService,
+    // ReservationsRepository,
+    ReservationsRepositorymySQL,
+    ReservationsResolver,
+    UserRepositorySQL,
+    HotelRepositorySQL,
+    RoomRepositorySQL,
+    UserRemoteRepository,
+  ],
 })
 export class ReservationsModule {}
