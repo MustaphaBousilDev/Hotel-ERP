@@ -19,6 +19,19 @@ module.exports = (_, argv) => ({
   module: {
     rules: [
       {
+<<<<<<< HEAD
+=======
+        test: /\.(png|jpg|gif|jpeg)$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192
+            }
+          }]
+      },
+      {
+>>>>>>> typeorm
         test: /\.m?js/,
         type: "javascript/auto",
         resolve: {
@@ -31,11 +44,23 @@ module.exports = (_, argv) => ({
       },
       {
         test: /\.(ts|tsx|js|jsx)$/,
+<<<<<<< HEAD
         exclude: /node_modules/,
+=======
+        exclude: /node_modules/, 
+>>>>>>> typeorm
         use: {
           loader: "babel-loader",
         },
       },
+<<<<<<< HEAD
+=======
+      {
+        test: /\.json$/,
+        use: 'json-loader',
+        type: 'javascript/auto',
+      },
+>>>>>>> typeorm
     ],
   },
 
@@ -43,7 +68,15 @@ module.exports = (_, argv) => ({
     new ModuleFederationPlugin({
       name: "container",
       filename: "remoteEntry.js",
+<<<<<<< HEAD
       remotes: {},
+=======
+      remotes: {
+        "tasks":"tasks@http://localhost:4201/remoteEntry.js",
+        static_all:"static_all@http://localhost:3004/remoteEntry.js",
+        auth: "auth@http://localhost:3005/remoteEntry.js"
+      },
+>>>>>>> typeorm
       exposes: {},
       shared: {
         ...deps,

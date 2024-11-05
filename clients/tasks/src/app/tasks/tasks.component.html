@@ -1,0 +1,261 @@
+
+<div class=" my-4">
+  <h3 class="text-3xl font-bold">Welcome Back, Mugiwara</h3>
+  <app-tabs (activeTabShared)="receviedDataFromChild($event)" ></app-tabs>
+  @if(dataFromChild=='all-task'){
+    <div cdkDropListGroup class=" task-todo">
+      <div class=" task-todo-child">
+        <div class="child shadow-lg  bg-white">
+          <div
+            class=" flex child-heading  my-2 justify-between
+            items-center p-1">
+            <p class=" flex gap-2 items-center">
+              <span class=" text-xs font-semibold">To Do</span>
+              <span class=" text-xs">5</span>
+            </p>
+            <p (click)="openModal(modalTemplate)">
+              <svg class="w-3 h-3 text-gray-800 dark:text-white " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
+              </svg>
+            </p>
+          </div>
+          <div
+            cdkDropList
+            [cdkDropListData]="todoArr"
+            class="tasks__list"
+            id="todoList"
+            (cdkDropListDropped)="drop($event)">
+            @if(todoArr.length > 0){
+              @for (item of todoArr; track item) {
+                <div class="tasks__list-child" cdkDrag>
+                  <header>
+                    <span>House Keeping</span>
+                    <span>
+                      <svg class="w-6 h-6 text-gray-800 dark:text-white allSvg" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+                        <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
+                      </svg>
+                    </span>
+                  </header>
+                  <section>
+                    <h3>Clean Rooms 604</h3>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis
+                      fugit ...
+                    </p>
+                    <div>
+                      <p>
+                        <svg class="text-gray-800 dark:text-white allSvg" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 20">
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1v18M1 3.652v9c5.6-5.223 8.4 2.49 14-.08v-9c-5.6 2.57-8.4-5.143-14 .08Z"/>
+                        </svg>
+                        <span>21/03/2024</span>
+                      </p>
+                      <p>
+                        CED-18
+                      </p>
+                    </div>
+                  </section>
+                  <footer>
+                    <div >
+                      <svg class="text-gray-800 dark:text-white allSvg" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10v5m0 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 0v3a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V5m0 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/>
+                      </svg>
+                    </div>
+                    <div>
+                      <div class="avatar">
+                        <img
+                          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRa9UI1y4Shr253ibETjPCOWNBWWpKgQsVKaw&usqp=CAU"
+                          alt=""
+                        />
+                      </div>
+                      <div class="avatar">
+                        <img
+                          src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                          alt=""
+                        />
+                      </div>
+                      <div class="avatar">
+                        <img
+                          src="https://images.assetsdelivery.com/compings_v2/tanyadanuta/tanyadanuta2006/tanyadanuta200600030.jpg"
+                          alt=""
+                        />
+                      </div>
+                    </div>
+                  </footer>
+                </div>
+              }
+            }@else {
+              <div>NoTasks</div>
+            }
+          </div>
+        </div>
+        <div class="child shadow-lg  bg-white">
+          <div
+            class=" flex child-heading  my-2 justify-between
+            items-center p-1">
+            <p class=" flex gap-2 items-center">
+              <span class=" text-xs font-semibold">Done</span>
+              <span class=" text-xs">5</span>
+            </p>
+            <p>
+              <svg class="w-3 h-3 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
+              </svg>
+            </p>
+          </div>
+          <div
+            cdkDropList
+            [cdkDropListData]="doneArr"
+            class="tasks__list"
+            id="doneList"
+            (cdkDropListDropped)="drop($event)">
+            @if(doneArr.length > 0) {
+              @for (item of doneArr; track item) {
+                <div class="tasks__list-child" cdkDrag>
+                  <header>
+                    <span>House Keeping</span>
+                    <span>
+                      <svg class="w-6 h-6 text-gray-800 dark:text-white allSvg" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+                        <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
+                      </svg>
+                    </span>
+                  </header>
+                  <section>
+                    <h3>Clean Rooms 604</h3>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis
+                      fugit ...
+                    </p>
+                    <div>
+                      <p>
+                        <svg class="text-gray-800 dark:text-white allSvg" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 20">
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1v18M1 3.652v9c5.6-5.223 8.4 2.49 14-.08v-9c-5.6 2.57-8.4-5.143-14 .08Z"/>
+                        </svg>
+                        <span>21/03/2024</span>
+                      </p>
+                      <p>
+                        CED-18
+                      </p>
+                    </div>
+                  </section>
+                  <footer>
+                    <div >
+                      <svg class="text-gray-800 dark:text-white allSvg" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10v5m0 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 0v3a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V5m0 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/>
+                      </svg>
+                    </div>
+                    <div>
+                      <div class="avatar">
+                        <img
+                          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRa9UI1y4Shr253ibETjPCOWNBWWpKgQsVKaw&usqp=CAU"
+                          alt=""
+                        />
+                      </div>
+                      <div class="avatar">
+                        <img
+                          src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                          alt=""
+                        />
+                      </div>
+                      <div class="avatar">
+                        <img
+                          src="https://images.assetsdelivery.com/compings_v2/tanyadanuta/tanyadanuta2006/tanyadanuta200600030.jpg"
+                          alt=""
+                        />
+                      </div>
+                    </div>
+                  </footer>
+                </div>
+              }
+            }@else {
+              <div>Not Tasks</div>
+            }
+          </div>
+        </div>
+        <div class="child shadow-lg   bg-white">
+          <div
+            class=" flex child-heading  my-2 justify-between
+            items-center p-1">
+            <p class=" flex gap-2 items-center">
+              <span class=" text-xs font-semibold">Progress</span>
+              <span class=" text-xs">5</span>
+            </p>
+            <p>
+              <svg class="w-3 h-3 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
+              </svg>
+            </p>
+          </div>
+          <div
+            cdkDropList
+            [cdkDropListData]="progressArr"
+            class="tasks__list"
+            id="progressList"
+            (cdkDropListDropped)="drop($event)">
+            @if(progressArr.length > 0){
+              @for (item of progressArr; track item) {
+                <div class="tasks__list-child" cdkDrag>
+                  <header>
+                    <span>House Keeping</span>
+                    <span>
+                      <svg class="w-6 h-6 text-gray-800 dark:text-white allSvg" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+                        <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
+                      </svg>
+                    </span>
+                  </header>
+                  <section>
+                    <h3>Clean Rooms 604</h3>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis
+                      fugit ...
+                    </p>
+                    <div>
+                      <p>
+                        <svg class="text-gray-800 dark:text-white allSvg" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 20">
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1v18M1 3.652v9c5.6-5.223 8.4 2.49 14-.08v-9c-5.6 2.57-8.4-5.143-14 .08Z"/>
+                        </svg>
+                        <span>21/03/2024</span>
+                      </p>
+                      <p>
+                        CED-18
+                      </p>
+                    </div>
+                  </section>
+                  <footer>
+                    <div >
+                      <svg class="text-gray-800 dark:text-white allSvg" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10v5m0 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 0v3a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V5m0 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/>
+                      </svg>
+                    </div>
+                    <div>
+                      <div class="avatar">
+                        <img
+                          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRa9UI1y4Shr253ibETjPCOWNBWWpKgQsVKaw&usqp=CAU"
+                          alt=""
+                        />
+                      </div>
+                      <div class="avatar">
+                        <img
+                          src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                          alt=""
+                        />
+                      </div>
+                      <div class="avatar">
+                        <img
+                          src="https://images.assetsdelivery.com/compings_v2/tanyadanuta/tanyadanuta2006/tanyadanuta200600030.jpg"
+                          alt=""
+                        />
+                      </div>
+                    </div>
+                  </footer>
+                </div>
+              }
+            }@else {
+              <div>No Tasks</div>
+            }
+          </div>
+        </div>
+      </div>
+
+      <ng-template #modalTemplate>
+        <app-task-add></app-task-add>
+      </ng-template>
+    </div>
+  }
+</div>

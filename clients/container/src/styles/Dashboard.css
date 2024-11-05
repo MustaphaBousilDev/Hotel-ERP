@@ -11,7 +11,11 @@
 
 :root {
     --blue: #2a2185;
+<<<<<<< HEAD
     --white: #fff;
+=======
+    --white: #f8fafc;
+>>>>>>> typeorm
     --gray: #f5f5f5;
     --black1: #222;
     --black2: #999;
@@ -28,7 +32,11 @@ body {
 }
 
 /* =============== Navigation ================ */
+<<<<<<< HEAD
 .navigation {
+=======
+/* .navigation {
+>>>>>>> typeorm
     position: fixed;
     width: 250px;
     height: 100%;
@@ -36,13 +44,25 @@ body {
     transition: 0.5s;
     overflow: hidden;
     overflow-y: scroll;
+<<<<<<< HEAD
     /* transition: width 0.5s, background 0.5s; */
 }
+=======
+} */
+>>>>>>> typeorm
 .navigation::-webkit-scrollbar {
     width: 0px;
     height: 100%;
     z-index: 1000;
 }
+<<<<<<< HEAD
+=======
+.child_side::-webkit-scrollbar{
+    width: 0px;
+    height: 100%;
+    z-index: 1000;
+}
+>>>>>>> typeorm
 .navigation::-webkit-scrollbar-thumb {
     background-color: 'red'
 }
@@ -170,8 +190,14 @@ body {
 }
 
 .topbar {
+<<<<<<< HEAD
     width: 100%;
     height: 60px;
+=======
+    width:99%;
+    height: 60px;
+    margin: '0 auto';
+>>>>>>> typeorm
     display: flex;
     justify-content: space-between;
     align-items: center;

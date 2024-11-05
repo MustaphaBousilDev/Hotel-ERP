@@ -1,0 +1,10 @@
+services:
+  static-all: 
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    image: static-all
+    command: npm start 
+    ports:
+      - 3004:3004

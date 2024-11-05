@@ -10,11 +10,20 @@ const Bars:React.FC<props> = ({menuActive,onClick}) => {
           className="toggle"
           onClick={onClick}
           onKeyDown={onClick}
+<<<<<<< HEAD
         >
           {
             menuActive 
                 ? <HiBars3BottomLeft className='text-textColor text-4xl' />
                 : <HiOutlineBars3 className='text-textColor text-4xl' />
+=======
+          data-tested="bars-toggle"
+        >
+          {
+            menuActive 
+                ? <HiBars3BottomLeft className='text-textColor text-4xl dark:text-gray-400' />
+                : <HiOutlineBars3 className='text-textColor text-4xl dark:text-gray-400' />
+>>>>>>> typeorm
           }
     </div>
   )
