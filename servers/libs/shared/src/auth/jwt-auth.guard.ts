@@ -24,18 +24,20 @@ export class JwtAuthGuard implements CanActivate {
   ): boolean | Promise<boolean> | Observable<boolean> {
     const jwt =
       context.switchToHttp().getRequest().cookies?.Authentication ||
-      context.switchToHttp().getRequest().headers?.authentication;
-    console.log(jwt);
+      context.switchToHttp().getRequest().headers?.Authentication;
+    // console.log('######fucking jwt graphQL', jwt);
     if (!jwt) {
       return false;
     }
     const roles = this.reflector.get<string[]>('roles', context.getHandler());
+    // console.log('#######fucking roles graphQL', jwt);
     return this.authClient
       .send<User>('authenticate', {
         Authentication: jwt,
       })
       .pipe(
         tap((res) => {
+          // console.log('######fucking roles tap graphQL', res.roles);
           if (roles) {
             for (const role of roles) {
               if (!res.roles?.map((role) => role.name).includes(role)) {

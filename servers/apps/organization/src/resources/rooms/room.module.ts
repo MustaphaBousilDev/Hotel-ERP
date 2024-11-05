@@ -5,18 +5,22 @@ import { DatabaseModulemySQL } from '@app/shared';
 import { LoggerModule } from 'nestjs-pino';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
-import { RoomRepositorySQL } from './room.repository';
+import { HotelRepositorySQL, RoomRepositorySQL } from './room.repository';
 import {
   ApolloFederationDriver,
   ApolloFederationDriverConfig,
 } from '@nestjs/apollo';
-import { Hotel } from '../../models/hotel.schema';
-import { Room } from '../../models/rooms.schema';
+import { HotelORG } from '../../models/hotel.schema';
+import { RoomORG } from '../../models/rooms.schema';
+import { UserRepositorySQLForRoom } from '../users/users.repository';
+import { UserRepositoryModule } from '../users/users.module';
+import { UserORG } from '../../models/users.mysql.entity';
 
 @Module({
   imports: [
+    UserRepositoryModule,
     DatabaseModulemySQL,
-    DatabaseModulemySQL.forFeature([Room, Hotel]),
+    DatabaseModulemySQL.forFeature([RoomORG, HotelORG, UserORG]),
     GraphQLModule.forRoot<ApolloFederationDriverConfig>({
       driver: ApolloFederationDriver,
       autoSchemaFile: {
@@ -26,6 +30,13 @@ import { Room } from '../../models/rooms.schema';
     LoggerModule,
     ConfigModule.forRoot({ isGlobal: true }),
   ],
-  providers: [RoomResolver, RoomService, RoomRepositorySQL],
+  providers: [
+    RoomResolver,
+    RoomService,
+    RoomRepositorySQL,
+    UserRepositorySQLForRoom,
+    HotelRepositorySQL,
+  ],
+  exports: [UserRepositorySQLForRoom],
 })
 export class RoomModule {}

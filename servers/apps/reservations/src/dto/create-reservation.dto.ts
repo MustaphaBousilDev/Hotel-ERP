@@ -4,6 +4,8 @@ import { Type } from 'class-transformer';
 import {
   IsDate,
   IsDefined,
+  IsNotEmpty,
+  //IsNotEmpty,
   // IsNotEmpty,
   // IsNotEmpty,
   IsNotEmptyObject,
@@ -12,6 +14,8 @@ import {
   // IsString,
   ValidateNested,
 } from 'class-validator';
+import { HotelIDInput } from './hotel.dto';
+import { RoomIDInputForReservation } from './room.dto';
 @InputType() // for graphql shema when i create or update
 export class CreateReservationDto {
   @IsDate()
@@ -22,21 +26,6 @@ export class CreateReservationDto {
   @Type(() => Date)
   @Field()
   endDate: Date;
-  // @IsString()
-  // @IsNotEmpty()
-  // placeId: string;
-  // @IsString()
-  // @IsNotEmpty()
-  // invoiceId: string;
-
-  // @IsDefined()
-  // @IsNotEmptyObject()
-  // @ValidateNested()
-  // @Type(() => CardDto)
-  // card: CardDto;
-
-  // @IsNumber()
-  // amount: number;
 
   @IsDefined()
   @IsNotEmptyObject()
@@ -44,4 +33,12 @@ export class CreateReservationDto {
   @Type(() => CreateChargeDto)
   @Field(() => CreateChargeDto)
   charge: CreateChargeDto;
+
+  @Field(() => HotelIDInput)
+  @IsNotEmpty()
+  hotel: HotelIDInput;
+
+  @Field(() => RoomIDInputForReservation)
+  @IsNotEmpty()
+  room: RoomIDInputForReservation;
 }

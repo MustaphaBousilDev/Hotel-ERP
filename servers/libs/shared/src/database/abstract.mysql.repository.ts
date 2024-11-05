@@ -2,6 +2,7 @@ import { Logger, NotFoundException } from '@nestjs/common';
 import { AbstractEntity } from './abstract.entity.mysql';
 import {
   EntityManager,
+  FindManyOptions,
   FindOptionsRelations,
   FindOptionsWhere,
   Repository,
@@ -19,13 +20,9 @@ export abstract class AbstractRepositorymySQL<T extends AbstractEntity<T>> {
   public ORM = 'typeORM';
 
   //Omit is an utility typescript for create a new type and in this situation the new type is all propertyType to TDOcument except '_id' <-this is new Type is for document parzmetre
-  async create(entity: T) {
-    // const createDocument = new this.model({
-    //   ...document,
-    //   _id: new Types.ObjectId(),
-    // });
-    // return (await createDocument.save()).toJSON() as unknown as TDocument;
-    this.entityManager.save(entity);
+  async create(entity: T): Promise<T> {
+    const savedEntity = await this.entityManager.save(entity);
+    return savedEntity;
   }
 
   async findOne(
@@ -36,6 +33,8 @@ export abstract class AbstractRepositorymySQL<T extends AbstractEntity<T>> {
     if (!entity) {
       this.logger.warn('Document was not found with filterQuery', where);
       throw new NotFoundException('Entity was not found');
+    } else {
+      this.logger.debug('Entity Found:', entity);
     }
     return entity;
   }
@@ -61,5 +60,9 @@ export abstract class AbstractRepositorymySQL<T extends AbstractEntity<T>> {
 
   async findOneAndDelete(where: FindOptionsWhere<T>) {
     return this.entityRepository.delete(where);
+  }
+
+  async findMany(options?: FindManyOptions<T>): Promise<T[]> {
+    return this.entityRepository.find(options);
   }
 }

@@ -1,0 +1,10 @@
+services:
+  auth: 
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    image: auth
+    command: npm start 
+    ports:
+      - 3005:3005

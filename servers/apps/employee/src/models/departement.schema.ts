@@ -1,31 +1,43 @@
 import { AbstractEntity } from '@app/shared';
 import { Field, ObjectType } from '@nestjs/graphql';
-import { Column, Entity, ManyToMany, JoinTable, OneToMany } from 'typeorm';
-import { Hotel } from './hotel.schema';
-import { Employee } from './employee.schema';
+import {
+  Column,
+  Entity,
+  ManyToMany,
+  JoinTable,
+  OneToMany,
+  ManyToOne,
+} from 'typeorm';
+import { HotelEMP } from './hotel.schema';
+import { EmployeeEMP } from './employee.schema';
+import { UserEMP } from './users.schema';
 
 @Entity()
 @ObjectType() // for add it in schema qraphql
-export class Departement extends AbstractEntity<Departement> {
-  @Column()
+export class DepartementEMP extends AbstractEntity<DepartementEMP> {
+  @Column({ nullable: true })
   @Field() // for graph
   name: string;
 
-  @Column()
+  @Column({ nullable: true })
   @Field() // for graph
   image: string;
 
-  @ManyToMany(() => Hotel, (hotel) => hotel.departments)
+  @ManyToMany(() => HotelEMP, (hotel) => hotel.departments)
   @JoinTable()
-  hotels: Hotel[];
+  hotels: HotelEMP[];
 
-  @Column()
-  @Field() // for graph
-  user_id: number;
-
-  @OneToMany(() => Employee, (employee) => employee.departement, {
+  @OneToMany(() => EmployeeEMP, (employee) => employee.departement, {
     cascade: true,
     eager: true,
   })
-  employee: Employee[];
+  employee: EmployeeEMP[];
+
+  @ManyToOne(() => UserEMP, (user) => user.departement, {
+    nullable: true,
+    orphanedRowAction: 'delete',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  user: UserEMP;
 }

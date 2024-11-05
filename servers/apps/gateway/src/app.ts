@@ -3,6 +3,7 @@ import { INestApplication } from '@nestjs/common';
 let app: INestApplication;
 
 const setApp = (_app: INestApplication) => {
+  console.log('APPss "##############"');
   app = _app;
 };
 

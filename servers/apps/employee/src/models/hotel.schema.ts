@@ -1,33 +1,38 @@
 import { AbstractEntity } from '@app/shared';
 import { Field, ObjectType } from '@nestjs/graphql';
 import { Column, Entity, ManyToMany, JoinTable, ManyToOne } from 'typeorm';
-import { Organization } from './organization.schema';
-import { Departement } from './departement.schema';
+import { OrganizationEMP } from './organization.schema';
+import { DepartementEMP } from './departement.schema';
+import { UserEMP } from './users.schema';
 
 @Entity()
 @ObjectType() // for add it in schema qraphql
-export class Hotel extends AbstractEntity<Hotel> {
-  @Column()
+export class HotelEMP extends AbstractEntity<HotelEMP> {
+  @Column({ nullable: true })
   //i am not using type in field because nestjs and graphql pick up on the type of these properties and will use it
   @Field() // for graph
   name: string;
 
-  @ManyToMany(() => Departement, (departments) => departments.hotels)
+  @ManyToMany(() => DepartementEMP, (departments) => departments.hotels)
   @JoinTable()
-  departments: Departement[];
+  departments: DepartementEMP[];
 
-  @ManyToOne(() => Organization, (organization) => organization.hotel, {
+  @ManyToOne(() => OrganizationEMP, (organization) => organization.hotel, {
     orphanedRowAction: 'delete',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  organization: Organization;
+  organization: OrganizationEMP;
 
   @Column()
   @Field() // for graph
   image: string;
 
-  @Column()
-  @Field() // for graph
-  user_id: number;
+  @ManyToOne(() => UserEMP, (user) => user.hotel, {
+    nullable: true,
+    orphanedRowAction: 'delete',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  user: UserEMP;
 }

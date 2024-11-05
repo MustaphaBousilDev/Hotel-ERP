@@ -1,42 +1,48 @@
-import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { RoomService } from './room.service';
 import { CreateRoomInput } from './dto/create-room.input';
-import { UpdateRoomInput } from './dto/update-room.input';
 import { CurrentUser, User } from '@app/shared';
-import { Room } from '../../models/rooms.schema';
+import { RoomORG } from '../../models/rooms.schema';
+import { UserInfoDto } from '@app/shared/dto/userInfo.dto';
+import { UpdateRoomInput } from './dto/update-room.input';
 
-@Resolver(() => Room)
+@Resolver(() => RoomORG)
 export class RoomResolver {
-  constructor(private readonly wifiService: RoomService) {}
+  constructor(private readonly roomService: RoomService) {}
 
-  @Mutation(() => Room)
-  createWifi(
-    @Args('createRoomInput') createWifiInput: CreateRoomInput,
-    @CurrentUser() user: User,
+  @Mutation(() => RoomORG)
+  createRoom(
+    @Args('createRoomInput') createRoomInput: CreateRoomInput,
+    @CurrentUser() user: UserInfoDto,
   ) {
-    return this.wifiService.create(createWifiInput, user);
+    console.log('################# room');
+    console.log(createRoomInput.hotel);
+    return this.roomService.create(createRoomInput, user);
   }
 
-  @Query(() => [Room], { name: 'room' })
+  @Query(() => [RoomORG], { name: 'rooms' })
   findAll() {
-    return this.wifiService.findAll();
+    return this.roomService.findAll();
   }
 
-  @Query(() => Room, { name: 'room' })
+  @Query(() => RoomORG, { name: 'room' })
   findOne(@Args('id', { type: () => Number }) id: number) {
-    return this.wifiService.findOne(id);
+    return this.roomService.findOne(id);
   }
 
-  @Mutation(() => Room)
-  updateWifi(
-    @Args('updateRoomInput') updateWifiInput: UpdateRoomInput,
+  @Mutation(() => RoomORG)
+  updateRoom(
+    @Args('id', { type: () => Int }) id: number,
+    @Args('updateRoomInput') updateRoomInput: UpdateRoomInput,
     @CurrentUser() user: User,
   ) {
-    return this.wifiService.update(updateWifiInput.id, updateWifiInput, user);
+    console.log('######### update resolver');
+    console.log(updateRoomInput);
+    return this.roomService.update(id, updateRoomInput, user);
   }
 
-  @Mutation(() => Room)
-  removeWifi(@Args('id', { type: () => Number }) id: number) {
-    return this.wifiService.remove(id);
+  @Mutation(() => RoomORG)
+  removeRoom(@Args('id', { type: () => Number }) id: number) {
+    return this.roomService.remove(id);
   }
 }

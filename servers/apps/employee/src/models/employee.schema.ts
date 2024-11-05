@@ -1,71 +1,109 @@
 import { AbstractEntity } from '@app/shared';
-import { Field, ObjectType } from '@nestjs/graphql';
+import { Field, ObjectType, registerEnumType } from '@nestjs/graphql';
 import { Column, Entity, ManyToOne } from 'typeorm';
-import { Departement } from './departement.schema';
-import { Position } from './position.schema';
+import { DepartementEMP } from './departement.schema';
+import { PositionEMP } from './position.schema';
+import { TimeWorkEMP } from './time-work.schema';
+import { UserEMP } from './users.schema';
+
+export enum Gender {
+  HOMME = 'homme',
+  FEMME = 'femme',
+}
+
+registerEnumType(Gender, {
+  name: 'Gender', //GraphQL type name
+});
 
 @Entity()
 @ObjectType() // for add it in schema qraphql
-export class Employee extends AbstractEntity<Employee> {
-  @Column()
+export class EmployeeEMP extends AbstractEntity<EmployeeEMP> {
+  @Column({ nullable: true })
   @Field() // for graph
   firstName: string;
 
-  @Column()
+  @Column({ nullable: true })
   @Field() // for graph
   lastName: string;
 
-  @Column()
-  @Field() // for graph
-  gender: string;
+  @Column({
+    type: 'enum',
+    enum: Gender,
+    default: Gender.HOMME,
+    nullable: true,
+  })
+  @Field(() => Gender, { nullable: true }) // for graph
+  gender: Gender;
 
-  @Column()
+  @Column({ nullable: true })
   @Field() // for graph
   dateOfBirth: Date;
 
-  @Column()
+  @Column({ nullable: true })
   @Field() // for graph
-  dateHired: Date;
+  dateOfHired: Date;
 
-  @Column()
+  @Column({ nullable: true })
   @Field() // for graph
   contactNumber: string;
 
-  @Column()
+  @Column({ nullable: true })
   @Field() // for graph
   email: string;
 
-  @Column()
+  @Column({ nullable: true })
   @Field() // for graph
   address: string;
 
-  @Column()
+  @Column({ nullable: true })
   @Field() // for graph
-  salary: string;
+  salary: number;
 
-  @Column()
+  @Column({ nullable: true })
   @Field() // for graph
   superVisorID: string;
 
-  @Column()
+  @Column({ nullable: true })
   @Field() // for graph
   isActivate: boolean;
 
-  @Column()
+  @Column({ nullable: true })
   @Field() // for graph
   image: string;
 
-  @ManyToOne(() => Departement, (departement) => departement.employee, {
+  @Field(() => DepartementEMP, { nullable: true })
+  @ManyToOne(() => DepartementEMP, (departement) => departement.employee, {
+    nullable: true,
     orphanedRowAction: 'delete',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  departement: Departement;
+  departement: DepartementEMP;
 
-  @ManyToOne(() => Position, (position) => position.employee, {
+  @Field(() => UserEMP, { nullable: true })
+  @ManyToOne(() => UserEMP, (user) => user.employees, {
+    nullable: true,
     orphanedRowAction: 'delete',
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  position: Departement;
+  user: UserEMP;
+
+  @Field(() => PositionEMP, { nullable: true })
+  @ManyToOne(() => PositionEMP, (position) => position.employee, {
+    nullable: true,
+    orphanedRowAction: 'delete',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  position: PositionEMP;
+
+  @Field(() => TimeWorkEMP, { nullable: true })
+  @ManyToOne(() => TimeWorkEMP, (organization) => organization.employee, {
+    nullable: true,
+    orphanedRowAction: 'delete',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  timeWork: TimeWorkEMP;
 }

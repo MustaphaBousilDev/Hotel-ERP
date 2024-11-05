@@ -23,6 +23,30 @@ import { authContext } from './auth.context';
                 name: 'reservations',
                 url: configService.getOrThrow('RESERVATIONS_GRAPHQL_URL'),
               },
+              {
+                name: 'auth',
+                url: configService.getOrThrow('AUTH_GRAPHQL_URL'),
+              },
+              {
+                name: 'payments',
+                url: configService.getOrThrow('PAYMENTS_GRAPHQL_URL'),
+              },
+              {
+                name: 'organization',
+                url: configService.getOrThrow('ORGANIZATION_GRAPHQL_URL'),
+              },
+              {
+                name: 'tasks',
+                url: configService.getOrThrow('TASKS_GRAPHQL_URL'),
+              },
+              {
+                name: 'employee',
+                url: configService.getOrThrow('EMPLOYEE_GRAPHQL_URL'),
+              },
+              {
+                name: 'stock',
+                url: configService.getOrThrow('STOCK_GRAPHQL_URL'),
+              },
             ],
           }),
           buildService({ url }) {
@@ -63,4 +87,8 @@ import { authContext } from './auth.context';
   controllers: [],
   providers: [],
 })
-export class GatewayModule {}
+export class GatewayModule {
+  constructor() {
+    console.log('### fucking Entire');
+  }
+}

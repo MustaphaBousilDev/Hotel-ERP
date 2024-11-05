@@ -1,26 +1,31 @@
 import { AbstractEntity } from '@app/shared';
 import { Field, ObjectType } from '@nestjs/graphql';
-import { Column, Entity, OneToMany } from 'typeorm';
-import { Employee } from './employee.schema';
+import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
+import { EmployeeEMP } from './employee.schema';
+import { UserEMP } from './users.schema';
 
 @Entity()
 @ObjectType() // for add it in schema qraphql
-export class Position extends AbstractEntity<Position> {
-  @Column()
+export class PositionEMP extends AbstractEntity<PositionEMP> {
+  @Column({ nullable: true })
   @Field() // for graph
   name: string;
 
-  @Column()
+  @Column({ nullable: true })
   @Field() // for graph
   status: boolean;
 
-  @Column()
-  @Field() // for graph
-  user_id: number;
-
-  @OneToMany(() => Employee, (employee) => employee.position, {
+  @OneToMany(() => EmployeeEMP, (employee) => employee.position, {
     cascade: true,
     eager: true,
   })
-  employee: Employee[];
+  employee: EmployeeEMP[];
+
+  @ManyToOne(() => UserEMP, (user) => user.position, {
+    nullable: true,
+    orphanedRowAction: 'delete',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  user: UserEMP;
 }

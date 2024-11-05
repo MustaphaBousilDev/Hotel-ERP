@@ -1,38 +1,44 @@
 import { Module } from '@nestjs/common';
 import { ReservationsService } from './reservations.service';
-import { ReservationsController } from './reservations.controller';
+//import { ReservationsController } from './reservations.controller';
 import {
   LoggerModule,
   AUTH_SERVICE,
   PAYMENT_SERVICE,
   DatabaseModulemySQL,
+  ORGANIZATION_SERVICE,
 } from '@app/shared';
-import { ReservationsRepositorymySQL } from './reservations.repository';
+import {
+  HotelRepositorySQL,
+  ReservationsRepositorymySQL,
+  RoomRepositorySQL,
+} from './reservations.repository';
 //for mysql typeorm
-import { Reservation } from './models/reservation.mysql.entity';
+import { ReservationRES } from './models/reservation.mysql.entity';
+import { UserRES } from './models/users.mysql.entity';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as Joi from 'joi';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { GraphQLModule } from '@nestjs/graphql';
-import {
-  ApolloFederationDriver,
-  ApolloFederationDriverConfig,
-} from '@nestjs/apollo';
+import { ApolloDriverConfig, ApolloFederationDriver } from '@nestjs/apollo';
 import { ReservationsResolver } from './reservations.resolver';
-
+import { RoomRES } from './models/rooms.mysql.entity';
+import { HotelRES } from './models/hotel.mysql.entity';
+import { OrganizationRES } from './models/organization.mysql.entity';
+import { UserRepositorySQL } from './reservations.repository';
+import { ReservationsController } from './reservations.controller';
+import { UserRepositorySQL as UserRemoteRepository } from './resources/users.repository';
 @Module({
   imports: [
-    // DatabaseModule,
-    // //DatabaseModule.forFeature in databaseModel inside shared folder
-    // DatabaseModule.forFeature([
-    //   {
-    //     name: ReservationDocument.name,
-    //     schema: ReservationSchema,
-    //   },
-    // ]),
     DatabaseModulemySQL,
-    DatabaseModulemySQL.forFeature([Reservation]),
-    GraphQLModule.forRoot<ApolloFederationDriverConfig>({
+    DatabaseModulemySQL.forFeature([
+      ReservationRES,
+      UserRES,
+      RoomRES,
+      HotelRES,
+      OrganizationRES,
+    ]),
+    GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloFederationDriver,
       //generate automaticely graphQL schema using federation version 2
       autoSchemaFile: {
@@ -80,6 +86,17 @@ import { ReservationsResolver } from './reservations.resolver';
         }),
         inject: [ConfigService],
       },
+      {
+        name: ORGANIZATION_SERVICE,
+        useFactory: (configService: ConfigService) => ({
+          transport: Transport.RMQ,
+          options: {
+            urls: [configService.getOrThrow<string>('RABBITMQ_URI')],
+            queue: 'organization',
+          },
+        }),
+        inject: [ConfigService],
+      },
     ]),
   ],
   controllers: [ReservationsController],
@@ -88,6 +105,10 @@ import { ReservationsResolver } from './reservations.resolver';
     // ReservationsRepository,
     ReservationsRepositorymySQL,
     ReservationsResolver,
+    UserRepositorySQL,
+    HotelRepositorySQL,
+    RoomRepositorySQL,
+    UserRemoteRepository,
   ],
 })
 export class ReservationsModule {}

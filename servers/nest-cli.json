@@ -88,6 +88,33 @@
       "compilerOptions": {
         "tsConfigPath": "apps/employee/tsconfig.app.json"
       }
+    },
+    "s3": {
+      "type": "application",
+      "root": "apps/s3",
+      "entryFile": "main",
+      "sourceRoot": "apps/s3/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/s3/tsconfig.app.json"
+      }
+    },
+    "tasks": {
+      "type": "application",
+      "root": "apps/tasks",
+      "entryFile": "main",
+      "sourceRoot": "apps/tasks/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/tasks/tsconfig.app.json"
+      }
+    },
+    "stock": {
+      "type": "application",
+      "root": "apps/stock",
+      "entryFile": "main",
+      "sourceRoot": "apps/stock/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/stock/tsconfig.app.json"
+      }
     }
   },
   "monorepo": true,
