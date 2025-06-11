@@ -1,8 +1,0 @@
-.tabs-notification::-webkit-scrollbar {
-  width: 0px;
-  height: 100%;
-  z-index: 1000;
-}
-.tabs-notification::-webkit-scrollbar-thumb {
-  background-color: 'red'
-}
